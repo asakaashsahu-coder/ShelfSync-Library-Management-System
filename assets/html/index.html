@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+        content="ShelfSync is a modern library management system for students, teachers and readers.">
+
+    <title>ShelfSync | Library Management System</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+        rel="stylesheet">
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <header class="header">
+
+        <div class="container navbar">
+
+            <a href="index.html" class="logo">
+                <div class="logo-icon">
+                    <i class="fa-solid fa-book-open"></i>
+                </div>
+
+                <span>ShelfSync</span>
+            </a>
+
+            <nav class="nav-links" id="navLinks">
+
+                <a href="index.html" class="active">Home</a>
+                <a href="about.html">About</a>
+                <a href="books.html">Books</a>
+                <a href="gallery.html">Gallery</a>
+                <a href="contact.html">Contact</a>
+
+                <a href="login.html" class="login-btn">
+                    <i class="fa-regular fa-user"></i>
+                    Login
+                </a>
+
+            </nav>
+
+            <button class="menu-btn" id="menuBtn" aria-label="Open menu">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <main>
+
+        <!-- Hero -->
+        <section class="hero">
+
+            <div class="container hero-content">
+
+                <div class="hero-text">
+
+                    <div class="hero-label">
+                        <span></span>
+                        Smart Library Management
+                    </div>
+
+                    <h1>
+                        Discover knowledge.
+                        <span>Read without limits.</span>
+                    </h1>
+
+                    <p class="hero-description">
+                        ShelfSync helps students and readers find books,
+                        explore collections and manage their library experience
+                        from one simple platform.
+                    </p>
+
+                    <div class="hero-buttons">
+
+                        <a href="books.html" class="primary-btn">
+                            Explore Library
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+
+                        <a href="about.html" class="secondary-btn">
+                            About ShelfSync
+                        </a>
+
+                    </div>
+
+                    <div class="hero-info">
+
+                        <div>
+                            <strong>10K+</strong>
+                            <span>Books</span>
+                        </div>
+
+                        <div>
+                            <strong>1.2K+</strong>
+                            <span>Members</span>
+                        </div>
+
+                        <div>
+                            <strong>30+</strong>
+                            <span>Categories</span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="hero-visual">
+
+                    <div class="hero-image">
+
+                        <img
+                            src="https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&w=1200&q=85"
+                            alt="Modern library">
+
+                        <div class="image-overlay"></div>
+
+                    </div>
+
+
+                    <div class="floating-card card-one">
+
+                        <div class="floating-icon">
+                            <i class="fa-solid fa-book"></i>
+                        </div>
+
+                        <div>
+                            <strong>New Arrivals</strong>
+                            <span>120+ books this month</span>
+                        </div>
+
+                    </div>
+
+
+                    <div class="floating-card card-two">
+
+                        <i class="fa-solid fa-circle-check"></i>
+
+                        <div>
+                            <strong>Easy Access</strong>
+                            <span>Search. Find. Read.</span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Search -->
+        <section class="search-section">
+
+            <div class="container">
+
+                <div class="search-box">
+
+                    <div class="search-text">
+
+                        <div class="search-icon-box">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </div>
+
+                        <div>
+                            <h2>Search the library</h2>
+
+                            <p>
+                                Find books by title, author or category.
+                            </p>
+                        </div>
+
+                    </div>
+
+
+                    <div class="search-bar">
+
+                        <input
+                            type="text"
+                            id="bookSearch"
+                            placeholder="Try 'Web Development'">
+
+                        <button id="searchBtn">
+                            Search
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Categories -->
+        <section class="categories section">
+
+            <div class="container">
+
+                <div class="section-top">
+
+                    <div>
+
+                        <p class="small-heading">
+                            Explore Collection
+                        </p>
+
+                        <h2>
+                            Books for every curious mind
+                        </h2>
+
+                    </div>
+
+                    <p class="section-description">
+                        Browse popular categories and discover books
+                        based on your interests and subjects.
+                    </p>
+
+                </div>
+
+
+                <div class="category-grid">
+
+                    <div class="category-card">
+
+                        <div class="category-icon">
+                            <i class="fa-solid fa-code"></i>
+                        </div>
+
+                        <span class="category-count">
+                            1,450 Books
+                        </span>
+
+                        <h3>Technology</h3>
+
+                        <p>
+                            Programming, web development, AI, software
+                            engineering and computer science.
+                        </p>
+
+                        <a href="books.html">
+                            Explore Category
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+
+                    </div>
+
+
+                    <div class="category-card">
+
+                        <div class="category-icon">
+                            <i class="fa-solid fa-flask"></i>
+                        </div>
+
+                        <span class="category-count">
+                            920 Books
+                        </span>
+
+                        <h3>Science</h3>
+
+                        <p>
+                            Physics, chemistry, biology, mathematics
+                            and scientific discoveries.
+                        </p>
+
+                        <a href="books.html">
+                            Explore Category
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+
+                    </div>
+
+
+                    <div class="category-card">
+
+                        <div class="category-icon">
+                            <i class="fa-solid fa-landmark"></i>
+                        </div>
+
+                        <span class="category-count">
+                            740 Books
+                        </span>
+
+                        <h3>History</h3>
+
+                        <p>
+                            Important events, great civilizations,
+                            historical leaders and world cultures.
+                        </p>
+
+                        <a href="books.html">
+                            Explore Category
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+
+                    </div>
+
+
+                    <div class="category-card">
+
+                        <div class="category-icon">
+                            <i class="fa-solid fa-feather-pointed"></i>
+                        </div>
+
+                        <span class="category-count">
+                            1,820 Books
+                        </span>
+
+                        <h3>Literature</h3>
+
+                        <p>
+                            Novels, poetry, classics, drama and modern
+                            literature from around the world.
+                        </p>
+
+                        <a href="books.html">
+                            Explore Category
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Featured books -->
+        <section class="featured-books section">
+
+            <div class="container">
+
+                <div class="section-top">
+
+                    <div>
+
+                        <p class="small-heading">
+                            Popular Right Now
+                        </p>
+
+                        <h2>
+                            Featured books
+                        </h2>
+
+                    </div>
+
+                    <a href="books.html" class="section-link">
+                        View all books
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+
+                </div>
+
+
+                <div class="book-grid">
+
+                    <article class="book-card">
+
+                        <div class="book-image">
+
+                            <img
+                                src="https://images.unsplash.com/photo-1543002588-bfa74002ed7e?auto=format&fit=crop&w=700&q=85"
+                                alt="Programming books">
+
+                            <span class="available">
+                                Available
+                            </span>
+
+                        </div>
+
+                        <div class="book-details">
+
+                            <div class="book-top">
+                                <span>Technology</span>
+
+                                <div>
+                                    <i class="fa-solid fa-star"></i>
+                                    4.9
+                                </div>
+                            </div>
+
+                            <h3>Modern Programming</h3>
+
+                            <p class="author">
+                                By Daniel Morris
+                            </p>
+
+                            <a href="books.html">
+                                View Book
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </a>
+
+                        </div>
+
+                    </article>
+
+
+                    <article class="book-card">
+
+                        <div class="book-image">
+
+                            <img
+                                src="https://images.unsplash.com/photo-1495446815901-a7297e633e8d?auto=format&fit=crop&w=700&q=85"
+                                alt="Literature books">
+
+                            <span class="available">
+                                Available
+                            </span>
+
+                        </div>
+
+                        <div class="book-details">
+
+                            <div class="book-top">
+                                <span>Literature</span>
+
+                                <div>
+                                    <i class="fa-solid fa-star"></i>
+                                    4.8
+                                </div>
+                            </div>
+
+                            <h3>Timeless Stories</h3>
+
+                            <p class="author">
+                                By Sophia Reed
+                            </p>
+
+                            <a href="books.html">
+                                View Book
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </a>
+
+                        </div>
+
+                    </article>
+
+
+                    <article class="book-card">
+
+                        <div class="book-image">
+
+                            <img
+                                src="https://images.unsplash.com/photo-1516979187457-637abb4f9353?auto=format&fit=crop&w=700&q=85"
+                                alt="Science books">
+
+                            <span class="borrowed">
+                                Borrowed
+                            </span>
+
+                        </div>
+
+                        <div class="book-details">
+
+                            <div class="book-top">
+                                <span>Science</span>
+
+                                <div>
+                                    <i class="fa-solid fa-star"></i>
+                                    4.7
+                                </div>
+                            </div>
+
+                            <h3>Exploring The Universe</h3>
+
+                            <p class="author">
+                                By Ethan Clark
+                            </p>
+
+                            <a href="books.html">
+                                View Book
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </a>
+
+                        </div>
+
+                    </article>
+
+
+                    <article class="book-card">
+
+                        <div class="book-image">
+
+                            <img
+                                src="https://images.unsplash.com/photo-1526243741027-444d633d7365?auto=format&fit=crop&w=700&q=85"
+                                alt="History books">
+
+                            <span class="available">
+                                Available
+                            </span>
+
+                        </div>
+
+                        <div class="book-details">
+
+                            <div class="book-top">
+                                <span>History</span>
+
+                                <div>
+                                    <i class="fa-solid fa-star"></i>
+                                    4.6
+                                </div>
+                            </div>
+
+                            <h3>The World Before Us</h3>
+
+                            <p class="author">
+                                By Amelia Parker
+                            </p>
+
+                            <a href="books.html">
+                                View Book
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </a>
+
+                        </div>
+
+                    </article>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Services -->
+        <section class="services section">
+
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <p class="small-heading">
+                        Library Services
+                    </p>
+
+                    <h2>
+                        A better library experience
+                    </h2>
+
+                    <p>
+                        ShelfSync brings simple digital tools together
+                        to make library access easier for everyone.
+                    </p>
+
+                </div>
+
+
+                <div class="service-grid">
+
+                    <div class="service-card">
+
+                        <div class="service-number">
+                            01
+                        </div>
+
+                        <div class="service-icon">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </div>
+
+                        <h3>Smart Book Search</h3>
+
+                        <p>
+                            Search books by title, author or category
+                            and quickly find what you need.
+                        </p>
+
+                    </div>
+
+
+                    <div class="service-card">
+
+                        <div class="service-number">
+                            02
+                        </div>
+
+                        <div class="service-icon">
+                            <i class="fa-solid fa-book-open-reader"></i>
+                        </div>
+
+                        <h3>Easy Borrowing</h3>
+
+                        <p>
+                            Check book availability and keep your
+                            borrowing experience simple.
+                        </p>
+
+                    </div>
+
+
+                    <div class="service-card">
+
+                        <div class="service-number">
+                            03
+                        </div>
+
+                        <div class="service-icon">
+                            <i class="fa-solid fa-laptop"></i>
+                        </div>
+
+                        <h3>Digital Resources</h3>
+
+                        <p>
+                            Access useful academic materials and
+                            learning resources from one place.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- CTA -->
+        <section class="join-section">
+
+            <div class="container">
+
+                <div class="join-box">
+
+                    <div class="join-content">
+
+                        <p class="small-heading">
+                            Join ShelfSync
+                        </p>
+
+                        <h2>
+                            Your next great read is waiting.
+                        </h2>
+
+                        <p>
+                            Create an account and explore thousands of
+                            books available in our library collection.
+                        </p>
+
+                    </div>
+
+
+                    <div class="join-buttons">
+
+                        <a href="login.html" class="join-btn">
+                            Become a Member
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+
+                        <a href="books.html" class="join-link">
+                            Browse Books
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- Footer -->
+    <footer class="footer">
+
+        <div class="container footer-grid">
+
+            <div class="footer-about">
+
+                <a href="index.html" class="logo footer-logo">
+
+                    <div class="logo-icon">
+                        <i class="fa-solid fa-book-open"></i>
+                    </div>
+
+                    <span>ShelfSync</span>
+
+                </a>
+
+                <p>
+                    A modern library management system designed
+                    for students, teachers and passionate readers.
+                </p>
+
+                <div class="social-links">
+
+                    <a href="#" aria-label="Facebook">
+                        <i class="fa-brands fa-facebook-f"></i>
+                    </a>
+
+                    <a href="#" aria-label="Instagram">
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+
+                    <a href="#" aria-label="LinkedIn">
+                        <i class="fa-brands fa-linkedin-in"></i>
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <div class="footer-links">
+
+                <h3>Quick Links</h3>
+
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="books.html">Books</a>
+                <a href="gallery.html">Gallery</a>
+
+            </div>
+
+
+            <div class="footer-links">
+
+                <h3>Library</h3>
+
+                <a href="books.html">Book Collection</a>
+                <a href="books.html">New Arrivals</a>
+                <a href="login.html">Membership</a>
+                <a href="contact.html">Contact</a>
+
+            </div>
+
+
+            <div class="footer-contact">
+
+                <h3>Contact</h3>
+
+                <p>
+                    <i class="fa-solid fa-location-dot"></i>
+                    Bhubaneswar, Odisha
+                </p>
+
+                <p>
+                    <i class="fa-solid fa-envelope"></i>
+                    info@shelfsync.com
+                </p>
+
+                <p>
+                    <i class="fa-solid fa-phone"></i>
+                    +91 98765 43210
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            <div class="container footer-bottom-content">
+
+                <p>
+                    © <span id="currentYear"></span>
+                    ShelfSync. All Rights Reserved.
+                </p>
+
+                <p>
+                    Library Management System
+                </p>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+    <script src="../js/script.js"></script>
+
+</body>
+
+</html>

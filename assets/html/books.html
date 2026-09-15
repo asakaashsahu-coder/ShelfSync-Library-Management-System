@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+        content="Explore books and library services available through ShelfSync Library Management System.">
+
+    <title>Books | ShelfSync</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+        rel="stylesheet">
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <header class="header">
+
+        <div class="container navbar">
+
+            <a href="index.html" class="logo">
+
+                <div class="logo-icon">
+                    <i class="fa-solid fa-book-open"></i>
+                </div>
+
+                <span>ShelfSync</span>
+
+            </a>
+
+            <nav class="nav-links" id="navLinks">
+
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="books.html" class="active">Books</a>
+                <a href="gallery.html">Gallery</a>
+                <a href="contact.html">Contact</a>
+
+                <a href="login.html" class="login-btn">
+                    <i class="fa-regular fa-user"></i>
+                    Login
+                </a>
+
+            </nav>
+
+            <button class="menu-btn" id="menuBtn" aria-label="Open menu">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <main>
+
+        <!-- Page heading -->
+        <section class="page-banner">
+
+            <div class="container">
+
+                <p class="small-heading">
+                    Library Collection
+                </p>
+
+                <h1>
+                    Find the book you're looking for
+                </h1>
+
+                <p>
+                    Browse our collection of books from technology,
+                    science, literature, history and more.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- Book search -->
+        <section class="books-search">
+
+            <div class="container">
+
+                <div class="books-search-box">
+
+                    <div class="books-search-input">
+
+                        <i class="fa-solid fa-magnifying-glass"></i>
+
+                        <input
+                            type="text"
+                            id="librarySearch"
+                            placeholder="Search by title or author...">
+
+                    </div>
+
+                    <select id="categorySelect">
+                        <option value="all">All Categories</option>
+                        <option value="technology">Technology</option>
+                        <option value="science">Science</option>
+                        <option value="literature">Literature</option>
+                        <option value="history">History</option>
+                    </select>
+
+                    <button id="librarySearchBtn">
+                        Search
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Book collection -->
+        <section class="book-collection section">
+
+            <div class="container">
+
+                <div class="section-top">
+
+                    <div>
+
+                        <p class="small-heading">
+                            Our Collection
+                        </p>
+
+                        <h2>
+                            Browse available books
+                        </h2>
+
+                    </div>
+
+                    <p class="section-description">
+                        Choose a category or use the search option to
+                        quickly find books from our library.
+                    </p>
+
+                </div>
+
+
+                <div class="book-filter">
+
+                    <button class="filter-btn active" data-category="all">
+                        All Books
+                    </button>
+
+                    <button class="filter-btn" data-category="technology">
+                        Technology
+                    </button>
+
+                    <button class="filter-btn" data-category="science">
+                        Science
+                    </button>
+
+                    <button class="filter-btn" data-category="literature">
+                        Literature
+                    </button>
+
+                    <button class="filter-btn" data-category="history">
+                        History
+                    </button>
+
+                </div>
+
+
+                <div class="library-book-grid" id="libraryBookGrid">
+
+                    <article class="library-book-card"
+                        data-category="technology"
+                        data-title="Java Programming"
+                        data-author="Herbert Schildt">
+
+                        <div class="library-book-image">
+
+                            <img
+                                src="https://images.unsplash.com/photo-1532012197267-da84d127e765?auto=format&fit=crop&w=700&q=85"
+                                alt="Java Programming book">
+
+                            <span class="available">
+                                Available
+                            </span>
+
+                        </div>
+
+                        <div class="library-book-info">
+
+                            <span class="book-category">
+                                Technology
+                            </span>
+
+                            <h3>
+                                Java Programming
+                            </h3>
+
+                            <p class="library-author">
+                                Herbert Schildt
+                            </p>
+
+                            <div class="book-meta">
+
+                                <span>
+                                    <i class="fa-solid fa-book"></i>
+                                    Programming
+                                </span>
+
+                                <span>
+                                    <i class="fa-solid fa-star"></i>
+                                    4.8
+                                </span>
+
+                            </div>
+
+                            <button class="borrow-btn">
+                                Borrow Book
+                            </button>
+
+                        </div>
+
+                    </article>
+
+
+                    <article class="library-book-card"
+                        data-category="technology"
+                        data-title="Web Development Basics"
+                        data-author="David White">
+
+                        <div class="library-book-image">
+
+                            <img
+                                src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&w=700&q=85"
+                                alt="Web Development book">
+
+                            <span class="available">
+                                Available
+                            </span>
+
+                        </div>
+
+                        <div class="library-book-info">
+
+                            <span class="book-category">
+                                Technology
+                            </span>
+
+                            <h3>
+                                Web Development Basics
+                            </h3>
+
+                            <p class="library-author">
+                                David White
+                            </p>
+
+                            <div class="book-meta">
+
+                                <span>
+                                    <i class="fa-solid fa-code"></i>
+                                    Web Design
+                                </span>
+
+                                <span>
+                                    <i class="fa-solid fa-star"></i>
+                                    4.7
+                                </span>
+
+                            </div>
+
+                            <button class="borrow-btn">
+                                Borrow Book
+                            </button>
+
+                        </div>
+
+                    </article>
+
+
+                    <article class="library-book-card"
+                        data-category="science"
+                        data-title="The Universe"
+                        data-author="Robert Clark">
+
+                        <div class="library-book-image">
+
+                            <img
+                                src="https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&w=700&q=85"
+                                alt="Science and universe book">
+
+                            <span class="borrowed">
+                                Borrowed
+                            </span>
+
+                        </div>
+
+                        <div class="library-book-info">
+
+                            <span class="book-category">
+                                Science
+                            </span>
+
+                            <h3>
+                                The Universe
+                            </h3>
+
+                            <p class="library-author">
+                                Robert Clark
+                            </p>
+
+                            <div class="book-meta">
+
+                                <span>
+                                    <i class="fa-solid fa-atom"></i>
+                                    Astronomy
+                                </span>
+
+                                <span>
+                                    <i class="fa-solid fa-star"></i>
+                                    4.9
+                                </span>
+
+                            </div>
+
+                            <button class="borrow-btn unavailable-btn" disabled>
+                                Not Available
+                            </button>
+
+                        </div>
+
+                    </article>
+
+
+                    <article class="library-book-card"
+                        data-category="science"
+                        data-title="Understanding Biology"
+                        data-author="Sarah Green">
+
+                        <div class="library-book-image">
+
+                            <img
+                                src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=700&q=85"
+                                alt="Biology book">
+
+                            <span class="available">
+                                Available
+                            </span>
+
+                        </div>
+
+                        <div class="library-book-info">
+
+                            <span class="book-category">
+                                Science
+                            </span>
+
+                            <h3>
+                                Understanding Biology
+                            </h3>
+
+                            <p class="library-author">
+                                Sarah Green
+                            </p>
+
+                            <div class="book-meta">
+
+                                <span>
+                                    <i class="fa-solid fa-dna"></i>
+                                    Biology
+                                </span>
+
+                                <span>
+                                    <i class="fa-solid fa-star"></i>
+                                    4.6
+                                </span>
+
+                            </div>
+
+                            <button class="borrow-btn">
+                                Borrow Book
+                            </button>
+
+                        </div>
+
+                    </article>
+
+
+                    <article class="library-book-card"
+                        data-category="literature"
+                        data-title="Pride and Prejudice"
+                        data-author="Jane Austen">
+
+                        <div class="library-book-image">
+
+                            <img
+                                src="https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=700&q=85"
+                                alt="Classic literature book">
+
+                            <span class="available">
+                                Available
+                            </span>
+
+                        </div>
+
+                        <div class="library-book-info">
+
+                            <span class="book-category">
+                                Literature
+                            </span>
+
+                            <h3>
+                                Pride and Prejudice
+                            </h3>
+
+                            <p class="library-author">
+                                Jane Austen
+                            </p>
+
+                            <div class="book-meta">
+
+                                <span>
+                                    <i class="fa-solid fa-feather"></i>
+                                    Classic
+                                </span>
+
+                                <span>
+                                    <i class="fa-solid fa-star"></i>
+                                    4.9
+                                </span>
+
+                            </div>
+
+                            <button class="borrow-btn">
+                                Borrow Book
+                            </button>
+
+                        </div>
+
+                    </article>
+
+
+                    <article class="library-book-card"
+                        data-category="literature"
+                        data-title="The Great Gatsby"
+                        data-author="F Scott Fitzgerald">
+
+                        <div class="library-book-image">
+
+                            <img
+                                src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=700&q=85"
+                                alt="Literature book">
+
+                            <span class="borrowed">
+                                Borrowed
+                            </span>
+
+                        </div>
+
+                        <div class="library-book-info">
+
+                            <span class="book-category">
+                                Literature
+                            </span>
+
+                            <h3>
+                                The Great Gatsby
+                            </h3>
+
+                            <p class="library-author">
+                                F. Scott Fitzgerald
+                            </p>
+
+                            <div class="book-meta">
+
+                                <span>
+                                    <i class="fa-solid fa-book-open"></i>
+                                    Fiction
+                                </span>
+
+                                <span>
+                                    <i class="fa-solid fa-star"></i>
+                                    4.8
+                                </span>
+
+                            </div>
+
+                            <button class="borrow-btn unavailable-btn" disabled>
+                                Not Available
+                            </button>
+
+                        </div>
+
+                    </article>
+
+
+                    <article class="library-book-card"
+                        data-category="history"
+                        data-title="World History"
+                        data-author="Michael Brown">
+
+                        <div class="library-book-image">
+
+                            <img
+                                src="https://images.unsplash.com/photo-1461360370896-922624d12aa1?auto=format&fit=crop&w=700&q=85"
+                                alt="World history book">
+
+                            <span class="available">
+                                Available
+                            </span>
+
+                        </div>
+
+                        <div class="library-book-info">
+
+                            <span class="book-category">
+                                History
+                            </span>
+
+                            <h3>
+                                World History
+                            </h3>
+
+                            <p class="library-author">
+                                Michael Brown
+                            </p>
+
+                            <div class="book-meta">
+
+                                <span>
+                                    <i class="fa-solid fa-landmark"></i>
+                                    History
+                                </span>
+
+                                <span>
+                                    <i class="fa-solid fa-star"></i>
+                                    4.7
+                                </span>
+
+                            </div>
+
+                            <button class="borrow-btn">
+                                Borrow Book
+                            </button>
+
+                        </div>
+
+                    </article>
+
+
+                    <article class="library-book-card"
+                        data-category="history"
+                        data-title="Ancient Civilizations"
+                        data-author="Emily Parker">
+
+                        <div class="library-book-image">
+
+                            <img
+                                src="https://images.unsplash.com/photo-1564399579883-451a5d44ec08?auto=format&fit=crop&w=700&q=85"
+                                alt="Ancient history book">
+
+                            <span class="available">
+                                Available
+                            </span>
+
+                        </div>
+
+                        <div class="library-book-info">
+
+                            <span class="book-category">
+                                History
+                            </span>
+
+                            <h3>
+                                Ancient Civilizations
+                            </h3>
+
+                            <p class="library-author">
+                                Emily Parker
+                            </p>
+
+                            <div class="book-meta">
+
+                                <span>
+                                    <i class="fa-solid fa-monument"></i>
+                                    Ancient History
+                                </span>
+
+                                <span>
+                                    <i class="fa-solid fa-star"></i>
+                                    4.6
+                                </span>
+
+                            </div>
+
+                            <button class="borrow-btn">
+                                Borrow Book
+                            </button>
+
+                        </div>
+
+                    </article>
+
+                </div>
+
+
+                <div class="no-books" id="noBooks">
+                    <i class="fa-solid fa-book-open"></i>
+
+                    <h3>No books found</h3>
+
+                    <p>
+                        Try searching with another title, author or category.
+                    </p>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Library services -->
+        <section class="library-services section">
+
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <p class="small-heading">
+                        More Than Books
+                    </p>
+
+                    <h2>
+                        Library services
+                    </h2>
+
+                    <p>
+                        ShelfSync provides useful services that make
+                        learning and library management easier.
+                    </p>
+
+                </div>
+
+
+                <div class="library-service-grid">
+
+                    <div class="library-service-card">
+
+                        <div>
+                            <i class="fa-solid fa-book-open-reader"></i>
+                        </div>
+
+                        <h3>Book Borrowing</h3>
+
+                        <p>
+                            Members can browse available books and
+                            request books from the library collection.
+                        </p>
+
+                    </div>
+
+
+                    <div class="library-service-card">
+
+                        <div>
+                            <i class="fa-solid fa-laptop"></i>
+                        </div>
+
+                        <h3>Digital Learning</h3>
+
+                        <p>
+                            Access educational materials and useful
+                            resources for academic learning.
+                        </p>
+
+                    </div>
+
+
+                    <div class="library-service-card">
+
+                        <div>
+                            <i class="fa-solid fa-clock"></i>
+                        </div>
+
+                        <h3>Reading Space</h3>
+
+                        <p>
+                            Enjoy a peaceful environment designed
+                            for reading, studying and research.
+                        </p>
+
+                    </div>
+
+
+                    <div class="library-service-card">
+
+                        <div>
+                            <i class="fa-solid fa-user-graduate"></i>
+                        </div>
+
+                        <h3>Student Support</h3>
+
+                        <p>
+                            Get assistance in finding academic books,
+                            references and learning materials.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- CTA -->
+        <section class="join-section">
+
+            <div class="container">
+
+                <div class="join-box">
+
+                    <div class="join-content">
+
+                        <p class="small-heading">
+                            Library Membership
+                        </p>
+
+                        <h2>
+                            Want to borrow a book?
+                        </h2>
+
+                        <p>
+                            Register as a ShelfSync member and get
+                            access to our library collection and services.
+                        </p>
+
+                    </div>
+
+                    <div class="join-buttons">
+
+                        <a href="login.html" class="join-btn">
+                            Register Now
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+
+                        <a href="contact.html" class="join-link">
+                            Need Help?
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- Footer -->
+    <footer class="footer">
+
+        <div class="container footer-grid">
+
+            <div class="footer-about">
+
+                <a href="index.html" class="logo footer-logo">
+
+                    <div class="logo-icon">
+                        <i class="fa-solid fa-book-open"></i>
+                    </div>
+
+                    <span>ShelfSync</span>
+
+                </a>
+
+                <p>
+                    A modern library management system designed
+                    for students, teachers and passionate readers.
+                </p>
+
+                <div class="social-links">
+
+                    <a href="#" aria-label="Facebook">
+                        <i class="fa-brands fa-facebook-f"></i>
+                    </a>
+
+                    <a href="#" aria-label="Instagram">
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+
+                    <a href="#" aria-label="LinkedIn">
+                        <i class="fa-brands fa-linkedin-in"></i>
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <div class="footer-links">
+
+                <h3>Quick Links</h3>
+
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="books.html">Books</a>
+                <a href="gallery.html">Gallery</a>
+
+            </div>
+
+
+            <div class="footer-links">
+
+                <h3>Library</h3>
+
+                <a href="books.html">Book Collection</a>
+                <a href="books.html">New Arrivals</a>
+                <a href="login.html">Membership</a>
+                <a href="contact.html">Contact</a>
+
+            </div>
+
+
+            <div class="footer-contact">
+
+                <h3>Contact</h3>
+
+                <p>
+                    <i class="fa-solid fa-location-dot"></i>
+                    Bhubaneswar, Odisha
+                </p>
+
+                <p>
+                    <i class="fa-solid fa-envelope"></i>
+                    info@shelfsync.com
+                </p>
+
+                <p>
+                    <i class="fa-solid fa-phone"></i>
+                    +91 98765 43210
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            <div class="container footer-bottom-content">
+
+                <p>
+                    © <span id="currentYear"></span>
+                    ShelfSync. All Rights Reserved.
+                </p>
+
+                <p>
+                    Library Management System
+                </p>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+    <script src="../js/script.js"></script>
+
+</body>
+
+</html>

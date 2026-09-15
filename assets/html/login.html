@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+        content="Login or register as a ShelfSync library member.">
+
+    <title>Login | ShelfSync</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+        rel="stylesheet">
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <header class="header">
+
+        <div class="container navbar">
+
+            <a href="index.html" class="logo">
+
+                <div class="logo-icon">
+                    <i class="fa-solid fa-book-open"></i>
+                </div>
+
+                <span>ShelfSync</span>
+
+            </a>
+
+            <nav class="nav-links" id="navLinks">
+
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="books.html">Books</a>
+                <a href="gallery.html">Gallery</a>
+                <a href="contact.html">Contact</a>
+
+                <a href="login.html" class="login-btn">
+                    <i class="fa-regular fa-user"></i>
+                    Login
+                </a>
+
+            </nav>
+
+            <button class="menu-btn" id="menuBtn" aria-label="Open menu">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <main>
+
+        <!-- Page heading -->
+        <section class="page-banner">
+
+            <div class="container">
+
+                <p class="small-heading">
+                    Member Access
+                </p>
+
+                <h1>
+                    Join the ShelfSync community
+                </h1>
+
+                <p>
+                    Login to your account or register as a new library member.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- Login and registration -->
+        <section class="account-section section">
+
+            <div class="container account-wrapper">
+
+                <div class="account-info">
+
+                    <p class="small-heading">
+                        ShelfSync Membership
+                    </p>
+
+                    <h2>
+                        Your library journey starts here
+                    </h2>
+
+                    <p>
+                        Create an account to explore books, manage your library
+                        membership and access useful learning resources.
+                    </p>
+
+                    <div class="account-benefits">
+
+                        <div>
+                            <i class="fa-solid fa-check"></i>
+                            <span>Explore available books</span>
+                        </div>
+
+                        <div>
+                            <i class="fa-solid fa-check"></i>
+                            <span>Request books easily</span>
+                        </div>
+
+                        <div>
+                            <i class="fa-solid fa-check"></i>
+                            <span>Access library services</span>
+                        </div>
+
+                        <div>
+                            <i class="fa-solid fa-check"></i>
+                            <span>Simple member experience</span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-card">
+
+                    <div class="form-tabs">
+
+                        <button class="tab-btn active" id="loginTab">
+                            Login
+                        </button>
+
+                        <button class="tab-btn" id="registerTab">
+                            Register
+                        </button>
+
+                    </div>
+
+
+                    <!-- Login form -->
+                    <form id="loginForm" class="account-form">
+
+                        <h3>Welcome Back</h3>
+
+                        <p>
+                            Enter your details to login.
+                        </p>
+
+
+                        <div class="form-group">
+
+                            <label for="loginEmail">
+                                Email
+                            </label>
+
+                            <input
+                                type="email"
+                                id="loginEmail"
+                                placeholder="Enter your email">
+
+                            <small class="error-message"
+                                id="loginEmailError"></small>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="loginPassword">
+                                Password
+                            </label>
+
+                            <input
+                                type="password"
+                                id="loginPassword"
+                                placeholder="Enter your password">
+
+                            <small class="error-message"
+                                id="loginPasswordError"></small>
+
+                        </div>
+
+
+                        <button type="submit" class="form-submit-btn">
+                            Login
+                        </button>
+
+                    </form>
+
+
+                    <!-- Registration form -->
+                    <form id="registerForm"
+                        class="account-form hidden-form">
+
+                        <h3>Create Account</h3>
+
+                        <p>
+                            Register as a new library member.
+                        </p>
+
+
+                        <div class="form-group">
+
+                            <label for="registerName">
+                                Full Name
+                            </label>
+
+                            <input
+                                type="text"
+                                id="registerName"
+                                placeholder="Enter your full name">
+
+                            <small class="error-message"
+                                id="nameError"></small>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="registerEmail">
+                                Email
+                            </label>
+
+                            <input
+                                type="email"
+                                id="registerEmail"
+                                placeholder="Enter your email">
+
+                            <small class="error-message"
+                                id="registerEmailError"></small>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="registerPhone">
+                                Phone Number
+                            </label>
+
+                            <input
+                                type="text"
+                                id="registerPhone"
+                                placeholder="Enter 10 digit phone number">
+
+                            <small class="error-message"
+                                id="phoneError"></small>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="registerPassword">
+                                Password
+                            </label>
+
+                            <input
+                                type="password"
+                                id="registerPassword"
+                                placeholder="Minimum 6 characters">
+
+                            <small class="error-message"
+                                id="registerPasswordError"></small>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="confirmPassword">
+                                Confirm Password
+                            </label>
+
+                            <input
+                                type="password"
+                                id="confirmPassword"
+                                placeholder="Enter password again">
+
+                            <small class="error-message"
+                                id="confirmPasswordError"></small>
+
+                        </div>
+
+
+                        <button type="submit" class="form-submit-btn">
+                            Register
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- Footer -->
+    <footer class="footer">
+
+        <div class="container footer-grid">
+
+            <div class="footer-about">
+
+                <a href="index.html" class="logo footer-logo">
+
+                    <div class="logo-icon">
+                        <i class="fa-solid fa-book-open"></i>
+                    </div>
+
+                    <span>ShelfSync</span>
+
+                </a>
+
+                <p>
+                    A modern library management system designed
+                    for students, teachers and passionate readers.
+                </p>
+
+                <div class="social-links">
+
+                    <a href="#" aria-label="Facebook">
+                        <i class="fa-brands fa-facebook-f"></i>
+                    </a>
+
+                    <a href="#" aria-label="Instagram">
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+
+                    <a href="#" aria-label="LinkedIn">
+                        <i class="fa-brands fa-linkedin-in"></i>
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <div class="footer-links">
+
+                <h3>Quick Links</h3>
+
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="books.html">Books</a>
+                <a href="gallery.html">Gallery</a>
+
+            </div>
+
+
+            <div class="footer-links">
+
+                <h3>Library</h3>
+
+                <a href="books.html">Book Collection</a>
+                <a href="books.html">New Arrivals</a>
+                <a href="login.html">Membership</a>
+                <a href="contact.html">Contact</a>
+
+            </div>
+
+
+            <div class="footer-contact">
+
+                <h3>Contact</h3>
+
+                <p>
+                    <i class="fa-solid fa-location-dot"></i>
+                    Bhubaneswar, Odisha
+                </p>
+
+                <p>
+                    <i class="fa-solid fa-envelope"></i>
+                    info@shelfsync.com
+                </p>
+
+                <p>
+                    <i class="fa-solid fa-phone"></i>
+                    +91 98765 43210
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            <div class="container footer-bottom-content">
+
+                <p>
+                    © <span id="currentYear"></span>
+                    ShelfSync. All Rights Reserved.
+                </p>
+
+                <p>
+                    Library Management System
+                </p>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+    <script src="../js/script.js"></script>
+
+</body>
+
+</html>

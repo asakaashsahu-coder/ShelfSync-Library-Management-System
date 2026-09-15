@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+        content="ShelfSync member profile and library dashboard.">
+
+    <title>Profile | ShelfSync</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+        rel="stylesheet">
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+    <header class="header">
+
+        <div class="container navbar">
+
+            <a href="index.html" class="logo">
+
+                <div class="logo-icon">
+                    <i class="fa-solid fa-book-open"></i>
+                </div>
+
+                <span>ShelfSync</span>
+
+            </a>
+
+            <nav class="nav-links" id="navLinks">
+
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="books.html">Books</a>
+                <a href="gallery.html">Gallery</a>
+                <a href="contact.html">Contact</a>
+
+                <a href="profile.html" class="login-btn active">
+                    <i class="fa-regular fa-user"></i>
+                    Profile
+                </a>
+
+            </nav>
+
+            <button class="menu-btn" id="menuBtn" aria-label="Open menu">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <main>
+
+        <section class="profile-hero">
+
+            <div class="container profile-hero-content">
+
+                <div>
+
+                    <p class="small-heading">
+                        Member Dashboard
+                    </p>
+
+                    <h1>
+                        Welcome back,
+                        <span id="profileFirstName">Member</span>
+                    </h1>
+
+                    <p>
+                        Manage your library account, check your borrowed books
+                        and continue exploring the ShelfSync collection.
+                    </p>
+
+                </div>
+
+                <a href="books.html" class="primary-btn">
+                    Browse Books
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+
+            </div>
+
+        </section>
+
+
+        <section class="profile-section section">
+
+            <div class="container profile-layout">
+
+
+                <aside class="profile-sidebar">
+
+                    <div class="profile-user-card">
+
+                        <div class="profile-avatar">
+                            <i class="fa-solid fa-user"></i>
+                        </div>
+
+                        <h2 id="profileName">
+                            Library Member
+                        </h2>
+
+                        <p id="profileEmail">
+                            member@shelfsync.com
+                        </p>
+
+                        <span class="member-status">
+                            <i class="fa-solid fa-circle-check"></i>
+                            Active Member
+                        </span>
+
+                    </div>
+
+
+                    <div class="profile-member-info">
+
+                        <div>
+
+                            <span>Member ID</span>
+
+                            <strong id="memberId">
+                                SS-2026-001
+                            </strong>
+
+                        </div>
+
+
+                        <div>
+
+                            <span>Membership</span>
+
+                            <strong>
+                                Student
+                            </strong>
+
+                        </div>
+
+
+                        <div>
+
+                            <span>Joined</span>
+
+                            <strong id="joinedDate">
+                                September 2026
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <button class="profile-logout-btn" id="logoutBtn">
+
+                        <i class="fa-solid fa-right-from-bracket"></i>
+
+                        Logout
+
+                    </button>
+
+                </aside>
+
+
+                <div class="profile-main">
+
+
+                    <div class="profile-stats">
+
+                        <div class="profile-stat-card">
+
+                            <div class="profile-stat-icon">
+                                <i class="fa-solid fa-book"></i>
+                            </div>
+
+                            <div>
+
+                                <span>
+                                    Borrowed Books
+                                </span>
+
+                                <h3>
+                                    2
+                                </h3>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="profile-stat-card">
+
+                            <div class="profile-stat-icon">
+                                <i class="fa-solid fa-book-open-reader"></i>
+                            </div>
+
+                            <div>
+
+                                <span>
+                                    Total Read
+                                </span>
+
+                                <h3>
+                                    12
+                                </h3>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="profile-stat-card">
+
+                            <div class="profile-stat-icon">
+                                <i class="fa-regular fa-heart"></i>
+                            </div>
+
+                            <div>
+
+                                <span>
+                                    Saved Books
+                                </span>
+
+                                <h3>
+                                    4
+                                </h3>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="profile-stat-card">
+
+                            <div class="profile-stat-icon">
+                                <i class="fa-solid fa-clock-rotate-left"></i>
+                            </div>
+
+                            <div>
+
+                                <span>
+                                    Due Soon
+                                </span>
+
+                                <h3>
+                                    1
+                                </h3>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <section class="profile-content-card">
+
+                        <div class="profile-card-heading">
+
+                            <div>
+
+                                <p class="small-heading">
+                                    My Library
+                                </p>
+
+                                <h2>
+                                    Currently Borrowed
+                                </h2>
+
+                            </div>
+
+                            <a href="books.html">
+                                View all books
+                            </a>
+
+                        </div>
+
+
+                        <div class="borrowed-list">
+
+
+                            <article class="borrowed-book">
+
+                                <div class="borrowed-book-icon">
+                                    <i class="fa-solid fa-book"></i>
+                                </div>
+
+                                <div class="borrowed-book-info">
+
+                                    <span class="borrowed-category">
+                                        Technology
+                                    </span>
+
+                                    <h3>
+                                        Java Programming
+                                    </h3>
+
+                                    <p>
+                                        Herbert Schildt
+                                    </p>
+
+                                </div>
+
+                                <div class="borrowed-date">
+
+                                    <span>
+                                        Due Date
+                                    </span>
+
+                                    <strong>
+                                        18 Sep 2026
+                                    </strong>
+
+                                </div>
+
+                                <span class="borrow-status">
+                                    Active
+                                </span>
+
+                            </article>
+
+
+                            <article class="borrowed-book">
+
+                                <div class="borrowed-book-icon">
+                                    <i class="fa-solid fa-book"></i>
+                                </div>
+
+                                <div class="borrowed-book-info">
+
+                                    <span class="borrowed-category">
+                                        Literature
+                                    </span>
+
+                                    <h3>
+                                        The Great Gatsby
+                                    </h3>
+
+                                    <p>
+                                        F. Scott Fitzgerald
+                                    </p>
+
+                                </div>
+
+                                <div class="borrowed-date">
+
+                                    <span>
+                                        Due Date
+                                    </span>
+
+                                    <strong>
+                                        28 Sep 2026
+                                    </strong>
+
+                                </div>
+
+                                <span class="borrow-status">
+                                    Active
+                                </span>
+
+                            </article>
+
+                        </div>
+
+                    </section>
+
+
+                    <section class="profile-content-card">
+
+                        <div class="profile-card-heading">
+
+                            <div>
+
+                                <p class="small-heading">
+                                    Recent Activity
+                                </p>
+
+                                <h2>
+                                    Account Activity
+                                </h2>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="activity-list">
+
+
+                            <div class="activity-item">
+
+                                <div class="activity-icon">
+                                    <i class="fa-solid fa-book"></i>
+                                </div>
+
+                                <div>
+
+                                    <h3>
+                                        Borrowed Java Programming
+                                    </h3>
+
+                                    <p>
+                                        You borrowed a book from the Technology category.
+                                    </p>
+
+                                </div>
+
+                                <span>
+                                    Today
+                                </span>
+
+                            </div>
+
+
+                            <div class="activity-item">
+
+                                <div class="activity-icon">
+                                    <i class="fa-solid fa-heart"></i>
+                                </div>
+
+                                <div>
+
+                                    <h3>
+                                        Saved The Universe
+                                    </h3>
+
+                                    <p>
+                                        A book was added to your saved list.
+                                    </p>
+
+                                </div>
+
+                                <span>
+                                    Yesterday
+                                </span>
+
+                            </div>
+
+
+                            <div class="activity-item">
+
+                                <div class="activity-icon">
+                                    <i class="fa-solid fa-user-check"></i>
+                                </div>
+
+                                <div>
+
+                                    <h3>
+                                        Membership active
+                                    </h3>
+
+                                    <p>
+                                        Your ShelfSync student membership is active.
+                                    </p>
+
+                                </div>
+
+                                <span>
+                                    3 days ago
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </section>
+
+
+                    <section class="profile-content-card">
+
+                        <div class="profile-card-heading">
+
+                            <div>
+
+                                <p class="small-heading">
+                                    Quick Actions
+                                </p>
+
+                                <h2>
+                                    What would you like to do?
+                                </h2>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="profile-actions">
+
+                            <a href="books.html" class="profile-action-card">
+
+                                <i class="fa-solid fa-magnifying-glass"></i>
+
+                                <div>
+
+                                    <h3>
+                                        Find a Book
+                                    </h3>
+
+                                    <p>
+                                        Search the ShelfSync collection.
+                                    </p>
+
+                                </div>
+
+                            </a>
+
+
+                            <a href="gallery.html" class="profile-action-card">
+
+                                <i class="fa-regular fa-images"></i>
+
+                                <div>
+
+                                    <h3>
+                                        Explore Library
+                                    </h3>
+
+                                    <p>
+                                        View our library spaces and activities.
+                                    </p>
+
+                                </div>
+
+                            </a>
+
+
+                            <a href="contact.html" class="profile-action-card">
+
+                                <i class="fa-regular fa-envelope"></i>
+
+                                <div>
+
+                                    <h3>
+                                        Contact Library
+                                    </h3>
+
+                                    <p>
+                                        Get help from the library team.
+                                    </p>
+
+                                </div>
+
+                            </a>
+
+                        </div>
+
+                    </section>
+
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <footer class="footer">
+
+        <div class="container footer-grid">
+
+
+            <div class="footer-about">
+
+                <a href="index.html" class="logo footer-logo">
+
+                    <div class="logo-icon">
+                        <i class="fa-solid fa-book-open"></i>
+                    </div>
+
+                    <span>
+                        ShelfSync
+                    </span>
+
+                </a>
+
+                <p>
+                    A modern library management system designed
+                    for students, teachers and passionate readers.
+                </p>
+
+
+                <div class="social-links">
+
+                    <a href="#" aria-label="Facebook">
+                        <i class="fa-brands fa-facebook-f"></i>
+                    </a>
+
+                    <a href="#" aria-label="Instagram">
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+
+                    <a href="#" aria-label="LinkedIn">
+                        <i class="fa-brands fa-linkedin-in"></i>
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <div class="footer-links">
+
+                <h3>
+                    Quick Links
+                </h3>
+
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="books.html">Books</a>
+                <a href="gallery.html">Gallery</a>
+
+            </div>
+
+
+            <div class="footer-links">
+
+                <h3>
+                    Library
+                </h3>
+
+                <a href="books.html">Book Collection</a>
+                <a href="books.html">New Arrivals</a>
+                <a href="profile.html">My Profile</a>
+                <a href="contact.html">Contact</a>
+
+            </div>
+
+
+            <div class="footer-contact">
+
+                <h3>
+                    Contact
+                </h3>
+
+                <p>
+                    <i class="fa-solid fa-location-dot"></i>
+                    Bhubaneswar, Odisha
+                </p>
+
+                <p>
+                    <i class="fa-solid fa-envelope"></i>
+                    info@shelfsync.com
+                </p>
+
+                <p>
+                    <i class="fa-solid fa-phone"></i>
+                    +91 98765 43210
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            <div class="container footer-bottom-content">
+
+                <p>
+                    © <span id="currentYear"></span>
+                    ShelfSync. All Rights Reserved.
+                </p>
+
+                <p>
+                    Library Management System
+                </p>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+    <script src="../js/script.js"></script>
+
+</body>
+
+</html>
