@@ -5,39 +5,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="description"
-        content="ShelfSync member profile and library dashboard.">
-
-    <title>Profile | ShelfSync</title>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
-        rel="stylesheet">
-
-    <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <title>My Profile | ShelfSync</title>
 
     <link rel="stylesheet" href="../css/style.css">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 
 <body>
 
-    <header class="header">
+    <!-- Header -->
+    <header class="main-header">
 
-        <div class="container navbar">
+        <div class="container nav-container">
 
             <a href="index.html" class="logo">
-
-                <div class="logo-icon">
-                    <i class="fa-solid fa-book-open"></i>
-                </div>
-
-                <span>ShelfSync</span>
-
+                <i class="fa-solid fa-book-open"></i>
+                Shelf<span>Sync</span>
             </a>
 
             <nav class="nav-links" id="navLinks">
@@ -48,15 +33,22 @@
                 <a href="gallery.html">Gallery</a>
                 <a href="contact.html">Contact</a>
 
-                <a href="profile.html" class="login-btn active">
-                    <i class="fa-regular fa-user"></i>
+                <a
+                    href="profile.html"
+                    class="login-nav active"
+                    id="accountNavLink">
                     Profile
                 </a>
 
             </nav>
 
-            <button class="menu-btn" id="menuBtn" aria-label="Open menu">
+            <button
+                class="menu-toggle"
+                id="menuToggle"
+                aria-label="Open menu">
+
                 <i class="fa-solid fa-bars"></i>
+
             </button>
 
         </div>
@@ -66,31 +58,38 @@
 
     <main>
 
-        <section class="profile-hero">
+        <!-- Profile Banner -->
+        <section class="profile-banner">
 
-            <div class="container profile-hero-content">
+            <div class="container profile-banner-content">
 
                 <div>
 
-                    <p class="small-heading">
+                    <span class="section-tag">
                         Member Dashboard
-                    </p>
+                    </span>
 
                     <h1>
-                        Welcome back,
-                        <span id="profileFirstName">Member</span>
+                        Welcome,
+                        <span id="profileFirstName">
+                            Member
+                        </span>
                     </h1>
 
                     <p>
-                        Manage your library account, check your borrowed books
-                        and continue exploring the ShelfSync collection.
+                        Manage your library account and keep track
+                        of your borrowed books.
                     </p>
 
                 </div>
 
-                <a href="books.html" class="primary-btn">
+                <a
+                    href="books.html"
+                    class="primary-btn">
+
+                    <i class="fa-solid fa-book-open"></i>
                     Browse Books
-                    <i class="fa-solid fa-arrow-right"></i>
+
                 </a>
 
             </div>
@@ -98,17 +97,21 @@
         </section>
 
 
-        <section class="profile-section section">
+        <!-- Profile Section -->
+        <section class="profile-section">
 
             <div class="container profile-layout">
 
 
+                <!-- Profile Sidebar -->
                 <aside class="profile-sidebar">
 
-                    <div class="profile-user-card">
+                    <div class="profile-card">
 
                         <div class="profile-avatar">
+
                             <i class="fa-solid fa-user"></i>
+
                         </div>
 
                         <h2 id="profileName">
@@ -124,108 +127,124 @@
                             Active Member
                         </span>
 
+
+                        <div class="profile-details">
+
+                            <div class="profile-detail">
+
+                                <span>
+                                    Member ID
+                                </span>
+
+                                <strong id="memberId">
+                                    -
+                                </strong>
+
+                            </div>
+
+
+                            <div class="profile-detail">
+
+                                <span>
+                                    Membership
+                                </span>
+
+                                <strong>
+                                    Student
+                                </strong>
+
+                            </div>
+
+
+                            <div class="profile-detail">
+
+                                <span>
+                                    Joined
+                                </span>
+
+                                <strong id="joinedDate">
+                                    -
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+
+                        <button
+                            class="logout-btn"
+                            id="logoutBtn">
+
+                            <i class="fa-solid fa-right-from-bracket"></i>
+                            Logout
+
+                        </button>
+
                     </div>
-
-
-                    <div class="profile-member-info">
-
-                        <div>
-
-                            <span>Member ID</span>
-
-                            <strong id="memberId">
-                                SS-2026-001
-                            </strong>
-
-                        </div>
-
-
-                        <div>
-
-                            <span>Membership</span>
-
-                            <strong>
-                                Student
-                            </strong>
-
-                        </div>
-
-
-                        <div>
-
-                            <span>Joined</span>
-
-                            <strong id="joinedDate">
-                                September 2026
-                            </strong>
-
-                        </div>
-
-                    </div>
-
-
-                    <button class="profile-logout-btn" id="logoutBtn">
-
-                        <i class="fa-solid fa-right-from-bracket"></i>
-
-                        Logout
-
-                    </button>
 
                 </aside>
 
 
+                <!-- Profile Main -->
                 <div class="profile-main">
 
 
+                    <!-- Statistics -->
                     <div class="profile-stats">
 
-                        <div class="profile-stat-card">
 
-                            <div class="profile-stat-icon">
-                                <i class="fa-solid fa-book"></i>
-                            </div>
+                        <article class="profile-stat-card">
 
-                            <div>
+                            <div class="profile-stat-icon blue-stat">
 
-                                <span>
-                                    Borrowed Books
-                                </span>
-
-                                <h3>
-                                    2
-                                </h3>
-
-                            </div>
-
-                        </div>
-
-
-                        <div class="profile-stat-card">
-
-                            <div class="profile-stat-icon">
                                 <i class="fa-solid fa-book-open-reader"></i>
+
                             </div>
 
                             <div>
 
                                 <span>
-                                    Total Read
+                                    Currently Borrowed
                                 </span>
 
-                                <h3>
-                                    12
+                                <h3 id="borrowedCount">
+                                    0
                                 </h3>
 
                             </div>
 
-                        </div>
+                        </article>
 
 
-                        <div class="profile-stat-card">
+                        <article class="profile-stat-card">
 
-                            <div class="profile-stat-icon">
-                                <i class="fa-regular fa-heart"></i>
+                            <div class="profile-stat-icon green-stat">
+
+                                <i class="fa-solid fa-book"></i>
+
+                            </div>
+
+                            <div>
+
+                                <span>
+                                    Books Returned
+                                </span>
+
+                                <h3 id="totalReadCount">
+                                    0
+                                </h3>
+
+                            </div>
+
+                        </article>
+
+
+                        <article class="profile-stat-card">
+
+                            <div class="profile-stat-icon purple-stat">
+
+                                <i class="fa-solid fa-bookmark"></i>
+
                             </div>
 
                             <div>
@@ -234,19 +253,21 @@
                                     Saved Books
                                 </span>
 
-                                <h3>
-                                    4
+                                <h3 id="savedCount">
+                                    0
                                 </h3>
 
                             </div>
 
-                        </div>
+                        </article>
 
 
-                        <div class="profile-stat-card">
+                        <article class="profile-stat-card">
 
-                            <div class="profile-stat-icon">
-                                <i class="fa-solid fa-clock-rotate-left"></i>
+                            <div class="profile-stat-icon orange-stat">
+
+                                <i class="fa-solid fa-clock"></i>
+
                             </div>
 
                             <div>
@@ -255,141 +276,94 @@
                                     Due Soon
                                 </span>
 
-                                <h3>
-                                    1
+                                <h3 id="dueSoonCount">
+                                    0
                                 </h3>
 
                             </div>
 
-                        </div>
+                        </article>
+
 
                     </div>
 
 
+                    <!-- Borrowed Books -->
                     <section class="profile-content-card">
 
                         <div class="profile-card-heading">
 
                             <div>
 
-                                <p class="small-heading">
+                                <span class="section-tag">
                                     My Library
-                                </p>
+                                </span>
 
                                 <h2>
-                                    Currently Borrowed
+                                    Currently Borrowed Books
                                 </h2>
 
                             </div>
 
-                            <a href="books.html">
-                                View all books
+                            <a
+                                href="books.html"
+                                class="small-link">
+
+                                Browse More
+
+                                <i class="fa-solid fa-arrow-right"></i>
+
                             </a>
 
                         </div>
 
 
+                        <!--
+                            JavaScript will insert the logged-in
+                            user's borrowed books here.
+                        -->
                         <div class="borrowed-list">
 
+                            <div
+                                class="empty-library-state"
+                                id="emptyBorrowedState">
 
-                            <article class="borrowed-book">
+                                <i class="fa-solid fa-book-open"></i>
 
-                                <div class="borrowed-book-icon">
-                                    <i class="fa-solid fa-book"></i>
-                                </div>
+                                <h3>
+                                    No borrowed books yet
+                                </h3>
 
-                                <div class="borrowed-book-info">
+                                <p>
+                                    Borrow an available book and it
+                                    will appear here with its borrow
+                                    date, due date and time remaining.
+                                </p>
 
-                                    <span class="borrowed-category">
-                                        Technology
-                                    </span>
+                                <a href="books.html">
+                                    Browse Books
+                                </a>
 
-                                    <h3>
-                                        Java Programming
-                                    </h3>
-
-                                    <p>
-                                        Herbert Schildt
-                                    </p>
-
-                                </div>
-
-                                <div class="borrowed-date">
-
-                                    <span>
-                                        Due Date
-                                    </span>
-
-                                    <strong>
-                                        18 Sep 2026
-                                    </strong>
-
-                                </div>
-
-                                <span class="borrow-status">
-                                    Active
-                                </span>
-
-                            </article>
-
-
-                            <article class="borrowed-book">
-
-                                <div class="borrowed-book-icon">
-                                    <i class="fa-solid fa-book"></i>
-                                </div>
-
-                                <div class="borrowed-book-info">
-
-                                    <span class="borrowed-category">
-                                        Literature
-                                    </span>
-
-                                    <h3>
-                                        The Great Gatsby
-                                    </h3>
-
-                                    <p>
-                                        F. Scott Fitzgerald
-                                    </p>
-
-                                </div>
-
-                                <div class="borrowed-date">
-
-                                    <span>
-                                        Due Date
-                                    </span>
-
-                                    <strong>
-                                        28 Sep 2026
-                                    </strong>
-
-                                </div>
-
-                                <span class="borrow-status">
-                                    Active
-                                </span>
-
-                            </article>
+                            </div>
 
                         </div>
 
                     </section>
 
 
+                    <!-- Recent Activity -->
                     <section class="profile-content-card">
 
                         <div class="profile-card-heading">
 
                             <div>
 
-                                <p class="small-heading">
-                                    Recent Activity
-                                </p>
+                                <span class="section-tag">
+                                    Activity
+                                </span>
 
                                 <h2>
-                                    Account Activity
+                                    Recent Library Activity
                                 </h2>
 
                             </div>
@@ -397,80 +371,22 @@
                         </div>
 
 
+                        <!--
+                            Borrow and return activity will be
+                            generated by JavaScript.
+                        -->
                         <div class="activity-list">
 
+                            <div
+                                class="empty-activity-state"
+                                id="emptyActivityState">
 
-                            <div class="activity-item">
+                                <i class="fa-solid fa-clock-rotate-left"></i>
 
-                                <div class="activity-icon">
-                                    <i class="fa-solid fa-book"></i>
-                                </div>
-
-                                <div>
-
-                                    <h3>
-                                        Borrowed Java Programming
-                                    </h3>
-
-                                    <p>
-                                        You borrowed a book from the Technology category.
-                                    </p>
-
-                                </div>
-
-                                <span>
-                                    Today
-                                </span>
-
-                            </div>
-
-
-                            <div class="activity-item">
-
-                                <div class="activity-icon">
-                                    <i class="fa-solid fa-heart"></i>
-                                </div>
-
-                                <div>
-
-                                    <h3>
-                                        Saved The Universe
-                                    </h3>
-
-                                    <p>
-                                        A book was added to your saved list.
-                                    </p>
-
-                                </div>
-
-                                <span>
-                                    Yesterday
-                                </span>
-
-                            </div>
-
-
-                            <div class="activity-item">
-
-                                <div class="activity-icon">
-                                    <i class="fa-solid fa-user-check"></i>
-                                </div>
-
-                                <div>
-
-                                    <h3>
-                                        Membership active
-                                    </h3>
-
-                                    <p>
-                                        Your ShelfSync student membership is active.
-                                    </p>
-
-                                </div>
-
-                                <span>
-                                    3 days ago
-                                </span>
+                                <p>
+                                    Your borrowing activity
+                                    will appear here.
+                                </p>
 
                             </div>
 
@@ -479,18 +395,19 @@
                     </section>
 
 
+                    <!-- Quick Actions -->
                     <section class="profile-content-card">
 
                         <div class="profile-card-heading">
 
                             <div>
 
-                                <p class="small-heading">
+                                <span class="section-tag">
                                     Quick Actions
-                                </p>
+                                </span>
 
                                 <h2>
-                                    What would you like to do?
+                                    What Would You Like To Do?
                                 </h2>
 
                             </div>
@@ -498,9 +415,12 @@
                         </div>
 
 
-                        <div class="profile-actions">
+                        <div class="quick-actions">
 
-                            <a href="books.html" class="profile-action-card">
+
+                            <a
+                                href="books.html"
+                                class="quick-action">
 
                                 <i class="fa-solid fa-magnifying-glass"></i>
 
@@ -511,7 +431,7 @@
                                     </h3>
 
                                     <p>
-                                        Search the ShelfSync collection.
+                                        Search the library collection.
                                     </p>
 
                                 </div>
@@ -519,18 +439,20 @@
                             </a>
 
 
-                            <a href="gallery.html" class="profile-action-card">
+                            <a
+                                href="gallery.html"
+                                class="quick-action">
 
-                                <i class="fa-regular fa-images"></i>
+                                <i class="fa-solid fa-images"></i>
 
                                 <div>
 
                                     <h3>
-                                        Explore Library
+                                        Library Gallery
                                     </h3>
 
                                     <p>
-                                        View our library spaces and activities.
+                                        Explore our library spaces.
                                     </p>
 
                                 </div>
@@ -538,23 +460,116 @@
                             </a>
 
 
-                            <a href="contact.html" class="profile-action-card">
+                            <a
+                                href="contact.html"
+                                class="quick-action">
 
-                                <i class="fa-regular fa-envelope"></i>
+                                <i class="fa-solid fa-headset"></i>
 
                                 <div>
 
                                     <h3>
-                                        Contact Library
+                                        Need Help?
                                     </h3>
 
                                     <p>
-                                        Get help from the library team.
+                                        Contact the library team.
                                     </p>
 
                                 </div>
 
                             </a>
+
+
+                        </div>
+
+                    </section>
+
+
+                    <!-- Borrowing Information -->
+                    <section class="profile-content-card">
+
+                        <div class="profile-card-heading">
+
+                            <div>
+
+                                <span class="section-tag">
+                                    Borrowing Information
+                                </span>
+
+                                <h2>
+                                    Library Borrowing Rules
+                                </h2>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="borrowing-rules">
+
+
+                            <div class="borrowing-rule">
+
+                                <i class="fa-solid fa-calendar-days"></i>
+
+                                <div>
+
+                                    <h3>
+                                        14 Day Borrowing Period
+                                    </h3>
+
+                                    <p>
+                                        Each available book can be
+                                        borrowed for up to 14 days.
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="borrowing-rule">
+
+                                <i class="fa-solid fa-clock"></i>
+
+                                <div>
+
+                                    <h3>
+                                        Track Remaining Time
+                                    </h3>
+
+                                    <p>
+                                        ShelfSync automatically
+                                        calculates the remaining
+                                        borrowing time.
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="borrowing-rule">
+
+                                <i class="fa-solid fa-rotate-left"></i>
+
+                                <div>
+
+                                    <h3>
+                                        Return Books
+                                    </h3>
+
+                                    <p>
+                                        Return borrowed books from
+                                        your profile when you have
+                                        finished reading.
+                                    </p>
+
+                                </div>
+
+                            </div>
+
 
                         </div>
 
@@ -570,46 +585,27 @@
     </main>
 
 
-    <footer class="footer">
+    <!-- Footer -->
+    <footer class="main-footer">
 
         <div class="container footer-grid">
 
 
-            <div class="footer-about">
+            <div class="footer-brand">
 
-                <a href="index.html" class="logo footer-logo">
+                <a
+                    href="index.html"
+                    class="logo footer-logo">
 
-                    <div class="logo-icon">
-                        <i class="fa-solid fa-book-open"></i>
-                    </div>
-
-                    <span>
-                        ShelfSync
-                    </span>
+                    <i class="fa-solid fa-book-open"></i>
+                    Shelf<span>Sync</span>
 
                 </a>
 
                 <p>
-                    A modern library management system designed
-                    for students, teachers and passionate readers.
+                    A simple and smart library management system
+                    designed for students and educational institutions.
                 </p>
-
-
-                <div class="social-links">
-
-                    <a href="#" aria-label="Facebook">
-                        <i class="fa-brands fa-facebook-f"></i>
-                    </a>
-
-                    <a href="#" aria-label="Instagram">
-                        <i class="fa-brands fa-instagram"></i>
-                    </a>
-
-                    <a href="#" aria-label="LinkedIn">
-                        <i class="fa-brands fa-linkedin-in"></i>
-                    </a>
-
-                </div>
 
             </div>
 
@@ -631,13 +627,20 @@
             <div class="footer-links">
 
                 <h3>
-                    Library
+                    Account
                 </h3>
 
-                <a href="books.html">Book Collection</a>
-                <a href="books.html">New Arrivals</a>
-                <a href="profile.html">My Profile</a>
-                <a href="contact.html">Contact</a>
+                <a href="profile.html">
+                    Profile
+                </a>
+
+                <a href="books.html">
+                    Borrow Books
+                </a>
+
+                <a href="contact.html">
+                    Contact
+                </a>
 
             </div>
 
@@ -645,7 +648,7 @@
             <div class="footer-contact">
 
                 <h3>
-                    Contact
+                    Library
                 </h3>
 
                 <p>
@@ -655,7 +658,7 @@
 
                 <p>
                     <i class="fa-solid fa-envelope"></i>
-                    info@shelfsync.com
+                    library@shelfsync.com
                 </p>
 
                 <p>
@@ -665,23 +668,21 @@
 
             </div>
 
+
         </div>
 
 
-        <div class="footer-bottom">
+        <div class="container footer-bottom">
 
-            <div class="container footer-bottom-content">
+            <p>
+                &copy;
+                <span id="currentYear"></span>
+                ShelfSync. All rights reserved.
+            </p>
 
-                <p>
-                    © <span id="currentYear"></span>
-                    ShelfSync. All Rights Reserved.
-                </p>
-
-                <p>
-                    Library Management System
-                </p>
-
-            </div>
+            <p>
+                Library Management System
+            </p>
 
         </div>
 

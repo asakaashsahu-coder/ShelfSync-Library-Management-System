@@ -5,59 +5,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="description"
-        content="Login or register as a ShelfSync library member.">
-
-    <title>Login | ShelfSync</title>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
-        rel="stylesheet">
-
-    <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <title>Login & Register | ShelfSync</title>
 
     <link rel="stylesheet" href="../css/style.css">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 
 <body>
 
-    <!-- Navbar -->
-    <header class="header">
+    <!-- Header -->
+    <header class="main-header">
 
-        <div class="container navbar">
+        <div class="container nav-container">
 
             <a href="index.html" class="logo">
-
-                <div class="logo-icon">
-                    <i class="fa-solid fa-book-open"></i>
-                </div>
-
-                <span>ShelfSync</span>
-
+                <i class="fa-solid fa-book-open"></i>
+                Shelf<span>Sync</span>
             </a>
 
             <nav class="nav-links" id="navLinks">
-
                 <a href="index.html">Home</a>
                 <a href="about.html">About</a>
                 <a href="books.html">Books</a>
                 <a href="gallery.html">Gallery</a>
                 <a href="contact.html">Contact</a>
 
-                <a href="login.html" class="login-btn">
-                    <i class="fa-regular fa-user"></i>
+                <a href="login.html"
+                    class="login-nav active"
+                    id="accountNavLink">
                     Login
                 </a>
-
             </nav>
 
-            <button class="menu-btn" id="menuBtn" aria-label="Open menu">
+            <button
+                class="menu-toggle"
+                id="menuToggle"
+                aria-label="Open menu">
+
                 <i class="fa-solid fa-bars"></i>
+
             </button>
 
         </div>
@@ -67,21 +55,20 @@
 
     <main>
 
-        <!-- Page heading -->
+        <!-- Page Banner -->
         <section class="page-banner">
 
             <div class="container">
 
-                <p class="small-heading">
-                    Member Access
-                </p>
+                <span class="section-tag">
+                    Member Account
+                </span>
 
-                <h1>
-                    Join the ShelfSync community
-                </h1>
+                <h1>Welcome to ShelfSync</h1>
 
                 <p>
-                    Login to your account or register as a new library member.
+                    Login to manage your borrowed books or create
+                    a new library account.
                 </p>
 
             </div>
@@ -89,46 +76,77 @@
         </section>
 
 
-        <!-- Login and registration -->
-        <section class="account-section section">
+        <!-- Account Section -->
+        <section class="account-section">
 
-            <div class="container account-wrapper">
+            <div class="container account-container">
 
+
+                <!-- Left Side -->
                 <div class="account-info">
 
-                    <p class="small-heading">
-                        ShelfSync Membership
-                    </p>
+                    <span class="section-tag">
+                        ShelfSync Member
+                    </span>
 
-                    <h2>
-                        Your library journey starts here
-                    </h2>
+                    <h2>Your Library, Your Account</h2>
 
                     <p>
-                        Create an account to explore books, manage your library
-                        membership and access useful learning resources.
+                        Create a ShelfSync account to borrow books,
+                        view your current borrowing status and keep
+                        track of your library activity.
                     </p>
 
-                    <div class="account-benefits">
 
-                        <div>
-                            <i class="fa-solid fa-check"></i>
-                            <span>Explore available books</span>
+                    <div class="account-feature">
+
+                        <div class="account-feature-icon">
+                            <i class="fa-solid fa-book-open-reader"></i>
                         </div>
 
                         <div>
-                            <i class="fa-solid fa-check"></i>
-                            <span>Request books easily</span>
+                            <h3>Borrow Books</h3>
+
+                            <p>
+                                Borrow available books directly from
+                                the ShelfSync collection.
+                            </p>
+                        </div>
+
+                    </div>
+
+
+                    <div class="account-feature">
+
+                        <div class="account-feature-icon">
+                            <i class="fa-solid fa-clock"></i>
                         </div>
 
                         <div>
-                            <i class="fa-solid fa-check"></i>
-                            <span>Access library services</span>
+                            <h3>Track Due Dates</h3>
+
+                            <p>
+                                Check when a book was borrowed and
+                                how many days remain before it is due.
+                            </p>
+                        </div>
+
+                    </div>
+
+
+                    <div class="account-feature">
+
+                        <div class="account-feature-icon">
+                            <i class="fa-solid fa-user"></i>
                         </div>
 
                         <div>
-                            <i class="fa-solid fa-check"></i>
-                            <span>Simple member experience</span>
+                            <h3>Personal Profile</h3>
+
+                            <p>
+                                View your member information and
+                                current library activity.
+                            </p>
                         </div>
 
                     </div>
@@ -136,44 +154,65 @@
                 </div>
 
 
-                <div class="form-card">
+                <!-- Account Form -->
+                <div class="account-card">
 
-                    <div class="form-tabs">
 
-                        <button class="tab-btn active" id="loginTab">
+                    <!-- Tabs -->
+                    <div class="account-tabs">
+
+                        <button
+                            class="account-tab active"
+                            id="loginTab">
                             Login
                         </button>
 
-                        <button class="tab-btn" id="registerTab">
+                        <button
+                            class="account-tab"
+                            id="registerTab">
                             Register
                         </button>
 
                     </div>
 
 
-                    <!-- Login form -->
-                    <form id="loginForm" class="account-form">
+                    <!-- Login Form -->
+                    <form
+                        id="loginForm"
+                        class="account-form">
 
-                        <h3>Welcome Back</h3>
+                        <div class="form-heading">
 
-                        <p>
-                            Enter your details to login.
-                        </p>
+                            <h2>Member Login</h2>
+
+                            <p>
+                                Enter your registered account details.
+                            </p>
+
+                        </div>
 
 
                         <div class="form-group">
 
                             <label for="loginEmail">
-                                Email
+                                Email Address
                             </label>
 
-                            <input
-                                type="email"
-                                id="loginEmail"
-                                placeholder="Enter your email">
+                            <div class="input-icon">
 
-                            <small class="error-message"
-                                id="loginEmailError"></small>
+                                <i class="fa-solid fa-envelope"></i>
+
+                                <input
+                                    type="email"
+                                    id="loginEmail"
+                                    placeholder="Enter your email">
+
+                            </div>
+
+                            <small
+                                class="error-message"
+                                id="loginEmailError">
+                            </small>
 
                         </div>
 
@@ -184,33 +223,71 @@
                                 Password
                             </label>
 
-                            <input
-                                type="password"
-                                id="loginPassword"
-                                placeholder="Enter your password">
+                            <div class="input-icon">
 
-                            <small class="error-message"
-                                id="loginPasswordError"></small>
+                                <i class="fa-solid fa-lock"></i>
+
+                                <input
+                                    type="password"
+                                    id="loginPassword"
+                                    placeholder="Enter your password">
+
+                            </div>
+
+                            <small
+                                class="error-message"
+                                id="loginPasswordError">
+                            </small>
 
                         </div>
 
 
-                        <button type="submit" class="form-submit-btn">
-                            Login
+                        <!-- Forgot Password -->
+                        <button
+                            type="button"
+                            class="forgot-password-link"
+                            id="forgotPasswordBtn">
+                            Forgot Password?
                         </button>
+
+
+                        <button
+                            type="submit"
+                            class="form-submit-btn">
+
+                            <i class="fa-solid fa-right-to-bracket"></i>
+                            Login
+
+                        </button>
+
+
+                        <p class="account-note">
+                            Don't have an account?
+                            <button
+                                type="button"
+                                class="inline-account-btn"
+                                id="openRegisterBtn">
+                                Register here
+                            </button>
+                        </p>
 
                     </form>
 
 
-                    <!-- Registration form -->
-                    <form id="registerForm"
+                    <!-- Register Form -->
+                    <form
+                        id="registerForm"
                         class="account-form hidden-form">
 
-                        <h3>Create Account</h3>
+                        <div class="form-heading">
 
-                        <p>
-                            Register as a new library member.
-                        </p>
+                            <h2>Create Account</h2>
+
+                            <p>
+                                Register as a new ShelfSync member.
+                            </p>
+
+                        </div>
 
 
                         <div class="form-group">
@@ -219,13 +296,21 @@
                                 Full Name
                             </label>
 
-                            <input
-                                type="text"
-                                id="registerName"
-                                placeholder="Enter your full name">
+                            <div class="input-icon">
 
-                            <small class="error-message"
-                                id="nameError"></small>
+                                <i class="fa-solid fa-user"></i>
+
+                                <input
+                                    type="text"
+                                    id="registerName"
+                                    placeholder="Enter your full name">
+
+                            </div>
+
+                            <small
+                                class="error-message"
+                                id="registerNameError">
+                            </small>
 
                         </div>
 
@@ -233,16 +318,24 @@
                         <div class="form-group">
 
                             <label for="registerEmail">
-                                Email
+                                Email Address
                             </label>
 
-                            <input
-                                type="email"
-                                id="registerEmail"
-                                placeholder="Enter your email">
+                            <div class="input-icon">
 
-                            <small class="error-message"
-                                id="registerEmailError"></small>
+                                <i class="fa-solid fa-envelope"></i>
+
+                                <input
+                                    type="email"
+                                    id="registerEmail"
+                                    placeholder="Enter your email">
+
+                            </div>
+
+                            <small
+                                class="error-message"
+                                id="registerEmailError">
+                            </small>
 
                         </div>
 
@@ -253,13 +346,22 @@
                                 Phone Number
                             </label>
 
-                            <input
-                                type="text"
-                                id="registerPhone"
-                                placeholder="Enter 10 digit phone number">
+                            <div class="input-icon">
 
-                            <small class="error-message"
-                                id="phoneError"></small>
+                                <i class="fa-solid fa-phone"></i>
+
+                                <input
+                                    type="text"
+                                    id="registerPhone"
+                                    maxlength="10"
+                                    placeholder="Enter 10 digit phone number">
+
+                            </div>
+
+                            <small
+                                class="error-message"
+                                id="registerPhoneError">
+                            </small>
 
                         </div>
 
@@ -270,13 +372,21 @@
                                 Password
                             </label>
 
-                            <input
-                                type="password"
-                                id="registerPassword"
-                                placeholder="Minimum 6 characters">
+                            <div class="input-icon">
 
-                            <small class="error-message"
-                                id="registerPasswordError"></small>
+                                <i class="fa-solid fa-lock"></i>
+
+                                <input
+                                    type="password"
+                                    id="registerPassword"
+                                    placeholder="Minimum 6 characters">
+
+                            </div>
+
+                            <small
+                                class="error-message"
+                                id="registerPasswordError">
+                            </small>
 
                         </div>
 
@@ -287,22 +397,189 @@
                                 Confirm Password
                             </label>
 
-                            <input
-                                type="password"
-                                id="confirmPassword"
-                                placeholder="Enter password again">
+                            <div class="input-icon">
 
-                            <small class="error-message"
-                                id="confirmPasswordError"></small>
+                                <i class="fa-solid fa-shield-halved"></i>
+
+                                <input
+                                    type="password"
+                                    id="confirmPassword"
+                                    placeholder="Enter password again">
+
+                            </div>
+
+                            <small
+                                class="error-message"
+                                id="confirmPasswordError">
+                            </small>
 
                         </div>
 
 
-                        <button type="submit" class="form-submit-btn">
-                            Register
+                        <button
+                            type="submit"
+                            class="form-submit-btn">
+
+                            <i class="fa-solid fa-user-plus"></i>
+                            Create Account
+
+                        </button>
+
+
+                        <p class="account-note">
+                            Already registered?
+
+                            <button
+                                type="button"
+                                class="inline-account-btn"
+                                id="openLoginBtn">
+                                Login here
+                            </button>
+                        </p>
+
+                    </form>
+
+
+                    <!-- Forgot Password Form -->
+                    <form
+                        id="forgotPasswordForm"
+                        class="account-form hidden-form">
+
+                        <div class="form-heading">
+
+                            <h2>Reset Password</h2>
+
+                            <p>
+                                Verify your registered information
+                                and create a new password.
+                            </p>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="forgotEmail">
+                                Registered Email
+                            </label>
+
+                            <div class="input-icon">
+
+                                <i class="fa-solid fa-envelope"></i>
+
+                                <input
+                                    type="email"
+                                    id="forgotEmail"
+                                    placeholder="Enter registered email">
+
+                            </div>
+
+                            <small
+                                class="error-message"
+                                id="forgotEmailError">
+                            </small>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="forgotPhone">
+                                Registered Phone Number
+                            </label>
+
+                            <div class="input-icon">
+
+                                <i class="fa-solid fa-phone"></i>
+
+                                <input
+                                    type="text"
+                                    id="forgotPhone"
+                                    maxlength="10"
+                                    placeholder="Enter registered phone">
+
+                            </div>
+
+                            <small
+                                class="error-message"
+                                id="forgotPhoneError">
+                            </small>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="newPassword">
+                                New Password
+                            </label>
+
+                            <div class="input-icon">
+
+                                <i class="fa-solid fa-lock"></i>
+
+                                <input
+                                    type="password"
+                                    id="newPassword"
+                                    placeholder="Minimum 6 characters">
+
+                            </div>
+
+                            <small
+                                class="error-message"
+                                id="newPasswordError">
+                            </small>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="forgotConfirmPassword">
+                                Confirm New Password
+                            </label>
+
+                            <div class="input-icon">
+
+                                <i class="fa-solid fa-shield-halved"></i>
+
+                                <input
+                                    type="password"
+                                    id="forgotConfirmPassword"
+                                    placeholder="Enter new password again">
+
+                            </div>
+
+                            <small
+                                class="error-message"
+                                id="forgotConfirmError">
+                            </small>
+
+                        </div>
+
+
+                        <button
+                            type="submit"
+                            class="form-submit-btn">
+
+                            <i class="fa-solid fa-key"></i>
+                            Reset Password
+
+                        </button>
+
+
+                        <button
+                            type="button"
+                            class="back-login-btn"
+                            id="backToLoginBtn">
+
+                            <i class="fa-solid fa-arrow-left"></i>
+                            Back to Login
+
                         </button>
 
                     </form>
+
 
                 </div>
 
@@ -314,42 +591,26 @@
 
 
     <!-- Footer -->
-    <footer class="footer">
+    <footer class="main-footer">
 
         <div class="container footer-grid">
 
-            <div class="footer-about">
+            <div class="footer-brand">
 
-                <a href="index.html" class="logo footer-logo">
+                <a
+                    href="index.html"
+                    class="logo footer-logo">
 
-                    <div class="logo-icon">
-                        <i class="fa-solid fa-book-open"></i>
-                    </div>
+                    <i class="fa-solid fa-book-open"></i>
 
-                    <span>ShelfSync</span>
+                    Shelf<span>Sync</span>
 
                 </a>
 
                 <p>
-                    A modern library management system designed
-                    for students, teachers and passionate readers.
+                    A simple and smart library management system
+                    designed for students and educational institutions.
                 </p>
-
-                <div class="social-links">
-
-                    <a href="#" aria-label="Facebook">
-                        <i class="fa-brands fa-facebook-f"></i>
-                    </a>
-
-                    <a href="#" aria-label="Instagram">
-                        <i class="fa-brands fa-instagram"></i>
-                    </a>
-
-                    <a href="#" aria-label="LinkedIn">
-                        <i class="fa-brands fa-linkedin-in"></i>
-                    </a>
-
-                </div>
 
             </div>
 
@@ -368,11 +629,10 @@
 
             <div class="footer-links">
 
-                <h3>Library</h3>
+                <h3>Account</h3>
 
-                <a href="books.html">Book Collection</a>
-                <a href="books.html">New Arrivals</a>
-                <a href="login.html">Membership</a>
+                <a href="login.html">Login</a>
+                <a href="profile.html">Profile</a>
                 <a href="contact.html">Contact</a>
 
             </div>
@@ -380,7 +640,7 @@
 
             <div class="footer-contact">
 
-                <h3>Contact</h3>
+                <h3>Library</h3>
 
                 <p>
                     <i class="fa-solid fa-location-dot"></i>
@@ -389,7 +649,7 @@
 
                 <p>
                     <i class="fa-solid fa-envelope"></i>
-                    info@shelfsync.com
+                    library@shelfsync.com
                 </p>
 
                 <p>
@@ -402,20 +662,17 @@
         </div>
 
 
-        <div class="footer-bottom">
+        <div class="container footer-bottom">
 
-            <div class="container footer-bottom-content">
+            <p>
+                &copy;
+                <span id="currentYear"></span>
+                ShelfSync. All rights reserved.
+            </p>
 
-                <p>
-                    © <span id="currentYear"></span>
-                    ShelfSync. All Rights Reserved.
-                </p>
-
-                <p>
-                    Library Management System
-                </p>
-
-            </div>
+            <p>
+                Library Management System
+            </p>
 
         </div>
 
