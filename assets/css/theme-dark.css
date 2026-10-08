@@ -1,0 +1,361 @@
+/* =========================================================
+   ShelfSync - Dark Theme
+   Add this file after style.css
+   ========================================================= */
+
+:root {
+    --primary: #60a5fa;
+    --primary-dark: #3b82f6;
+    --primary-soft: #172554;
+
+    --ink: #f8fafc;
+    --text: #cbd5e1;
+    --muted: #94a3b8;
+    --light-text: #64748b;
+
+    --line: #263449;
+
+    --surface: #111827;
+    --soft: #0f172a;
+    --soft-blue: #172033;
+
+    --success: #4ade80;
+    --danger: #f87171;
+    --warning: #fbbf24;
+
+    --shadow-sm:
+        0 4px 14px rgba(0, 0, 0, 0.20);
+
+    --shadow:
+        0 14px 40px rgba(0, 0, 0, 0.28);
+
+    --shadow-lg:
+        0 24px 60px rgba(0, 0, 0, 0.38);
+}
+
+
+/* =========================================================
+   Main Background
+   ========================================================= */
+
+html {
+    background: #0b1120;
+}
+
+body {
+    background:
+        radial-gradient(
+            circle at 8% 5%,
+            rgba(59, 130, 246, 0.12),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 92% 20%,
+            rgba(96, 165, 250, 0.07),
+            transparent 28%
+        ),
+        linear-gradient(
+            135deg,
+            #0b1120 0%,
+            #0f172a 48%,
+            #111827 100%
+        );
+
+    color: var(--text);
+}
+
+
+/* =========================================================
+   Header / Navigation
+   ========================================================= */
+
+.site-header,
+header,
+.navbar {
+    background: rgba(11, 17, 32, 0.88);
+    border-color: var(--line);
+}
+
+.nav-links a {
+    color: #cbd5e1;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    color: var(--primary);
+}
+
+
+/* =========================================================
+   General Sections
+   ========================================================= */
+
+.categories-section,
+.featured-section,
+.about-purpose-section,
+.about-features-section,
+.technology-section,
+.journey-section,
+.gallery-section,
+.contact-section,
+.profile-dashboard-section {
+    background: transparent;
+}
+
+
+/* =========================================================
+   Cards
+   ========================================================= */
+
+.category-card,
+.featured-book-card,
+.service-card,
+.purpose-card,
+.technology-card,
+.gallery-card,
+.form-card,
+.contact-card,
+.profile-card,
+.profile-panel,
+.profile-stat-card {
+    background: rgba(17, 24, 39, 0.88);
+    border-color: var(--line);
+    box-shadow: var(--shadow-sm);
+}
+
+.category-card:hover,
+.featured-book-card:hover,
+.service-card:hover,
+.purpose-card:hover,
+.technology-card:hover,
+.gallery-card:hover {
+    border-color: #334155;
+    box-shadow: var(--shadow);
+}
+
+
+/* =========================================================
+   Typography
+   ========================================================= */
+
+.center-heading h2,
+.section-heading h2,
+.category-card h3,
+.service-card h3,
+.featured-book-card h3,
+.purpose-card h3,
+.technology-card h3,
+.library-book-info h3,
+.borrowed-book-card h3 {
+    color: var(--ink);
+}
+
+.center-heading p,
+.section-heading p,
+.category-card p,
+.service-card p,
+.featured-book-card p,
+.purpose-card p,
+.technology-card p,
+.library-author,
+.book-description {
+    color: var(--muted);
+}
+
+
+/* =========================================================
+   Icons
+   ========================================================= */
+
+.category-icon,
+.service-icon,
+.technology-icon,
+.purpose-icon,
+.profile-stat-icon {
+    background: var(--primary-soft);
+    color: var(--primary);
+}
+
+
+/* =========================================================
+   Search / Form Controls
+   ========================================================= */
+
+.library-search-box,
+.search-input-wrap {
+    background: #111827;
+    border-color: var(--line);
+}
+
+.library-search-box input,
+.search-input-wrap input {
+    color: var(--ink);
+}
+
+input,
+select,
+textarea {
+    background: #111827;
+    border-color: var(--line);
+    color: var(--ink);
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: #64748b;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: var(--primary);
+    box-shadow:
+        0 0 0 3px rgba(96, 165, 250, 0.12);
+}
+
+
+/* =========================================================
+   Buttons
+   ========================================================= */
+
+.book-filter-btn,
+.gallery-filter-btn,
+.book-actions button {
+    background: #111827;
+    border-color: var(--line);
+    color: var(--text);
+}
+
+.book-filter-btn:hover,
+.book-filter-btn.active,
+.gallery-filter-btn:hover,
+.gallery-filter-btn.active {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: #0b1120;
+}
+
+.book-actions .book-details-btn {
+    background: var(--primary-soft);
+    border-color: #1e40af;
+    color: var(--primary);
+}
+
+.book-actions .borrow-btn {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: #0b1120;
+}
+
+.book-actions .borrow-btn:hover {
+    background: var(--primary-dark);
+}
+
+
+/* =========================================================
+   Book Covers
+   ========================================================= */
+
+.library-book-cover {
+    background: #172033;
+}
+
+.featured-book-icon {
+    background: #e2e8f0;
+    color: #0f172a;
+}
+
+
+/* =========================================================
+   Profile
+   ========================================================= */
+
+.profile-panel-header {
+    border-color: var(--line);
+}
+
+.profile-stat-card {
+    background: #111827;
+}
+
+.borrowed-book-card {
+    border-color: var(--line);
+}
+
+.borrowed-book-card > div:first-child {
+    background: var(--primary-soft);
+    color: var(--primary);
+}
+
+.borrowed-book-card .return-book-btn {
+    background: var(--primary-soft);
+    border-color: #1e40af;
+    color: var(--primary);
+}
+
+.borrowed-book-card .return-book-btn:hover {
+    background: var(--primary);
+    color: #0b1120;
+}
+
+
+/* =========================================================
+   Modal
+   ========================================================= */
+
+.book-modal-overlay {
+    background: rgba(2, 6, 23, 0.82);
+}
+
+.book-modal-content {
+    background: #111827;
+    border-color: var(--line);
+}
+
+
+/* =========================================================
+   Footer
+   ========================================================= */
+
+footer {
+    background: #080d19;
+    border-color: var(--line);
+}
+
+.footer-brand,
+.footer-column h3 {
+    color: var(--ink);
+}
+
+.footer-column a,
+.footer-brand p,
+.footer-bottom {
+    color: var(--muted);
+}
+
+.footer-column a:hover {
+    color: var(--primary);
+}
+
+
+/* =========================================================
+   Links
+   ========================================================= */
+
+a {
+    color: inherit;
+}
+
+a:hover {
+    color: var(--primary);
+}
+
+
+/* =========================================================
+   Selection
+   ========================================================= */
+
+::selection {
+    background: rgba(96, 165, 250, 0.25);
+    color: #ffffff;
+}

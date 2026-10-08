@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,8 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="description"
-        content="Contact ShelfSync Library for support, membership information and general enquiries.">
+    <meta
+        name="description"
+        content="Contact ShelfSync for questions, feedback and support about our digital library management system."
+    >
 
     <title>Contact | ShelfSync</title>
 
@@ -15,49 +16,110 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
-        rel="stylesheet">
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap"
+        rel="stylesheet"
+    >
 
     <link
         rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
 
+    <!-- ShelfSync Base Styles -->
     <link rel="stylesheet" href="../css/style.css">
+
+    <!--
+        SHELFSYNC THEME
+        ------------------------------------------------
+        Keep style.css enabled.
+
+        Choose ONE theme below.
+
+        To change the theme:
+        1. Remove the comments from the theme you want.
+        2. Keep the other themes commented.
+        3. Save the file and refresh the page.
+
+        Available themes:
+        - Ivory
+        - Dark
+        - Midnight
+        - Sage
+        ------------------------------------------------
+    -->
+
+    <!-- Ivory Theme -->
+    <!-- <link rel="stylesheet" href="../css/theme-ivory.css"> -->
+
+    <!-- Dark Theme -->
+    <!-- <link rel="stylesheet" href="../css/theme-dark.css"> -->
+
+    <!-- Midnight Theme -->
+    <!-- <link rel="stylesheet" href="../css/theme-midnight.css"> -->
+
+    <!-- Sage Theme -->
+    <!-- <link rel="stylesheet" href="../css/theme-sage.css"> -->
+
 </head>
 
 <body>
 
-    <!-- Navbar -->
-    <header class="header">
+    <!-- Navigation -->
+    <header class="main-header">
 
-        <div class="container navbar">
+        <div class="container nav-container">
 
             <a href="index.html" class="logo">
 
-                <div class="logo-icon">
+                <span class="logo-icon">
                     <i class="fa-solid fa-book-open"></i>
-                </div>
+                </span>
 
                 <span>ShelfSync</span>
 
             </a>
 
+
             <nav class="nav-links" id="navLinks">
 
-                <a href="index.html">Home</a>
-                <a href="about.html">About</a>
-                <a href="books.html">Books</a>
-                <a href="gallery.html">Gallery</a>
-                <a href="contact.html" class="active">Contact</a>
+                <a href="index.html">
+                    Home
+                </a>
 
-                <a href="login.html" class="login-btn">
+                <a href="about.html">
+                    About
+                </a>
+
+                <a href="books.html">
+                    Books
+                </a>
+
+                <a href="gallery.html">
+                    Gallery
+                </a>
+
+                <a href="contact.html" class="active">
+                    Contact
+                </a>
+
+                <a
+                    href="login.html"
+                    class="login-nav"
+                    id="accountNavLink"
+                >
                     <i class="fa-regular fa-user"></i>
                     Login
                 </a>
 
             </nav>
 
-            <button class="menu-btn" id="menuBtn" aria-label="Open menu">
+
+            <button
+                type="button"
+                class="menu-toggle"
+                id="menuToggle"
+                aria-label="Open navigation menu"
+            >
                 <i class="fa-solid fa-bars"></i>
             </button>
 
@@ -68,22 +130,22 @@
 
     <main>
 
-        <!-- Page heading -->
+        <!-- Page Banner -->
         <section class="page-banner">
 
             <div class="container">
 
                 <p class="small-heading">
-                    Contact Us
+                    GET IN TOUCH
                 </p>
 
                 <h1>
-                    We're here to help
+                    Let's talk about ShelfSync.
                 </h1>
 
                 <p>
-                    Have a question about books, membership or library services?
-                    Send us a message and we will be happy to help.
+                    Have a question, suggestion or feedback?
+                    We'd be happy to hear from you.
                 </p>
 
             </div>
@@ -91,78 +153,170 @@
         </section>
 
 
-        <!-- Contact section -->
+        <!-- Contact Main Section -->
         <section class="contact-section section">
 
             <div class="container contact-grid">
 
-                <div class="contact-info-box">
+
+                <!-- Contact Information -->
+                <div class="contact-info">
 
                     <p class="small-heading">
-                        Get In Touch
+                        CONTACT SHELFSYNC
                     </p>
 
                     <h2>
-                        Contact ShelfSync
+                        We're here to help.
                     </h2>
 
-                    <p class="contact-text">
-                        Reach out to us for library information, membership help
-                        or any general enquiry.
+                    <p class="contact-intro">
+                        Whether you want to know more about the library,
+                        need help with your account or simply want to
+                        share an idea, you can reach us using the details
+                        below.
                     </p>
 
 
-                    <div class="contact-item">
+                    <div class="contact-details">
 
-                        <div class="contact-icon">
-                            <i class="fa-solid fa-location-dot"></i>
+
+                        <!-- Phone -->
+                        <a
+                            href="tel:8093430469"
+                            class="contact-detail-card"
+                        >
+
+                            <div class="contact-detail-icon">
+                                <i class="fa-solid fa-phone"></i>
+                            </div>
+
+                            <div>
+
+                                <span>
+                                    Call us
+                                </span>
+
+                                <strong>
+                                    8093430469
+                                </strong>
+
+                                <small>
+                                    Available for project support
+                                </small>
+
+                            </div>
+
+                            <i class="fa-solid fa-arrow-up-right-from-square contact-arrow"></i>
+
+                        </a>
+
+
+                        <!-- Email -->
+                        <a
+                            href="mailto:kumarsahuakash710@gmail.com"
+                            class="contact-detail-card"
+                        >
+
+                            <div class="contact-detail-icon">
+                                <i class="fa-regular fa-envelope"></i>
+                            </div>
+
+                            <div>
+
+                                <span>
+                                    Email us
+                                </span>
+
+                                <strong>
+                                    kumarsahuakash710@gmail.com
+                                </strong>
+
+                                <small>
+                                    Send us your questions or feedback
+                                </small>
+
+                            </div>
+
+                            <i class="fa-solid fa-arrow-up-right-from-square contact-arrow"></i>
+
+                        </a>
+
+
+                        <!-- Location -->
+                        <div class="contact-detail-card">
+
+                            <div class="contact-detail-icon">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </div>
+
+                            <div>
+
+                                <span>
+                                    Location
+                                </span>
+
+                                <strong>
+                                    Bhubaneswar, Odisha
+                                </strong>
+
+                                <small>
+                                    United School of Business Management
+                                </small>
+
+                            </div>
+
                         </div>
 
-                        <div>
-                            <h3>Address</h3>
-                            <p>Bhubaneswar, Odisha, India</p>
+
+                        <!-- Hours -->
+                        <div class="contact-detail-card">
+
+                            <div class="contact-detail-icon">
+                                <i class="fa-regular fa-clock"></i>
+                            </div>
+
+                            <div>
+
+                                <span>
+                                    Support hours
+                                </span>
+
+                                <strong>
+                                    Monday - Saturday
+                                </strong>
+
+                                <small>
+                                    9:00 AM - 6:00 PM
+                                </small>
+
+                            </div>
+
                         </div>
 
                     </div>
 
 
-                    <div class="contact-item">
+                    <!-- Contact Note -->
+                    <div class="contact-note">
 
-                        <div class="contact-icon">
-                            <i class="fa-solid fa-envelope"></i>
+                        <div class="contact-note-icon">
+                            <i class="fa-solid fa-circle-info"></i>
                         </div>
 
                         <div>
-                            <h3>Email</h3>
-                            <p>info@shelfsync.com</p>
-                        </div>
 
-                    </div>
+                            <strong>
+                                About this project
+                            </strong>
 
+                            <p>
+                                ShelfSync is a BCA project created to
+                                demonstrate how a digital library can make
+                                book discovery, borrowing and account
+                                management simpler.
+                            </p>
 
-                    <div class="contact-item">
-
-                        <div class="contact-icon">
-                            <i class="fa-solid fa-phone"></i>
-                        </div>
-
-                        <div>
-                            <h3>Phone</h3>
-                            <p>+91 98765 43210</p>
-                        </div>
-
-                    </div>
-
-
-                    <div class="contact-item">
-
-                        <div class="contact-icon">
-                            <i class="fa-solid fa-clock"></i>
-                        </div>
-
-                        <div>
-                            <h3>Opening Hours</h3>
-                            <p>Monday - Saturday: 9:00 AM - 6:00 PM</p>
                         </div>
 
                     </div>
@@ -170,94 +324,158 @@
                 </div>
 
 
-                <div class="contact-form-box">
+                <!-- Contact Form -->
+                <div class="contact-form-card">
 
-                    <h2>
-                        Send us a message
-                    </h2>
+                    <div class="contact-form-header">
 
-                    <p>
-                        Fill in the form below and we will get back to you.
-                    </p>
+                        <p class="small-heading">
+                            SEND A MESSAGE
+                        </p>
+
+                        <h2>
+                            How can we help?
+                        </h2>
+
+                        <p>
+                            Fill out the form and share your message with us.
+                        </p>
+
+                    </div>
 
 
-                    <form id="contactForm">
+                    <form id="contactForm" novalidate>
 
+
+                        <!-- Name -->
                         <div class="form-group">
 
                             <label for="contactName">
                                 Full Name
                             </label>
 
-                            <input
-                                type="text"
-                                id="contactName"
-                                placeholder="Enter your name">
+                            <div class="input-wrapper">
+
+                                <i class="fa-regular fa-user"></i>
+
+                                <input
+                                    type="text"
+                                    id="contactName"
+                                    name="contactName"
+                                    placeholder="Enter your full name"
+                                    autocomplete="name"
+                                >
+
+                            </div>
 
                             <small
-                                class="error-message"
-                                id="contactNameError"></small>
+                                class="form-error"
+                                id="contactNameError"
+                            ></small>
 
                         </div>
 
 
+                        <!-- Email -->
                         <div class="form-group">
 
                             <label for="contactEmail">
-                                Email
+                                Email Address
                             </label>
 
-                            <input
-                                type="email"
-                                id="contactEmail"
-                                placeholder="Enter your email">
+                            <div class="input-wrapper">
+
+                                <i class="fa-regular fa-envelope"></i>
+
+                                <input
+                                    type="email"
+                                    id="contactEmail"
+                                    name="contactEmail"
+                                    placeholder="Enter your email address"
+                                    autocomplete="email"
+                                >
+
+                            </div>
 
                             <small
-                                class="error-message"
-                                id="contactEmailError"></small>
+                                class="form-error"
+                                id="contactEmailError"
+                            ></small>
 
                         </div>
 
 
+                        <!-- Subject -->
                         <div class="form-group">
 
                             <label for="contactSubject">
                                 Subject
                             </label>
 
-                            <input
-                                type="text"
-                                id="contactSubject"
-                                placeholder="Enter subject">
+                            <div class="input-wrapper">
+
+                                <i class="fa-regular fa-pen-to-square"></i>
+
+                                <input
+                                    type="text"
+                                    id="contactSubject"
+                                    name="contactSubject"
+                                    placeholder="What would you like to discuss?"
+                                >
+
+                            </div>
 
                             <small
-                                class="error-message"
-                                id="contactSubjectError"></small>
+                                class="form-error"
+                                id="contactSubjectError"
+                            ></small>
 
                         </div>
 
 
+                        <!-- Message -->
                         <div class="form-group">
 
                             <label for="contactMessage">
                                 Message
                             </label>
 
-                            <textarea
-                                id="contactMessage"
-                                rows="6"
-                                placeholder="Write your message"></textarea>
+                            <div class="textarea-wrapper">
+
+                                <i class="fa-regular fa-message"></i>
+
+                                <textarea
+                                    id="contactMessage"
+                                    name="contactMessage"
+                                    rows="6"
+                                    placeholder="Write your message here..."
+                                ></textarea>
+
+                            </div>
 
                             <small
-                                class="error-message"
-                                id="contactMessageError"></small>
+                                class="form-error"
+                                id="contactMessageError"
+                            ></small>
 
                         </div>
 
 
-                        <button type="submit" class="form-submit-btn">
+                        <!-- Submit -->
+                        <button
+                            type="submit"
+                            class="primary-btn contact-submit"
+                        >
                             Send Message
+                            <i class="fa-solid fa-paper-plane"></i>
                         </button>
+
+
+                        <p class="form-disclaimer">
+                            <i class="fa-solid fa-lock"></i>
+                            Your message is handled through this
+                            project's contact interface.
+                        </p>
 
                     </form>
 
@@ -268,68 +486,223 @@
         </section>
 
 
-        <!-- Library hours -->
-        <section class="contact-extra section">
+        <!-- Why Contact -->
+        <section class="contact-reasons-section section">
 
             <div class="container">
 
-                <div class="section-heading">
+                <div class="section-heading centered">
 
                     <p class="small-heading">
-                        Library Information
+                        HOW WE CAN HELP
                     </p>
 
                     <h2>
-                        Visit during working hours
+                        What can you reach us about?
                     </h2>
 
                     <p>
-                        Our library is open throughout the week for students,
-                        teachers and registered members.
+                        ShelfSync is designed around the needs of students,
+                        readers and library users.
                     </p>
 
                 </div>
 
 
-                <div class="contact-extra-grid">
+                <div class="contact-reasons-grid">
 
-                    <div class="contact-extra-card">
 
-                        <i class="fa-solid fa-calendar-days"></i>
+                    <article class="contact-reason-card">
 
-                        <h3>Monday - Friday</h3>
+                        <div class="contact-reason-icon">
+                            <i class="fa-solid fa-book"></i>
+                        </div>
+
+                        <h3>
+                            Book Information
+                        </h3>
 
                         <p>
-                            9:00 AM - 6:00 PM
+                            Ask about books, categories, availability
+                            or the information displayed in our collection.
+                        </p>
+
+                    </article>
+
+
+                    <article class="contact-reason-card">
+
+                        <div class="contact-reason-icon">
+                            <i class="fa-solid fa-user"></i>
+                        </div>
+
+                        <h3>
+                            Account Help
+                        </h3>
+
+                        <p>
+                            Need help with registration, login, password
+                            recovery or your ShelfSync profile?
+                        </p>
+
+                    </article>
+
+
+                    <article class="contact-reason-card">
+
+                        <div class="contact-reason-icon">
+                            <i class="fa-solid fa-lightbulb"></i>
+                        </div>
+
+                        <h3>
+                            Suggestions
+                        </h3>
+
+                        <p>
+                            Have an idea that could make the library
+                            experience better? We'd love to hear it.
+                        </p>
+
+                    </article>
+
+
+                    <article class="contact-reason-card">
+
+                        <div class="contact-reason-icon">
+                            <i class="fa-solid fa-bug"></i>
+                        </div>
+
+                        <h3>
+                            Report an Issue
+                        </h3>
+
+                        <p>
+                            Let us know if something isn't behaving as
+                            expected while using the website.
+                        </p>
+
+                    </article>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Location / Project Section -->
+        <section class="contact-location-section">
+
+            <div class="container">
+
+                <div class="contact-location-card">
+
+                    <div class="contact-location-content">
+
+                        <p class="small-heading">
+                            WHERE WE ARE
+                        </p>
+
+                        <h2>
+                            Built in Bhubaneswar.
+                        </h2>
+
+                        <p>
+                            ShelfSync is developed as an academic project
+                            at United School of Business Management,
+                            Bhubaneswar. The project combines web
+                            development concepts with a practical library
+                            management use case.
+                        </p>
+
+
+                        <div class="location-points">
+
+                            <div>
+
+                                <i class="fa-solid fa-location-dot"></i>
+
+                                <span>
+                                    Bhubaneswar, Odisha, India
+                                </span>
+
+                            </div>
+
+
+                            <div>
+
+                                <i class="fa-solid fa-building-columns"></i>
+
+                                <span>
+                                    United School of Business Management
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="contact-location-visual">
+
+                        <div class="location-visual-icon">
+                            <i class="fa-solid fa-book-open"></i>
+                        </div>
+
+                        <span>
+                            SHELFSYNC
+                        </span>
+
+                        <strong>
+                            Read. Borrow. Track.
+                        </strong>
+
+                        <p>
+                            A simpler way to manage your library.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Final CTA -->
+        <section class="contact-cta-section">
+
+            <div class="container">
+
+                <div class="contact-cta-card">
+
+                    <div>
+
+                        <p class="small-heading">
+                            KEEP EXPLORING
+                        </p>
+
+                        <h2>
+                            Looking for your next book?
+                        </h2>
+
+                        <p>
+                            Explore the ShelfSync collection and find
+                            something worth reading.
                         </p>
 
                     </div>
 
 
-                    <div class="contact-extra-card">
-
-                        <i class="fa-solid fa-calendar-check"></i>
-
-                        <h3>Saturday</h3>
-
-                        <p>
-                            10:00 AM - 4:00 PM
-                        </p>
-
-                    </div>
-
-
-                    <div class="contact-extra-card">
-
-                        <i class="fa-solid fa-calendar-xmark"></i>
-
-                        <h3>Sunday</h3>
-
-                        <p>
-                            Closed
-                        </p>
-
-                    </div>
+                    <a
+                        href="books.html"
+                        class="primary-btn"
+                    >
+                        Explore Books
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
 
                 </div>
 
@@ -341,106 +714,156 @@
 
 
     <!-- Footer -->
-    <footer class="footer">
+    <footer class="site-footer">
 
-        <div class="container footer-grid">
+        <div class="container">
 
-            <div class="footer-about">
+            <div class="footer-grid">
 
-                <a href="index.html" class="logo footer-logo">
+                <div class="footer-brand">
 
-                    <div class="logo-icon">
-                        <i class="fa-solid fa-book-open"></i>
+                    <a href="index.html" class="logo footer-logo">
+
+                        <span class="logo-icon">
+                            <i class="fa-solid fa-book-open"></i>
+                        </span>
+
+                        <span>
+                            ShelfSync
+                        </span>
+
+                    </a>
+
+                    <p>
+                        A modern digital library experience designed to
+                        make discovering, borrowing and managing books easier.
+                    </p>
+
+
+                    <div class="footer-socials">
+
+                        <a
+                            href="#"
+                            aria-label="Facebook"
+                        >
+                            <i class="fa-brands fa-facebook-f"></i>
+                        </a>
+
+                        <a
+                            href="#"
+                            aria-label="Instagram"
+                        >
+                            <i class="fa-brands fa-instagram"></i>
+                        </a>
+
+                        <a
+                            href="#"
+                            aria-label="GitHub"
+                        >
+                            <i class="fa-brands fa-github"></i>
+                        </a>
+
                     </div>
 
-                    <span>ShelfSync</span>
+                </div>
 
-                </a>
 
-                <p>
-                    A modern library management system designed
-                    for students, teachers and passionate readers.
-                </p>
+                <div class="footer-column">
 
-                <div class="social-links">
+                    <h3>
+                        Explore
+                    </h3>
 
-                    <a href="#" aria-label="Facebook">
-                        <i class="fa-brands fa-facebook-f"></i>
+                    <a href="index.html">
+                        Home
                     </a>
 
-                    <a href="#" aria-label="Instagram">
-                        <i class="fa-brands fa-instagram"></i>
+                    <a href="about.html">
+                        About
                     </a>
 
-                    <a href="#" aria-label="LinkedIn">
-                        <i class="fa-brands fa-linkedin-in"></i>
+                    <a href="books.html">
+                        Books
                     </a>
+
+                    <a href="gallery.html">
+                        Gallery
+                    </a>
+
+                </div>
+
+
+                <div class="footer-column">
+
+                    <h3>
+                        Account
+                    </h3>
+
+                    <a href="login.html">
+                        Login
+                    </a>
+
+                    <a href="login.html">
+                        Register
+                    </a>
+
+                    <a href="profile.html">
+                        My Profile
+                    </a>
+
+                    <a href="contact.html">
+                        Contact
+                    </a>
+
+                </div>
+
+
+                <div class="footer-column">
+
+                    <h3>
+                        Contact
+                    </h3>
+
+                    <p>
+                        <i class="fa-solid fa-phone"></i>
+                        8093430469
+                    </p>
+
+                    <p>
+                        <i class="fa-solid fa-envelope"></i>
+                        kumarsahuakash710@gmail.com
+                    </p>
+
+                    <p>
+                        <i class="fa-solid fa-location-dot"></i>
+                        Bhubaneswar, Odisha
+                    </p>
 
                 </div>
 
             </div>
 
 
-            <div class="footer-links">
-
-                <h3>Quick Links</h3>
-
-                <a href="index.html">Home</a>
-                <a href="about.html">About</a>
-                <a href="books.html">Books</a>
-                <a href="gallery.html">Gallery</a>
-
-            </div>
-
-
-            <div class="footer-links">
-
-                <h3>Library</h3>
-
-                <a href="books.html">Book Collection</a>
-                <a href="books.html">New Arrivals</a>
-                <a href="login.html">Membership</a>
-                <a href="contact.html">Contact</a>
-
-            </div>
-
-
-            <div class="footer-contact">
-
-                <h3>Contact</h3>
+            <div class="footer-bottom">
 
                 <p>
-                    <i class="fa-solid fa-location-dot"></i>
-                    Bhubaneswar, Odisha
+                    &copy;
+                    <span id="currentYear"></span>
+                    ShelfSync. All rights reserved.
                 </p>
 
-                <p>
-                    <i class="fa-solid fa-envelope"></i>
-                    info@shelfsync.com
-                </p>
 
-                <p>
-                    <i class="fa-solid fa-phone"></i>
-                    +91 637241 5399
-                </p>
+                <div class="footer-bottom-links">
 
-            </div>
+                    <a href="#">
+                        Privacy
+                    </a>
 
-        </div>
+                    <a href="#">
+                        Terms
+                    </a>
 
-
-        <div class="footer-bottom">
-
-            <div class="container footer-bottom-content">
-
-                <p>
-                    © <span id="currentYear"></span>
-                    ShelfSync. All Rights Reserved.
-                </p>
-
-                <p>
-                    Library Management System
-                </p>
+                </div>
 
             </div>
 
@@ -454,4 +877,3 @@
 </body>
 
 </html>
-

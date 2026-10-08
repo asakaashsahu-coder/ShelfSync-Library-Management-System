@@ -1,653 +1,738 @@
-// Mobile menu
-const menuBtn =
-    document.getElementById("menuBtn") ||
-    document.getElementById("menuToggle");
+/* ShelfSync - Complete Main JavaScript */
 
-const navLinks = document.getElementById("navLinks");
+document.addEventListener("DOMContentLoaded", function () {
 
-if (menuBtn && navLinks) {
-    menuBtn.addEventListener("click", function () {
-        navLinks.classList.toggle("show");
-    });
+    /* =========================
+       Basic setup
+    ========================= */
 
-    const navItems = navLinks.querySelectorAll("a");
+    const currentYear = document.getElementById("currentYear");
 
-    navItems.forEach(function (item) {
-        item.addEventListener("click", function () {
+    if (currentYear) {
+        currentYear.textContent = new Date().getFullYear();
+    }
+
+    const inHtmlFolder =
+        window.location.pathname.toLowerCase().includes("/assets/html/");
+
+    function pageLink(page) {
+        return inHtmlFolder ? page : "assets/html/" + page;
+    }
+
+
+    /* =========================
+       Mobile / Tablet Navigation
+    ========================= */
+
+    const menuBtn =
+        document.getElementById("menuToggle") ||
+        document.getElementById("menuBtn");
+
+    const navLinks =
+        document.getElementById("navLinks");
+
+    if (menuBtn && navLinks) {
+
+        menuBtn.type = "button";
+
+        menuBtn.setAttribute(
+            "aria-expanded",
+            "false"
+        );
+
+        menuBtn.setAttribute(
+            "aria-controls",
+            "navLinks"
+        );
+
+        menuBtn.setAttribute(
+            "aria-label",
+            "Open navigation menu"
+        );
+
+
+        function closeMobileMenu() {
+
+            navLinks.classList.remove("open");
             navLinks.classList.remove("show");
-        });
-    });
-}
+            navLinks.classList.remove("active");
 
+            menuBtn.setAttribute(
+                "aria-expanded",
+                "false"
+            );
 
-// Current year
-const currentYear = document.getElementById("currentYear");
+            menuBtn.setAttribute(
+                "aria-label",
+                "Open navigation menu"
+            );
 
-if (currentYear) {
-    currentYear.textContent = new Date().getFullYear();
-}
+            const icon =
+                menuBtn.querySelector("i");
 
-
-// Storage helpers
-function getCurrentMember() {
-    const sessionData = localStorage.getItem("shelfSyncSession");
-
-    if (sessionData) {
-        return JSON.parse(sessionData);
-    }
-
-    return null;
-}
-
-
-function getBorrowStorageKey(email) {
-    return "shelfSyncBorrowed_" + email.toLowerCase();
-}
-
-
-function getReturnedStorageKey(email) {
-    return "shelfSyncReturned_" + email.toLowerCase();
-}
-
-
-function getActivityStorageKey(email) {
-    return "shelfSyncActivity_" + email.toLowerCase();
-}
-
-
-function getBorrowedBooks(email) {
-    const data = localStorage.getItem(
-        getBorrowStorageKey(email)
-    );
-
-    if (data) {
-        return JSON.parse(data);
-    }
-
-    return [];
-}
-
-
-function saveBorrowedBooks(email, books) {
-    localStorage.setItem(
-        getBorrowStorageKey(email),
-        JSON.stringify(books)
-    );
-}
-
-
-function getReturnedBooks(email) {
-    const data = localStorage.getItem(
-        getReturnedStorageKey(email)
-    );
-
-    if (data) {
-        return JSON.parse(data);
-    }
-
-    return [];
-}
-
-
-function saveReturnedBooks(email, books) {
-    localStorage.setItem(
-        getReturnedStorageKey(email),
-        JSON.stringify(books)
-    );
-}
-
-
-function getMemberActivities(email) {
-    const data = localStorage.getItem(
-        getActivityStorageKey(email)
-    );
-
-    if (data) {
-        return JSON.parse(data);
-    }
-
-    return [];
-}
-
-
-function addMemberActivity(email, activity) {
-    const activities = getMemberActivities(email);
-
-    activities.unshift(activity);
-
-    localStorage.setItem(
-        getActivityStorageKey(email),
-        JSON.stringify(activities.slice(0, 10))
-    );
-}
-
-
-// Logged-in navbar
-const savedSession =
-    localStorage.getItem("shelfSyncSession");
-
-const loginButton =
-    document.querySelector(".login-btn") ||
-    document.getElementById("accountNavLink");
-
-if (savedSession && loginButton) {
-    loginButton.href = "profile.html";
-
-    loginButton.innerHTML =
-        '<i class="fa-regular fa-user"></i> Profile';
-}
-
-
-// Home search
-const bookSearch =
-    document.getElementById("bookSearch");
-
-const searchBtn =
-    document.getElementById("searchBtn");
-
-
-if (bookSearch && searchBtn) {
-
-    searchBtn.addEventListener("click", function () {
-
-        const value =
-            bookSearch.value.trim();
-
-        if (value === "") {
-
-            alert("Please enter a book name.");
-
-        } else {
-
-            window.location.href =
-                "books.html?search=" +
-                encodeURIComponent(value);
-        }
-    });
-
-
-    bookSearch.addEventListener(
-        "keydown",
-        function (event) {
-
-            if (event.key === "Enter") {
-                searchBtn.click();
+            if (icon) {
+                icon.classList.remove("fa-xmark");
+                icon.classList.add("fa-bars");
             }
         }
-    );
-}
 
 
-// Books page
-const librarySearch =
-    document.getElementById("librarySearch");
+        function openMobileMenu() {
 
-const librarySearchBtn =
-    document.getElementById("librarySearchBtn");
+            navLinks.classList.add("open");
 
-const categorySelect =
-    document.getElementById("categorySelect");
+            menuBtn.setAttribute(
+                "aria-expanded",
+                "true"
+            );
 
+            menuBtn.setAttribute(
+                "aria-label",
+                "Close navigation menu"
+            );
 
-const filterButtons =
-    document.querySelectorAll(
-        ".filter-btn, .book-filter-btn"
-    );
+            const icon =
+                menuBtn.querySelector("i");
 
-
-const libraryBooks =
-    document.querySelectorAll(
-        ".library-book-card"
-    );
-
-
-const noBooks =
-    document.getElementById("noBooks");
+            if (icon) {
+                icon.classList.remove("fa-bars");
+                icon.classList.add("fa-xmark");
+            }
+        }
 
 
-// Filter books
-function filterBooks() {
+        menuBtn.addEventListener(
+            "click",
+            function (event) {
 
-    if (!libraryBooks.length) {
-        return;
+                event.preventDefault();
+                event.stopPropagation();
+
+                const isOpen =
+                    navLinks.classList.contains("open");
+
+                if (isOpen) {
+                    closeMobileMenu();
+                } else {
+                    openMobileMenu();
+                }
+            }
+        );
+
+
+        navLinks
+            .querySelectorAll("a")
+            .forEach(function (link) {
+
+                link.addEventListener(
+                    "click",
+                    function () {
+                        closeMobileMenu();
+                    }
+                );
+
+            });
+
+
+        document.addEventListener(
+            "click",
+            function (event) {
+
+                if (
+                    !navLinks.classList.contains("open")
+                ) {
+                    return;
+                }
+
+                if (
+                    navLinks.contains(event.target) ||
+                    menuBtn.contains(event.target)
+                ) {
+                    return;
+                }
+
+                closeMobileMenu();
+            }
+        );
+
+
+        document.addEventListener(
+            "keydown",
+            function (event) {
+
+                if (event.key === "Escape") {
+                    closeMobileMenu();
+                }
+            }
+        );
+
+
+        window.addEventListener(
+            "resize",
+            function () {
+
+                if (window.innerWidth > 850) {
+                    closeMobileMenu();
+                }
+            }
+        );
     }
 
 
-    let searchText = "";
+    /* =========================
+       Storage helpers
+    ========================= */
+
+    function getCurrentMember() {
+
+        const data =
+            localStorage.getItem(
+                "shelfSyncSession"
+            );
+
+        if (!data) {
+            return null;
+        }
+
+        try {
+            return JSON.parse(data);
+        } catch (error) {
+            localStorage.removeItem(
+                "shelfSyncSession"
+            );
+            return null;
+        }
+    }
+
+
+    function getUsers() {
+
+        try {
+
+            const users =
+                JSON.parse(
+                    localStorage.getItem(
+                        "shelfSyncUsers"
+                    ) || "[]"
+                );
+
+            if (Array.isArray(users)) {
+                return users;
+            }
+
+        } catch (error) {
+            return [];
+        }
+
+        return [];
+    }
+
+
+    function saveUsers(users) {
+
+        localStorage.setItem(
+            "shelfSyncUsers",
+            JSON.stringify(users)
+        );
+    }
+
+
+    function migrateOldUser() {
+
+        const oldUser =
+            localStorage.getItem(
+                "shelfSyncUser"
+            );
+
+        if (!oldUser) {
+            return;
+        }
+
+        const users = getUsers();
+
+        try {
+
+            const user =
+                JSON.parse(oldUser);
+
+            if (
+                user &&
+                user.email &&
+                !users.some(function (item) {
+                    return (
+                        item.email.toLowerCase() ===
+                        user.email.toLowerCase()
+                    );
+                })
+            ) {
+
+                users.push(user);
+                saveUsers(users);
+            }
+
+        } catch (error) {
+            return;
+        }
+    }
+
+    migrateOldUser();
+
+
+    function getStorageKey(type, email) {
+
+        return (
+            "shelfSync" +
+            type +
+            "_" +
+            String(email || "").toLowerCase()
+        );
+    }
+
+
+    function readList(type, email) {
+
+        if (!email) {
+            return [];
+        }
+
+        try {
+
+            return JSON.parse(
+                localStorage.getItem(
+                    getStorageKey(type, email)
+                ) || "[]"
+            );
+
+        } catch (error) {
+            return [];
+        }
+    }
+
+
+    function saveList(type, email, data) {
+
+        localStorage.setItem(
+            getStorageKey(type, email),
+            JSON.stringify(data)
+        );
+    }
+
+
+    function getBorrowedBooks(email) {
+        return readList(
+            "Borrowed",
+            email
+        );
+    }
+
+
+    function saveBorrowedBooks(
+        email,
+        books
+    ) {
+        saveList(
+            "Borrowed",
+            email,
+            books
+        );
+    }
+
+
+    function getReturnedBooks(email) {
+        return readList(
+            "Returned",
+            email
+        );
+    }
+
+
+    function saveReturnedBooks(
+        email,
+        books
+    ) {
+        saveList(
+            "Returned",
+            email,
+            books
+        );
+    }
+
+
+    function getActivities(email) {
+        return readList(
+            "Activity",
+            email
+        );
+    }
+
+
+    function addActivity(
+        email,
+        activity
+    ) {
+
+        const activities =
+            getActivities(email);
+
+        activities.unshift(activity);
+
+        saveList(
+            "Activity",
+            email,
+            activities.slice(0, 10)
+        );
+    }
+
+
+    /* =========================
+       Navbar account
+    ========================= */
+
+    function updateNavbar() {
+
+        const member =
+            getCurrentMember();
+
+        const account =
+            document.getElementById(
+                "accountNavLink"
+            ) ||
+            document.querySelector(
+                ".login-btn"
+            );
+
+        if (!account) {
+            return;
+        }
+
+        account.href =
+            member
+                ? pageLink("profile.html")
+                : pageLink("login.html");
+
+        account.innerHTML =
+            member
+                ? '<i class="fa-regular fa-user"></i> Profile'
+                : '<i class="fa-regular fa-user"></i> Login';
+    }
+
+    updateNavbar();
+
+
+    /* =========================
+       Home search
+    ========================= */
+
+    const homeSearch =
+        document.getElementById(
+            "bookSearch"
+        );
+
+    const homeSearchButton =
+        document.getElementById(
+            "searchBtn"
+        );
+
+
+    function performHomeSearch() {
+
+        if (!homeSearch) {
+            return;
+        }
+
+        const value =
+            homeSearch.value.trim();
+
+        if (!value) {
+
+            alert(
+                "Please enter a book name."
+            );
+
+            return;
+        }
+
+        window.location.href =
+            pageLink("books.html") +
+            "?search=" +
+            encodeURIComponent(value);
+    }
+
+
+    if (homeSearchButton) {
+
+        homeSearchButton.addEventListener(
+            "click",
+            performHomeSearch
+        );
+    }
+
+
+    if (homeSearch) {
+
+        homeSearch.addEventListener(
+            "keydown",
+            function (event) {
+
+                if (event.key === "Enter") {
+                    performHomeSearch();
+                }
+            }
+        );
+    }
+
+
+    /* =========================
+       Books
+    ========================= */
+
+    const librarySearch =
+        document.getElementById(
+            "librarySearch"
+        );
+
+    const librarySearchButton =
+        document.getElementById(
+            "librarySearchBtn"
+        );
+
+    const categorySelect =
+        document.getElementById(
+            "categorySelect"
+        );
+
+    const libraryBooks =
+        document.querySelectorAll(
+            ".library-book-card"
+        );
+
+    const noBooks =
+        document.getElementById(
+            "noBooks"
+        );
+
+
+    function filterBooks() {
+
+        if (!libraryBooks.length) {
+            return;
+        }
+
+        const search =
+            librarySearch
+                ? librarySearch.value
+                    .toLowerCase()
+                    .trim()
+                : "";
+
+        const category =
+            categorySelect
+                ? categorySelect.value.toLowerCase()
+                : "all";
+
+        let found = 0;
+
+
+        libraryBooks.forEach(
+            function (book) {
+
+                const title =
+                    (
+                        book.dataset.title ||
+                        ""
+                    ).toLowerCase();
+
+                const author =
+                    (
+                        book.dataset.author ||
+                        ""
+                    ).toLowerCase();
+
+                const description =
+                    (
+                        book.dataset.description ||
+                        ""
+                    ).toLowerCase();
+
+                const bookCategory =
+                    (
+                        book.dataset.category ||
+                        "all"
+                    ).toLowerCase();
+
+                const searchMatch =
+                    title.includes(search) ||
+                    author.includes(search) ||
+                    description.includes(search);
+
+                const categoryMatch =
+                    category === "all" ||
+                    bookCategory === category;
+
+                const show =
+                    searchMatch &&
+                    categoryMatch;
+
+                book.style.display =
+                    show ? "" : "none";
+
+                if (show) {
+                    found++;
+                }
+            }
+        );
+
+
+        if (noBooks) {
+
+            noBooks.style.display =
+                found === 0
+                    ? "block"
+                    : "none";
+        }
+    }
+
+
+    if (librarySearchButton) {
+
+        librarySearchButton.addEventListener(
+            "click",
+            filterBooks
+        );
+    }
+
 
     if (librarySearch) {
 
-        searchText =
-            librarySearch.value
-                .toLowerCase()
-                .trim();
-    }
+        librarySearch.addEventListener(
+            "input",
+            filterBooks
+        );
 
+        const urlSearch =
+            new URLSearchParams(
+                window.location.search
+            ).get("search");
 
-    let category = "all";
+        if (urlSearch) {
 
-    if (categorySelect) {
-        category = categorySelect.value;
-    }
-
-
-    let found = 0;
-
-
-    libraryBooks.forEach(function (book) {
-
-        const title =
-            (book.dataset.title || "")
-                .toLowerCase();
-
-        const author =
-            (book.dataset.author || "")
-                .toLowerCase();
-
-        const bookCategory =
-            book.dataset.category || "all";
-
-
-        const matchesSearch =
-            title.includes(searchText) ||
-            author.includes(searchText);
-
-
-        const matchesCategory =
-            category === "all" ||
-            bookCategory === category;
-
-
-        if (
-            matchesSearch &&
-            matchesCategory
-        ) {
-
-            book.style.display = "block";
-
-            found++;
-
-        } else {
-
-            book.style.display = "none";
-        }
-    });
-
-
-    if (noBooks) {
-
-        if (found === 0) {
-
-            noBooks.style.display = "block";
-
-        } else {
-
-            noBooks.style.display = "none";
-        }
-    }
-}
-
-
-// Search button
-if (librarySearchBtn) {
-
-    librarySearchBtn.addEventListener(
-        "click",
-        filterBooks
-    );
-}
-
-
-// Search while typing
-if (librarySearch) {
-
-    librarySearch.addEventListener(
-        "input",
-        filterBooks
-    );
-}
-
-
-// Category select
-if (categorySelect) {
-
-    categorySelect.addEventListener(
-        "change",
-        filterBooks
-    );
-}
-
-
-// Category buttons
-filterButtons.forEach(function (button) {
-
-    button.addEventListener(
-        "click",
-        function () {
-
-            filterButtons.forEach(
-                function (item) {
-
-                    item.classList.remove(
-                        "active"
-                    );
-                }
-            );
-
-
-            button.classList.add(
-                "active"
-            );
-
-
-            if (categorySelect) {
-
-                categorySelect.value =
-                    button.dataset.category ||
-                    "all";
-            }
-
+            librarySearch.value =
+                urlSearch;
 
             filterBooks();
         }
-    );
-});
-
-
-// Search coming from Home page
-if (
-    librarySearch &&
-    libraryBooks.length
-) {
-
-    const urlData =
-        new URLSearchParams(
-            window.location.search
-        );
-
-
-    const searchValue =
-        urlData.get("search");
-
-
-    if (searchValue) {
-
-        librarySearch.value =
-            searchValue;
-
-        filterBooks();
-    }
-}
-
-
-// Borrow buttons
-const borrowButtons =
-    document.querySelectorAll(
-        ".borrow-btn:not(.unavailable-btn)"
-    );
-
-
-// Mark books already borrowed
-function markAlreadyBorrowedBooks() {
-
-    const member =
-        getCurrentMember();
-
-
-    if (
-        !member ||
-        !libraryBooks.length
-    ) {
-        return;
     }
 
 
-    const borrowed =
-        getBorrowedBooks(
-            member.email
+    if (categorySelect) {
+
+        categorySelect.addEventListener(
+            "change",
+            filterBooks
         );
+    }
 
 
-    libraryBooks.forEach(
-        function (book) {
+    document
+        .querySelectorAll(
+            ".filter-btn, .book-filter-btn"
+        )
+        .forEach(
+            function (button) {
 
-            const title =
-                book.dataset.title;
+                button.type = "button";
 
+                button.addEventListener(
+                    "click",
+                    function (event) {
 
-            const alreadyBorrowed =
-                borrowed.some(
-                    function (item) {
+                        event.preventDefault();
 
-                        return (
-                            item.title === title
+                        document
+                            .querySelectorAll(
+                                ".filter-btn, .book-filter-btn"
+                            )
+                            .forEach(
+                                function (item) {
+                                    item.classList.remove(
+                                        "active"
+                                    );
+                                }
+                            );
+
+                        button.classList.add(
+                            "active"
                         );
+
+                        if (categorySelect) {
+
+                            categorySelect.value =
+                                button.dataset.category ||
+                                "all";
+                        }
+
+                        filterBooks();
                     }
                 );
-
-
-            if (!alreadyBorrowed) {
-                return;
             }
+        );
 
 
-            const button =
-                book.querySelector(
-                    ".borrow-btn"
-                );
+    /* =========================
+       Borrow books
+    ========================= */
 
+    function markBorrowedBooks() {
 
-            if (button) {
+        const member =
+            getCurrentMember();
 
-                button.disabled = true;
-
-                button.textContent =
-                    "Borrowed";
-            }
-
-
-            const availability =
-                book.querySelector(
-                    ".availability"
-                );
-
-
-            if (availability) {
-
-                availability.textContent =
-                    "Borrowed";
-
-                availability.classList.remove(
-                    "available"
-                );
-
-                availability.classList.add(
-                    "borrowed"
-                );
-            }
+        if (!member) {
+            return;
         }
-    );
-}
+
+        const borrowed =
+            getBorrowedBooks(
+                member.email
+            );
 
 
-// Borrow a book
-borrowButtons.forEach(
-    function (button) {
-
-        button.addEventListener(
-            "click",
-            function () {
-
-                const member =
-                    getCurrentMember();
-
-
-                // User must login
-                if (!member) {
-
-                    const goToLogin =
-                        confirm(
-                            "You need to login before borrowing a book. Go to the login page?"
-                        );
-
-
-                    if (goToLogin) {
-
-                        window.location.href =
-                            "login.html";
-                    }
-
-
-                    return;
-                }
-
-
-                const book =
-                    button.closest(
-                        ".library-book-card"
-                    );
-
-
-                if (!book) {
-                    return;
-                }
-
+        libraryBooks.forEach(
+            function (book) {
 
                 const title =
-                    book.dataset.title ||
-                    "Unknown Book";
+                    book.dataset.title;
 
-
-                const author =
-                    book.dataset.author ||
-                    "Unknown Author";
-
-
-                const category =
-                    book.dataset.category ||
-                    "General";
-
-
-                const price =
-                    book.dataset.price ||
-                    "Not listed";
-
-
-                const borrowedBooks =
-                    getBorrowedBooks(
-                        member.email
-                    );
-
-
-                // Prevent duplicate borrowing
                 const alreadyBorrowed =
-                    borrowedBooks.some(
+                    borrowed.some(
                         function (item) {
-
                             return (
-                                item.title === title
+                                item.title ===
+                                title
                             );
                         }
                     );
 
-
-                if (alreadyBorrowed) {
-
-                    alert(
-                        "You have already borrowed this book."
-                    );
-
+                if (!alreadyBorrowed) {
                     return;
                 }
 
-
-                const answer =
-                    confirm(
-                        'Borrow "' +
-                        title +
-                        '" for 14 days?'
+                const button =
+                    book.querySelector(
+                        ".borrow-btn"
                     );
 
+                if (button) {
 
-                if (!answer) {
-                    return;
+                    button.disabled = true;
+                    button.textContent =
+                        "Borrowed";
                 }
-
-
-                const borrowedAt =
-                    new Date();
-
-
-                const dueAt =
-                    new Date(
-                        borrowedAt
-                    );
-
-
-                // 14 day borrowing period
-                dueAt.setDate(
-                    dueAt.getDate() + 14
-                );
-
-
-                const borrowedBook = {
-
-                    id: Date.now(),
-
-                    title: title,
-
-                    author: author,
-
-                    category: category,
-
-                    price: price,
-
-                    borrowedAt:
-                        borrowedAt.toISOString(),
-
-                    dueAt:
-                        dueAt.toISOString()
-                };
-
-
-                borrowedBooks.push(
-                    borrowedBook
-                );
-
-
-                saveBorrowedBooks(
-                    member.email,
-                    borrowedBooks
-                );
-
-
-                // Add activity
-                addMemberActivity(
-                    member.email,
-                    {
-
-                        type: "borrow",
-
-                        title: title,
-
-                        date:
-                            new Date()
-                                .toISOString()
-                    }
-                );
-
-
-                button.disabled = true;
-
-                button.textContent =
-                    "Borrowed";
-
 
                 const availability =
                     book.querySelector(
                         ".availability"
                     );
-
 
                 if (availability) {
 
@@ -662,2251 +747,3270 @@ borrowButtons.forEach(
                         "borrowed"
                     );
                 }
-
-
-                alert(
-                    title +
-                    " has been borrowed successfully for 14 days."
-                );
             }
         );
     }
-);
 
 
-markAlreadyBorrowedBooks();
+    function borrowBook(button) {
+
+        const member =
+            getCurrentMember();
+
+        if (!member) {
+
+            const goLogin =
+                confirm(
+                    "You need to login before borrowing a book. Go to the login page?"
+                );
+
+            if (goLogin) {
+                window.location.href =
+                    pageLink("login.html");
+            }
+
+            return;
+        }
 
 
-// Book details modal
-const bookDetailsModal =
-    document.getElementById("bookDetailsModal");
+        const card =
+            button.closest(
+                ".library-book-card"
+            );
 
-const bookModalOverlay =
-    document.getElementById("bookModalOverlay");
-
-const closeBookModal =
-    document.getElementById("closeBookModal");
-
-const modalCloseButton =
-    document.getElementById("modalCloseButton");
-
-const modalBorrowButton =
-    document.getElementById("modalBorrowButton");
-
-const bookDetailsButtons =
-    document.querySelectorAll(".book-details-btn");
-
-let selectedBookCard = null;
+        if (!card) {
+            return;
+        }
 
 
-// Make category name readable
-function formatBookCategory(category) {
+        const title =
+            card.dataset.title ||
+            "Unknown Book";
 
-    if (!category) {
-        return "General";
-    }
+        const author =
+            card.dataset.author ||
+            "Unknown Author";
 
-    return (
-        category.charAt(0).toUpperCase() +
-        category.slice(1)
-    );
-}
+        const category =
+            card.dataset.category ||
+            "General";
 
-
-// Open selected book details
-function openBookDetails(book) {
-
-    if (!bookDetailsModal || !book) {
-        return;
-    }
-
-    selectedBookCard = book;
-
-    const title =
-        book.dataset.title || "Book Title";
-
-    const author =
-        book.dataset.author || "Unknown Author";
-
-    const category =
-        book.dataset.category || "General";
-
-    const price =
-        book.dataset.price || "Not listed";
-
-    const language =
-        book.dataset.language || "English";
-
-    const pages =
-        book.dataset.pages || "-";
-
-    const year =
-        book.dataset.year || "-";
-
-    const edition =
-        book.dataset.isbn || "-";
-
-    const description =
-        book.dataset.description ||
-        "No additional information is available for this book.";
+        const price =
+            card.dataset.price ||
+            "Not listed";
 
 
-    const modalBookTitle =
-        document.getElementById("modalBookTitle");
-
-    const modalBookAuthor =
-        document.getElementById("modalBookAuthor");
-
-    const modalBookCategory =
-        document.getElementById("modalBookCategory");
-
-    const modalBookDescription =
-        document.getElementById("modalBookDescription");
-
-    const modalBookLanguage =
-        document.getElementById("modalBookLanguage");
-
-    const modalBookPages =
-        document.getElementById("modalBookPages");
-
-    const modalBookYear =
-        document.getElementById("modalBookYear");
-
-    const modalBookIsbn =
-        document.getElementById("modalBookIsbn");
-
-    const modalBookPrice =
-        document.getElementById("modalBookPrice");
-
-    const modalBookStatus =
-        document.getElementById("modalBookStatus");
+        const borrowed =
+            getBorrowedBooks(
+                member.email
+            );
 
 
-    if (modalBookTitle) {
-        modalBookTitle.textContent = title;
-    }
+        if (
+            borrowed.some(
+                function (item) {
+                    return item.title === title;
+                }
+            )
+        ) {
 
-    if (modalBookAuthor) {
-        modalBookAuthor.textContent = author;
-    }
+            alert(
+                "You have already borrowed this book."
+            );
 
-    if (modalBookCategory) {
-        modalBookCategory.textContent =
-            formatBookCategory(category);
-    }
-
-    if (modalBookDescription) {
-        modalBookDescription.textContent =
-            description;
-    }
-
-    if (modalBookLanguage) {
-        modalBookLanguage.textContent =
-            language;
-    }
-
-    if (modalBookPages) {
-        modalBookPages.textContent =
-            pages;
-    }
-
-    if (modalBookYear) {
-        modalBookYear.textContent =
-            year;
-    }
-
-    if (modalBookIsbn) {
-        modalBookIsbn.textContent =
-            edition;
-    }
-
-    if (modalBookPrice) {
-        modalBookPrice.textContent =
-            price;
-    }
+            return;
+        }
 
 
-    const cardBorrowButton =
-        book.querySelector(".borrow-btn");
+        const confirmBorrow =
+            confirm(
+                'Borrow "' +
+                title +
+                '" for 14 days?'
+            );
 
-    const isBorrowed =
-        cardBorrowButton &&
-        cardBorrowButton.disabled;
+        if (!confirmBorrow) {
+            return;
+        }
 
 
-    if (modalBookStatus) {
+        const borrowedAt =
+            new Date();
 
-        modalBookStatus.textContent =
-            isBorrowed
-                ? "Borrowed"
-                : "Available";
+        const dueAt =
+            new Date(
+                borrowedAt
+            );
 
-        modalBookStatus.classList.toggle(
-            "modal-borrowed",
-            isBorrowed
+        dueAt.setDate(
+            dueAt.getDate() + 14
         );
 
-        modalBookStatus.classList.toggle(
-            "modal-available",
-            !isBorrowed
+
+        borrowed.push({
+
+            id: Date.now(),
+
+            title: title,
+
+            author: author,
+
+            category: category,
+
+            price: price,
+
+            borrowedAt:
+                borrowedAt.toISOString(),
+
+            dueAt:
+                dueAt.toISOString()
+        });
+
+
+        saveBorrowedBooks(
+            member.email,
+            borrowed
+        );
+
+
+        addActivity(
+            member.email,
+            {
+                type: "borrow",
+                title: title,
+                date:
+                    new Date().toISOString()
+            }
+        );
+
+
+        button.disabled = true;
+        button.textContent =
+            "Borrowed";
+
+
+        const availability =
+            card.querySelector(
+                ".availability"
+            );
+
+        if (availability) {
+
+            availability.textContent =
+                "Borrowed";
+
+            availability.classList.remove(
+                "available"
+            );
+
+            availability.classList.add(
+                "borrowed"
+            );
+        }
+
+
+        alert(
+            title +
+            " has been borrowed successfully for 14 days."
+        );
+    }
+
+
+    document
+        .querySelectorAll(
+            ".borrow-btn:not(.unavailable-btn)"
+        )
+        .forEach(
+            function (button) {
+
+                button.type = "button";
+
+                button.addEventListener(
+                    "click",
+                    function () {
+                        borrowBook(button);
+                    }
+                );
+            }
+        );
+
+
+    markBorrowedBooks();
+
+
+    /* =========================
+       Book details modal
+    ========================= */
+
+    const bookDetailsModal =
+        document.getElementById(
+            "bookDetailsModal"
+        );
+
+    const bookModalOverlay =
+        document.getElementById(
+            "bookModalOverlay"
+        );
+
+    const closeBookModal =
+        document.getElementById(
+            "closeBookModal"
+        );
+
+    const modalCloseButton =
+        document.getElementById(
+            "modalCloseButton"
+        );
+
+    const modalBorrowButton =
+        document.getElementById(
+            "modalBorrowButton"
+        );
+
+    let selectedBookCard = null;
+
+
+    function formatCategory(
+        category
+    ) {
+
+        if (!category) {
+            return "General";
+        }
+
+        return (
+            category
+                .charAt(0)
+                .toUpperCase() +
+            category.slice(1)
+        );
+    }
+
+
+    function openBookDetails(
+        card
+    ) {
+
+        if (
+            !bookDetailsModal ||
+            !card
+        ) {
+            return;
+        }
+
+        selectedBookCard =
+            card;
+
+
+        const values = {
+
+            modalBookTitle:
+                card.dataset.title ||
+                "Book Title",
+
+            modalBookAuthor:
+                card.dataset.author ||
+                "Unknown Author",
+
+            modalBookCategory:
+                formatCategory(
+                    card.dataset.category
+                ),
+
+            modalBookDescription:
+                card.dataset.description ||
+                "No additional information is available for this book.",
+
+            modalBookLanguage:
+                card.dataset.language ||
+                "English",
+
+            modalBookPages:
+                card.dataset.pages ||
+                "-",
+
+            modalBookYear:
+                card.dataset.year ||
+                "-",
+
+            modalBookIsbn:
+                card.dataset.isbn ||
+                "-",
+
+            modalBookPrice:
+                card.dataset.price ||
+                "Not listed"
+        };
+
+
+        Object.keys(values)
+            .forEach(
+                function (id) {
+
+                    const element =
+                        document.getElementById(
+                            id
+                        );
+
+                    if (element) {
+                        element.textContent =
+                            values[id];
+                    }
+                }
+            );
+
+
+        const borrowButton =
+            card.querySelector(
+                ".borrow-btn"
+            );
+
+        const borrowed =
+            Boolean(
+                borrowButton &&
+                borrowButton.disabled
+            );
+
+
+        const status =
+            document.getElementById(
+                "modalBookStatus"
+            );
+
+        if (status) {
+
+            status.textContent =
+                borrowed
+                    ? "Borrowed"
+                    : "Available";
+
+            status.classList.toggle(
+                "modal-borrowed",
+                borrowed
+            );
+
+            status.classList.toggle(
+                "modal-available",
+                !borrowed
+            );
+        }
+
+
+        if (modalBorrowButton) {
+
+            modalBorrowButton.disabled =
+                borrowed;
+
+            modalBorrowButton.innerHTML =
+                borrowed
+                    ? '<i class="fa-solid fa-check"></i> Already Borrowed'
+                    : '<i class="fa-solid fa-book-open-reader"></i> Borrow Book';
+        }
+
+
+        bookDetailsModal.classList.add(
+            "show"
+        );
+
+        bookDetailsModal.setAttribute(
+            "aria-hidden",
+            "false"
+        );
+
+        document.body.classList.add(
+            "modal-open"
+        );
+    }
+
+
+    function closeBookDetails() {
+
+        if (!bookDetailsModal) {
+            return;
+        }
+
+        bookDetailsModal.classList.remove(
+            "show"
+        );
+
+        bookDetailsModal.setAttribute(
+            "aria-hidden",
+            "true"
+        );
+
+        document.body.classList.remove(
+            "modal-open"
+        );
+
+        selectedBookCard = null;
+    }
+
+
+    document
+        .querySelectorAll(
+            ".book-details-btn"
+        )
+        .forEach(
+            function (button) {
+
+                button.type = "button";
+
+                button.addEventListener(
+                    "click",
+                    function () {
+
+                        openBookDetails(
+                            button.closest(
+                                ".library-book-card"
+                            )
+                        );
+                    }
+                );
+            }
+        );
+
+
+    if (closeBookModal) {
+
+        closeBookModal.addEventListener(
+            "click",
+            closeBookDetails
+        );
+    }
+
+
+    if (modalCloseButton) {
+
+        modalCloseButton.addEventListener(
+            "click",
+            closeBookDetails
+        );
+    }
+
+
+    if (bookModalOverlay) {
+
+        bookModalOverlay.addEventListener(
+            "click",
+            closeBookDetails
         );
     }
 
 
     if (modalBorrowButton) {
 
-        modalBorrowButton.disabled =
-            Boolean(isBorrowed);
-
-        if (isBorrowed) {
-
-            modalBorrowButton.innerHTML =
-                '<i class="fa-solid fa-check"></i> Already Borrowed';
-
-        } else {
-
-            modalBorrowButton.innerHTML =
-                '<i class="fa-solid fa-book-open-reader"></i> Borrow Book';
-        }
-    }
-
-
-    bookDetailsModal.classList.add("show");
-
-    bookDetailsModal.setAttribute(
-        "aria-hidden",
-        "false"
-    );
-
-    document.body.classList.add(
-        "modal-open"
-    );
-}
-
-
-// Close details popup
-function closeBookDetails() {
-
-    if (!bookDetailsModal) {
-        return;
-    }
-
-    bookDetailsModal.classList.remove(
-        "show"
-    );
-
-    bookDetailsModal.setAttribute(
-        "aria-hidden",
-        "true"
-    );
-
-    document.body.classList.remove(
-        "modal-open"
-    );
-
-    selectedBookCard = null;
-}
-
-
-// View Details buttons
-bookDetailsButtons.forEach(
-    function (button) {
-
-        button.addEventListener(
+        modalBorrowButton.addEventListener(
             "click",
             function () {
 
-                const book =
-                    button.closest(
-                        ".library-book-card"
+                if (!selectedBookCard) {
+                    return;
+                }
+
+                const button =
+                    selectedBookCard.querySelector(
+                        ".borrow-btn"
                     );
 
-                openBookDetails(book);
+                if (
+                    !button ||
+                    button.disabled
+                ) {
+                    return;
+                }
+
+                closeBookDetails();
+
+                button.click();
             }
         );
     }
-);
 
 
-// Close using X
-if (closeBookModal) {
+    /* =========================
+       Gallery
+    ========================= */
 
-    closeBookModal.addEventListener(
-        "click",
-        closeBookDetails
+    const galleryButtons =
+        document.querySelectorAll(
+            ".gallery-filter-btn, .gallery-filter, [data-gallery-filter], [data-filter]"
+        );
+
+    const galleryItems =
+        document.querySelectorAll(
+            ".gallery-item, .gallery-card"
+        );
+
+
+    function getGalleryFilter(
+        element
+    ) {
+
+        return String(
+            element.dataset.gallery ||
+            element.dataset.filter ||
+            element.dataset.galleryFilter ||
+            element.dataset.category ||
+            "all"
+        )
+            .toLowerCase()
+            .trim();
+    }
+
+
+    galleryButtons.forEach(
+        function (button) {
+
+            button.type = "button";
+
+            button.addEventListener(
+                "click",
+                function (event) {
+
+                    event.preventDefault();
+
+                    const selected =
+                        getGalleryFilter(
+                            button
+                        );
+
+
+                    galleryButtons.forEach(
+                        function (item) {
+
+                            item.classList.remove(
+                                "active"
+                            );
+                        }
+                    );
+
+
+                    button.classList.add(
+                        "active"
+                    );
+
+
+                    galleryItems.forEach(
+                        function (item) {
+
+                            const category =
+                                getGalleryFilter(
+                                    item
+                                );
+
+                            item.style.display =
+                                selected === "all" ||
+                                category === selected
+                                    ? ""
+                                    : "none";
+                        }
+                    );
+                }
+            );
+        }
     );
-}
 
 
-// Close using Close button
-if (modalCloseButton) {
+    /* =========================
+       Gallery lightbox
+    ========================= */
 
-    modalCloseButton.addEventListener(
-        "click",
-        closeBookDetails
-    );
-}
+    const lightbox =
+        document.getElementById(
+            "galleryLightbox"
+        );
+
+    const lightboxImage =
+        document.getElementById(
+            "galleryLightboxImage"
+        );
+
+    const lightboxTitle =
+        document.getElementById(
+            "galleryLightboxTitle"
+        );
+
+    const lightboxClose =
+        document.getElementById(
+            "galleryLightboxClose"
+        );
+
+    const lightboxOverlay =
+        document.getElementById(
+            "galleryLightboxOverlay"
+        );
 
 
-// Close by clicking background
-if (bookModalOverlay) {
+    function closeLightbox() {
 
-    bookModalOverlay.addEventListener(
-        "click",
-        closeBookDetails
-    );
-}
+        if (!lightbox) {
+            return;
+        }
+
+        lightbox.classList.remove(
+            "show"
+        );
+
+        lightbox.setAttribute(
+            "aria-hidden",
+            "true"
+        );
+
+        document.body.classList.remove(
+            "modal-open"
+        );
+    }
 
 
-// Close with Escape key
-document.addEventListener(
-    "keydown",
-    function (event) {
+    function openLightbox(
+        image,
+        title
+    ) {
 
         if (
-            event.key === "Escape" &&
-            bookDetailsModal &&
-            bookDetailsModal.classList.contains(
-                "show"
-            )
+            !lightbox ||
+            !lightboxImage
         ) {
+            return;
+        }
 
-            closeBookDetails();
+        lightboxImage.src =
+            image;
+
+        lightboxImage.alt =
+            title ||
+            "ShelfSync Gallery";
+
+        if (lightboxTitle) {
+            lightboxTitle.textContent =
+                title ||
+                "ShelfSync Gallery";
+        }
+
+        lightbox.classList.add(
+            "show"
+        );
+
+        lightbox.setAttribute(
+            "aria-hidden",
+            "false"
+        );
+
+        document.body.classList.add(
+            "modal-open"
+        );
+    }
+
+
+    document
+        .querySelectorAll(
+            ".gallery-view-btn, .gallery-item img, .gallery-card img"
+        )
+        .forEach(
+            function (element) {
+
+                element.addEventListener(
+                    "click",
+                    function () {
+
+                        const item =
+                            element.closest(
+                                ".gallery-item, .gallery-card"
+                            );
+
+                        const image =
+                            element.tagName.toLowerCase() ===
+                            "img"
+                                ? element
+                                : item &&
+                                  item.querySelector(
+                                      "img"
+                                  );
+
+                        if (!image) {
+                            return;
+                        }
+
+                        let title =
+                            item &&
+                            (
+                                item.dataset.title ||
+                                (
+                                    item.querySelector(
+                                        ".gallery-item-title, .gallery-title"
+                                    ) || {}
+                                ).textContent
+                            );
+
+                        openLightbox(
+                            image.src,
+                            title
+                                ? title.trim()
+                                : "ShelfSync Gallery"
+                        );
+                    }
+                );
+            }
+        );
+
+
+    if (lightboxClose) {
+
+        lightboxClose.addEventListener(
+            "click",
+            closeLightbox
+        );
+    }
+
+
+    if (lightboxOverlay) {
+
+        lightboxOverlay.addEventListener(
+            "click",
+            closeLightbox
+        );
+    }
+
+
+    /* =========================
+       Authentication
+    ========================= */
+
+    const loginForm =
+        document.getElementById(
+            "loginForm"
+        );
+
+    const registerForm =
+        document.getElementById(
+            "registerForm"
+        );
+
+    const forgotForm =
+        document.getElementById(
+            "forgotPasswordForm"
+        );
+
+
+    const loginFormElement =
+        document.getElementById(
+            "loginFormElement"
+        );
+
+    const registerFormElement =
+        document.getElementById(
+            "registerFormElement"
+        );
+
+    const forgotPasswordFormElement =
+        document.getElementById(
+            "forgotPasswordFormElement"
+        );
+
+
+    const loginTab =
+        document.getElementById(
+            "loginTab"
+        );
+
+    const registerTab =
+        document.getElementById(
+            "registerTab"
+        );
+
+
+    const forgotPasswordButton =
+        document.getElementById(
+            "forgotPasswordBtn"
+        );
+
+    const backToLoginButton =
+        document.getElementById(
+            "backToLoginBtn"
+        );
+
+    const switchToRegister =
+        document.getElementById(
+            "switchToRegister"
+        );
+
+    const switchToLogin =
+        document.getElementById(
+            "switchToLogin"
+        );
+
+
+    function showLoginForm() {
+
+        if (loginForm) {
+
+            loginForm.classList.remove(
+                "hidden"
+            );
+
+            loginForm.style.display =
+                "block";
+        }
+
+        if (registerForm) {
+
+            registerForm.classList.add(
+                "hidden"
+            );
+
+            registerForm.style.display =
+                "none";
+        }
+
+        if (forgotForm) {
+
+            forgotForm.classList.add(
+                "hidden"
+            );
+
+            forgotForm.style.display =
+                "none";
+        }
+
+        if (loginTab) {
+            loginTab.classList.add(
+                "active"
+            );
+        }
+
+        if (registerTab) {
+            registerTab.classList.remove(
+                "active"
+            );
         }
     }
-);
 
 
-// Borrow directly from details popup
-if (modalBorrowButton) {
+    function showRegisterForm() {
 
-    modalBorrowButton.addEventListener(
-        "click",
-        function () {
+        if (loginForm) {
 
-            if (!selectedBookCard) {
-                return;
-            }
+            loginForm.classList.add(
+                "hidden"
+            );
 
-            const cardBorrowButton =
-                selectedBookCard.querySelector(
-                    ".borrow-btn"
+            loginForm.style.display =
+                "none";
+        }
+
+        if (registerForm) {
+
+            registerForm.classList.remove(
+                "hidden"
+            );
+
+            registerForm.style.display =
+                "block";
+        }
+
+        if (forgotForm) {
+
+            forgotForm.classList.add(
+                "hidden"
+            );
+
+            forgotForm.style.display =
+                "none";
+        }
+
+        if (loginTab) {
+            loginTab.classList.remove(
+                "active"
+            );
+        }
+
+        if (registerTab) {
+            registerTab.classList.add(
+                "active"
+            );
+        }
+    }
+
+
+    function showForgotForm() {
+
+        if (loginForm) {
+
+            loginForm.classList.add(
+                "hidden"
+            );
+
+            loginForm.style.display =
+                "none";
+        }
+
+        if (registerForm) {
+
+            registerForm.classList.add(
+                "hidden"
+            );
+
+            registerForm.style.display =
+                "none";
+        }
+
+        if (forgotForm) {
+
+            forgotForm.classList.remove(
+                "hidden"
+            );
+
+            forgotForm.style.display =
+                "block";
+        }
+
+        if (loginTab) {
+            loginTab.classList.remove(
+                "active"
+            );
+        }
+
+        if (registerTab) {
+            registerTab.classList.remove(
+                "active"
+            );
+        }
+    }
+
+
+    if (loginTab) {
+
+        loginTab.addEventListener(
+            "click",
+            showLoginForm
+        );
+    }
+
+
+    if (registerTab) {
+
+        registerTab.addEventListener(
+            "click",
+            showRegisterForm
+        );
+    }
+
+
+    if (switchToRegister) {
+
+        switchToRegister.addEventListener(
+            "click",
+            showRegisterForm
+        );
+    }
+
+
+    if (switchToLogin) {
+
+        switchToLogin.addEventListener(
+            "click",
+            showLoginForm
+        );
+    }
+
+
+    if (forgotPasswordButton) {
+
+        forgotPasswordButton.addEventListener(
+            "click",
+            showForgotForm
+        );
+    }
+
+
+    if (backToLoginButton) {
+
+        backToLoginButton.addEventListener(
+            "click",
+            showLoginForm
+        );
+    }
+
+
+    function setError(
+        id,
+        message
+    ) {
+
+        const element =
+            document.getElementById(
+                id
+            );
+
+        if (element) {
+            element.textContent =
+                message || "";
+        }
+    }
+
+
+    function clearErrors() {
+
+        document
+            .querySelectorAll(
+                ".form-error"
+            )
+            .forEach(
+                function (item) {
+                    item.textContent = "";
+                }
+            );
+    }
+
+
+    function validEmail(
+        email
+    ) {
+
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+            .test(email);
+    }
+
+
+    function validPhone(
+        phone
+    ) {
+
+        return /^[0-9+\-\s]{10,15}$/
+            .test(phone);
+    }
+
+
+    function createMemberId() {
+
+        const year =
+            new Date()
+                .getFullYear();
+
+        const number =
+            Math.floor(
+                1000 +
+                Math.random() * 9000
+            );
+
+        return (
+            "SS-" +
+            year +
+            "-" +
+            number
+        );
+    }
+
+
+    if (loginFormElement) {
+
+        loginFormElement.addEventListener(
+            "submit",
+            function (event) {
+
+                event.preventDefault();
+
+                clearErrors();
+
+
+                const email =
+                    (
+                        document.getElementById(
+                            "loginEmail"
+                        ) || {}
+                    ).value
+                        ?.trim()
+                        .toLowerCase() || "";
+
+
+                const password =
+                    (
+                        document.getElementById(
+                            "loginPassword"
+                        ) || {}
+                    ).value || "";
+
+
+                let valid = true;
+
+
+                if (!validEmail(email)) {
+
+                    setError(
+                        "loginEmailError",
+                        "Please enter a valid email address."
+                    );
+
+                    valid = false;
+                }
+
+
+                if (!password) {
+
+                    setError(
+                        "loginPasswordError",
+                        "Please enter your password."
+                    );
+
+                    valid = false;
+                }
+
+
+                if (!valid) {
+                    return;
+                }
+
+
+                const users =
+                    getUsers();
+
+                const user =
+                    users.find(
+                        function (item) {
+
+                            return (
+                                String(
+                                    item.email
+                                ).toLowerCase() ===
+                                email &&
+                                item.password ===
+                                password
+                            );
+                        }
+                    );
+
+
+                if (!user) {
+
+                    setError(
+                        "loginPasswordError",
+                        "Incorrect email or password."
+                    );
+
+                    return;
+                }
+
+
+                localStorage.setItem(
+                    "shelfSyncSession",
+                    JSON.stringify(user)
                 );
 
-            if (
-                !cardBorrowButton ||
-                cardBorrowButton.disabled
-            ) {
+
+                updateNavbar();
+
+
+                alert(
+                    "Welcome back, " +
+                    (
+                        user.name ||
+                        "Member"
+                    ) +
+                    "!"
+                );
+
+
+                window.location.href =
+                    pageLink(
+                        "profile.html"
+                    );
+            }
+        );
+    }
+
+
+    if (registerFormElement) {
+
+        registerFormElement.addEventListener(
+            "submit",
+            function (event) {
+
+                event.preventDefault();
+
+                clearErrors();
+
+
+                const name =
+                    (
+                        document.getElementById(
+                            "registerName"
+                        ) || {}
+                    ).value?.trim() || "";
+
+
+                const email =
+                    (
+                        document.getElementById(
+                            "registerEmail"
+                        ) || {}
+                    ).value
+                        ?.trim()
+                        .toLowerCase() || "";
+
+
+                const phone =
+                    (
+                        document.getElementById(
+                            "registerPhone"
+                        ) || {}
+                    ).value?.trim() || "";
+
+
+                const password =
+                    (
+                        document.getElementById(
+                            "registerPassword"
+                        ) || {}
+                    ).value || "";
+
+
+                const confirmPassword =
+                    (
+                        document.getElementById(
+                            "confirmPassword"
+                        ) || {}
+                    ).value || "";
+
+
+                const terms =
+                    document.getElementById(
+                        "acceptTerms"
+                    );
+
+
+                let valid = true;
+
+
+                if (name.length < 3) {
+
+                    setError(
+                        "registerNameError",
+                        "Please enter your full name."
+                    );
+
+                    valid = false;
+                }
+
+
+                if (!validEmail(email)) {
+
+                    setError(
+                        "registerEmailError",
+                        "Please enter a valid email address."
+                    );
+
+                    valid = false;
+                }
+
+
+                if (!validPhone(phone)) {
+
+                    setError(
+                        "registerPhoneError",
+                        "Please enter a valid phone number."
+                    );
+
+                    valid = false;
+                }
+
+
+                if (password.length < 6) {
+
+                    setError(
+                        "registerPasswordError",
+                        "Password must contain at least 6 characters."
+                    );
+
+                    valid = false;
+                }
+
+
+                if (
+                    password !==
+                    confirmPassword
+                ) {
+
+                    setError(
+                        "confirmPasswordError",
+                        "Passwords do not match."
+                    );
+
+                    valid = false;
+                }
+
+
+                if (
+                    terms &&
+                    !terms.checked
+                ) {
+
+                    alert(
+                        "Please accept the ShelfSync project acknowledgement."
+                    );
+
+                    valid = false;
+                }
+
+
+                if (!valid) {
+                    return;
+                }
+
+
+                const users =
+                    getUsers();
+
+
+                if (
+                    users.some(
+                        function (item) {
+
+                            return (
+                                String(
+                                    item.email
+                                ).toLowerCase() ===
+                                email
+                            );
+                        }
+                    )
+                ) {
+
+                    setError(
+                        "registerEmailError",
+                        "An account with this email already exists."
+                    );
+
+                    return;
+                }
+
+
+                const member = {
+
+                    id:
+                        createMemberId(),
+
+                    memberId:
+                        createMemberId(),
+
+                    name:
+                        name,
+
+                    email:
+                        email,
+
+                    phone:
+                        phone,
+
+                    password:
+                        password,
+
+                    joinedDate:
+                        new Date().toISOString(),
+
+                    borrowedBooks:
+                        0
+                };
+
+
+                member.memberId =
+                    member.id;
+
+
+                users.push(
+                    member
+                );
+
+                saveUsers(
+                    users
+                );
+
+
+                localStorage.setItem(
+                    "shelfSyncSession",
+                    JSON.stringify(member)
+                );
+
+
+                addActivity(
+                    email,
+                    {
+                        type: "register",
+                        title:
+                            "Account created",
+                        date:
+                            new Date().toISOString()
+                    }
+                );
+
+
+                alert(
+                    "Account created successfully."
+                );
+
+
+                window.location.href =
+                    pageLink(
+                        "profile.html"
+                    );
+            }
+        );
+    }
+
+
+    if (forgotPasswordFormElement) {
+
+        forgotPasswordFormElement.addEventListener(
+            "submit",
+            function (event) {
+
+                event.preventDefault();
+
+                clearErrors();
+
+
+                const email =
+                    (
+                        document.getElementById(
+                            "forgotEmail"
+                        ) || {}
+                    ).value
+                        ?.trim()
+                        .toLowerCase() || "";
+
+
+                const phone =
+                    (
+                        document.getElementById(
+                            "forgotPhone"
+                        ) || {}
+                    ).value?.trim() || "";
+
+
+                const newPassword =
+                    (
+                        document.getElementById(
+                            "newPassword"
+                        ) || {}
+                    ).value || "";
+
+
+                const confirmPassword =
+                    (
+                        document.getElementById(
+                            "forgotConfirmPassword"
+                        ) || {}
+                    ).value || "";
+
+
+                let valid = true;
+
+
+                if (!validEmail(email)) {
+
+                    setError(
+                        "forgotEmailError",
+                        "Please enter a valid email address."
+                    );
+
+                    valid = false;
+                }
+
+
+                if (!validPhone(phone)) {
+
+                    setError(
+                        "forgotPhoneError",
+                        "Please enter your registered phone number."
+                    );
+
+                    valid = false;
+                }
+
+
+                if (newPassword.length < 6) {
+
+                    setError(
+                        "newPasswordError",
+                        "Password must contain at least 6 characters."
+                    );
+
+                    valid = false;
+                }
+
+
+                if (
+                    newPassword !==
+                    confirmPassword
+                ) {
+
+                    setError(
+                        "forgotConfirmError",
+                        "Passwords do not match."
+                    );
+
+                    valid = false;
+                }
+
+
+                if (!valid) {
+                    return;
+                }
+
+
+                const users =
+                    getUsers();
+
+
+                const index =
+                    users.findIndex(
+                        function (user) {
+
+                            return (
+                                String(
+                                    user.email
+                                ).toLowerCase() ===
+                                email &&
+                                String(
+                                    user.phone
+                                ) ===
+                                String(phone)
+                            );
+                        }
+                    );
+
+
+                if (index === -1) {
+
+                    setError(
+                        "forgotEmailError",
+                        "The email and phone number do not match an account."
+                    );
+
+                    return;
+                }
+
+
+                users[index].password =
+                    newPassword;
+
+
+                saveUsers(
+                    users
+                );
+
+
+                alert(
+                    "Password reset successfully. You can now sign in."
+                );
+
+
+                showLoginForm();
+            }
+        );
+    }
+
+
+    /* =========================
+       Password visibility
+    ========================= */
+
+    document
+        .querySelectorAll(
+            ".password-toggle, .toggle-password"
+        )
+        .forEach(
+            function (button) {
+
+                button.addEventListener(
+                    "click",
+                    function () {
+
+                        const targetId =
+                            button.dataset.target ||
+                            button.getAttribute(
+                                "data-target"
+                            );
+
+                        const input =
+                            document.getElementById(
+                                targetId
+                            );
+
+                        if (!input) {
+                            return;
+                        }
+
+
+                        const show =
+                            input.type ===
+                            "password";
+
+
+                        input.type =
+                            show
+                                ? "text"
+                                : "password";
+
+
+                        const icon =
+                            button.querySelector(
+                                "i"
+                            );
+
+                        if (icon) {
+
+                            icon.classList.toggle(
+                                "fa-eye",
+                                !show
+                            );
+
+                            icon.classList.toggle(
+                                "fa-eye-slash",
+                                show
+                            );
+                        }
+
+
+                        button.setAttribute(
+                            "aria-label",
+                            show
+                                ? "Hide password"
+                                : "Show password"
+                        );
+                    }
+                );
+            }
+        );
+
+
+    /* =========================
+       Profile
+    ========================= */
+
+    const profilePage =
+        document.querySelector(
+            ".profile-page"
+        ) ||
+        document.getElementById(
+            "profilePage"
+        );
+
+
+    if (
+        profilePage ||
+        document.getElementById(
+            "profileName"
+        )
+    ) {
+
+        const member =
+            getCurrentMember();
+
+
+        if (!member) {
+
+            window.location.href =
+                pageLink("login.html");
+
+            return;
+        }
+
+
+        function setProfileText(
+            ids,
+            value
+        ) {
+
+            ids.forEach(
+                function (id) {
+
+                    const element =
+                        document.getElementById(
+                            id
+                        );
+
+                    if (element) {
+                        element.textContent =
+                            value;
+                    }
+                }
+            );
+        }
+
+
+        const firstName =
+            (
+                member.name ||
+                "Member"
+            ).split(" ")[0];
+
+
+        setProfileText(
+            [
+                "profileName",
+                "profileFirstName"
+            ],
+            member.name ||
+            "Member"
+        );
+
+
+        setProfileText(
+            [
+                "profileWelcomeName"
+            ],
+            firstName
+        );
+
+
+        setProfileText(
+            [
+                "profileEmail"
+            ],
+            member.email ||
+            "-"
+        );
+
+
+        setProfileText(
+            [
+                "profilePhone"
+            ],
+            member.phone ||
+            "-"
+        );
+
+
+        setProfileText(
+            [
+                "profileMemberId",
+                "memberId"
+            ],
+            member.memberId ||
+            member.id ||
+            "-"
+        );
+
+
+        let joined =
+            "-";
+
+
+        if (member.joinedDate) {
+
+            const date =
+                new Date(
+                    member.joinedDate
+                );
+
+            if (!Number.isNaN(date.getTime())) {
+
+                joined =
+                    date.toLocaleDateString(
+                        "en-IN",
+                        {
+                            day:
+                                "2-digit",
+                            month:
+                                "short",
+                            year:
+                                "numeric"
+                        }
+                    );
+            }
+        }
+
+
+        setProfileText(
+            [
+                "profileJoinedDate",
+                "joinedDate"
+            ],
+            joined
+        );
+
+
+        const borrowed =
+            getBorrowedBooks(
+                member.email
+            );
+
+
+        const activities =
+            getActivities(
+                member.email
+            );
+
+
+        const borrowedCount =
+            document.getElementById(
+                "borrowedCount"
+            );
+
+        const activityCount =
+            document.getElementById(
+                "activityCount"
+            );
+
+        const totalReadCount =
+            document.getElementById(
+                "totalReadCount"
+            );
+
+
+        if (borrowedCount) {
+            borrowedCount.textContent =
+                borrowed.length;
+        }
+
+
+        if (activityCount) {
+            activityCount.textContent =
+                activities.length;
+        }
+
+
+        if (totalReadCount) {
+
+            totalReadCount.textContent =
+                getReturnedBooks(
+                    member.email
+                ).length;
+        }
+
+
+        function renderBorrowedBooks() {
+
+            const list =
+                document.querySelector(
+                    ".borrowed-list"
+                ) ||
+                document.getElementById(
+                    "borrowedBooksList"
+                );
+
+
+            if (!list) {
                 return;
             }
 
-            // Keep reference before closing modal
-            const buttonToClick =
-                cardBorrowButton;
 
-            closeBookDetails();
+            list.innerHTML = "";
 
-            // Use the existing ShelfSync borrowing system
-            buttonToClick.click();
+
+            if (!borrowed.length) {
+
+                list.innerHTML =
+                    '<div class="empty-state">No books are currently borrowed.</div>';
+
+                return;
+            }
+
+
+            borrowed.forEach(
+                function (book) {
+
+                    const wrapper =
+                        document.createElement(
+                            "div"
+                        );
+
+                    wrapper.className =
+                        "borrowed-book-item";
+
+
+                    const due =
+                        new Date(
+                            book.dueAt
+                        );
+
+
+                    const now =
+                        new Date();
+
+
+                    const remaining =
+                        Math.max(
+                            0,
+                            Math.ceil(
+                                (
+                                    due -
+                                    now
+                                ) /
+                                86400000
+                            )
+                        );
+
+
+                    wrapper.innerHTML =
+
+                        '<div class="borrowed-book-info">' +
+
+                        "<h3>" +
+                        escapeHTML(
+                            book.title
+                        ) +
+                        "</h3>" +
+
+                        "<p>" +
+                        escapeHTML(
+                            book.author ||
+                            "Unknown Author"
+                        ) +
+                        "</p>" +
+
+                        '<span class="borrowed-time">' +
+                        (
+                            remaining > 0
+                                ? remaining +
+                                  " days remaining"
+                                : "Return date reached"
+                        ) +
+                        "</span>" +
+
+                        "</div>" +
+
+                        '<button type="button" class="secondary-btn return-book-btn" data-id="' +
+                        book.id +
+                        '">' +
+                        "Return Book" +
+                        "</button>";
+
+
+                    list.appendChild(
+                        wrapper
+                    );
+                }
+            );
+
+
+            list
+                .querySelectorAll(
+                    ".return-book-btn"
+                )
+                .forEach(
+                    function (button) {
+
+                        button.addEventListener(
+                            "click",
+                            function () {
+
+                                returnBook(
+                                    Number(
+                                        button.dataset.id
+                                    )
+                                );
+                            }
+                        );
+                    }
+                );
         }
-    );
-}
 
 
-// Gallery filter
-const galleryButtons =
-    document.querySelectorAll(
-        ".gallery-filter-btn"
-    );
+        function returnBook(
+            bookId
+        ) {
+
+            const current =
+                getBorrowedBooks(
+                    member.email
+                );
 
 
-const galleryItems =
-    document.querySelectorAll(
-        ".gallery-item"
-    );
+            const index =
+                current.findIndex(
+                    function (book) {
 
-
-galleryButtons.forEach(
-    function (button) {
-
-        button.addEventListener(
-            "click",
-            function () {
-
-                const selected =
-                    button.dataset.gallery;
-
-
-                galleryButtons.forEach(
-                    function (item) {
-
-                        item.classList.remove(
-                            "active"
+                        return (
+                            Number(book.id) ===
+                            Number(bookId)
                         );
                     }
                 );
 
 
-                button.classList.add(
-                    "active"
+            if (index === -1) {
+                return;
+            }
+
+
+            const book =
+                current[index];
+
+
+            current.splice(
+                index,
+                1
+            );
+
+
+            saveBorrowedBooks(
+                member.email,
+                current
+            );
+
+
+            const returned =
+                getReturnedBooks(
+                    member.email
                 );
 
 
-                galleryItems.forEach(
-                    function (item) {
+            returned.unshift(
+                {
+                    ...book,
+                    returnedAt:
+                        new Date().toISOString()
+                }
+            );
+
+
+            saveReturnedBooks(
+                member.email,
+                returned
+            );
+
+
+            addActivity(
+                member.email,
+                {
+                    type:
+                        "return",
+                    title:
+                        book.title,
+                    date:
+                        new Date().toISOString()
+                }
+            );
+
+
+            alert(
+                book.title +
+                " has been returned."
+            );
+
+
+            window.location.reload();
+        }
+
+
+        renderBorrowedBooks();
+
+
+        function renderActivities() {
+
+            const list =
+                document.querySelector(
+                    ".activity-list"
+                ) ||
+                document.getElementById(
+                    "activityList"
+                );
+
+
+            if (!list) {
+                return;
+            }
+
+
+            list.innerHTML = "";
+
+
+            if (!activities.length) {
+
+                list.innerHTML =
+                    '<div class="empty-state">No recent activity.</div>';
+
+                return;
+            }
+
+
+            activities.forEach(
+                function (activity) {
+
+                    const item =
+                        document.createElement(
+                            "div"
+                        );
+
+                    item.className =
+                        "activity-item";
+
+
+                    let date =
+                        "";
+
+                    if (activity.date) {
+
+                        const d =
+                            new Date(
+                                activity.date
+                            );
 
                         if (
-                            selected === "all" ||
-                            item.dataset.gallery ===
-                            selected
+                            !Number.isNaN(
+                                d.getTime()
+                            )
                         ) {
 
-                            item.style.display =
-                                "block";
-
-                        } else {
-
-                            item.style.display =
-                                "none";
+                            date =
+                                d.toLocaleDateString(
+                                    "en-IN",
+                                    {
+                                        day:
+                                            "2-digit",
+                                        month:
+                                            "short",
+                                        year:
+                                            "numeric"
+                                    }
+                                );
                         }
                     }
-                );
-            }
-        );
-    }
-);
 
 
-// Login and Register
-const loginTab =
-    document.getElementById(
-        "loginTab"
-    );
+                    item.innerHTML =
 
+                        "<div>" +
 
-const registerTab =
-    document.getElementById(
-        "registerTab"
-    );
+                        "<strong>" +
+                        escapeHTML(
+                            activity.title ||
+                            "Activity"
+                        ) +
+                        "</strong>" +
 
+                        "<span>" +
+                        escapeHTML(
+                            activity.type ||
+                            "activity"
+                        ) +
+                        "</span>" +
 
-const loginForm =
-    document.getElementById(
-        "loginForm"
-    );
+                        "</div>" +
 
+                        "<small>" +
+                        date +
+                        "</small>";
 
-const registerForm =
-    document.getElementById(
-        "registerForm"
-    );
 
-
-const forgotPasswordForm =
-    document.getElementById(
-        "forgotPasswordForm"
-    );
-
-
-const forgotPasswordBtn =
-    document.getElementById(
-        "forgotPasswordBtn"
-    );
-
-
-const backToLoginBtn =
-    document.getElementById(
-        "backToLoginBtn"
-    );
-
-
-const openRegisterBtn =
-    document.getElementById(
-        "openRegisterBtn"
-    );
-
-
-const openLoginBtn =
-    document.getElementById(
-        "openLoginBtn"
-    );
-
-
-// Show login
-function showLoginForm() {
-
-    if (loginForm) {
-        loginForm.style.display =
-            "block";
-    }
-
-
-    if (registerForm) {
-        registerForm.style.display =
-            "none";
-    }
-
-
-    if (forgotPasswordForm) {
-        forgotPasswordForm.style.display =
-            "none";
-    }
-
-
-    if (loginTab) {
-        loginTab.classList.add(
-            "active"
-        );
-    }
-
-
-    if (registerTab) {
-        registerTab.classList.remove(
-            "active"
-        );
-    }
-}
-
-
-// Show register
-function showRegisterForm() {
-
-    if (loginForm) {
-        loginForm.style.display =
-            "none";
-    }
-
-
-    if (registerForm) {
-        registerForm.style.display =
-            "block";
-    }
-
-
-    if (forgotPasswordForm) {
-        forgotPasswordForm.style.display =
-            "none";
-    }
-
-
-    if (registerTab) {
-        registerTab.classList.add(
-            "active"
-        );
-    }
-
-
-    if (loginTab) {
-        loginTab.classList.remove(
-            "active"
-        );
-    }
-}
-
-
-// Show forgot password
-function showForgotPasswordForm() {
-
-    if (loginForm) {
-        loginForm.style.display =
-            "none";
-    }
-
-
-    if (registerForm) {
-        registerForm.style.display =
-            "none";
-    }
-
-
-    if (forgotPasswordForm) {
-        forgotPasswordForm.style.display =
-            "block";
-    }
-
-
-    if (loginTab) {
-        loginTab.classList.remove(
-            "active"
-        );
-    }
-
-
-    if (registerTab) {
-        registerTab.classList.remove(
-            "active"
-        );
-    }
-}
-
-
-// Tab events
-if (loginTab) {
-
-    loginTab.addEventListener(
-        "click",
-        showLoginForm
-    );
-}
-
-
-if (registerTab) {
-
-    registerTab.addEventListener(
-        "click",
-        showRegisterForm
-    );
-}
-
-
-if (forgotPasswordBtn) {
-
-    forgotPasswordBtn.addEventListener(
-        "click",
-        showForgotPasswordForm
-    );
-}
-
-
-if (backToLoginBtn) {
-
-    backToLoginBtn.addEventListener(
-        "click",
-        showLoginForm
-    );
-}
-
-
-if (openRegisterBtn) {
-
-    openRegisterBtn.addEventListener(
-        "click",
-        showRegisterForm
-    );
-}
-
-
-if (openLoginBtn) {
-
-    openLoginBtn.addEventListener(
-        "click",
-        showLoginForm
-    );
-}
-
-
-// Login validation
-if (loginForm) {
-
-    loginForm.addEventListener(
-        "submit",
-        function (event) {
-
-            event.preventDefault();
-
-
-            const email =
-                document
-                    .getElementById(
-                        "loginEmail"
-                    )
-                    .value
-                    .trim();
-
-
-            const password =
-                document
-                    .getElementById(
-                        "loginPassword"
-                    )
-                    .value;
-
-
-            const emailError =
-                document.getElementById(
-                    "loginEmailError"
-                );
-
-
-            const passwordError =
-                document.getElementById(
-                    "loginPasswordError"
-                );
-
-
-            emailError.textContent = "";
-
-            passwordError.textContent = "";
-
-
-            let valid = true;
-
-
-            if (email === "") {
-
-                emailError.textContent =
-                    "Please enter your email.";
-
-                valid = false;
-
-            } else if (
-                !email.includes("@")
-            ) {
-
-                emailError.textContent =
-                    "Please enter a valid email.";
-
-                valid = false;
-            }
-
-
-            if (password === "") {
-
-                passwordError.textContent =
-                    "Please enter your password.";
-
-                valid = false;
-            }
-
-
-            if (!valid) {
-                return;
-            }
-
-
-            const savedUser =
-                localStorage.getItem(
-                    "shelfSyncUser"
-                );
-
-
-            if (!savedUser) {
-
-                alert(
-                    "No account found. Please register first."
-                );
-
-                return;
-            }
-
-
-            const user =
-                JSON.parse(
-                    savedUser
-                );
-
-
-            if (
-                email.toLowerCase() !==
-                    user.email.toLowerCase() ||
-                password !== user.password
-            ) {
-
-                passwordError.textContent =
-                    "Email or password is incorrect.";
-
-                return;
-            }
-
-
-            const session = {
-
-                name: user.name,
-
-                email: user.email,
-
-                phone: user.phone,
-
-                memberId:
-                    user.memberId,
-
-                joinedDate:
-                    user.joinedDate
-            };
-
-
-            localStorage.setItem(
-                "shelfSyncSession",
-                JSON.stringify(session)
-            );
-
-
-            alert(
-                "Login successful."
-            );
-
-
-            window.location.href =
-                "profile.html";
-        }
-    );
-}
-
-
-// Registration validation
-if (registerForm) {
-
-    registerForm.addEventListener(
-        "submit",
-        function (event) {
-
-            event.preventDefault();
-
-
-            const name =
-                document
-                    .getElementById(
-                        "registerName"
-                    )
-                    .value
-                    .trim();
-
-
-            const email =
-                document
-                    .getElementById(
-                        "registerEmail"
-                    )
-                    .value
-                    .trim();
-
-
-            const phone =
-                document
-                    .getElementById(
-                        "registerPhone"
-                    )
-                    .value
-                    .trim();
-
-
-            const password =
-                document
-                    .getElementById(
-                        "registerPassword"
-                    )
-                    .value;
-
-
-            const confirmPassword =
-                document
-                    .getElementById(
-                        "confirmPassword"
-                    )
-                    .value;
-
-
-            const nameError =
-                document.getElementById(
-                    "registerNameError"
-                ) ||
-                document.getElementById(
-                    "nameError"
-                );
-
-
-            const emailError =
-                document.getElementById(
-                    "registerEmailError"
-                );
-
-
-            const phoneError =
-                document.getElementById(
-                    "registerPhoneError"
-                ) ||
-                document.getElementById(
-                    "phoneError"
-                );
-
-
-            const passwordError =
-                document.getElementById(
-                    "registerPasswordError"
-                );
-
-
-            const confirmError =
-                document.getElementById(
-                    "confirmPasswordError"
-                );
-
-
-            if (nameError) {
-                nameError.textContent = "";
-            }
-
-
-            if (emailError) {
-                emailError.textContent = "";
-            }
-
-
-            if (phoneError) {
-                phoneError.textContent = "";
-            }
-
-
-            if (passwordError) {
-                passwordError.textContent = "";
-            }
-
-
-            if (confirmError) {
-                confirmError.textContent = "";
-            }
-
-
-            let valid = true;
-
-
-            if (name === "") {
-
-                if (nameError) {
-
-                    nameError.textContent =
-                        "Please enter your name.";
-                }
-
-                valid = false;
-            }
-
-
-            if (email === "") {
-
-                if (emailError) {
-
-                    emailError.textContent =
-                        "Please enter your email.";
-                }
-
-                valid = false;
-
-            } else if (
-                !email.includes("@")
-            ) {
-
-                if (emailError) {
-
-                    emailError.textContent =
-                        "Please enter a valid email.";
-                }
-
-                valid = false;
-            }
-
-
-            if (
-                phone.length !== 10 ||
-                isNaN(phone)
-            ) {
-
-                if (phoneError) {
-
-                    phoneError.textContent =
-                        "Phone number must contain 10 digits.";
-                }
-
-                valid = false;
-            }
-
-
-            if (
-                password.length < 6
-            ) {
-
-                if (passwordError) {
-
-                    passwordError.textContent =
-                        "Password must be at least 6 characters.";
-                }
-
-                valid = false;
-            }
-
-
-            if (
-                confirmPassword !==
-                password
-            ) {
-
-                if (confirmError) {
-
-                    confirmError.textContent =
-                        "Passwords do not match.";
-                }
-
-                valid = false;
-            }
-
-
-            if (!valid) {
-                return;
-            }
-
-
-            const memberNumber =
-                String(
-                    Date.now()
-                ).slice(-4);
-
-
-            const today =
-                new Date();
-
-
-            const joinedDate =
-                today.toLocaleDateString(
-                    "en-IN",
-                    {
-                        month: "long",
-                        year: "numeric"
-                    }
-                );
-
-
-            const user = {
-
-                name: name,
-
-                email: email,
-
-                phone: phone,
-
-                password: password,
-
-                memberId:
-                    "SS-" +
-                    today.getFullYear() +
-                    "-" +
-                    memberNumber,
-
-                joinedDate:
-                    joinedDate
-            };
-
-
-            localStorage.setItem(
-                "shelfSyncUser",
-                JSON.stringify(user)
-            );
-
-
-            alert(
-                "Registration successful. Please login."
-            );
-
-
-            registerForm.reset();
-
-
-            showLoginForm();
-
-
-            const loginEmail =
-                document.getElementById(
-                    "loginEmail"
-                );
-
-
-            if (loginEmail) {
-
-                loginEmail.value =
-                    email;
-            }
-        }
-    );
-}
-
-
-// Forgot Password
-if (forgotPasswordForm) {
-
-    forgotPasswordForm.addEventListener(
-        "submit",
-        function (event) {
-
-            event.preventDefault();
-
-
-            const email =
-                document
-                    .getElementById(
-                        "forgotEmail"
-                    )
-                    .value
-                    .trim();
-
-
-            const phone =
-                document
-                    .getElementById(
-                        "forgotPhone"
-                    )
-                    .value
-                    .trim();
-
-
-            const newPassword =
-                document
-                    .getElementById(
-                        "newPassword"
-                    )
-                    .value;
-
-
-            const confirmPassword =
-                document
-                    .getElementById(
-                        "forgotConfirmPassword"
-                    )
-                    .value;
-
-
-            const emailError =
-                document.getElementById(
-                    "forgotEmailError"
-                );
-
-
-            const phoneError =
-                document.getElementById(
-                    "forgotPhoneError"
-                );
-
-
-            const passwordError =
-                document.getElementById(
-                    "newPasswordError"
-                );
-
-
-            const confirmError =
-                document.getElementById(
-                    "forgotConfirmError"
-                );
-
-
-            emailError.textContent = "";
-
-            phoneError.textContent = "";
-
-            passwordError.textContent = "";
-
-            confirmError.textContent = "";
-
-
-            let valid = true;
-
-
-            if (
-                email === "" ||
-                !email.includes("@")
-            ) {
-
-                emailError.textContent =
-                    "Please enter a valid email.";
-
-                valid = false;
-            }
-
-
-            if (
-                phone.length !== 10 ||
-                isNaN(phone)
-            ) {
-
-                phoneError.textContent =
-                    "Enter your registered 10 digit phone number.";
-
-                valid = false;
-            }
-
-
-            if (
-                newPassword.length < 6
-            ) {
-
-                passwordError.textContent =
-                    "Password must be at least 6 characters.";
-
-                valid = false;
-            }
-
-
-            if (
-                confirmPassword !==
-                newPassword
-            ) {
-
-                confirmError.textContent =
-                    "Passwords do not match.";
-
-                valid = false;
-            }
-
-
-            if (!valid) {
-                return;
-            }
-
-
-            const savedUser =
-                localStorage.getItem(
-                    "shelfSyncUser"
-                );
-
-
-            if (!savedUser) {
-
-                emailError.textContent =
-                    "No registered account found.";
-
-                return;
-            }
-
-
-            const user =
-                JSON.parse(
-                    savedUser
-                );
-
-
-            if (
-                email.toLowerCase() !==
-                user.email.toLowerCase()
-            ) {
-
-                emailError.textContent =
-                    "This email is not registered.";
-
-                return;
-            }
-
-
-            if (
-                phone !== user.phone
-            ) {
-
-                phoneError.textContent =
-                    "Phone number does not match our record.";
-
-                return;
-            }
-
-
-            // Update password
-            user.password =
-                newPassword;
-
-
-            localStorage.setItem(
-                "shelfSyncUser",
-                JSON.stringify(user)
-            );
-
-
-            forgotPasswordForm.reset();
-
-
-            alert(
-                "Password changed successfully. You can now login."
-            );
-
-
-            showLoginForm();
-
-
-            const loginEmail =
-                document.getElementById(
-                    "loginEmail"
-                );
-
-
-            if (loginEmail) {
-
-                loginEmail.value =
-                    user.email;
-            }
-        }
-    );
-}
-
-
-// Format date for profile
-function formatLibraryDate(
-    dateValue
-) {
-
-    return new Date(
-        dateValue
-    ).toLocaleDateString(
-        "en-IN",
-        {
-            day: "2-digit",
-            month: "short",
-            year: "numeric"
-        }
-    );
-}
-
-
-// Calculate remaining borrowing time
-function getTimeRemaining(
-    dueValue
-) {
-
-    const now =
-        new Date();
-
-
-    const due =
-        new Date(
-            dueValue
-        );
-
-
-    const difference =
-        due.getTime() -
-        now.getTime();
-
-
-    // Overdue
-    if (difference <= 0) {
-
-        const overdueDays =
-            Math.max(
-                1,
-                Math.ceil(
-                    Math.abs(
-                        difference
-                    ) /
-                    86400000
-                )
-            );
-
-
-        return (
-            overdueDays +
-            " day" +
-            (
-                overdueDays === 1
-                    ? ""
-                    : "s"
-            ) +
-            " overdue"
-        );
-    }
-
-
-    const days =
-        Math.ceil(
-            difference /
-            86400000
-        );
-
-
-    return (
-        days +
-        " day" +
-        (
-            days === 1
-                ? ""
-                : "s"
-        ) +
-        " left"
-    );
-}
-
-
-// Prevent HTML from user data
-function escapeHtml(value) {
-
-    return String(value)
-
-        .replaceAll(
-            "&",
-            "&amp;"
-        )
-
-        .replaceAll(
-            "<",
-            "&lt;"
-        )
-
-        .replaceAll(
-            ">",
-            "&gt;"
-        )
-
-        .replaceAll(
-            '"',
-            "&quot;"
-        )
-
-        .replaceAll(
-            "'",
-            "&#039;"
-        );
-}
-
-
-// Profile elements
-const profileName =
-    document.getElementById(
-        "profileName"
-    );
-
-
-const profileFirstName =
-    document.getElementById(
-        "profileFirstName"
-    );
-
-
-const profileEmail =
-    document.getElementById(
-        "profileEmail"
-    );
-
-
-const memberId =
-    document.getElementById(
-        "memberId"
-    );
-
-
-const joinedDate =
-    document.getElementById(
-        "joinedDate"
-    );
-
-
-const logoutBtn =
-    document.getElementById(
-        "logoutBtn"
-    );
-
-
-const borrowedCount =
-    document.getElementById(
-        "borrowedCount"
-    );
-
-
-const totalReadCount =
-    document.getElementById(
-        "totalReadCount"
-    );
-
-
-const savedCount =
-    document.getElementById(
-        "savedCount"
-    );
-
-
-const dueSoonCount =
-    document.getElementById(
-        "dueSoonCount"
-    );
-
-
-const borrowedList =
-    document.querySelector(
-        ".borrowed-list"
-    );
-
-
-const activityList =
-    document.querySelector(
-        ".activity-list"
-    );
-
-
-// Display borrowed books
-function renderBorrowedBooks(
-    member
-) {
-
-    if (!borrowedList) {
-        return;
-    }
-
-
-    const books =
-        getBorrowedBooks(
-            member.email
-        );
-
-
-    if (borrowedCount) {
-
-        borrowedCount.textContent =
-            books.length;
-    }
-
-
-    let dueSoon = 0;
-
-
-    const now =
-        new Date();
-
-
-    books.forEach(
-        function (book) {
-
-            const difference =
-                new Date(
-                    book.dueAt
-                ) -
-                now;
-
-
-            const days =
-                Math.ceil(
-                    difference /
-                    86400000
-                );
-
-
-            if (
-                days >= 0 &&
-                days <= 3
-            ) {
-
-                dueSoon++;
-            }
-        }
-    );
-
-
-    if (dueSoonCount) {
-
-        dueSoonCount.textContent =
-            dueSoon;
-    }
-
-
-    // No borrowed books
-    if (books.length === 0) {
-
-        borrowedList.innerHTML = `
-            <div class="empty-library-state">
-
-                <i class="fa-solid fa-book-open"></i>
-
-                <h3>
-                    No borrowed books yet
-                </h3>
-
-                <p>
-                    Borrow an available book and
-                    it will appear here with its
-                    borrow date, due date and
-                    time remaining.
-                </p>
-
-                <a href="books.html">
-                    Browse Books
-                </a>
-
-            </div>
-        `;
-
-
-        return;
-    }
-
-
-    borrowedList.innerHTML = "";
-
-
-    books.forEach(
-        function (book) {
-
-            const item =
-                document.createElement(
-                    "article"
-                );
-
-
-            item.className =
-                "borrowed-book";
-
-
-            item.innerHTML = `
-
-                <div class="borrowed-book-icon">
-
-                    <i class="fa-solid fa-book"></i>
-
-                </div>
-
-
-                <div class="borrowed-book-info">
-
-                    <span class="borrowed-category">
-
-                        ${escapeHtml(
-                            book.category
-                        )}
-
-                    </span>
-
-
-                    <h3>
-
-                        ${escapeHtml(
-                            book.title
-                        )}
-
-                    </h3>
-
-
-                    <p>
-
-                        ${escapeHtml(
-                            book.author
-                        )}
-
-                        ·
-
-                        ${escapeHtml(
-                            book.price
-                        )}
-
-                    </p>
-
-                </div>
-
-
-                <div class="borrowed-date">
-
-                    <span>
-                        Borrowed
-                    </span>
-
-                    <strong>
-
-                        ${formatLibraryDate(
-                            book.borrowedAt
-                        )}
-
-                    </strong>
-
-
-                    <span>
-                        Due
-                    </span>
-
-                    <strong>
-
-                        ${formatLibraryDate(
-                            book.dueAt
-                        )}
-
-                    </strong>
-
-                </div>
-
-
-                <div class="borrowed-date borrowed-time">
-
-                    <span>
-                        Time Remaining
-                    </span>
-
-                    <strong class="time-left">
-
-                        ${getTimeRemaining(
-                            book.dueAt
-                        )}
-
-                    </strong>
-
-                </div>
-
-
-                <button
-                    class="return-book-btn"
-                    data-book-id="${book.id}"
-                    type="button">
-
-                    Return
-
-                </button>
-            `;
-
-
-            borrowedList.appendChild(
-                item
-            );
-        }
-    );
-
-
-    // Return buttons
-    const returnButtons =
-        borrowedList.querySelectorAll(
-            ".return-book-btn"
-        );
-
-
-    returnButtons.forEach(
-        function (button) {
-
-            button.addEventListener(
-                "click",
-                function () {
-
-                    returnBook(
-                        member,
-                        Number(
-                            button.dataset.bookId
-                        )
+                    list.appendChild(
+                        item
                     );
                 }
             );
         }
-    );
-}
 
 
-// Return book
-function returnBook(
-    member,
-    bookId
-) {
+        renderActivities();
 
-    const books =
-        getBorrowedBooks(
-            member.email
-        );
 
+        /* Profile photo */
 
-    const book =
-        books.find(
-            function (item) {
-
-                return (
-                    item.id ===
-                    bookId
-                );
-            }
-        );
-
-
-    if (!book) {
-        return;
-    }
-
-
-    const answer =
-        confirm(
-            'Return "' +
-            book.title +
-            '"?'
-        );
-
-
-    if (!answer) {
-        return;
-    }
-
-
-    // Remove from borrowed
-    const remainingBooks =
-        books.filter(
-            function (item) {
-
-                return (
-                    item.id !==
-                    bookId
-                );
-            }
-        );
-
-
-    saveBorrowedBooks(
-        member.email,
-        remainingBooks
-    );
-
-
-    // Add to returned history
-    const returnedBooks =
-        getReturnedBooks(
-            member.email
-        );
-
-
-    returnedBooks.unshift({
-
-        ...book,
-
-        returnedAt:
-            new Date()
-                .toISOString()
-    });
-
-
-    saveReturnedBooks(
-        member.email,
-        returnedBooks
-    );
-
-
-    // Activity
-    addMemberActivity(
-        member.email,
-        {
-
-            type: "return",
-
-            title: book.title,
-
-            date:
-                new Date()
-                    .toISOString()
-        }
-    );
-
-
-    // Refresh profile
-    renderProfileData(
-        member
-    );
-
-
-    alert(
-        book.title +
-        " has been returned successfully."
-    );
-}
-
-
-// Recent activity
-function renderActivity(
-    member
-) {
-
-    if (!activityList) {
-        return;
-    }
-
-
-    const activities =
-        getMemberActivities(
-            member.email
-        );
-
-
-    if (
-        activities.length === 0
-    ) {
-
-        activityList.innerHTML = `
-
-            <div class="empty-activity-state">
-
-                <i class="fa-solid fa-clock-rotate-left"></i>
-
-                <p>
-                    Your borrowing activity
-                    will appear here.
-                </p>
-
-            </div>
-        `;
-
-
-        return;
-    }
-
-
-    activityList.innerHTML = "";
-
-
-    activities.forEach(
-        function (activity) {
-
-            const item =
-                document.createElement(
-                    "div"
-                );
-
-
-            item.className =
-                "activity-item";
-
-
-            const isReturn =
-                activity.type ===
-                "return";
-
-
-            const title =
-                isReturn
-                    ? "Book Returned"
-                    : "Book Borrowed";
-
-
-            const icon =
-                isReturn
-                    ? "fa-rotate-left"
-                    : "fa-book-open-reader";
-
-
-            const message =
-                isReturn
-                    ? 'Returned "' +
-                      activity.title +
-                      '"'
-                    : 'Borrowed "' +
-                      activity.title +
-                      '"';
-
-
-            item.innerHTML = `
-
-                <div class="activity-icon">
-
-                    <i class="fa-solid ${icon}"></i>
-
-                </div>
-
-
-                <div>
-
-                    <h3>
-                        ${title}
-                    </h3>
-
-                    <p>
-                        ${escapeHtml(
-                            message
-                        )}
-                    </p>
-
-                </div>
-
-
-                <span>
-
-                    ${formatLibraryDate(
-                        activity.date
-                    )}
-
-                </span>
-            `;
-
-
-            activityList.appendChild(
-                item
+        const photoInput =
+            document.getElementById(
+                "profilePhotoInput"
             );
-        }
-    );
-}
 
+        const avatarImage =
+            document.getElementById(
+                "profileAvatarImage"
+            );
 
-// Render complete profile
-function renderProfileData(
-    member
-) {
+        const avatarLetter =
+            document.getElementById(
+                "profileAvatarLetter"
+            );
 
-    const borrowed =
-        getBorrowedBooks(
-            member.email
-        );
+        const changePhotoButton =
+            document.getElementById(
+                "changeProfilePhotoBtn"
+            );
 
-
-    const returned =
-        getReturnedBooks(
-            member.email
-        );
-
-
-    if (profileName) {
-
-        profileName.textContent =
-            member.name ||
-            "Library Member";
-    }
-
-
-    if (profileFirstName) {
-
-        profileFirstName.textContent =
-            (
-                member.name ||
-                "Member"
-            )
-                .split(" ")[0];
-    }
-
-
-    if (profileEmail) {
-
-        profileEmail.textContent =
-            member.email ||
-            "member@shelfsync.com";
-    }
-
-
-    if (memberId) {
-
-        memberId.textContent =
-            member.memberId ||
-            "-";
-    }
-
-
-    if (joinedDate) {
-
-        joinedDate.textContent =
-            member.joinedDate ||
-            "-";
-    }
-
-
-    if (borrowedCount) {
-
-        borrowedCount.textContent =
-            borrowed.length;
-    }
-
-
-    if (totalReadCount) {
-
-        totalReadCount.textContent =
-            returned.length;
-    }
-
-
-    // Saved feature not added yet
-    if (savedCount) {
-
-        savedCount.textContent =
-            "0";
-    }
-
-
-    renderBorrowedBooks(
-        member
-    );
-
-
-    renderActivity(
-        member
-    );
-}
-
-
-// Protect profile page
-if (profileName) {
-
-    const member =
-        getCurrentMember();
-
-
-    if (!member) {
-
-        alert(
-            "Please login to view your profile."
-        );
-
-
-        window.location.href =
-            "login.html";
-
-    } else {
-
-        renderProfileData(
-            member
-        );
-    }
-}
-
-
-// Logout
-if (logoutBtn) {
-
-    logoutBtn.addEventListener(
-        "click",
-        function () {
-
-            const answer =
-                confirm(
-                    "Do you want to logout?"
-                );
-
-
-            if (!answer) {
-                return;
-            }
-
-
-            localStorage.removeItem(
-                "shelfSyncSession"
+        const removePhotoButton =
+            document.getElementById(
+                "removeProfilePhotoBtn"
             );
 
 
-            alert(
-                "Logged out successfully."
-            );
+        const photoKey =
+            "shelfSyncProfilePhoto_" +
+            member.email.toLowerCase();
 
 
-            window.location.href =
-                "login.html";
-        }
-    );
-}
+        function loadProfilePhoto() {
 
-
-// Contact form
-const contactForm =
-    document.getElementById(
-        "contactForm"
-    );
-
-
-if (contactForm) {
-
-    contactForm.addEventListener(
-        "submit",
-        function (event) {
-
-            event.preventDefault();
-
-
-            const name =
-                document
-                    .getElementById(
-                        "contactName"
-                    )
-                    .value
-                    .trim();
-
-
-            const email =
-                document
-                    .getElementById(
-                        "contactEmail"
-                    )
-                    .value
-                    .trim();
-
-
-            const subject =
-                document
-                    .getElementById(
-                        "contactSubject"
-                    )
-                    .value
-                    .trim();
-
-
-            const message =
-                document
-                    .getElementById(
-                        "contactMessage"
-                    )
-                    .value
-                    .trim();
-
-
-            const nameError =
-                document.getElementById(
-                    "contactNameError"
+            const saved =
+                localStorage.getItem(
+                    photoKey
                 );
 
-
-            const emailError =
-                document.getElementById(
-                    "contactEmailError"
-                );
-
-
-            const subjectError =
-                document.getElementById(
-                    "contactSubjectError"
-                );
-
-
-            const messageError =
-                document.getElementById(
-                    "contactMessageError"
-                );
-
-
-            nameError.textContent = "";
-
-            emailError.textContent = "";
-
-            subjectError.textContent = "";
-
-            messageError.textContent = "";
-
-
-            let valid = true;
-
-
-            if (name === "") {
-
-                nameError.textContent =
-                    "Please enter your name.";
-
-                valid = false;
-            }
-
-
-            if (email === "") {
-
-                emailError.textContent =
-                    "Please enter your email.";
-
-                valid = false;
-
-            } else if (
-                !email.includes("@")
+            if (
+                saved &&
+                avatarImage
             ) {
 
-                emailError.textContent =
-                    "Please enter a valid email.";
+                avatarImage.src =
+                    saved;
 
-                valid = false;
+                avatarImage.style.display =
+                    "block";
+
+                if (avatarLetter) {
+                    avatarLetter.style.display =
+                        "none";
+                }
+
+            } else {
+
+                if (avatarImage) {
+                    avatarImage.style.display =
+                        "none";
+                }
+
+                if (avatarLetter) {
+
+                    avatarLetter.style.display =
+                        "flex";
+
+                    avatarLetter.textContent =
+                        (
+                            member.name ||
+                            "M"
+                        )
+                            .charAt(0)
+                            .toUpperCase();
+                }
             }
+        }
 
 
-            if (subject === "") {
+        if (changePhotoButton) {
 
-                subjectError.textContent =
-                    "Please enter a subject.";
+            changePhotoButton.addEventListener(
+                "click",
+                function () {
 
-                valid = false;
-            }
-
-
-            if (message === "") {
-
-                messageError.textContent =
-                    "Please enter your message.";
-
-                valid = false;
-            }
+                    if (photoInput) {
+                        photoInput.click();
+                    }
+                }
+            );
+        }
 
 
-            if (valid) {
+        if (photoInput) {
+
+            photoInput.addEventListener(
+                "change",
+                function () {
+
+                    const file =
+                        photoInput.files &&
+                        photoInput.files[0];
+
+                    if (!file) {
+                        return;
+                    }
+
+
+                    if (
+                        !file.type.startsWith(
+                            "image/"
+                        )
+                    ) {
+
+                        alert(
+                            "Please select an image file."
+                        );
+
+                        return;
+                    }
+
+
+                    if (
+                        file.size >
+                        5 * 1024 * 1024
+                    ) {
+
+                        alert(
+                            "Image size must be below 5 MB."
+                        );
+
+                        return;
+                    }
+
+
+                    const reader =
+                        new FileReader();
+
+
+                    reader.onload =
+                        function (event) {
+
+                            const image =
+                                new Image();
+
+
+                            image.onload =
+                                function () {
+
+                                    const canvas =
+                                        document.createElement(
+                                            "canvas"
+                                        );
+
+
+                                    const max =
+                                        400;
+
+
+                                    let width =
+                                        image.width;
+
+                                    let height =
+                                        image.height;
+
+
+                                    if (
+                                        width >
+                                        height
+                                    ) {
+
+                                        if (
+                                            width >
+                                            max
+                                        ) {
+
+                                            height =
+                                                height *
+                                                max /
+                                                width;
+
+                                            width =
+                                                max;
+                                        }
+
+                                    } else {
+
+                                        if (
+                                            height >
+                                            max
+                                        ) {
+
+                                            width =
+                                                width *
+                                                max /
+                                                height;
+
+                                            height =
+                                                max;
+                                        }
+                                    }
+
+
+                                    canvas.width =
+                                        width;
+
+                                    canvas.height =
+                                        height;
+
+
+                                    const context =
+                                        canvas.getContext(
+                                            "2d"
+                                        );
+
+
+                                    context.drawImage(
+                                        image,
+                                        0,
+                                        0,
+                                        width,
+                                        height
+                                    );
+
+
+                                    const compressed =
+                                        canvas.toDataURL(
+                                            "image/jpeg",
+                                            0.82
+                                        );
+
+
+                                    localStorage.setItem(
+                                        photoKey,
+                                        compressed
+                                    );
+
+
+                                    loadProfilePhoto();
+                                };
+
+
+                            image.src =
+                                event.target.result;
+                        };
+
+
+                    reader.readAsDataURL(
+                        file
+                    );
+                }
+            );
+        }
+
+
+        if (removePhotoButton) {
+
+            removePhotoButton.addEventListener(
+                "click",
+                function () {
+
+                    localStorage.removeItem(
+                        photoKey
+                    );
+
+                    loadProfilePhoto();
+                }
+            );
+        }
+
+
+        loadProfilePhoto();
+    }
+
+
+    /* =========================
+       Contact form
+    ========================= */
+
+    const contactForm =
+        document.getElementById(
+            "contactForm"
+        );
+
+
+    if (contactForm) {
+
+        contactForm.addEventListener(
+            "submit",
+            function (event) {
+
+                event.preventDefault();
+
+
+                const name =
+                    (
+                        document.getElementById(
+                            "contactName"
+                        ) || {}
+                    ).value?.trim() || "";
+
+
+                const email =
+                    (
+                        document.getElementById(
+                            "contactEmail"
+                        ) || {}
+                    ).value
+                        ?.trim() || "";
+
+
+                const message =
+                    (
+                        document.getElementById(
+                            "contactMessage"
+                        ) || {}
+                    ).value?.trim() || "";
+
+
+                if (!name) {
+
+                    alert(
+                        "Please enter your name."
+                    );
+
+                    return;
+                }
+
+
+                if (!validEmail(email)) {
+
+                    alert(
+                        "Please enter a valid email address."
+                    );
+
+                    return;
+                }
+
+
+                if (!message) {
+
+                    alert(
+                        "Please enter your message."
+                    );
+
+                    return;
+                }
+
 
                 alert(
-                    "Message sent successfully."
+                    "Thank you for contacting ShelfSync. Your message has been recorded for this project demonstration."
                 );
 
 
                 contactForm.reset();
             }
+        );
+    }
+
+
+    /* =========================
+       Admin dashboard
+    ========================= */
+
+    const adminPage =
+        document.querySelector(
+            ".admin-page"
+        );
+
+
+    if (adminPage) {
+
+        const adminNavLinks =
+            document.querySelectorAll(
+                ".admin-nav-link[data-admin-section]"
+            );
+
+
+        const adminSections =
+            document.querySelectorAll(
+                ".admin-section"
+            );
+
+
+        function showAdminSection(
+            sectionName
+        ) {
+
+            adminSections.forEach(
+                function (section) {
+
+                    const id =
+                        section.id ||
+                        section.dataset.section;
+
+                    const active =
+                        id ===
+                        sectionName;
+
+                    section.classList.toggle(
+                        "active",
+                        active
+                    );
+
+                    section.style.display =
+                        active
+                            ? ""
+                            : "none";
+                }
+            );
+
+
+            adminNavLinks.forEach(
+                function (link) {
+
+                    link.classList.toggle(
+                        "active",
+                        link.dataset.adminSection ===
+                        sectionName
+                    );
+                }
+            );
+        }
+
+
+        adminNavLinks.forEach(
+            function (link) {
+
+                link.addEventListener(
+                    "click",
+                    function (event) {
+
+                        event.preventDefault();
+
+                        showAdminSection(
+                            link.dataset.adminSection
+                        );
+                    }
+                );
+            }
+        );
+
+
+        const adminMenuButton =
+            document.getElementById(
+                "adminMenuToggle"
+            ) ||
+            document.getElementById(
+                "adminMenuBtn"
+            );
+
+
+        const adminSidebar =
+            document.querySelector(
+                ".admin-sidebar"
+            );
+
+
+        if (
+            adminMenuButton &&
+            adminSidebar
+        ) {
+
+            adminMenuButton.addEventListener(
+                "click",
+                function () {
+
+                    adminSidebar.classList.toggle(
+                        "open"
+                    );
+                }
+            );
+        }
+
+
+        const adminMember =
+            getCurrentMember();
+
+
+        const adminUserName =
+            document.getElementById(
+                "adminUserName"
+            );
+
+        const adminUserEmail =
+            document.getElementById(
+                "adminUserEmail"
+            );
+
+        const adminAvatar =
+            document.getElementById(
+                "adminSidebarAvatar"
+            );
+
+
+        if (adminMember) {
+
+            if (adminUserName) {
+
+                adminUserName.textContent =
+                    adminMember.name ||
+                    "ShelfSync Admin";
+            }
+
+
+            if (adminUserEmail) {
+
+                adminUserEmail.textContent =
+                    adminMember.email ||
+                    "Administrator";
+            }
+
+
+            if (adminAvatar) {
+
+                adminAvatar.textContent =
+                    (
+                        adminMember.name ||
+                        "A"
+                    )
+                        .charAt(0)
+                        .toUpperCase();
+            }
+        }
+
+
+        const allUsers =
+            getUsers();
+
+
+        const allBorrowings =
+            allUsers.reduce(
+                function (result, user) {
+
+                    return result.concat(
+                        getBorrowedBooks(
+                            user.email
+                        ).map(
+                            function (book) {
+
+                                return {
+                                    ...book,
+                                    memberName:
+                                        user.name,
+                                    memberEmail:
+                                        user.email
+                                };
+                            }
+                        )
+                    );
+                },
+                []
+            );
+
+
+        function setAdminNumber(
+            ids,
+            value
+        ) {
+
+            ids.forEach(
+                function (id) {
+
+                    const element =
+                        document.getElementById(
+                            id
+                        );
+
+                    if (element) {
+                        element.textContent =
+                            value;
+                    }
+                }
+            );
+        }
+
+
+        setAdminNumber(
+            [
+                "totalMembers",
+                "adminTotalMembers",
+                "memberCount"
+            ],
+            allUsers.length
+        );
+
+
+        setAdminNumber(
+            [
+                "totalBorrowed",
+                "adminTotalBorrowed",
+                "borrowedCount"
+            ],
+            allBorrowings.length
+        );
+
+
+        const bookCards =
+            document.querySelectorAll(
+                ".library-book-card"
+            );
+
+
+        setAdminNumber(
+            [
+                "totalBooks",
+                "adminTotalBooks",
+                "bookCount"
+            ],
+            bookCards.length
+        );
+
+
+        setAdminNumber(
+            [
+                "totalReturned",
+                "adminTotalReturned"
+            ],
+            allUsers.reduce(
+                function (total, user) {
+
+                    return (
+                        total +
+                        getReturnedBooks(
+                            user.email
+                        ).length
+                    );
+                },
+                0
+            )
+        );
+
+
+        /* Admin member table */
+
+        const memberTable =
+            document.getElementById(
+                "membersTableBody"
+            ) ||
+            document.querySelector(
+                "#membersTable tbody"
+            );
+
+
+        if (memberTable) {
+
+            memberTable.innerHTML = "";
+
+
+            allUsers.forEach(
+                function (user) {
+
+                    const row =
+                        document.createElement(
+                            "tr"
+                        );
+
+
+                    row.innerHTML =
+
+                        "<td>" +
+                        escapeHTML(
+                            user.memberId ||
+                            user.id ||
+                            "-"
+                        ) +
+                        "</td>" +
+
+                        "<td>" +
+                        escapeHTML(
+                            user.name ||
+                            "-"
+                        ) +
+                        "</td>" +
+
+                        "<td>" +
+                        escapeHTML(
+                            user.email ||
+                            "-"
+                        ) +
+                        "</td>" +
+
+                        "<td>" +
+                        escapeHTML(
+                            user.phone ||
+                            "-"
+                        ) +
+                        "</td>";
+
+
+                    memberTable.appendChild(
+                        row
+                    );
+                }
+            );
+        }
+
+
+        /* Admin borrowing table */
+
+        const borrowingTable =
+            document.getElementById(
+                "borrowingsTableBody"
+            ) ||
+            document.querySelector(
+                "#borrowingsTable tbody"
+            );
+
+
+        if (borrowingTable) {
+
+            borrowingTable.innerHTML = "";
+
+
+            allBorrowings.forEach(
+                function (book) {
+
+                    const row =
+                        document.createElement(
+                            "tr"
+                        );
+
+
+                    const due =
+                        book.dueAt
+                            ? new Date(
+                                book.dueAt
+                            ).toLocaleDateString(
+                                "en-IN"
+                            )
+                            : "-";
+
+
+                    row.innerHTML =
+
+                        "<td>" +
+                        escapeHTML(
+                            book.title ||
+                            "-"
+                        ) +
+                        "</td>" +
+
+                        "<td>" +
+                        escapeHTML(
+                            book.memberName ||
+                            "-"
+                        ) +
+                        "</td>" +
+
+                        "<td>" +
+                        escapeHTML(
+                            book.memberEmail ||
+                            "-"
+                        ) +
+                        "</td>" +
+
+                        "<td>" +
+                        due +
+                        "</td>";
+
+
+                    borrowingTable.appendChild(
+                        row
+                    );
+                }
+            );
+        }
+
+
+        /* Admin search */
+
+        const adminBookSearch =
+            document.getElementById(
+                "adminBookSearch"
+            );
+
+        if (adminBookSearch) {
+
+            adminBookSearch.addEventListener(
+                "input",
+                function () {
+
+                    const value =
+                        adminBookSearch.value
+                            .toLowerCase()
+                            .trim();
+
+
+                    document
+                        .querySelectorAll(
+                            ".admin-book-row, .admin-book-card, #booksTable tbody tr"
+                        )
+                        .forEach(
+                            function (item) {
+
+                                item.style.display =
+                                    item.textContent
+                                        .toLowerCase()
+                                        .includes(
+                                            value
+                                        )
+                                        ? ""
+                                        : "none";
+                            }
+                        );
+                }
+            );
+        }
+
+
+        const adminMemberSearch =
+            document.getElementById(
+                "adminMemberSearch"
+            );
+
+
+        if (adminMemberSearch) {
+
+            adminMemberSearch.addEventListener(
+                "input",
+                function () {
+
+                    const value =
+                        adminMemberSearch.value
+                            .toLowerCase()
+                            .trim();
+
+
+                    document
+                        .querySelectorAll(
+                            "#membersTable tbody tr, .member-row"
+                        )
+                        .forEach(
+                            function (item) {
+
+                                item.style.display =
+                                    item.textContent
+                                        .toLowerCase()
+                                        .includes(
+                                            value
+                                        )
+                                        ? ""
+                                        : "none";
+                            }
+                        );
+                }
+            );
+        }
+
+
+        /* Admin tabs */
+
+        document
+            .querySelectorAll(
+                ".admin-tab"
+            )
+            .forEach(
+                function (tab) {
+
+                    tab.addEventListener(
+                        "click",
+                        function () {
+
+                            const target =
+                                tab.dataset.tab;
+
+                            document
+                                .querySelectorAll(
+                                    ".admin-tab"
+                                )
+                                .forEach(
+                                    function (item) {
+                                        item.classList.remove(
+                                            "active"
+                                        );
+                                    }
+                                );
+
+                            tab.classList.add(
+                                "active"
+                            );
+
+
+                            document
+                                .querySelectorAll(
+                                    ".admin-tab-content"
+                                )
+                                .forEach(
+                                    function (content) {
+
+                                        content.style.display =
+                                            content.dataset.tabContent ===
+                                            target
+                                                ? ""
+                                                : "none";
+                                    }
+                                );
+                        }
+                    );
+                }
+            );
+    }
+
+
+    /* =========================
+       Logout
+    ========================= */
+
+    document
+        .querySelectorAll(
+            "#logoutBtn, .logout-btn, [data-logout]"
+        )
+        .forEach(
+            function (button) {
+
+                button.addEventListener(
+                    "click",
+                    function (event) {
+
+                        event.preventDefault();
+
+
+                        localStorage.removeItem(
+                            "shelfSyncSession"
+                        );
+
+
+                        updateNavbar();
+
+
+                        alert(
+                            "You have been logged out."
+                        );
+
+
+                        window.location.href =
+                            pageLink(
+                                "login.html"
+                            );
+                    }
+                );
+            }
+        );
+
+
+    /* =========================
+       Escape key
+    ========================= */
+
+    document.addEventListener(
+        "keydown",
+        function (event) {
+
+            if (
+                event.key !==
+                "Escape"
+            ) {
+                return;
+            }
+
+            closeBookDetails();
+            closeLightbox();
+
+            if (menuBtn && navLinks) {
+
+                navLinks.classList.remove(
+                    "open"
+                );
+
+                menuBtn.setAttribute(
+                    "aria-expanded",
+                    "false"
+                );
+            }
         }
     );
-}
+
+
+    /* =========================
+       Smooth internal links
+    ========================= */
+
+    document
+        .querySelectorAll(
+            'a[href^="#"]'
+        )
+        .forEach(
+            function (link) {
+
+                link.addEventListener(
+                    "click",
+                    function (event) {
+
+                        const targetId =
+                            link.getAttribute(
+                                "href"
+                            );
+
+                        if (
+                            !targetId ||
+                            targetId === "#"
+                        ) {
+                            return;
+                        }
+
+
+                        const target =
+                            document.querySelector(
+                                targetId
+                            );
+
+                        if (!target) {
+                            return;
+                        }
+
+
+                        event.preventDefault();
+
+
+                        target.scrollIntoView(
+                            {
+                                behavior:
+                                    "smooth",
+                                block:
+                                    "start"
+                            }
+                        );
+                    }
+                );
+            }
+        );
+
+
+    /* =========================
+       Back to top
+    ========================= */
+
+    const backToTop =
+        document.getElementById(
+            "backToTop"
+        );
+
+
+    if (backToTop) {
+
+        window.addEventListener(
+            "scroll",
+            function () {
+
+                backToTop.classList.toggle(
+                    "show",
+                    window.scrollY >
+                    400
+                );
+            }
+        );
+
+
+        backToTop.addEventListener(
+            "click",
+            function () {
+
+                window.scrollTo(
+                    {
+                        top: 0,
+                        behavior:
+                            "smooth"
+                    }
+                );
+            }
+        );
+    }
+
+
+    /* =========================
+       Helper
+    ========================= */
+
+    function escapeHTML(
+        value
+    ) {
+
+        return String(
+            value || ""
+        )
+            .replace(
+                /&/g,
+                "&amp;"
+            )
+            .replace(
+                /</g,
+                "&lt;"
+            )
+            .replace(
+                />/g,
+                "&gt;"
+            )
+            .replace(
+                /"/g,
+                "&quot;"
+            )
+            .replace(
+                /'/g,
+                "&#039;"
+            );
+    }
+
+});

@@ -1,0 +1,382 @@
+/* =========================================================
+   ShelfSync - Sage Theme
+   Add this file after style.css
+   ========================================================= */
+
+:root {
+    --primary: #3f6b5b;
+    --primary-dark: #315546;
+    --primary-soft: #e7f0eb;
+
+    --ink: #182620;
+    --text: #405149;
+    --muted: #708078;
+    --light-text: #9aa8a1;
+
+    --line: #dce5df;
+
+    --surface: #ffffff;
+    --soft: #f4f7f5;
+    --soft-blue: #edf4f0;
+
+    --success: #3f7d5d;
+    --danger: #b94a48;
+    --warning: #b77932;
+
+    --shadow-sm:
+        0 4px 14px rgba(35, 55, 46, 0.06);
+
+    --shadow:
+        0 14px 40px rgba(35, 55, 46, 0.09);
+
+    --shadow-lg:
+        0 24px 60px rgba(35, 55, 46, 0.13);
+}
+
+
+/* =========================================================
+   Main Background
+   ========================================================= */
+
+html {
+    background: #f3f6f3;
+}
+
+body {
+    background:
+        radial-gradient(
+            circle at 8% 8%,
+            rgba(63, 107, 91, 0.08),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 92% 18%,
+            rgba(120, 150, 134, 0.08),
+            transparent 28%
+        ),
+        linear-gradient(
+            135deg,
+            #f7f8f5 0%,
+            #f1f5f2 50%,
+            #eaf1ed 100%
+        );
+
+    color: var(--text);
+}
+
+
+/* =========================================================
+   Header / Navigation
+   ========================================================= */
+
+.site-header,
+header,
+.navbar {
+    background: rgba(250, 252, 250, 0.92);
+    border-color: var(--line);
+    box-shadow: 0 8px 25px rgba(35, 55, 46, 0.05);
+}
+
+.nav-links a {
+    color: var(--text);
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    color: var(--primary);
+}
+
+
+/* =========================================================
+   Main Sections
+   ========================================================= */
+
+.categories-section,
+.featured-section,
+.about-purpose-section,
+.about-features-section,
+.technology-section,
+.journey-section,
+.gallery-section,
+.contact-section,
+.profile-dashboard-section {
+    background: transparent;
+}
+
+
+/* =========================================================
+   Cards
+   ========================================================= */
+
+.category-card,
+.featured-book-card,
+.service-card,
+.purpose-card,
+.technology-card,
+.gallery-card,
+.form-card,
+.contact-card,
+.profile-card,
+.profile-panel,
+.profile-stat-card {
+    background: rgba(255, 255, 255, 0.94);
+    border-color: var(--line);
+    box-shadow: var(--shadow-sm);
+}
+
+.category-card:hover,
+.featured-book-card:hover,
+.service-card:hover,
+.purpose-card:hover,
+.technology-card:hover,
+.gallery-card:hover {
+    border-color: #c5d7cd;
+    box-shadow: var(--shadow);
+}
+
+
+/* =========================================================
+   Typography
+   ========================================================= */
+
+.center-heading h2,
+.section-heading h2,
+.category-card h3,
+.service-card h3,
+.featured-book-card h3,
+.purpose-card h3,
+.technology-card h3,
+.library-book-info h3,
+.borrowed-book-card h3 {
+    color: var(--ink);
+}
+
+.center-heading p,
+.section-heading p,
+.category-card p,
+.service-card p,
+.featured-book-card p,
+.purpose-card p,
+.technology-card p,
+.library-author,
+.book-description {
+    color: var(--muted);
+}
+
+
+/* =========================================================
+   Icons
+   ========================================================= */
+
+.category-icon,
+.service-icon,
+.technology-icon,
+.purpose-icon,
+.profile-stat-icon {
+    background: var(--primary-soft);
+    color: var(--primary);
+}
+
+
+/* =========================================================
+   Search
+   ========================================================= */
+
+.library-search-box,
+.search-input-wrap {
+    background: rgba(255, 255, 255, 0.94);
+    border-color: var(--line);
+}
+
+.library-search-box input,
+.search-input-wrap input {
+    color: var(--ink);
+}
+
+.library-search-box input::placeholder,
+.search-input-wrap input::placeholder {
+    color: var(--light-text);
+}
+
+
+/* =========================================================
+   Forms
+   ========================================================= */
+
+input,
+select,
+textarea {
+    background: #ffffff;
+    border-color: var(--line);
+    color: var(--ink);
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: var(--light-text);
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: var(--primary);
+    box-shadow:
+        0 0 0 3px rgba(63, 107, 91, 0.10);
+}
+
+
+/* =========================================================
+   Filters
+   ========================================================= */
+
+.book-filter-btn,
+.gallery-filter-btn {
+    background: #ffffff;
+    border-color: var(--line);
+    color: var(--muted);
+}
+
+.book-filter-btn:hover,
+.book-filter-btn.active,
+.gallery-filter-btn:hover,
+.gallery-filter-btn.active {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: #ffffff;
+}
+
+
+/* =========================================================
+   Book Actions
+   ========================================================= */
+
+.book-actions button {
+    background: #ffffff;
+    border-color: var(--line);
+    color: var(--text);
+}
+
+.book-actions .book-details-btn {
+    background: var(--primary-soft);
+    border-color: #bfd2c8;
+    color: var(--primary);
+}
+
+.book-actions .borrow-btn {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: #ffffff;
+}
+
+.book-actions .borrow-btn:hover {
+    background: var(--primary-dark);
+}
+
+
+/* =========================================================
+   Book Covers
+   ========================================================= */
+
+.library-book-cover {
+    background:
+        linear-gradient(
+            145deg,
+            #557d6c,
+            #345848
+        );
+}
+
+.featured-book-icon {
+    background: #e7f0eb;
+    color: var(--primary);
+}
+
+
+/* =========================================================
+   Profile
+   ========================================================= */
+
+.profile-panel-header {
+    border-color: var(--line);
+}
+
+.profile-stat-card {
+    background: rgba(255, 255, 255, 0.96);
+}
+
+.borrowed-book-card {
+    border-color: var(--line);
+}
+
+.borrowed-book-card > div:first-child {
+    background: var(--primary-soft);
+    color: var(--primary);
+}
+
+.borrowed-book-card .return-book-btn {
+    background: var(--primary-soft);
+    border-color: #bfd2c8;
+    color: var(--primary);
+}
+
+.borrowed-book-card .return-book-btn:hover {
+    background: var(--primary);
+    color: #ffffff;
+}
+
+
+/* =========================================================
+   Modal
+   ========================================================= */
+
+.book-modal-overlay {
+    background: rgba(24, 38, 32, 0.68);
+    backdrop-filter: blur(6px);
+}
+
+.book-modal-content {
+    background: #ffffff;
+    border-color: var(--line);
+    box-shadow: var(--shadow-lg);
+}
+
+
+/* =========================================================
+   Footer
+   ========================================================= */
+
+footer {
+    background:
+        linear-gradient(
+            145deg,
+            #172a23,
+            #1e352c
+        );
+
+    border-color: #2d493d;
+}
+
+.footer-brand,
+.footer-column h3 {
+    color: #f5f8f6;
+}
+
+.footer-column a,
+.footer-brand p,
+.footer-bottom {
+    color: #a9b9b1;
+}
+
+.footer-column a:hover {
+    color: #b9d6c7;
+}
+
+
+/* =========================================================
+   Selection
+   ========================================================= */
+
+::selection {
+    background: rgba(63, 107, 91, 0.20);
+    color: var(--ink);
+}

@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,8 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="description"
-        content="Explore the ShelfSync library gallery including reading spaces, books, study areas and library activities.">
+    <meta
+        name="description"
+        content="Explore the ShelfSync library gallery featuring books, reading spaces, students and library activities."
+    >
 
     <title>Gallery | ShelfSync</title>
 
@@ -15,49 +16,110 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
-        rel="stylesheet">
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap"
+        rel="stylesheet"
+    >
 
     <link
         rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
 
+    <!-- ShelfSync Base Styles -->
     <link rel="stylesheet" href="../css/style.css">
+
+    <!--
+        SHELFSYNC THEME
+        ------------------------------------------------
+        Keep style.css enabled.
+
+        Choose ONE theme below.
+
+        To change the theme:
+        1. Remove the comments from the theme you want.
+        2. Keep the other themes commented.
+        3. Save the file and refresh the page.
+
+        Available themes:
+        - Ivory
+        - Dark
+        - Midnight
+        - Sage
+        ------------------------------------------------
+    -->
+
+    <!-- Ivory Theme -->
+    <!-- <link rel="stylesheet" href="../css/theme-ivory.css"> -->
+
+    <!-- Dark Theme -->
+    <!-- <link rel="stylesheet" href="../css/theme-dark.css"> -->
+
+    <!-- Midnight Theme -->
+    <!-- <link rel="stylesheet" href="../css/theme-midnight.css"> -->
+
+    <!-- Sage Theme -->
+    <!-- <link rel="stylesheet" href="../css/theme-sage.css"> -->
+
 </head>
 
 <body>
 
-    <!-- Navbar -->
-    <header class="header">
+    <!-- Navigation -->
+    <header class="main-header">
 
-        <div class="container navbar">
+        <div class="container nav-container">
 
             <a href="index.html" class="logo">
 
-                <div class="logo-icon">
+                <span class="logo-icon">
                     <i class="fa-solid fa-book-open"></i>
-                </div>
+                </span>
 
                 <span>ShelfSync</span>
 
             </a>
 
+
             <nav class="nav-links" id="navLinks">
 
-                <a href="index.html">Home</a>
-                <a href="about.html">About</a>
-                <a href="books.html">Books</a>
-                <a href="gallery.html" class="active">Gallery</a>
-                <a href="contact.html">Contact</a>
+                <a href="index.html">
+                    Home
+                </a>
 
-                <a href="login.html" class="login-btn">
+                <a href="about.html">
+                    About
+                </a>
+
+                <a href="books.html">
+                    Books
+                </a>
+
+                <a href="gallery.html" class="active">
+                    Gallery
+                </a>
+
+                <a href="contact.html">
+                    Contact
+                </a>
+
+                <a
+                    href="login.html"
+                    class="login-nav"
+                    id="accountNavLink"
+                >
                     <i class="fa-regular fa-user"></i>
                     Login
                 </a>
 
             </nav>
 
-            <button class="menu-btn" id="menuBtn" aria-label="Open menu">
+
+            <button
+                type="button"
+                class="menu-toggle"
+                id="menuToggle"
+                aria-label="Open navigation menu"
+            >
                 <i class="fa-solid fa-bars"></i>
             </button>
 
@@ -68,23 +130,22 @@
 
     <main>
 
-        <!-- Page heading -->
+        <!-- Page Banner -->
         <section class="page-banner">
 
             <div class="container">
 
                 <p class="small-heading">
-                    Library Gallery
+                    SHELFSYNC GALLERY
                 </p>
 
                 <h1>
-                    A place created for learning
+                    A glimpse into the library.
                 </h1>
 
                 <p>
-                    Take a look inside our library and explore the
-                    spaces, collections and activities that make
-                    ShelfSync a better place to learn.
+                    Explore moments, books and spaces that represent the
+                    reading and learning experience behind ShelfSync.
                 </p>
 
             </div>
@@ -92,235 +153,470 @@
         </section>
 
 
-        <!-- Gallery introduction -->
-        <section class="gallery-intro section">
+        <!-- Gallery Introduction -->
+        <section class="gallery-intro-section section">
 
             <div class="container gallery-intro-grid">
 
-                <div class="gallery-intro-content">
+                <div>
 
                     <p class="small-heading">
-                        Inside Our Library
+                        EXPLORE THE SPACE
                     </p>
 
                     <h2>
-                        More than just books
+                        Where books become ideas.
                     </h2>
 
-                    <p>
-                        Our library provides comfortable reading spaces,
-                        organized book collections and a peaceful
-                        environment for study and research.
-                    </p>
-
-                    <p>
-                        Students can use the library for individual reading,
-                        academic work, group learning and educational
-                        activities.
-                    </p>
-
-                    <a href="about.html" class="primary-btn">
-                        Learn More
-                        <i class="fa-solid fa-arrow-right"></i>
-                    </a>
-
                 </div>
 
-
-                <div class="gallery-intro-image">
-
-                    <img
-                        src="../images/gallery-main.jpg"
-                        alt="Modern library interior">
-
-                    <div class="gallery-image-label">
-                        <i class="fa-solid fa-book-open-reader"></i>
-
-                        <div>
-                            <strong>Peaceful Spaces</strong>
-                            <span>Made for focused learning</span>
-                        </div>
-                    </div>
-
-                </div>
+                <p>
+                    A library is more than shelves filled with books.
+                    It is a place for learning, curiosity, discovery and
+                    sharing ideas. This gallery brings those elements
+                    together through the ShelfSync experience.
+                </p>
 
             </div>
 
         </section>
 
 
-        <!-- Gallery -->
-        <section class="gallery-section section">
+        <!-- Gallery Filters -->
+        <section class="gallery-section">
 
             <div class="container">
 
-                <div class="section-top">
+                <div class="gallery-filters">
 
-                    <div>
-
-                        <p class="small-heading">
-                            Explore
-                        </p>
-
-                        <h2>
-                            Library moments
-                        </h2>
-
-                    </div>
-
-                    <p class="section-description">
-                        A collection of spaces and activities from
-                        around our library.
-                    </p>
-
-                </div>
-
-
-                <div class="gallery-filter">
-
-                    <button class="gallery-filter-btn active" data-gallery="all">
+                    <button
+                        type="button"
+                        class="gallery-filter-btn active"
+                        data-filter="all"
+                    >
                         All
                     </button>
 
-                    <button class="gallery-filter-btn" data-gallery="library">
-                        Library
+                    <button
+                        type="button"
+                        class="gallery-filter-btn"
+                        data-filter="books"
+                    >
+                        Books
                     </button>
 
-                    <button class="gallery-filter-btn" data-gallery="reading">
+                    <button
+                        type="button"
+                        class="gallery-filter-btn"
+                        data-filter="reading"
+                    >
                         Reading
                     </button>
 
-                    <button class="gallery-filter-btn" data-gallery="students">
-                        Students
+                    <button
+                        type="button"
+                        class="gallery-filter-btn"
+                        data-filter="library"
+                    >
+                        Library
                     </button>
 
-                    <button class="gallery-filter-btn" data-gallery="events">
+                    <button
+                        type="button"
+                        class="gallery-filter-btn"
+                        data-filter="events"
+                    >
                         Events
                     </button>
 
                 </div>
 
 
+                <!-- Gallery Grid -->
                 <div class="gallery-grid">
 
-                    <figure class="gallery-item large"
-                        data-gallery="library">
 
-                        <img
-                            src="../images/gallery-bookshelves.jpg"
-                            alt="Library bookshelves">
+                    <!-- Gallery Item 1 -->
+                    <article
+                        class="gallery-item gallery-large"
+                        data-category="library"
+                    >
 
-                        <figcaption>
-                            <span>Library</span>
-                            <h3>Main Book Collection</h3>
-                        </figcaption>
+                        <div class="gallery-image">
 
-                    </figure>
+                            <img
+                                src="../images/gallery-main.jpg"
+                                alt="Main library space"
+                                loading="lazy"
+                            >
 
+                            <div class="gallery-overlay">
 
-                    <figure class="gallery-item"
-                        data-gallery="reading">
+                                <div>
 
-                        <img
-                            src="../images/gallery-reading.jpg"
-                            alt="Books in reading area">
+                                    <span>
+                                        Library
+                                    </span>
 
-                        <figcaption>
-                            <span>Reading</span>
-                            <h3>Reading Corner</h3>
-                        </figcaption>
+                                    <h3>
+                                        A Place to Discover
+                                    </h3>
 
-                    </figure>
+                                    <p>
+                                        A welcoming environment for
+                                        reading and learning.
+                                    </p>
 
+                                </div>
 
-                    <figure class="gallery-item"
-                        data-gallery="students">
+                                <button
+                                    type="button"
+                                    class="gallery-view-btn"
+                                    aria-label="View A Place to Discover"
+                                >
+                                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                                </button>
 
-                        <img
-                            src="../images/gallery-students.jpg"
-                            alt="Students studying together">
+                            </div>
 
-                        <figcaption>
-                            <span>Students</span>
-                            <h3>Group Study</h3>
-                        </figcaption>
+                        </div>
 
-                    </figure>
-
-
-                    <figure class="gallery-item"
-                        data-gallery="library">
-
-                        <img
-                            src="../images/gallery-collections.jpg"
-                            alt="Books on shelves">
-
-                        <figcaption>
-                            <span>Library</span>
-                            <h3>Organized Collections</h3>
-                        </figcaption>
-
-                    </figure>
+                    </article>
 
 
-                    <figure class="gallery-item large"
-                        data-gallery="students">
+                    <!-- Gallery Item 2 -->
+                    <article
+                        class="gallery-item"
+                        data-category="books"
+                    >
 
-                        <img
-                            src="../images/gallery-students.jpg"
-                            alt="Students studying together">
+                        <div class="gallery-image">
 
-                        <figcaption>
-                            <span>Students</span>
-                            <h3>Learning Together</h3>
-                        </figcaption>
+                            <img
+                                src="../images/gallery-books.jpg"
+                                alt="Collection of books"
+                                loading="lazy"
+                            >
 
-                    </figure>
+                            <div class="gallery-overlay">
+
+                                <div>
+
+                                    <span>
+                                        Books
+                                    </span>
+
+                                    <h3>
+                                        Explore the Collection
+                                    </h3>
+
+                                    <p>
+                                        Discover different subjects and
+                                        genres.
+                                    </p>
+
+                                </div>
+
+                                <button
+                                    type="button"
+                                    class="gallery-view-btn"
+                                    aria-label="View Explore the Collection"
+                                >
+                                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </article>
 
 
-                    <figure class="gallery-item"
-                        data-gallery="reading">
+                    <!-- Gallery Item 3 -->
+                    <article
+                        class="gallery-item"
+                        data-category="reading"
+                    >
 
-                        <img
-                            src="../images/gallery-books.jpg"
-                            alt="Open books">
+                        <div class="gallery-image">
 
-                        <figcaption>
-                            <span>Reading</span>
-                            <h3>Quiet Reading Time</h3>
-                        </figcaption>
+                            <img
+                                src="../images/gallery-reading.jpg"
+                                alt="Person reading a book"
+                                loading="lazy"
+                            >
 
-                    </figure>
+                            <div class="gallery-overlay">
+
+                                <div>
+
+                                    <span>
+                                        Reading
+                                    </span>
+
+                                    <h3>
+                                        Time to Read
+                                    </h3>
+
+                                    <p>
+                                        Every book opens a new perspective.
+                                    </p>
+
+                                </div>
+
+                                <button
+                                    type="button"
+                                    class="gallery-view-btn"
+                                    aria-label="View Time to Read"
+                                >
+                                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </article>
 
 
-                    <figure class="gallery-item"
-                        data-gallery="events">
+                    <!-- Gallery Item 4 -->
+                    <article
+                        class="gallery-item"
+                        data-category="books"
+                    >
 
-                        <img
-                            src="../images/gallery-event.jpg"
-                            alt="Library event">
+                        <div class="gallery-image">
 
-                        <figcaption>
-                            <span>Events</span>
-                            <h3>Student Activities</h3>
-                        </figcaption>
+                            <img
+                                src="../images/gallery-collections.jpg"
+                                alt="Library book collection"
+                                loading="lazy"
+                            >
 
-                    </figure>
+                            <div class="gallery-overlay">
+
+                                <div>
+
+                                    <span>
+                                        Books
+                                    </span>
+
+                                    <h3>
+                                        Curated Collections
+                                    </h3>
+
+                                    <p>
+                                        Find knowledge across multiple
+                                        categories.
+                                    </p>
+
+                                </div>
+
+                                <button
+                                    type="button"
+                                    class="gallery-view-btn"
+                                    aria-label="View Curated Collections"
+                                >
+                                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </article>
 
 
-                    <figure class="gallery-item"
-                        data-gallery="events">
+                    <!-- Gallery Item 5 -->
+                    <article
+                        class="gallery-item gallery-wide"
+                        data-category="library"
+                    >
 
-                        <img
-                            src="../images/gallery-workshop.jpg"
-                            alt="Educational workshop">
+                        <div class="gallery-image">
 
-                        <figcaption>
-                            <span>Events</span>
-                            <h3>Learning Workshop</h3>
-                        </figcaption>
+                            <img
+                                src="../images/gallery-bookshelves.jpg"
+                                alt="Library bookshelves"
+                                loading="lazy"
+                            >
 
-                    </figure>
+                            <div class="gallery-overlay">
+
+                                <div>
+
+                                    <span>
+                                        Library
+                                    </span>
+
+                                    <h3>
+                                        Endless Possibilities
+                                    </h3>
+
+                                    <p>
+                                        A shelf can be the beginning of
+                                        an entirely new journey.
+                                    </p>
+
+                                </div>
+
+                                <button
+                                    type="button"
+                                    class="gallery-view-btn"
+                                    aria-label="View Endless Possibilities"
+                                >
+                                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- Gallery Item 6 -->
+                    <article
+                        class="gallery-item"
+                        data-category="events"
+                    >
+
+                        <div class="gallery-image">
+
+                            <img
+                                src="../images/gallery-event.jpg"
+                                alt="Library event"
+                                loading="lazy"
+                            >
+
+                            <div class="gallery-overlay">
+
+                                <div>
+
+                                    <span>
+                                        Events
+                                    </span>
+
+                                    <h3>
+                                        Learning Together
+                                    </h3>
+
+                                    <p>
+                                        Libraries bring people and ideas
+                                        together.
+                                    </p>
+
+                                </div>
+
+                                <button
+                                    type="button"
+                                    class="gallery-view-btn"
+                                    aria-label="View Learning Together"
+                                >
+                                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- Gallery Item 7 -->
+                    <article
+                        class="gallery-item"
+                        data-category="events"
+                    >
+
+                        <div class="gallery-image">
+
+                            <img
+                                src="../images/gallery-workshop.jpg"
+                                alt="Library workshop"
+                                loading="lazy"
+                            >
+
+                            <div class="gallery-overlay">
+
+                                <div>
+
+                                    <span>
+                                        Events
+                                    </span>
+
+                                    <h3>
+                                        Knowledge in Action
+                                    </h3>
+
+                                    <p>
+                                        Learning becomes more meaningful
+                                        when shared.
+                                    </p>
+
+                                </div>
+
+                                <button
+                                    type="button"
+                                    class="gallery-view-btn"
+                                    aria-label="View Knowledge in Action"
+                                >
+                                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- Gallery Item 8 -->
+                    <article
+                        class="gallery-item gallery-large"
+                        data-category="reading"
+                    >
+
+                        <div class="gallery-image">
+
+                            <img
+                                src="../images/gallery-students.jpg"
+                                alt="Students studying together"
+                                loading="lazy"
+                            >
+
+                            <div class="gallery-overlay">
+
+                                <div>
+
+                                    <span>
+                                        Reading
+                                    </span>
+
+                                    <h3>
+                                        Learn Together
+                                    </h3>
+
+                                    <p>
+                                        Reading and collaboration create
+                                        better learning experiences.
+                                    </p>
+
+                                </div>
+
+                                <button
+                                    type="button"
+                                    class="gallery-view-btn"
+                                    aria-label="View Learn Together"
+                                >
+                                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </article>
 
                 </div>
 
@@ -329,93 +625,27 @@
         </section>
 
 
-        <!-- Highlights -->
-        <section class="gallery-highlights section">
+        <!-- Gallery Quote -->
+        <section class="gallery-quote-section section">
 
             <div class="container">
 
-                <div class="section-heading">
+                <div class="gallery-quote-card">
 
-                    <p class="small-heading">
-                        Library Environment
-                    </p>
+                    <div class="quote-mark">
+                        <i class="fa-solid fa-quote-left"></i>
+                    </div>
 
-                    <h2>
-                        Designed for better learning
-                    </h2>
+                    <blockquote>
+                        A library is not just a collection of books.
+                        It is a place where curiosity gets a direction.
+                    </blockquote>
+
+                    <div class="quote-line"></div>
 
                     <p>
-                        Our library combines comfort, resources and
-                        technology to create a useful learning environment.
+                        THE SHELFSYNC EXPERIENCE
                     </p>
-
-                </div>
-
-
-                <div class="highlight-grid">
-
-                    <div class="highlight-card">
-
-                        <div class="highlight-icon">
-                            <i class="fa-solid fa-book"></i>
-                        </div>
-
-                        <h3>Large Collection</h3>
-
-                        <p>
-                            Thousands of books from different academic
-                            and general interest categories.
-                        </p>
-
-                    </div>
-
-
-                    <div class="highlight-card">
-
-                        <div class="highlight-icon">
-                            <i class="fa-solid fa-chair"></i>
-                        </div>
-
-                        <h3>Reading Spaces</h3>
-
-                        <p>
-                            Comfortable areas for quiet reading,
-                            studying and research.
-                        </p>
-
-                    </div>
-
-
-                    <div class="highlight-card">
-
-                        <div class="highlight-icon">
-                            <i class="fa-solid fa-wifi"></i>
-                        </div>
-
-                        <h3>Digital Access</h3>
-
-                        <p>
-                            Digital resources and internet facilities
-                            for academic learning.
-                        </p>
-
-                    </div>
-
-
-                    <div class="highlight-card">
-
-                        <div class="highlight-icon">
-                            <i class="fa-solid fa-users"></i>
-                        </div>
-
-                        <h3>Student Activities</h3>
-
-                        <p>
-                            Learning sessions, workshops and other
-                            educational activities.
-                        </p>
-
-                    </div>
 
                 </div>
 
@@ -424,43 +654,37 @@
         </section>
 
 
-        <!-- CTA -->
-        <section class="join-section">
+        <!-- Gallery CTA -->
+        <section class="gallery-cta-section">
 
             <div class="container">
 
-                <div class="join-box">
+                <div class="gallery-cta-card">
 
-                    <div class="join-content">
+                    <div>
 
                         <p class="small-heading">
-                            Visit ShelfSync
+                            READY TO EXPLORE?
                         </p>
 
                         <h2>
-                            Explore the library yourself.
+                            Your next book is waiting.
                         </h2>
 
                         <p>
-                            Become a member and enjoy access to books,
-                            reading spaces and useful library services.
+                            Leave the gallery behind and explore the
+                            ShelfSync collection.
                         </p>
 
                     </div>
 
-
-                    <div class="join-buttons">
-
-                        <a href="login.html" class="join-btn">
-                            Become a Member
-                            <i class="fa-solid fa-arrow-right"></i>
-                        </a>
-
-                        <a href="contact.html" class="join-link">
-                            Contact Library
-                        </a>
-
-                    </div>
+                    <a
+                        href="books.html"
+                        class="primary-btn"
+                    >
+                        Browse Books
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
 
                 </div>
 
@@ -471,107 +695,206 @@
     </main>
 
 
+    <!-- Image Lightbox -->
+    <div
+        class="gallery-lightbox"
+        id="galleryLightbox"
+        aria-hidden="true"
+    >
+
+        <div
+            class="gallery-lightbox-overlay"
+            id="galleryLightboxOverlay"
+        ></div>
+
+
+        <div class="gallery-lightbox-content">
+
+            <button
+                type="button"
+                class="gallery-lightbox-close"
+                id="galleryLightboxClose"
+                aria-label="Close image"
+            >
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+
+            <img
+                id="galleryLightboxImage"
+                src=""
+                alt=""
+            >
+
+
+            <div class="gallery-lightbox-caption">
+
+                <span id="galleryLightboxCategory">
+                    Gallery
+                </span>
+
+                <h3 id="galleryLightboxTitle">
+                    Image
+                </h3>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
     <!-- Footer -->
-    <footer class="footer">
+    <footer class="site-footer">
 
-        <div class="container footer-grid">
+        <div class="container">
 
-            <div class="footer-about">
+            <div class="footer-grid">
 
-                <a href="index.html" class="logo footer-logo">
+                <div class="footer-brand">
 
-                    <div class="logo-icon">
-                        <i class="fa-solid fa-book-open"></i>
+                    <a href="index.html" class="logo footer-logo">
+
+                        <span class="logo-icon">
+                            <i class="fa-solid fa-book-open"></i>
+                        </span>
+
+                        <span>
+                            ShelfSync
+                        </span>
+
+                    </a>
+
+                    <p>
+                        A modern digital library experience designed to
+                        make discovering, borrowing and managing books easier.
+                    </p>
+
+
+                    <div class="footer-socials">
+
+                        <a
+                            href="#"
+                            aria-label="Facebook"
+                        >
+                            <i class="fa-brands fa-facebook-f"></i>
+                        </a>
+
+                        <a
+                            href="#"
+                            aria-label="Instagram"
+                        >
+                            <i class="fa-brands fa-instagram"></i>
+                        </a>
+
+                        <a
+                            href="#"
+                            aria-label="GitHub"
+                        >
+                            <i class="fa-brands fa-github"></i>
+                        </a>
+
                     </div>
 
-                    <span>ShelfSync</span>
+                </div>
 
-                </a>
 
-                <p>
-                    A modern library management system designed
-                    for students, teachers and passionate readers.
-                </p>
+                <div class="footer-column">
 
-                <div class="social-links">
+                    <h3>
+                        Explore
+                    </h3>
 
-                    <a href="#" aria-label="Facebook">
-                        <i class="fa-brands fa-facebook-f"></i>
+                    <a href="index.html">
+                        Home
                     </a>
 
-                    <a href="#" aria-label="Instagram">
-                        <i class="fa-brands fa-instagram"></i>
+                    <a href="about.html">
+                        About
                     </a>
 
-                    <a href="#" aria-label="LinkedIn">
-                        <i class="fa-brands fa-linkedin-in"></i>
+                    <a href="books.html">
+                        Books
                     </a>
+
+                    <a href="gallery.html">
+                        Gallery
+                    </a>
+
+                </div>
+
+
+                <div class="footer-column">
+
+                    <h3>
+                        Account
+                    </h3>
+
+                    <a href="login.html">
+                        Login
+                    </a>
+
+                    <a href="login.html">
+                        Register
+                    </a>
+
+                    <a href="profile.html">
+                        My Profile
+                    </a>
+
+                    <a href="contact.html">
+                        Contact
+                    </a>
+
+                </div>
+
+
+                <div class="footer-column">
+
+                    <h3>
+                        Contact
+                    </h3>
+
+                    <p>
+                        <i class="fa-solid fa-location-dot"></i>
+                        Bhubaneswar, Odisha
+                    </p>
+
+                    <p>
+                        <i class="fa-solid fa-envelope"></i>
+                        shelfsync@example.com
+                    </p>
+
+                    <p>
+                        <i class="fa-solid fa-clock"></i>
+                        Mon - Sat, 9:00 AM - 6:00 PM
+                    </p>
 
                 </div>
 
             </div>
 
 
-            <div class="footer-links">
-
-                <h3>Quick Links</h3>
-
-                <a href="index.html">Home</a>
-                <a href="about.html">About</a>
-                <a href="books.html">Books</a>
-                <a href="gallery.html">Gallery</a>
-
-            </div>
-
-
-            <div class="footer-links">
-
-                <h3>Library</h3>
-
-                <a href="books.html">Book Collection</a>
-                <a href="books.html">New Arrivals</a>
-                <a href="login.html">Membership</a>
-                <a href="contact.html">Contact</a>
-
-            </div>
-
-
-            <div class="footer-contact">
-
-                <h3>Contact</h3>
+            <div class="footer-bottom">
 
                 <p>
-                    <i class="fa-solid fa-location-dot"></i>
-                    Bhubaneswar, Odisha
+                    &copy;
+                    <span id="currentYear"></span>
+                    ShelfSync. All rights reserved.
                 </p>
 
-                <p>
-                    <i class="fa-solid fa-envelope"></i>
-                    info@shelfsync.com
-                </p>
 
-                <p>
-                    <i class="fa-solid fa-phone"></i>
-                    +91 98765 43210
-                </p>
+                <div class="footer-bottom-links">
 
-            </div>
+                    <a href="#">
+                        Privacy
+                    </a>
 
-        </div>
+                    <a href="#">
+                        Terms
+                    </a>
 
-
-        <div class="footer-bottom">
-
-            <div class="container footer-bottom-content">
-
-                <p>
-                    © <span id="currentYear"></span>
-                    ShelfSync. All Rights Reserved.
-                </p>
-
-                <p>
-                    Library Management System
-                </p>
+                </div>
 
             </div>
 
@@ -585,4 +908,3 @@
 </body>
 
 </html>
-

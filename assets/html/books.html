@@ -5,8 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="description"
-        content="Browse technology, science, literature and history books in the ShelfSync Library Management System.">
+    <meta
+        name="description"
+        content="Explore the ShelfSync digital library collection of technology, science, literature and history books."
+    >
 
     <title>Books | ShelfSync</title>
 
@@ -14,44 +16,93 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
-        rel="stylesheet">
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap"
+        rel="stylesheet"
+    >
 
     <link
         rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
 
+    <!-- ShelfSync Base Styles -->
     <link rel="stylesheet" href="../css/style.css">
+
+    <!--
+        SHELFSYNC THEME
+        ------------------------------------------------
+        Keep style.css enabled.
+
+        Choose ONE theme below.
+
+        To change the theme:
+        1. Remove the comments from the theme you want.
+        2. Keep the other themes commented.
+        3. Save the file and refresh the page.
+
+        Available themes:
+        - Ivory
+        - Dark
+        - Midnight
+        - Sage
+        ------------------------------------------------
+    -->
+
+    <!-- Ivory Theme -->
+    <!-- <link rel="stylesheet" href="../css/theme-ivory.css"> -->
+
+    <!-- Dark Theme -->
+    <!-- <link rel="stylesheet" href="../css/theme-dark.css"> -->
+
+    <!-- Midnight Theme -->
+    <!-- <link rel="stylesheet" href="../css/theme-midnight.css"> -->
+
+    <!-- Sage Theme -->
+    <!-- <link rel="stylesheet" href="../css/theme-sage.css"> -->
+
 </head>
 
 <body>
 
-    <!-- Header -->
+    <!-- Navigation -->
     <header class="main-header">
 
         <div class="container nav-container">
 
             <a href="index.html" class="logo">
-                <i class="fa-solid fa-book-open"></i>
-                Shelf<span>Sync</span>
+                <span class="logo-icon">
+                    <i class="fa-solid fa-book-open"></i>
+                </span>
+                <span>ShelfSync</span>
             </a>
 
             <nav class="nav-links" id="navLinks">
 
-                <a href="index.html">Home</a>
-                <a href="about.html">About</a>
+                <a href="index.html">
+                    Home
+                </a>
+
+                <a href="about.html">
+                    About
+                </a>
 
                 <a href="books.html" class="active">
                     Books
                 </a>
 
-                <a href="gallery.html">Gallery</a>
-                <a href="contact.html">Contact</a>
+                <a href="gallery.html">
+                    Gallery
+                </a>
 
-                <a href="login.html"
+                <a href="contact.html">
+                    Contact
+                </a>
+
+                <a
+                    href="login.html"
                     class="login-nav"
-                    id="accountNavLink">
-
+                    id="accountNavLink"
+                >
                     <i class="fa-regular fa-user"></i>
                     Login
                 </a>
@@ -59,12 +110,12 @@
             </nav>
 
             <button
+                type="button"
                 class="menu-toggle"
                 id="menuToggle"
-                aria-label="Open navigation menu">
-
+                aria-label="Open navigation menu"
+            >
                 <i class="fa-solid fa-bars"></i>
-
             </button>
 
         </div>
@@ -72,1464 +123,1545 @@
     </header>
 
 
-    <!-- Page Banner -->
-    <section class="page-banner">
+    <main>
 
-        <div class="container">
+        <!-- Page Banner -->
+        <section class="page-banner">
 
-            <p class="small-heading">
-                ShelfSync Collection
-            </p>
+            <div class="container">
 
-            <h1>Explore Our Books</h1>
+                <p class="small-heading">
+                    SHELFSYNC COLLECTION
+                </p>
 
-            <p>
-                Search the library collection, explore different
-                categories, view book information and borrow
-                available books using your ShelfSync account.
-            </p>
-
-        </div>
-
-    </section>
-
-
-    <!-- Search -->
-    <section class="library-search-section">
-
-        <div class="container">
-
-            <div class="library-search-box">
-
-                <div class="search-input-wrap">
-
-                    <i class="fa-solid fa-magnifying-glass"></i>
-
-                    <input
-                        type="text"
-                        id="librarySearch"
-                        placeholder="Search by book title or author...">
-
-                </div>
-
-                <select id="categorySelect">
-
-                    <option value="all">
-                        All Categories
-                    </option>
-
-                    <option value="technology">
-                        Technology
-                    </option>
-
-                    <option value="science">
-                        Science
-                    </option>
-
-                    <option value="literature">
-                        Literature
-                    </option>
-
-                    <option value="history">
-                        History
-                    </option>
-
-                </select>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- Books -->
-    <section class="library-section">
-
-        <div class="container">
-
-            <div class="section-heading">
-
-                <div>
-
-                    <p class="section-tag">
-                        Library Collection
-                    </p>
-
-                    <h2>Find Your Next Book</h2>
-
-                </div>
+                <h1>
+                    Explore Our Books
+                </h1>
 
                 <p>
-                    Explore our collection of technology,
-                    science, literature and history books.
+                    Discover books across technology, science, literature
+                    and history. Search the collection, view details and
+                    borrow books using your ShelfSync account.
                 </p>
 
             </div>
 
+        </section>
 
-            <!-- Filters -->
-            <div class="book-filter">
 
-                <button
-                    class="book-filter-btn active"
-                    data-category="all">
-                    All Books
-                </button>
+        <!-- Search Section -->
+        <section class="library-search-section">
 
-                <button
-                    class="book-filter-btn"
-                    data-category="technology">
-                    Technology
-                </button>
+            <div class="container">
 
-                <button
-                    class="book-filter-btn"
-                    data-category="science">
-                    Science
-                </button>
+                <div class="library-search-box">
 
-                <button
-                    class="book-filter-btn"
-                    data-category="literature">
-                    Literature
-                </button>
+                    <div class="search-input-wrap">
 
-                <button
-                    class="book-filter-btn"
-                    data-category="history">
-                    History
-                </button>
-
-            </div>
-
-
-            <div class="library-books-grid">
-
-                <!-- TECHNOLOGY 1 -->
-                <article
-                    class="library-book-card"
-                    data-title="Java: The Complete Reference"
-                    data-author="Herbert Schildt"
-                    data-category="technology"
-                    data-price="₹649"
-                    data-language="English"
-                    data-pages="1280"
-                    data-year="2021"
-                    data-isbn="Reference Edition"
-                    data-description="A detailed Java programming reference covering the Java language, object-oriented programming, collections, streams, concurrency and other important development concepts.">
-
-                    <div class="library-book-cover technology-cover">
-                        <i class="fa-brands fa-java"></i>
-                        <span>Technology</span>
-                    </div>
-
-                    <div class="library-book-info">
-
-                        <span class="availability available">
-                            Available
-                        </span>
-
-                        <span class="book-category">
-                            Technology
-                        </span>
-
-                        <h3>Java: The Complete Reference</h3>
-
-                        <p class="library-author">
-                            Herbert Schildt
-                        </p>
-
-                        <p class="book-description">
-                            A comprehensive guide to Java
-                            programming and object-oriented
-                            development.
-                        </p>
-
-                        <div class="book-price-row">
-                            <span class="book-price-label">
-                                Book Price
-                            </span>
-
-                            <strong class="book-price">
-                                ₹649
-                            </strong>
-                        </div>
-
-                        <div class="book-actions">
-
-                            <button
-                                type="button"
-                                class="book-details-btn">
-                                <i class="fa-solid fa-circle-info"></i>
-                                View Details
-                            </button>
-
-                            <button
-                                type="button"
-                                class="borrow-btn">
-                                <i class="fa-solid fa-book-open-reader"></i>
-                                Borrow Book
-                            </button>
-
-                        </div>
-
-                    </div>
-
-                </article>
-
-
-                <!-- TECHNOLOGY 2 -->
-                <article
-                    class="library-book-card"
-                    data-title="Web Development Basics"
-                    data-author="David White"
-                    data-category="technology"
-                    data-price="₹499"
-                    data-language="English"
-                    data-pages="420"
-                    data-year="2022"
-                    data-isbn="ShelfSync Edition"
-                    data-description="A beginner-friendly introduction to HTML, CSS and JavaScript with a focus on creating responsive and interactive websites.">
-
-                    <div class="library-book-cover technology-cover">
-                        <i class="fa-solid fa-code"></i>
-                        <span>Technology</span>
-                    </div>
-
-                    <div class="library-book-info">
-
-                        <span class="availability available">
-                            Available
-                        </span>
-
-                        <span class="book-category">
-                            Technology
-                        </span>
-
-                        <h3>Web Development Basics</h3>
-
-                        <p class="library-author">
-                            David White
-                        </p>
-
-                        <p class="book-description">
-                            Learn HTML, CSS and JavaScript
-                            fundamentals for modern websites.
-                        </p>
-
-                        <div class="book-price-row">
-                            <span class="book-price-label">
-                                Book Price
-                            </span>
-
-                            <strong class="book-price">
-                                ₹499
-                            </strong>
-                        </div>
-
-                        <div class="book-actions">
-
-                            <button
-                                type="button"
-                                class="book-details-btn">
-                                <i class="fa-solid fa-circle-info"></i>
-                                View Details
-                            </button>
-
-                            <button
-                                type="button"
-                                class="borrow-btn">
-                                <i class="fa-solid fa-book-open-reader"></i>
-                                Borrow Book
-                            </button>
-
-                        </div>
-
-                    </div>
-
-                </article>
-
-
-                <!-- TECHNOLOGY 3 -->
-                <article
-                    class="library-book-card"
-                    data-title="Python Programming"
-                    data-author="John Zelle"
-                    data-category="technology"
-                    data-price="₹599"
-                    data-language="English"
-                    data-pages="552"
-                    data-year="2016"
-                    data-isbn="Reference Edition"
-                    data-description="An introduction to computer science and programming using Python, with explanations of problem solving, functions, objects and program design.">
-
-                    <div class="library-book-cover technology-cover">
-                        <i class="fa-brands fa-python"></i>
-                        <span>Technology</span>
-                    </div>
-
-                    <div class="library-book-info">
-
-                        <span class="availability available">
-                            Available
-                        </span>
-
-                        <span class="book-category">
-                            Technology
-                        </span>
-
-                        <h3>Python Programming</h3>
-
-                        <p class="library-author">
-                            John Zelle
-                        </p>
-
-                        <p class="book-description">
-                            Learn programming and problem-solving
-                            concepts using Python.
-                        </p>
-
-                        <div class="book-price-row">
-                            <span class="book-price-label">
-                                Book Price
-                            </span>
-
-                            <strong class="book-price">
-                                ₹599
-                            </strong>
-                        </div>
-
-                        <div class="book-actions">
-
-                            <button
-                                type="button"
-                                class="book-details-btn">
-                                <i class="fa-solid fa-circle-info"></i>
-                                View Details
-                            </button>
-
-                            <button
-                                type="button"
-                                class="borrow-btn">
-                                <i class="fa-solid fa-book-open-reader"></i>
-                                Borrow Book
-                            </button>
-
-                        </div>
-
-                    </div>
-
-                </article>
-
-
-                <!-- TECHNOLOGY 4 -->
-                <article
-                    class="library-book-card"
-                    data-title="Data Structures and Algorithms"
-                    data-author="Michael T. Goodrich"
-                    data-category="technology"
-                    data-price="₹749"
-                    data-language="English"
-                    data-pages="736"
-                    data-year="2014"
-                    data-isbn="Reference Edition"
-                    data-description="A study of fundamental data structures and algorithms including arrays, lists, stacks, queues, trees, graphs, searching and sorting techniques.">
-
-                    <div class="library-book-cover technology-cover">
-                        <i class="fa-solid fa-diagram-project"></i>
-                        <span>Technology</span>
-                    </div>
-
-                    <div class="library-book-info">
-
-                        <span class="availability available">
-                            Available
-                        </span>
-
-                        <span class="book-category">
-                            Technology
-                        </span>
-
-                        <h3>Data Structures & Algorithms</h3>
-
-                        <p class="library-author">
-                            Michael T. Goodrich
-                        </p>
-
-                        <p class="book-description">
-                            Explore important data structures,
-                            algorithms and problem-solving methods.
-                        </p>
-
-                        <div class="book-price-row">
-                            <span class="book-price-label">
-                                Book Price
-                            </span>
-
-                            <strong class="book-price">
-                                ₹749
-                            </strong>
-                        </div>
-
-                        <div class="book-actions">
-
-                            <button
-                                type="button"
-                                class="book-details-btn">
-                                <i class="fa-solid fa-circle-info"></i>
-                                View Details
-                            </button>
-
-                            <button
-                                type="button"
-                                class="borrow-btn">
-                                <i class="fa-solid fa-book-open-reader"></i>
-                                Borrow Book
-                            </button>
-
-                        </div>
-
-                    </div>
-
-                </article>
-
-
-                <!-- SCIENCE 1 -->
-                <article
-                    class="library-book-card"
-                    data-title="The Universe"
-                    data-author="Robert Clark"
-                    data-category="science"
-                    data-price="₹799"
-                    data-language="English"
-                    data-pages="512"
-                    data-year="2020"
-                    data-isbn="ShelfSync Edition"
-                    data-description="An accessible exploration of astronomy, galaxies, stars, planets and scientific ideas used to understand the universe.">
-
-                    <div class="library-book-cover science-cover">
-                        <i class="fa-solid fa-earth-americas"></i>
-                        <span>Science</span>
-                    </div>
-
-                    <div class="library-book-info">
-
-                        <span class="availability available">
-                            Available
-                        </span>
-
-                        <span class="book-category">
-                            Science
-                        </span>
-
-                        <h3>The Universe</h3>
-
-                        <p class="library-author">
-                            Robert Clark
-                        </p>
-
-                        <p class="book-description">
-                            Explore stars, planets, galaxies
-                            and the science of space.
-                        </p>
-
-                        <div class="book-price-row">
-                            <span class="book-price-label">
-                                Book Price
-                            </span>
-
-                            <strong class="book-price">
-                                ₹799
-                            </strong>
-                        </div>
-
-                        <div class="book-actions">
-
-                            <button
-                                type="button"
-                                class="book-details-btn">
-                                <i class="fa-solid fa-circle-info"></i>
-                                View Details
-                            </button>
-
-                            <button
-                                type="button"
-                                class="borrow-btn">
-                                <i class="fa-solid fa-book-open-reader"></i>
-                                Borrow Book
-                            </button>
-
-                        </div>
-
-                    </div>
-
-                </article>
-
-
-                <!-- SCIENCE 2 -->
-                <article
-                    class="library-book-card"
-                    data-title="Understanding Biology"
-                    data-author="Sarah Green"
-                    data-category="science"
-                    data-price="₹579"
-                    data-language="English"
-                    data-pages="486"
-                    data-year="2021"
-                    data-isbn="ShelfSync Edition"
-                    data-description="An introductory biology book explaining cells, genetics, evolution, ecosystems and other fundamental concepts of life science.">
-
-                    <div class="library-book-cover science-cover">
-                        <i class="fa-solid fa-dna"></i>
-                        <span>Science</span>
-                    </div>
-
-                    <div class="library-book-info">
-
-                        <span class="availability available">
-                            Available
-                        </span>
-
-                        <span class="book-category">
-                            Science
-                        </span>
-
-                        <h3>Understanding Biology</h3>
-
-                        <p class="library-author">
-                            Sarah Green
-                        </p>
-
-                        <p class="book-description">
-                            Discover cells, genetics, ecosystems
-                            and the principles of living organisms.
-                        </p>
-
-                        <div class="book-price-row">
-                            <span class="book-price-label">
-                                Book Price
-                            </span>
-
-                            <strong class="book-price">
-                                ₹579
-                            </strong>
-                        </div>
-
-                        <div class="book-actions">
-
-                            <button
-                                type="button"
-                                class="book-details-btn">
-                                <i class="fa-solid fa-circle-info"></i>
-                                View Details
-                            </button>
-
-                            <button
-                                type="button"
-                                class="borrow-btn">
-                                <i class="fa-solid fa-book-open-reader"></i>
-                                Borrow Book
-                            </button>
-
-                        </div>
-
-                    </div>
-
-                </article>
-
-
-                <!-- SCIENCE 3 -->
-                <article
-                    class="library-book-card"
-                    data-title="A Brief History of Time"
-                    data-author="Stephen Hawking"
-                    data-category="science"
-                    data-price="₹399"
-                    data-language="English"
-                    data-pages="256"
-                    data-year="1988"
-                    data-isbn="Reference Edition"
-                    data-description="Stephen Hawking introduces major ideas about cosmology, black holes, time, space and the origin and structure of the universe.">
-
-                    <div class="library-book-cover science-cover">
-                        <i class="fa-solid fa-user-astronaut"></i>
-                        <span>Science</span>
-                    </div>
-
-                    <div class="library-book-info">
-
-                        <span class="availability available">
-                            Available
-                        </span>
-
-                        <span class="book-category">
-                            Science
-                        </span>
-
-                        <h3>A Brief History of Time</h3>
-
-                        <p class="library-author">
-                            Stephen Hawking
-                        </p>
-
-                        <p class="book-description">
-                            Explore space, time, black holes
-                            and some of cosmology's biggest ideas.
-                        </p>
-
-                        <div class="book-price-row">
-                            <span class="book-price-label">
-                                Book Price
-                            </span>
-
-                            <strong class="book-price">
-                                ₹399
-                            </strong>
-                        </div>
-
-                        <div class="book-actions">
-
-                            <button
-                                type="button"
-                                class="book-details-btn">
-                                <i class="fa-solid fa-circle-info"></i>
-                                View Details
-                            </button>
-
-                            <button
-                                type="button"
-                                class="borrow-btn">
-                                <i class="fa-solid fa-book-open-reader"></i>
-                                Borrow Book
-                            </button>
-
-                        </div>
-
-                    </div>
-
-                </article>
-
-
-                <!-- SCIENCE 4 -->
-                <article
-                    class="library-book-card"
-                    data-title="The Selfish Gene"
-                    data-author="Richard Dawkins"
-                    data-category="science"
-                    data-price="₹449"
-                    data-language="English"
-                    data-pages="496"
-                    data-year="1976"
-                    data-isbn="Reference Edition"
-                    data-description="A well-known work of evolutionary biology that discusses natural selection and evolution from a gene-centered perspective.">
-
-                    <div class="library-book-cover science-cover">
-                        <i class="fa-solid fa-microscope"></i>
-                        <span>Science</span>
-                    </div>
-
-                    <div class="library-book-info">
-
-                        <span class="availability available">
-                            Available
-                        </span>
-
-                        <span class="book-category">
-                            Science
-                        </span>
-
-                        <h3>The Selfish Gene</h3>
-
-                        <p class="library-author">
-                            Richard Dawkins
-                        </p>
-
-                        <p class="book-description">
-                            An influential introduction to
-                            evolution and gene-centered selection.
-                        </p>
-
-                        <div class="book-price-row">
-                            <span class="book-price-label">
-                                Book Price
-                            </span>
-
-                            <strong class="book-price">
-                                ₹449
-                            </strong>
-                        </div>
-
-                        <div class="book-actions">
-
-                            <button
-                                type="button"
-                                class="book-details-btn">
-                                <i class="fa-solid fa-circle-info"></i>
-                                View Details
-                            </button>
-
-                            <button
-                                type="button"
-                                class="borrow-btn">
-                                <i class="fa-solid fa-book-open-reader"></i>
-                                Borrow Book
-                            </button>
-
-                        </div>
-
-                    </div>
-
-                </article>
-
-
-                <!-- LITERATURE 1 -->
-                <article
-                    class="library-book-card"
-                    data-title="Pride and Prejudice"
-                    data-author="Jane Austen"
-                    data-category="literature"
-                    data-price="₹299"
-                    data-language="English"
-                    data-pages="432"
-                    data-year="1813"
-                    data-isbn="Classic Edition"
-                    data-description="Jane Austen's classic novel follows Elizabeth Bennet while exploring relationships, family, social expectations and personal growth.">
-
-                    <div class="library-book-cover literature-cover">
-                        <i class="fa-solid fa-feather-pointed"></i>
-                        <span>Literature</span>
-                    </div>
-
-                    <div class="library-book-info">
-
-                        <span class="availability available">
-                            Available
-                        </span>
-
-                        <span class="book-category">
-                            Literature
-                        </span>
-
-                        <h3>Pride and Prejudice</h3>
-
-                        <p class="library-author">
-                            Jane Austen
-                        </p>
-
-                        <p class="book-description">
-                            A classic story about relationships,
-                            society, family and personal growth.
-                        </p>
-
-                        <div class="book-price-row">
-                            <span class="book-price-label">
-                                Book Price
-                            </span>
-
-                            <strong class="book-price">
-                                ₹299
-                            </strong>
-                        </div>
-
-                        <div class="book-actions">
-
-                            <button
-                                type="button"
-                                class="book-details-btn">
-                                <i class="fa-solid fa-circle-info"></i>
-                                View Details
-                            </button>
-
-                            <button
-                                type="button"
-                                class="borrow-btn">
-                                <i class="fa-solid fa-book-open-reader"></i>
-                                Borrow Book
-                            </button>
-
-                        </div>
-
-                    </div>
-
-                </article>
-
-
-                <!-- LITERATURE 2 -->
-                <article
-                    class="library-book-card"
-                    data-title="The Great Gatsby"
-                    data-author="F. Scott Fitzgerald"
-                    data-category="literature"
-                    data-price="₹349"
-                    data-language="English"
-                    data-pages="208"
-                    data-year="1925"
-                    data-isbn="Classic Edition"
-                    data-description="A famous American novel following Jay Gatsby and exploring ambition, wealth, relationships and the idea of the American Dream.">
-
-                    <div class="library-book-cover literature-cover">
-                        <i class="fa-solid fa-book"></i>
-                        <span>Literature</span>
-                    </div>
-
-                    <div class="library-book-info">
-
-                        <span class="availability available">
-                            Available
-                        </span>
-
-                        <span class="book-category">
-                            Literature
-                        </span>
-
-                        <h3>The Great Gatsby</h3>
-
-                        <p class="library-author">
-                            F. Scott Fitzgerald
-                        </p>
-
-                        <p class="book-description">
-                            A celebrated novel about wealth,
-                            ambition and the American Dream.
-                        </p>
-
-                        <div class="book-price-row">
-                            <span class="book-price-label">
-                                Book Price
-                            </span>
-
-                            <strong class="book-price">
-                                ₹349
-                            </strong>
-                        </div>
-
-                        <div class="book-actions">
-
-                            <button
-                                type="button"
-                                class="book-details-btn">
-                                <i class="fa-solid fa-circle-info"></i>
-                                View Details
-                            </button>
-
-                            <button
-                                type="button"
-                                class="borrow-btn">
-                                <i class="fa-solid fa-book-open-reader"></i>
-                                Borrow Book
-                            </button>
-
-                        </div>
-
-                    </div>
-
-                </article>
-
-
-                <!-- LITERATURE 3 -->
-                <article
-                    class="library-book-card"
-                    data-title="The Alchemist"
-                    data-author="Paulo Coelho"
-                    data-category="literature"
-                    data-price="₹299"
-                    data-language="English"
-                    data-pages="208"
-                    data-year="1988"
-                    data-isbn="Reference Edition"
-                    data-description="A philosophical novel about Santiago, a young shepherd who follows a dream and begins a journey of discovery, purpose and personal growth.">
-
-                    <div class="library-book-cover literature-cover">
-                        <i class="fa-solid fa-compass"></i>
-                        <span>Literature</span>
-                    </div>
-
-                    <div class="library-book-info">
-
-                        <span class="availability available">
-                            Available
-                        </span>
-
-                        <span class="book-category">
-                            Literature
-                        </span>
-
-                        <h3>The Alchemist</h3>
-
-                        <p class="library-author">
-                            Paulo Coelho
-                        </p>
-
-                        <p class="book-description">
-                            A journey about dreams,
-                            purpose and personal discovery.
-                        </p>
-
-                        <div class="book-price-row">
-                            <span class="book-price-label">
-                                Book Price
-                            </span>
-
-                            <strong class="book-price">
-                                ₹299
-                            </strong>
-                        </div>
-
-                        <div class="book-actions">
-
-                            <button
-                                type="button"
-                                class="book-details-btn">
-                                <i class="fa-solid fa-circle-info"></i>
-                                View Details
-                            </button>
-
-                            <button
-                                type="button"
-                                class="borrow-btn">
-                                <i class="fa-solid fa-book-open-reader"></i>
-                                Borrow Book
-                            </button>
-
-                        </div>
-
-                    </div>
-
-                </article>
-
-
-                <!-- LITERATURE 4 -->
-                <article
-                    class="library-book-card"
-                    data-title="1984"
-                    data-author="George Orwell"
-                    data-category="literature"
-                    data-price="₹249"
-                    data-language="English"
-                    data-pages="328"
-                    data-year="1949"
-                    data-isbn="Classic Edition"
-                    data-description="George Orwell's dystopian novel explores surveillance, propaganda, authoritarian government and the struggle for individual freedom.">
-
-                    <div class="library-book-cover literature-cover">
-                        <i class="fa-solid fa-eye"></i>
-                        <span>Literature</span>
-                    </div>
-
-                    <div class="library-book-info">
-
-                        <span class="availability available">
-                            Available
-                        </span>
-
-                        <span class="book-category">
-                            Literature
-                        </span>
-
-                        <h3>1984</h3>
-
-                        <p class="library-author">
-                            George Orwell
-                        </p>
-
-                        <p class="book-description">
-                            A dystopian novel about surveillance,
-                            propaganda and individual freedom.
-                        </p>
-
-                        <div class="book-price-row">
-                            <span class="book-price-label">
-                                Book Price
-                            </span>
-
-                            <strong class="book-price">
-                                ₹249
-                            </strong>
-                        </div>
-
-                        <div class="book-actions">
-
-                            <button
-                                type="button"
-                                class="book-details-btn">
-                                <i class="fa-solid fa-circle-info"></i>
-                                View Details
-                            </button>
-
-                            <button
-                                type="button"
-                                class="borrow-btn">
-                                <i class="fa-solid fa-book-open-reader"></i>
-                                Borrow Book
-                            </button>
-
-                        </div>
-
-                    </div>
-
-                </article>
-
-
-                <!-- HISTORY 1 -->
-                <article
-                    class="library-book-card"
-                    data-title="World History"
-                    data-author="Michael Brown"
-                    data-category="history"
-                    data-price="₹699"
-                    data-language="English"
-                    data-pages="640"
-                    data-year="2019"
-                    data-isbn="ShelfSync Edition"
-                    data-description="A broad introduction to major civilizations, historical events and social changes that influenced the development of the modern world.">
-
-                    <div class="library-book-cover history-cover">
-                        <i class="fa-solid fa-landmark"></i>
-                        <span>History</span>
-                    </div>
-
-                    <div class="library-book-info">
-
-                        <span class="availability available">
-                            Available
-                        </span>
-
-                        <span class="book-category">
-                            History
-                        </span>
-
-                        <h3>World History</h3>
-
-                        <p class="library-author">
-                            Michael Brown
-                        </p>
-
-                        <p class="book-description">
-                            Study major civilizations,
-                            historical events and social change.
-                        </p>
-
-                        <div class="book-price-row">
-                            <span class="book-price-label">
-                                Book Price
-                            </span>
-
-                            <strong class="book-price">
-                                ₹699
-                            </strong>
-                        </div>
-
-                        <div class="book-actions">
-
-                            <button
-                                type="button"
-                                class="book-details-btn">
-                                <i class="fa-solid fa-circle-info"></i>
-                                View Details
-                            </button>
-
-                            <button
-                                type="button"
-                                class="borrow-btn">
-                                <i class="fa-solid fa-book-open-reader"></i>
-                                Borrow Book
-                            </button>
-
-                        </div>
-
-                    </div>
-
-                </article>
-
-
-                <!-- HISTORY 2 -->
-                <article
-                    class="library-book-card"
-                    data-title="Ancient Civilizations"
-                    data-author="Emily Parker"
-                    data-category="history"
-                    data-price="₹629"
-                    data-language="English"
-                    data-pages="528"
-                    data-year="2020"
-                    data-isbn="ShelfSync Edition"
-                    data-description="An introduction to ancient societies including Egypt, Greece and Rome and the influence of early civilizations on the modern world.">
-
-                    <div class="library-book-cover history-cover">
-                        <i class="fa-solid fa-monument"></i>
-                        <span>History</span>
-                    </div>
-
-                    <div class="library-book-info">
-
-                        <span class="availability available">
-                            Available
-                        </span>
-
-                        <span class="book-category">
-                            History
-                        </span>
-
-                        <h3>Ancient Civilizations</h3>
-
-                        <p class="library-author">
-                            Emily Parker
-                        </p>
-
-                        <p class="book-description">
-                            Explore ancient societies and
-                            their influence on the modern world.
-                        </p>
-
-                        <div class="book-price-row">
-                            <span class="book-price-label">
-                                Book Price
-                            </span>
-
-                            <strong class="book-price">
-                                ₹629
-                            </strong>
-                        </div>
-
-                        <div class="book-actions">
-
-                            <button
-                                type="button"
-                                class="book-details-btn">
-                                <i class="fa-solid fa-circle-info"></i>
-                                View Details
-                            </button>
-
-                            <button
-                                type="button"
-                                class="borrow-btn">
-                                <i class="fa-solid fa-book-open-reader"></i>
-                                Borrow Book
-                            </button>
-
-                        </div>
-
-                    </div>
-
-                </article>
-
-
-                <!-- HISTORY 3 -->
-                <article
-                    class="library-book-card"
-                    data-title="Sapiens"
-                    data-author="Yuval Noah Harari"
-                    data-category="history"
-                    data-price="₹499"
-                    data-language="English"
-                    data-pages="512"
-                    data-year="2011"
-                    data-isbn="Reference Edition"
-                    data-description="A broad account of human history examining the development of Homo sapiens, societies, agriculture, empires, science and the modern world.">
-
-                    <div class="library-book-cover history-cover">
-                        <i class="fa-solid fa-people-group"></i>
-                        <span>History</span>
-                    </div>
-
-                    <div class="library-book-info">
-
-                        <span class="availability available">
-                            Available
-                        </span>
-
-                        <span class="book-category">
-                            History
-                        </span>
-
-                        <h3>Sapiens</h3>
-
-                        <p class="library-author">
-                            Yuval Noah Harari
-                        </p>
-
-                        <p class="book-description">
-                            Explore major developments in
-                            human history and civilization.
-                        </p>
-
-                        <div class="book-price-row">
-                            <span class="book-price-label">
-                                Book Price
-                            </span>
-
-                            <strong class="book-price">
-                                ₹499
-                            </strong>
-                        </div>
-
-                        <div class="book-actions">
-
-                            <button
-                                type="button"
-                                class="book-details-btn">
-                                <i class="fa-solid fa-circle-info"></i>
-                                View Details
-                            </button>
-
-                            <button
-                                type="button"
-                                class="borrow-btn">
-                                <i class="fa-solid fa-book-open-reader"></i>
-                                Borrow Book
-                            </button>
-
-                        </div>
-
-                    </div>
-
-                </article>
-
-
-                <!-- HISTORY 4 -->
-                <article
-                    class="library-book-card"
-                    data-title="The Silk Roads"
-                    data-author="Peter Frankopan"
-                    data-category="history"
-                    data-price="₹599"
-                    data-language="English"
-                    data-pages="656"
-                    data-year="2015"
-                    data-isbn="Reference Edition"
-                    data-description="A history examining the trade routes connecting Asia, Europe and the Middle East and their importance in the movement of goods, cultures and ideas.">
-
-                    <div class="library-book-cover history-cover">
-                        <i class="fa-solid fa-route"></i>
-                        <span>History</span>
-                    </div>
-
-                    <div class="library-book-info">
-
-                        <span class="availability available">
-                            Available
-                        </span>
-
-                        <span class="book-category">
-                            History
-                        </span>
-
-                        <h3>The Silk Roads</h3>
-
-                        <p class="library-author">
-                            Peter Frankopan
-                        </p>
-
-                        <p class="book-description">
-                            Discover the historic routes that
-                            connected civilizations and cultures.
-                        </p>
-
-                        <div class="book-price-row">
-                            <span class="book-price-label">
-                                Book Price
-                            </span>
-
-                            <strong class="book-price">
-                                ₹599
-                            </strong>
-                        </div>
-
-                        <div class="book-actions">
-
-                            <button
-                                type="button"
-                                class="book-details-btn">
-                                <i class="fa-solid fa-circle-info"></i>
-                                View Details
-                            </button>
-
-                            <button
-                                type="button"
-                                class="borrow-btn">
-                                <i class="fa-solid fa-book-open-reader"></i>
-                                Borrow Book
-                            </button>
-
-                        </div>
-
-                    </div>
-
-                </article>
-
-            </div>
-
-
-            <!-- No Search Result -->
-            <div class="no-books" id="noBooks">
-
-                <i class="fa-solid fa-book-open"></i>
-
-                <h3>No books found</h3>
-
-                <p>
-                    Try another title, author or category.
-                </p>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- Services -->
-    <section class="services-section">
-
-        <div class="container">
-
-            <div class="section-heading center-heading">
-
-                <p class="section-tag">
-                    Library Services
-                </p>
-
-                <h2>More Than Just Books</h2>
-
-                <p>
-                    ShelfSync helps students discover and
-                    manage library resources more easily.
-                </p>
-
-            </div>
-
-
-            <div class="services-grid">
-
-                <div class="library-service-card">
-
-                    <div>
                         <i class="fa-solid fa-magnifying-glass"></i>
+
+                        <input
+                            type="text"
+                            id="librarySearch"
+                            placeholder="Search by book title or author..."
+                            autocomplete="off"
+                        >
+
                     </div>
 
-                    <h3>Search Books</h3>
+                    <select id="categorySelect">
+
+                        <option value="all">
+                            All Categories
+                        </option>
+
+                        <option value="technology">
+                            Technology
+                        </option>
+
+                        <option value="science">
+                            Science
+                        </option>
+
+                        <option value="literature">
+                            Literature
+                        </option>
+
+                        <option value="history">
+                            History
+                        </option>
+
+                    </select>
+
+                    <button
+                        type="button"
+                        id="librarySearchBtn"
+                        class="primary-btn"
+                    >
+                        <i class="fa-solid fa-search"></i>
+                        Search
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Books Collection -->
+        <section class="library-section section">
+
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <div>
+
+                        <p class="small-heading">
+                            LIBRARY COLLECTION
+                        </p>
+
+                        <h2>
+                            Find Your Next Book
+                        </h2>
+
+                    </div>
 
                     <p>
-                        Search books by title, author
-                        or category.
+                        Browse our growing collection and find something
+                        useful, interesting or simply worth reading.
                     </p>
 
                 </div>
 
 
-                <div class="library-service-card">
+                <!-- Category Filters -->
+                <div class="book-filter">
 
-                    <div>
-                        <i class="fa-solid fa-book-open-reader"></i>
-                    </div>
+                    <button
+                        type="button"
+                        class="book-filter-btn active"
+                        data-category="all"
+                    >
+                        All Books
+                    </button>
 
-                    <h3>Borrow Books</h3>
+                    <button
+                        type="button"
+                        class="book-filter-btn"
+                        data-category="technology"
+                    >
+                        Technology
+                    </button>
 
-                    <p>
-                        Logged-in members can borrow
-                        available books for 14 days.
-                    </p>
+                    <button
+                        type="button"
+                        class="book-filter-btn"
+                        data-category="science"
+                    >
+                        Science
+                    </button>
+
+                    <button
+                        type="button"
+                        class="book-filter-btn"
+                        data-category="literature"
+                    >
+                        Literature
+                    </button>
+
+                    <button
+                        type="button"
+                        class="book-filter-btn"
+                        data-category="history"
+                    >
+                        History
+                    </button>
 
                 </div>
 
 
-                <div class="library-service-card">
+                <!-- Book Grid -->
+                <div class="library-books-grid">
 
-                    <div>
-                        <i class="fa-solid fa-clock"></i>
-                    </div>
 
-                    <h3>Track Due Dates</h3>
+                    <!-- 1. Java -->
+                    <article
+                        class="library-book-card"
+                        data-title="Java: The Complete Reference"
+                        data-author="Herbert Schildt"
+                        data-category="technology"
+                        data-price="₹649"
+                        data-language="English"
+                        data-pages="1280"
+                        data-year="2021"
+                        data-isbn="Reference Edition"
+                        data-description="A detailed Java programming reference covering the Java language, object-oriented programming, collections, streams, concurrency and other important development concepts."
+                    >
 
-                    <p>
-                        View borrowed dates, due dates
-                        and remaining time.
-                    </p>
+                        <div class="library-book-cover technology-cover">
+                            <i class="fa-brands fa-java"></i>
+                            <span>Technology</span>
+                        </div>
+
+                        <div class="library-book-info">
+
+                            <span class="availability available">
+                                Available
+                            </span>
+
+                            <span class="book-category">
+                                Technology
+                            </span>
+
+                            <h3>
+                                Java: The Complete Reference
+                            </h3>
+
+                            <p class="library-author">
+                                Herbert Schildt
+                            </p>
+
+                            <p class="book-description">
+                                A comprehensive reference for Java programming
+                                and object-oriented development.
+                            </p>
+
+                            <div class="book-price-row">
+                                <span class="book-price-label">
+                                    Book Price
+                                </span>
+
+                                <strong class="book-price">
+                                    ₹649
+                                </strong>
+                            </div>
+
+                            <div class="book-actions">
+
+                                <button
+                                    type="button"
+                                    class="book-details-btn"
+                                >
+                                    <i class="fa-solid fa-circle-info"></i>
+                                    View Details
+                                </button>
+
+                                <button
+                                    type="button"
+                                    class="borrow-btn"
+                                >
+                                    <i class="fa-solid fa-book-open-reader"></i>
+                                    Borrow Book
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- 2. Web Development -->
+                    <article
+                        class="library-book-card"
+                        data-title="Web Development Basics"
+                        data-author="David White"
+                        data-category="technology"
+                        data-price="₹499"
+                        data-language="English"
+                        data-pages="420"
+                        data-year="2022"
+                        data-isbn="ShelfSync Edition"
+                        data-description="A beginner-friendly introduction to HTML, CSS and JavaScript with a focus on creating responsive and interactive websites."
+                    >
+
+                        <div class="library-book-cover technology-cover">
+                            <i class="fa-solid fa-code"></i>
+                            <span>Technology</span>
+                        </div>
+
+                        <div class="library-book-info">
+
+                            <span class="availability available">
+                                Available
+                            </span>
+
+                            <span class="book-category">
+                                Technology
+                            </span>
+
+                            <h3>
+                                Web Development Basics
+                            </h3>
+
+                            <p class="library-author">
+                                David White
+                            </p>
+
+                            <p class="book-description">
+                                A beginner-friendly introduction to HTML,
+                                CSS and JavaScript.
+                            </p>
+
+                            <div class="book-price-row">
+                                <span class="book-price-label">
+                                    Book Price
+                                </span>
+
+                                <strong class="book-price">
+                                    ₹499
+                                </strong>
+                            </div>
+
+                            <div class="book-actions">
+
+                                <button
+                                    type="button"
+                                    class="book-details-btn"
+                                >
+                                    <i class="fa-solid fa-circle-info"></i>
+                                    View Details
+                                </button>
+
+                                <button
+                                    type="button"
+                                    class="borrow-btn"
+                                >
+                                    <i class="fa-solid fa-book-open-reader"></i>
+                                    Borrow Book
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- 3. Python -->
+                    <article
+                        class="library-book-card"
+                        data-title="Python Programming"
+                        data-author="John Zelle"
+                        data-category="technology"
+                        data-price="₹599"
+                        data-language="English"
+                        data-pages="552"
+                        data-year="2016"
+                        data-isbn="Reference Edition"
+                        data-description="An introduction to computer science and programming using Python, with explanations of problem solving, functions, objects and program design."
+                    >
+
+                        <div class="library-book-cover technology-cover">
+                            <i class="fa-brands fa-python"></i>
+                            <span>Technology</span>
+                        </div>
+
+                        <div class="library-book-info">
+
+                            <span class="availability available">
+                                Available
+                            </span>
+
+                            <span class="book-category">
+                                Technology
+                            </span>
+
+                            <h3>
+                                Python Programming
+                            </h3>
+
+                            <p class="library-author">
+                                John Zelle
+                            </p>
+
+                            <p class="book-description">
+                                Learn programming concepts and problem solving
+                                using Python.
+                            </p>
+
+                            <div class="book-price-row">
+                                <span class="book-price-label">
+                                    Book Price
+                                </span>
+
+                                <strong class="book-price">
+                                    ₹599
+                                </strong>
+                            </div>
+
+                            <div class="book-actions">
+
+                                <button
+                                    type="button"
+                                    class="book-details-btn"
+                                >
+                                    <i class="fa-solid fa-circle-info"></i>
+                                    View Details
+                                </button>
+
+                                <button
+                                    type="button"
+                                    class="borrow-btn"
+                                >
+                                    <i class="fa-solid fa-book-open-reader"></i>
+                                    Borrow Book
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- 4. Data Structures -->
+                    <article
+                        class="library-book-card"
+                        data-title="Data Structures and Algorithms"
+                        data-author="Michael T. Goodrich"
+                        data-category="technology"
+                        data-price="₹749"
+                        data-language="English"
+                        data-pages="736"
+                        data-year="2014"
+                        data-isbn="Reference Edition"
+                        data-description="A study of fundamental data structures and algorithms including arrays, lists, stacks, queues, trees, graphs, searching and sorting techniques."
+                    >
+
+                        <div class="library-book-cover technology-cover">
+                            <i class="fa-solid fa-diagram-project"></i>
+                            <span>Technology</span>
+                        </div>
+
+                        <div class="library-book-info">
+
+                            <span class="availability available">
+                                Available
+                            </span>
+
+                            <span class="book-category">
+                                Technology
+                            </span>
+
+                            <h3>
+                                Data Structures &amp; Algorithms
+                            </h3>
+
+                            <p class="library-author">
+                                Michael T. Goodrich
+                            </p>
+
+                            <p class="book-description">
+                                Fundamental data structures, algorithms,
+                                searching and sorting techniques.
+                            </p>
+
+                            <div class="book-price-row">
+                                <span class="book-price-label">
+                                    Book Price
+                                </span>
+
+                                <strong class="book-price">
+                                    ₹749
+                                </strong>
+                            </div>
+
+                            <div class="book-actions">
+
+                                <button
+                                    type="button"
+                                    class="book-details-btn"
+                                >
+                                    <i class="fa-solid fa-circle-info"></i>
+                                    View Details
+                                </button>
+
+                                <button
+                                    type="button"
+                                    class="borrow-btn"
+                                >
+                                    <i class="fa-solid fa-book-open-reader"></i>
+                                    Borrow Book
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- 5. The Universe -->
+                    <article
+                        class="library-book-card"
+                        data-title="The Universe"
+                        data-author="Robert Clark"
+                        data-category="science"
+                        data-price="₹799"
+                        data-language="English"
+                        data-pages="512"
+                        data-year="2020"
+                        data-isbn="ShelfSync Edition"
+                        data-description="An accessible exploration of astronomy, galaxies, stars, planets and scientific ideas used to understand the universe."
+                    >
+
+                        <div class="library-book-cover science-cover">
+                            <i class="fa-solid fa-earth-americas"></i>
+                            <span>Science</span>
+                        </div>
+
+                        <div class="library-book-info">
+
+                            <span class="availability available">
+                                Available
+                            </span>
+
+                            <span class="book-category">
+                                Science
+                            </span>
+
+                            <h3>
+                                The Universe
+                            </h3>
+
+                            <p class="library-author">
+                                Robert Clark
+                            </p>
+
+                            <p class="book-description">
+                                Explore galaxies, stars, planets and the
+                                science behind our universe.
+                            </p>
+
+                            <div class="book-price-row">
+                                <span class="book-price-label">
+                                    Book Price
+                                </span>
+
+                                <strong class="book-price">
+                                    ₹799
+                                </strong>
+                            </div>
+
+                            <div class="book-actions">
+
+                                <button
+                                    type="button"
+                                    class="book-details-btn"
+                                >
+                                    <i class="fa-solid fa-circle-info"></i>
+                                    View Details
+                                </button>
+
+                                <button
+                                    type="button"
+                                    class="borrow-btn"
+                                >
+                                    <i class="fa-solid fa-book-open-reader"></i>
+                                    Borrow Book
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- 6. Biology -->
+                    <article
+                        class="library-book-card"
+                        data-title="Understanding Biology"
+                        data-author="Sarah Green"
+                        data-category="science"
+                        data-price="₹579"
+                        data-language="English"
+                        data-pages="486"
+                        data-year="2021"
+                        data-isbn="ShelfSync Edition"
+                        data-description="An introductory biology book explaining cells, genetics, evolution, ecosystems and other fundamental concepts of life science."
+                    >
+
+                        <div class="library-book-cover science-cover">
+                            <i class="fa-solid fa-dna"></i>
+                            <span>Science</span>
+                        </div>
+
+                        <div class="library-book-info">
+
+                            <span class="availability available">
+                                Available
+                            </span>
+
+                            <span class="book-category">
+                                Science
+                            </span>
+
+                            <h3>
+                                Understanding Biology
+                            </h3>
+
+                            <p class="library-author">
+                                Sarah Green
+                            </p>
+
+                            <p class="book-description">
+                                Learn about cells, genetics, evolution and
+                                fundamental life science concepts.
+                            </p>
+
+                            <div class="book-price-row">
+                                <span class="book-price-label">
+                                    Book Price
+                                </span>
+
+                                <strong class="book-price">
+                                    ₹579
+                                </strong>
+                            </div>
+
+                            <div class="book-actions">
+
+                                <button
+                                    type="button"
+                                    class="book-details-btn"
+                                >
+                                    <i class="fa-solid fa-circle-info"></i>
+                                    View Details
+                                </button>
+
+                                <button
+                                    type="button"
+                                    class="borrow-btn"
+                                >
+                                    <i class="fa-solid fa-book-open-reader"></i>
+                                    Borrow Book
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- 7. A Brief History of Time -->
+                    <article
+                        class="library-book-card"
+                        data-title="A Brief History of Time"
+                        data-author="Stephen Hawking"
+                        data-category="science"
+                        data-price="₹399"
+                        data-language="English"
+                        data-pages="256"
+                        data-year="1988"
+                        data-isbn="Reference Edition"
+                        data-description="Stephen Hawking introduces major ideas about cosmology, black holes, time, space and the origin and structure of the universe."
+                    >
+
+                        <div class="library-book-cover science-cover">
+                            <i class="fa-solid fa-star"></i>
+                            <span>Science</span>
+                        </div>
+
+                        <div class="library-book-info">
+
+                            <span class="availability available">
+                                Available
+                            </span>
+
+                            <span class="book-category">
+                                Science
+                            </span>
+
+                            <h3>
+                                A Brief History of Time
+                            </h3>
+
+                            <p class="library-author">
+                                Stephen Hawking
+                            </p>
+
+                            <p class="book-description">
+                                Explore major ideas about cosmology, black
+                                holes, time and space.
+                            </p>
+
+                            <div class="book-price-row">
+                                <span class="book-price-label">
+                                    Book Price
+                                </span>
+
+                                <strong class="book-price">
+                                    ₹399
+                                </strong>
+                            </div>
+
+                            <div class="book-actions">
+
+                                <button
+                                    type="button"
+                                    class="book-details-btn"
+                                >
+                                    <i class="fa-solid fa-circle-info"></i>
+                                    View Details
+                                </button>
+
+                                <button
+                                    type="button"
+                                    class="borrow-btn"
+                                >
+                                    <i class="fa-solid fa-book-open-reader"></i>
+                                    Borrow Book
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- 8. The Selfish Gene -->
+                    <article
+                        class="library-book-card"
+                        data-title="The Selfish Gene"
+                        data-author="Richard Dawkins"
+                        data-category="science"
+                        data-price="₹449"
+                        data-language="English"
+                        data-pages="496"
+                        data-year="1976"
+                        data-isbn="Reference Edition"
+                        data-description="A well-known work of evolutionary biology that discusses natural selection and evolution from a gene-centered perspective."
+                    >
+
+                        <div class="library-book-cover science-cover">
+                            <i class="fa-solid fa-microscope"></i>
+                            <span>Science</span>
+                        </div>
+
+                        <div class="library-book-info">
+
+                            <span class="availability available">
+                                Available
+                            </span>
+
+                            <span class="book-category">
+                                Science
+                            </span>
+
+                            <h3>
+                                The Selfish Gene
+                            </h3>
+
+                            <p class="library-author">
+                                Richard Dawkins
+                            </p>
+
+                            <p class="book-description">
+                                Explore evolution and natural selection from
+                                a gene-centered perspective.
+                            </p>
+
+                            <div class="book-price-row">
+                                <span class="book-price-label">
+                                    Book Price
+                                </span>
+
+                                <strong class="book-price">
+                                    ₹449
+                                </strong>
+                            </div>
+
+                            <div class="book-actions">
+
+                                <button
+                                    type="button"
+                                    class="book-details-btn"
+                                >
+                                    <i class="fa-solid fa-circle-info"></i>
+                                    View Details
+                                </button>
+
+                                <button
+                                    type="button"
+                                    class="borrow-btn"
+                                >
+                                    <i class="fa-solid fa-book-open-reader"></i>
+                                    Borrow Book
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- 9. Pride and Prejudice -->
+                    <article
+                        class="library-book-card"
+                        data-title="Pride and Prejudice"
+                        data-author="Jane Austen"
+                        data-category="literature"
+                        data-price="₹299"
+                        data-language="English"
+                        data-pages="432"
+                        data-year="1813"
+                        data-isbn="Classic Edition"
+                        data-description="Jane Austen's classic novel follows Elizabeth Bennet while exploring relationships, family, social expectations and personal growth."
+                    >
+
+                        <div class="library-book-cover literature-cover">
+                            <i class="fa-solid fa-feather-pointed"></i>
+                            <span>Literature</span>
+                        </div>
+
+                        <div class="library-book-info">
+
+                            <span class="availability available">
+                                Available
+                            </span>
+
+                            <span class="book-category">
+                                Literature
+                            </span>
+
+                            <h3>
+                                Pride and Prejudice
+                            </h3>
+
+                            <p class="library-author">
+                                Jane Austen
+                            </p>
+
+                            <p class="book-description">
+                                A timeless classic about relationships,
+                                family and social expectations.
+                            </p>
+
+                            <div class="book-price-row">
+                                <span class="book-price-label">
+                                    Book Price
+                                </span>
+
+                                <strong class="book-price">
+                                    ₹299
+                                </strong>
+                            </div>
+
+                            <div class="book-actions">
+
+                                <button
+                                    type="button"
+                                    class="book-details-btn"
+                                >
+                                    <i class="fa-solid fa-circle-info"></i>
+                                    View Details
+                                </button>
+
+                                <button
+                                    type="button"
+                                    class="borrow-btn"
+                                >
+                                    <i class="fa-solid fa-book-open-reader"></i>
+                                    Borrow Book
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- 10. Great Gatsby -->
+                    <article
+                        class="library-book-card"
+                        data-title="The Great Gatsby"
+                        data-author="F. Scott Fitzgerald"
+                        data-category="literature"
+                        data-price="₹349"
+                        data-language="English"
+                        data-pages="208"
+                        data-year="1925"
+                        data-isbn="Classic Edition"
+                        data-description="A famous American novel following Jay Gatsby and exploring ambition, wealth, relationships and the idea of the American Dream."
+                    >
+
+                        <div class="library-book-cover literature-cover">
+                            <i class="fa-solid fa-book"></i>
+                            <span>Literature</span>
+                        </div>
+
+                        <div class="library-book-info">
+
+                            <span class="availability available">
+                                Available
+                            </span>
+
+                            <span class="book-category">
+                                Literature
+                            </span>
+
+                            <h3>
+                                The Great Gatsby
+                            </h3>
+
+                            <p class="library-author">
+                                F. Scott Fitzgerald
+                            </p>
+
+                            <p class="book-description">
+                                A classic story exploring ambition, wealth,
+                                relationships and the American Dream.
+                            </p>
+
+                            <div class="book-price-row">
+                                <span class="book-price-label">
+                                    Book Price
+                                </span>
+
+                                <strong class="book-price">
+                                    ₹349
+                                </strong>
+                            </div>
+
+                            <div class="book-actions">
+
+                                <button
+                                    type="button"
+                                    class="book-details-btn"
+                                >
+                                    <i class="fa-solid fa-circle-info"></i>
+                                    View Details
+                                </button>
+
+                                <button
+                                    type="button"
+                                    class="borrow-btn"
+                                >
+                                    <i class="fa-solid fa-book-open-reader"></i>
+                                    Borrow Book
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- 11. The Alchemist -->
+                    <article
+                        class="library-book-card"
+                        data-title="The Alchemist"
+                        data-author="Paulo Coelho"
+                        data-category="literature"
+                        data-price="₹299"
+                        data-language="English"
+                        data-pages="208"
+                        data-year="1988"
+                        data-isbn="Reference Edition"
+                        data-description="A widely read novel about Santiago's journey, dreams, personal discovery and the search for purpose."
+                    >
+
+                        <div class="library-book-cover literature-cover">
+                            <i class="fa-solid fa-compass"></i>
+                            <span>Literature</span>
+                        </div>
+
+                        <div class="library-book-info">
+
+                            <span class="availability available">
+                                Available
+                            </span>
+
+                            <span class="book-category">
+                                Literature
+                            </span>
+
+                            <h3>
+                                The Alchemist
+                            </h3>
+
+                            <p class="library-author">
+                                Paulo Coelho
+                            </p>
+
+                            <p class="book-description">
+                                A journey of dreams, discovery, purpose and
+                                following one's goals.
+                            </p>
+
+                            <div class="book-price-row">
+                                <span class="book-price-label">
+                                    Book Price
+                                </span>
+
+                                <strong class="book-price">
+                                    ₹299
+                                </strong>
+                            </div>
+
+                            <div class="book-actions">
+
+                                <button
+                                    type="button"
+                                    class="book-details-btn"
+                                >
+                                    <i class="fa-solid fa-circle-info"></i>
+                                    View Details
+                                </button>
+
+                                <button
+                                    type="button"
+                                    class="borrow-btn"
+                                >
+                                    <i class="fa-solid fa-book-open-reader"></i>
+                                    Borrow Book
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- 12. 1984 -->
+                    <article
+                        class="library-book-card"
+                        data-title="1984"
+                        data-author="George Orwell"
+                        data-category="literature"
+                        data-price="₹249"
+                        data-language="English"
+                        data-pages="328"
+                        data-year="1949"
+                        data-isbn="Classic Edition"
+                        data-description="George Orwell's dystopian novel explores surveillance, control, propaganda, truth and individual freedom."
+                    >
+
+                        <div class="library-book-cover literature-cover">
+                            <i class="fa-solid fa-eye"></i>
+                            <span>Literature</span>
+                        </div>
+
+                        <div class="library-book-info">
+
+                            <span class="availability available">
+                                Available
+                            </span>
+
+                            <span class="book-category">
+                                Literature
+                            </span>
+
+                            <h3>
+                                1984
+                            </h3>
+
+                            <p class="library-author">
+                                George Orwell
+                            </p>
+
+                            <p class="book-description">
+                                A dystopian classic about surveillance,
+                                control, truth and freedom.
+                            </p>
+
+                            <div class="book-price-row">
+                                <span class="book-price-label">
+                                    Book Price
+                                </span>
+
+                                <strong class="book-price">
+                                    ₹249
+                                </strong>
+                            </div>
+
+                            <div class="book-actions">
+
+                                <button
+                                    type="button"
+                                    class="book-details-btn"
+                                >
+                                    <i class="fa-solid fa-circle-info"></i>
+                                    View Details
+                                </button>
+
+                                <button
+                                    type="button"
+                                    class="borrow-btn"
+                                >
+                                    <i class="fa-solid fa-book-open-reader"></i>
+                                    Borrow Book
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- 13. World History -->
+                    <article
+                        class="library-book-card"
+                        data-title="World History"
+                        data-author="Michael Brown"
+                        data-category="history"
+                        data-price="₹699"
+                        data-language="English"
+                        data-pages="640"
+                        data-year="2019"
+                        data-isbn="ShelfSync Edition"
+                        data-description="A broad introduction to major civilizations, historical events, political changes and important developments across world history."
+                    >
+
+                        <div class="library-book-cover history-cover">
+                            <i class="fa-solid fa-landmark"></i>
+                            <span>History</span>
+                        </div>
+
+                        <div class="library-book-info">
+
+                            <span class="availability available">
+                                Available
+                            </span>
+
+                            <span class="book-category">
+                                History
+                            </span>
+
+                            <h3>
+                                World History
+                            </h3>
+
+                            <p class="library-author">
+                                Michael Brown
+                            </p>
+
+                            <p class="book-description">
+                                Explore major civilizations, events and
+                                developments across world history.
+                            </p>
+
+                            <div class="book-price-row">
+                                <span class="book-price-label">
+                                    Book Price
+                                </span>
+
+                                <strong class="book-price">
+                                    ₹699
+                                </strong>
+                            </div>
+
+                            <div class="book-actions">
+
+                                <button
+                                    type="button"
+                                    class="book-details-btn"
+                                >
+                                    <i class="fa-solid fa-circle-info"></i>
+                                    View Details
+                                </button>
+
+                                <button
+                                    type="button"
+                                    class="borrow-btn"
+                                >
+                                    <i class="fa-solid fa-book-open-reader"></i>
+                                    Borrow Book
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- 14. Ancient Civilizations -->
+                    <article
+                        class="library-book-card"
+                        data-title="Ancient Civilizations"
+                        data-author="Emily Parker"
+                        data-category="history"
+                        data-price="₹629"
+                        data-language="English"
+                        data-pages="528"
+                        data-year="2020"
+                        data-isbn="ShelfSync Edition"
+                        data-description="An introduction to ancient civilizations, cultures, societies, achievements and historical developments."
+                    >
+
+                        <div class="library-book-cover history-cover">
+                            <i class="fa-solid fa-monument"></i>
+                            <span>History</span>
+                        </div>
+
+                        <div class="library-book-info">
+
+                            <span class="availability available">
+                                Available
+                            </span>
+
+                            <span class="book-category">
+                                History
+                            </span>
+
+                            <h3>
+                                Ancient Civilizations
+                            </h3>
+
+                            <p class="library-author">
+                                Emily Parker
+                            </p>
+
+                            <p class="book-description">
+                                Discover ancient cultures, societies and
+                                their major achievements.
+                            </p>
+
+                            <div class="book-price-row">
+                                <span class="book-price-label">
+                                    Book Price
+                                </span>
+
+                                <strong class="book-price">
+                                    ₹629
+                                </strong>
+                            </div>
+
+                            <div class="book-actions">
+
+                                <button
+                                    type="button"
+                                    class="book-details-btn"
+                                >
+                                    <i class="fa-solid fa-circle-info"></i>
+                                    View Details
+                                </button>
+
+                                <button
+                                    type="button"
+                                    class="borrow-btn"
+                                >
+                                    <i class="fa-solid fa-book-open-reader"></i>
+                                    Borrow Book
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- 15. Sapiens -->
+                    <article
+                        class="library-book-card"
+                        data-title="Sapiens"
+                        data-author="Yuval Noah Harari"
+                        data-category="history"
+                        data-price="₹499"
+                        data-language="English"
+                        data-pages="512"
+                        data-year="2011"
+                        data-isbn="Reference Edition"
+                        data-description="A broad exploration of human history, societies, cultures and the development of Homo sapiens."
+                    >
+
+                        <div class="library-book-cover history-cover">
+                            <i class="fa-solid fa-users"></i>
+                            <span>History</span>
+                        </div>
+
+                        <div class="library-book-info">
+
+                            <span class="availability available">
+                                Available
+                            </span>
+
+                            <span class="book-category">
+                                History
+                            </span>
+
+                            <h3>
+                                Sapiens
+                            </h3>
+
+                            <p class="library-author">
+                                Yuval Noah Harari
+                            </p>
+
+                            <p class="book-description">
+                                Explore human history, societies, cultures
+                                and the development of our species.
+                            </p>
+
+                            <div class="book-price-row">
+                                <span class="book-price-label">
+                                    Book Price
+                                </span>
+
+                                <strong class="book-price">
+                                    ₹499
+                                </strong>
+                            </div>
+
+                            <div class="book-actions">
+
+                                <button
+                                    type="button"
+                                    class="book-details-btn"
+                                >
+                                    <i class="fa-solid fa-circle-info"></i>
+                                    View Details
+                                </button>
+
+                                <button
+                                    type="button"
+                                    class="borrow-btn"
+                                >
+                                    <i class="fa-solid fa-book-open-reader"></i>
+                                    Borrow Book
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- 16. The Silk Roads -->
+                    <article
+                        class="library-book-card"
+                        data-title="The Silk Roads"
+                        data-author="Peter Frankopan"
+                        data-category="history"
+                        data-price="₹599"
+                        data-language="English"
+                        data-pages="656"
+                        data-year="2015"
+                        data-isbn="Reference Edition"
+                        data-description="A historical account examining the importance of the Silk Roads and their influence on civilizations, trade, politics and culture."
+                    >
+
+                        <div class="library-book-cover history-cover">
+                            <i class="fa-solid fa-route"></i>
+                            <span>History</span>
+                        </div>
+
+                        <div class="library-book-info">
+
+                            <span class="availability available">
+                                Available
+                            </span>
+
+                            <span class="book-category">
+                                History
+                            </span>
+
+                            <h3>
+                                The Silk Roads
+                            </h3>
+
+                            <p class="library-author">
+                                Peter Frankopan
+                            </p>
+
+                            <p class="book-description">
+                                Discover how trade routes shaped
+                                civilizations, politics and culture.
+                            </p>
+
+                            <div class="book-price-row">
+                                <span class="book-price-label">
+                                    Book Price
+                                </span>
+
+                                <strong class="book-price">
+                                    ₹599
+                                </strong>
+                            </div>
+
+                            <div class="book-actions">
+
+                                <button
+                                    type="button"
+                                    class="book-details-btn"
+                                >
+                                    <i class="fa-solid fa-circle-info"></i>
+                                    View Details
+                                </button>
+
+                                <button
+                                    type="button"
+                                    class="borrow-btn"
+                                >
+                                    <i class="fa-solid fa-book-open-reader"></i>
+                                    Borrow Book
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </article>
 
                 </div>
 
 
-                <div class="library-service-card">
+                <!-- No Results -->
+                <div
+                    class="no-books"
+                    id="noBooks"
+                    style="display: none;"
+                >
 
                     <div>
-                        <i class="fa-solid fa-rotate-left"></i>
+                        <i class="fa-solid fa-book-open"></i>
                     </div>
 
-                    <h3>Return Books</h3>
+                    <h3>
+                        No books found
+                    </h3>
 
                     <p>
-                        Return borrowed books directly
-                        from your member profile.
+                        Try another title, author or category.
                     </p>
 
                 </div>
 
             </div>
 
-        </div>
-
-    </section>
+        </section>
 
 
-    <!-- CTA -->
-    <section class="cta-section">
+        <!-- Borrowing Information -->
+        <section class="library-service-section section">
 
-        <div class="container">
+            <div class="container">
 
-            <div class="cta-box">
+                <div class="section-heading">
 
-                <div>
+                    <div>
+                        <p class="small-heading">
+                            SIMPLE LIBRARY EXPERIENCE
+                        </p>
 
-                    <h2>Ready to start reading?</h2>
+                        <h2>
+                            Borrow with confidence
+                        </h2>
+                    </div>
 
                     <p>
-                        Login to ShelfSync and borrow
-                        a book from the collection.
+                        ShelfSync keeps your borrowing information organized
+                        so you can focus on finding and reading great books.
                     </p>
 
                 </div>
 
-                <a href="login.html" class="primary-btn">
 
-                    <i class="fa-regular fa-user"></i>
-                    Member Login
+                <div class="library-services-grid">
 
-                </a>
+                    <div class="library-service-card">
+
+                        <div>
+                            <i class="fa-solid fa-calendar-days"></i>
+                        </div>
+
+                        <h3>
+                            14-Day Borrowing
+                        </h3>
+
+                        <p>
+                            Borrowed books are tracked with a simple
+                            borrowing period so you know when they are due.
+                        </p>
+
+                    </div>
+
+
+                    <div class="library-service-card">
+
+                        <div>
+                            <i class="fa-solid fa-user-check"></i>
+                        </div>
+
+                        <h3>
+                            Personal Account
+                        </h3>
+
+                        <p>
+                            Sign in to view your borrowed books, account
+                            information and recent library activity.
+                        </p>
+
+                    </div>
+
+
+                    <div class="library-service-card">
+
+                        <div>
+                            <i class="fa-solid fa-clock-rotate-left"></i>
+                        </div>
+
+                        <h3>
+                            Easy Tracking
+                        </h3>
+
+                        <p>
+                            Keep track of borrowed and returned books
+                            directly from your ShelfSync profile.
+                        </p>
+
+                    </div>
+
+                </div>
 
             </div>
 
-        </div>
+        </section>
 
-    </section>
+    </main>
 
 
     <!-- Book Details Modal -->
     <div
         class="book-modal"
         id="bookDetailsModal"
-        aria-hidden="true">
+        aria-hidden="true"
+    >
 
         <div
             class="book-modal-overlay"
-            id="bookModalOverlay">
-        </div>
+            id="bookModalOverlay"
+        ></div>
 
 
         <div
             class="book-modal-content"
             role="dialog"
             aria-modal="true"
-            aria-labelledby="modalBookTitle">
+            aria-labelledby="modalBookTitle"
+        >
 
             <button
                 type="button"
                 class="book-modal-close"
                 id="closeBookModal"
-                aria-label="Close book details">
-
+                aria-label="Close book details"
+            >
                 <i class="fa-solid fa-xmark"></i>
-
             </button>
 
 
@@ -1543,7 +1675,8 @@
 
                     <span
                         class="book-modal-category"
-                        id="modalBookCategory">
+                        id="modalBookCategory"
+                    >
                         Category
                     </span>
 
@@ -1562,7 +1695,9 @@
 
             <div class="book-modal-description">
 
-                <h3>About This Book</h3>
+                <h3>
+                    About This Book
+                </h3>
 
                 <p id="modalBookDescription">
                     Book information will appear here.
@@ -1574,6 +1709,7 @@
             <div class="book-modal-details">
 
                 <div>
+
                     <span>
                         <i class="fa-solid fa-language"></i>
                         Language
@@ -1582,10 +1718,12 @@
                     <strong id="modalBookLanguage">
                         English
                     </strong>
+
                 </div>
 
 
                 <div>
+
                     <span>
                         <i class="fa-regular fa-file-lines"></i>
                         Pages
@@ -1594,10 +1732,12 @@
                     <strong id="modalBookPages">
                         -
                     </strong>
+
                 </div>
 
 
                 <div>
+
                     <span>
                         <i class="fa-regular fa-calendar"></i>
                         Publication
@@ -1606,22 +1746,26 @@
                     <strong id="modalBookYear">
                         -
                     </strong>
+
                 </div>
 
 
                 <div>
+
                     <span>
-                        <i class="fa-solid fa-barcode"></i>
+                        <i class="fa-solid fa-bookmark"></i>
                         Edition
                     </span>
 
                     <strong id="modalBookIsbn">
                         -
                     </strong>
+
                 </div>
 
 
                 <div>
+
                     <span>
                         <i class="fa-solid fa-indian-rupee-sign"></i>
                         Price
@@ -1630,20 +1774,7 @@
                     <strong id="modalBookPrice">
                         -
                     </strong>
-                </div>
 
-
-                <div>
-                    <span>
-                        <i class="fa-solid fa-circle-check"></i>
-                        Status
-                    </span>
-
-                    <strong
-                        class="modal-available"
-                        id="modalBookStatus">
-                        Available
-                    </strong>
                 </div>
 
             </div>
@@ -1654,9 +1785,10 @@
                 <i class="fa-solid fa-circle-info"></i>
 
                 <p>
-                    ShelfSync members can borrow an
-                    available book for
-                    <strong>14 days</strong>.
+                    Current status:
+                    <strong id="modalBookStatus">
+                        Available
+                    </strong>
                 </p>
 
             </div>
@@ -1666,19 +1798,19 @@
 
                 <button
                     type="button"
-                    class="secondary-modal-btn"
-                    id="modalCloseButton">
+                    class="secondary-btn"
+                    id="modalCloseButton"
+                >
                     Close
                 </button>
 
                 <button
                     type="button"
-                    class="modal-borrow-btn"
-                    id="modalBorrowButton">
-
+                    class="borrow-btn"
+                    id="modalBorrowButton"
+                >
                     <i class="fa-solid fa-book-open-reader"></i>
                     Borrow Book
-
                 </button>
 
             </div>
@@ -1689,88 +1821,143 @@
 
 
     <!-- Footer -->
-    <footer class="main-footer">
+    <footer class="site-footer">
 
-        <div class="container footer-grid">
+        <div class="container">
 
-            <div class="footer-brand">
+            <div class="footer-grid">
 
-                <a href="index.html" class="logo footer-logo">
+                <div class="footer-brand">
 
-                    <i class="fa-solid fa-book-open"></i>
-                    Shelf<span>Sync</span>
+                    <a href="index.html" class="logo footer-logo">
 
-                </a>
+                        <span class="logo-icon">
+                            <i class="fa-solid fa-book-open"></i>
+                        </span>
 
-                <p>
-                    A Library Management System designed
-                    to make discovering and managing books
-                    easier for students.
-                </p>
+                        <span>ShelfSync</span>
 
-            </div>
+                    </a>
+
+                    <p>
+                        A modern digital library experience designed to
+                        make discovering, borrowing and managing books easier.
+                    </p>
+
+                    <div class="footer-socials">
+
+                        <a href="#" aria-label="Facebook">
+                            <i class="fa-brands fa-facebook-f"></i>
+                        </a>
+
+                        <a href="#" aria-label="Instagram">
+                            <i class="fa-brands fa-instagram"></i>
+                        </a>
+
+                        <a href="#" aria-label="GitHub">
+                            <i class="fa-brands fa-github"></i>
+                        </a>
+
+                    </div>
+
+                </div>
 
 
-            <div>
+                <div class="footer-column">
 
-                <h3>Quick Links</h3>
+                    <h3>
+                        Explore
+                    </h3>
 
-                <div class="footer-links">
-                    <a href="index.html">Home</a>
-                    <a href="about.html">About</a>
-                    <a href="books.html">Books</a>
-                    <a href="gallery.html">Gallery</a>
+                    <a href="index.html">
+                        Home
+                    </a>
+
+                    <a href="about.html">
+                        About
+                    </a>
+
+                    <a href="books.html">
+                        Books
+                    </a>
+
+                    <a href="gallery.html">
+                        Gallery
+                    </a>
+
+                </div>
+
+
+                <div class="footer-column">
+
+                    <h3>
+                        Account
+                    </h3>
+
+                    <a href="login.html">
+                        Login
+                    </a>
+
+                    <a href="login.html">
+                        Register
+                    </a>
+
+                    <a href="profile.html">
+                        My Profile
+                    </a>
+
+                    <a href="contact.html">
+                        Contact
+                    </a>
+
+                </div>
+
+
+                <div class="footer-column">
+
+                    <h3>
+                        Library
+                    </h3>
+
+                    <p>
+                        <i class="fa-solid fa-location-dot"></i>
+                        Bhubaneswar, Odisha
+                    </p>
+
+                    <p>
+                        <i class="fa-solid fa-book"></i>
+                        ShelfSync Library
+                    </p>
+
+                    <p>
+                        <i class="fa-solid fa-clock"></i>
+                        Mon - Sat, 9:00 AM - 6:00 PM
+                    </p>
+
                 </div>
 
             </div>
 
 
-            <div>
-
-                <h3>Account</h3>
-
-                <div class="footer-links">
-                    <a href="login.html">Login</a>
-                    <a href="login.html">Register</a>
-                    <a href="profile.html">Profile</a>
-                    <a href="contact.html">Contact</a>
-                </div>
-
-            </div>
-
-
-            <div class="footer-contact">
-
-                <h3>Library</h3>
-
-                <p>
-                    <i class="fa-solid fa-location-dot"></i>
-                    Bhubaneswar, Odisha
-                </p>
-
-                <p>
-                    <i class="fa-solid fa-book"></i>
-                    ShelfSync Library
-                </p>
-
-            </div>
-
-        </div>
-
-
-        <div class="footer-bottom">
-
-            <div class="container footer-bottom-content">
+            <div class="footer-bottom">
 
                 <p>
                     &copy;
                     <span id="currentYear"></span>
-                    ShelfSync. BCA Web Development Project.
+                    ShelfSync. All rights reserved.
                 </p>
 
-                <p>
-                    Library Management System
-                </p>
+                <div class="footer-bottom-links">
+
+                    <a href="#">
+                        Privacy
+                    </a>
+
+                    <a href="#">
+                        Terms
+                    </a>
+
+                </div>
 
             </div>
 

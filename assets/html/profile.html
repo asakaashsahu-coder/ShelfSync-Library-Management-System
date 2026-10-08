@@ -5,50 +5,124 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <meta
+        name="description"
+        content="Manage your ShelfSync library account, borrowed books and reading activity."
+    >
+
     <title>My Profile | ShelfSync</title>
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+    <!-- ShelfSync Base Styles -->
     <link rel="stylesheet" href="../css/style.css">
 
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <!--
+        SHELFSYNC THEME
+        ------------------------------------------------
+        Keep style.css enabled.
+
+        Choose ONE theme below.
+
+        To change the theme:
+        1. Remove the comments from the theme you want.
+        2. Keep the other themes commented.
+        3. Save the file and refresh the page.
+
+        Available themes:
+        - Ivory
+        - Dark
+        - Midnight
+        - Sage
+        ------------------------------------------------
+    -->
+
+    <!-- Ivory Theme -->
+    <!-- <link rel="stylesheet" href="../css/theme-ivory.css"> -->
+
+    <!-- Dark Theme -->
+    <!-- <link rel="stylesheet" href="../css/theme-dark.css"> -->
+
+    <!-- Midnight Theme -->
+    <!-- <link rel="stylesheet" href="../css/theme-midnight.css"> -->
+
+    <!-- Sage Theme -->
+    <!-- <link rel="stylesheet" href="../css/theme-sage.css"> -->
+
 </head>
 
 <body>
 
-    <!-- Header -->
+    <!-- Navigation -->
     <header class="main-header">
 
         <div class="container nav-container">
 
             <a href="index.html" class="logo">
-                <i class="fa-solid fa-book-open"></i>
-                Shelf<span>Sync</span>
+
+                <span class="logo-icon">
+                    <i class="fa-solid fa-book-open"></i>
+                </span>
+
+                <span>
+                    ShelfSync
+                </span>
+
             </a>
+
 
             <nav class="nav-links" id="navLinks">
 
-                <a href="index.html">Home</a>
-                <a href="about.html">About</a>
-                <a href="books.html">Books</a>
-                <a href="gallery.html">Gallery</a>
-                <a href="contact.html">Contact</a>
+                <a href="index.html">
+                    Home
+                </a>
+
+                <a href="about.html">
+                    About
+                </a>
+
+                <a href="books.html">
+                    Books
+                </a>
+
+                <a href="gallery.html">
+                    Gallery
+                </a>
+
+                <a href="contact.html">
+                    Contact
+                </a>
 
                 <a
                     href="profile.html"
                     class="login-nav active"
-                    id="accountNavLink">
+                    id="accountNavLink"
+                >
+                    <i class="fa-regular fa-user"></i>
                     Profile
                 </a>
 
             </nav>
 
+
             <button
+                type="button"
                 class="menu-toggle"
                 id="menuToggle"
-                aria-label="Open menu">
-
+                aria-label="Open navigation menu"
+            >
                 <i class="fa-solid fa-bars"></i>
-
             </button>
 
         </div>
@@ -58,290 +132,363 @@
 
     <main>
 
-        <!-- Profile Banner -->
-        <section class="profile-banner">
+        <!-- Profile Hero -->
+        <section class="profile-hero">
 
-            <div class="container profile-banner-content">
+            <div class="container profile-hero-content">
 
-                <div>
 
-                    <span class="section-tag">
-                        Member Dashboard
-                    </span>
+                <div class="profile-welcome">
 
-                    <h1>
-                        Welcome,
-                        <span id="profileFirstName">
-                            Member
-                        </span>
-                    </h1>
 
-                    <p>
-                        Manage your library account and keep track
-                        of your borrowed books.
-                    </p>
+                    <!-- Profile Picture -->
+                    <div class="profile-avatar-wrapper">
+
+                        <div class="profile-avatar-large">
+
+                            <img
+                                src=""
+                                alt="Profile picture"
+                                id="profileAvatarImage"
+                                class="profile-avatar-image"
+                            >
+
+                            <span
+                                id="profileAvatar"
+                                class="profile-avatar-letter"
+                            >
+                                U
+                            </span>
+
+                        </div>
+
+
+                        <button
+                            type="button"
+                            class="profile-photo-button"
+                            id="changeProfilePhotoBtn"
+                            aria-label="Change profile photo"
+                            title="Change profile photo"
+                        >
+                            <i class="fa-solid fa-camera"></i>
+                        </button>
+
+
+                        <input
+                            type="file"
+                            id="profilePhotoInput"
+                            accept="image/*"
+                            hidden
+                        >
+
+                    </div>
+
+
+                    <div>
+
+                        <p class="small-heading">
+                            MY SHELFSYNC ACCOUNT
+                        </p>
+
+                        <h1>
+                            Welcome back,
+                            <span id="profileFirstName">
+                                Member
+                            </span>
+                        </h1>
+
+                        <p>
+                            Manage your library activity and keep track of
+                            the books you are currently reading.
+                        </p>
+
+                    </div>
 
                 </div>
 
-                <a
-                    href="books.html"
-                    class="primary-btn">
 
-                    <i class="fa-solid fa-book-open"></i>
-                    Browse Books
-
-                </a>
+                <button
+                    type="button"
+                    class="profile-logout-btn"
+                    id="logoutBtn"
+                >
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    Logout
+                </button>
 
             </div>
 
         </section>
 
 
-        <!-- Profile Section -->
-        <section class="profile-section">
+        <!-- Profile Dashboard -->
+        <section class="profile-dashboard-section section">
 
-            <div class="container profile-layout">
+            <div class="container">
 
 
-                <!-- Profile Sidebar -->
-                <aside class="profile-sidebar">
+                <!-- Account Overview -->
+                <div class="profile-account-card">
 
-                    <div class="profile-card">
+                    <div class="profile-account-header">
 
-                        <div class="profile-avatar">
+                        <div>
 
-                            <i class="fa-solid fa-user"></i>
+                            <p class="small-heading">
+                                ACCOUNT OVERVIEW
+                            </p>
+
+                            <h2>
+                                Your member information
+                            </h2>
 
                         </div>
 
-                        <h2 id="profileName">
-                            Library Member
-                        </h2>
-
-                        <p id="profileEmail">
-                            member@shelfsync.com
-                        </p>
-
-                        <span class="member-status">
-                            <i class="fa-solid fa-circle-check"></i>
+                        <span class="profile-status-badge">
+                            <i class="fa-solid fa-circle"></i>
                             Active Member
                         </span>
 
-
-                        <div class="profile-details">
-
-                            <div class="profile-detail">
-
-                                <span>
-                                    Member ID
-                                </span>
-
-                                <strong id="memberId">
-                                    -
-                                </strong>
-
-                            </div>
+                    </div>
 
 
-                            <div class="profile-detail">
-
-                                <span>
-                                    Membership
-                                </span>
-
-                                <strong>
-                                    Student
-                                </strong>
-
-                            </div>
+                    <div class="profile-account-grid">
 
 
-                            <div class="profile-detail">
+                        <div class="profile-info-item">
 
-                                <span>
-                                    Joined
-                                </span>
+                            <span>
+                                <i class="fa-regular fa-user"></i>
+                                Full Name
+                            </span>
 
-                                <strong id="joinedDate">
-                                    -
-                                </strong>
-
-                            </div>
+                            <strong id="profileName">
+                                —
+                            </strong>
 
                         </div>
 
 
-                        <button
-                            class="logout-btn"
-                            id="logoutBtn">
+                        <div class="profile-info-item">
 
-                            <i class="fa-solid fa-right-from-bracket"></i>
-                            Logout
+                            <span>
+                                <i class="fa-regular fa-envelope"></i>
+                                Email Address
+                            </span>
 
-                        </button>
+                            <strong id="profileEmail">
+                                —
+                            </strong>
+
+                        </div>
+
+
+                        <div class="profile-info-item">
+
+                            <span>
+                                <i class="fa-solid fa-phone"></i>
+                                Phone Number
+                            </span>
+
+                            <strong id="profilePhone">
+                                —
+                            </strong>
+
+                        </div>
+
+
+                        <div class="profile-info-item">
+
+                            <span>
+                                <i class="fa-solid fa-id-card"></i>
+                                Member ID
+                            </span>
+
+                            <strong id="memberId">
+                                —
+                            </strong>
+
+                        </div>
+
+
+                        <div class="profile-info-item">
+
+                            <span>
+                                <i class="fa-regular fa-calendar"></i>
+                                Joined
+                            </span>
+
+                            <strong id="joinedDate">
+                                —
+                            </strong>
+
+                        </div>
+
+
+                        <div class="profile-info-item">
+
+                            <span>
+                                <i class="fa-solid fa-book-open"></i>
+                                Account Type
+                            </span>
+
+                            <strong>
+                                Library Member
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Statistics -->
+                <div class="profile-stats-grid">
+
+
+                    <div class="profile-stat-card">
+
+                        <div class="profile-stat-icon">
+                            <i class="fa-solid fa-book-open"></i>
+                        </div>
+
+                        <div>
+
+                            <span>
+                                Currently Borrowed
+                            </span>
+
+                            <strong id="borrowedCount">
+                                0
+                            </strong>
+
+                        </div>
 
                     </div>
 
-                </aside>
 
+                    <div class="profile-stat-card">
 
-                <!-- Profile Main -->
-                <div class="profile-main">
+                        <div class="profile-stat-icon">
+                            <i class="fa-solid fa-clock"></i>
+                        </div>
 
+                        <div>
 
-                    <!-- Statistics -->
-                    <div class="profile-stats">
+                            <span>
+                                Active Borrow Period
+                            </span>
 
+                            <strong>
+                                14 Days
+                            </strong>
 
-                        <article class="profile-stat-card">
-
-                            <div class="profile-stat-icon blue-stat">
-
-                                <i class="fa-solid fa-book-open-reader"></i>
-
-                            </div>
-
-                            <div>
-
-                                <span>
-                                    Currently Borrowed
-                                </span>
-
-                                <h3 id="borrowedCount">
-                                    0
-                                </h3>
-
-                            </div>
-
-                        </article>
-
-
-                        <article class="profile-stat-card">
-
-                            <div class="profile-stat-icon green-stat">
-
-                                <i class="fa-solid fa-book"></i>
-
-                            </div>
-
-                            <div>
-
-                                <span>
-                                    Books Returned
-                                </span>
-
-                                <h3 id="totalReadCount">
-                                    0
-                                </h3>
-
-                            </div>
-
-                        </article>
-
-
-                        <article class="profile-stat-card">
-
-                            <div class="profile-stat-icon purple-stat">
-
-                                <i class="fa-solid fa-bookmark"></i>
-
-                            </div>
-
-                            <div>
-
-                                <span>
-                                    Saved Books
-                                </span>
-
-                                <h3 id="savedCount">
-                                    0
-                                </h3>
-
-                            </div>
-
-                        </article>
-
-
-                        <article class="profile-stat-card">
-
-                            <div class="profile-stat-icon orange-stat">
-
-                                <i class="fa-solid fa-clock"></i>
-
-                            </div>
-
-                            <div>
-
-                                <span>
-                                    Due Soon
-                                </span>
-
-                                <h3 id="dueSoonCount">
-                                    0
-                                </h3>
-
-                            </div>
-
-                        </article>
-
+                        </div>
 
                     </div>
+
+
+                    <div class="profile-stat-card">
+
+                        <div class="profile-stat-icon">
+                            <i class="fa-solid fa-rotate-left"></i>
+                        </div>
+
+                        <div>
+
+                            <span>
+                                Returned Books
+                            </span>
+
+                            <strong id="totalReadCount">
+                                0
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="profile-stat-card">
+
+                        <div class="profile-stat-icon">
+                            <i class="fa-solid fa-chart-line"></i>
+                        </div>
+
+                        <div>
+
+                            <span>
+                                Library Activity
+                            </span>
+
+                            <strong id="activityCount">
+                                0
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Main Profile Content -->
+                <div class="profile-main-grid">
 
 
                     <!-- Borrowed Books -->
-                    <section class="profile-content-card">
+                    <section class="profile-panel borrowed-books-panel">
 
-                        <div class="profile-card-heading">
+                        <div class="profile-panel-header">
 
                             <div>
 
-                                <span class="section-tag">
-                                    My Library
-                                </span>
+                                <p class="small-heading">
+                                    YOUR LIBRARY
+                                </p>
 
                                 <h2>
-                                    Currently Borrowed Books
+                                    Currently borrowed
                                 </h2>
 
                             </div>
 
                             <a
                                 href="books.html"
-                                class="small-link">
-
-                                Browse More
-
+                                class="profile-panel-link"
+                            >
+                                Browse books
                                 <i class="fa-solid fa-arrow-right"></i>
-
                             </a>
 
                         </div>
 
 
-                        <!--
-                            JavaScript will insert the logged-in
-                            user's borrowed books here.
-                        -->
+                        <!-- IMPORTANT:
+                             script.js uses .borrowed-list -->
                         <div class="borrowed-list">
 
-                            <div
-                                class="empty-library-state"
-                                id="emptyBorrowedState">
+                            <div class="empty-library-state">
 
-                                <i class="fa-solid fa-book-open"></i>
+                                <div class="empty-library-icon">
+                                    <i class="fa-solid fa-book-open"></i>
+                                </div>
 
                                 <h3>
-                                    No borrowed books yet
+                                    No books borrowed yet
                                 </h3>
 
                                 <p>
-                                    Borrow an available book and it
-                                    will appear here with its borrow
-                                    date, due date and time remaining.
+                                    Your currently borrowed books will
+                                    appear here.
                                 </p>
 
-                                <a href="books.html">
-                                    Browse Books
+                                <a
+                                    href="books.html"
+                                    class="secondary-btn"
+                                >
+                                    Explore Books
                                 </a>
 
                             </div>
@@ -351,19 +498,19 @@
                     </section>
 
 
-                    <!-- Recent Activity -->
-                    <section class="profile-content-card">
+                    <!-- Activity -->
+                    <aside class="profile-panel activity-panel">
 
-                        <div class="profile-card-heading">
+                        <div class="profile-panel-header">
 
                             <div>
 
-                                <span class="section-tag">
-                                    Activity
-                                </span>
+                                <p class="small-heading">
+                                    RECENT ACTIVITY
+                                </p>
 
                                 <h2>
-                                    Recent Library Activity
+                                    Library activity
                                 </h2>
 
                             </div>
@@ -371,212 +518,246 @@
                         </div>
 
 
-                        <!--
-                            Borrow and return activity will be
-                            generated by JavaScript.
-                        -->
                         <div class="activity-list">
 
-                            <div
-                                class="empty-activity-state"
-                                id="emptyActivityState">
+                            <div class="empty-activity-state">
 
-                                <i class="fa-solid fa-clock-rotate-left"></i>
+                                <div class="activity-empty-icon">
+                                    <i class="fa-regular fa-clock"></i>
+                                </div>
 
                                 <p>
-                                    Your borrowing activity
-                                    will appear here.
+                                    Your recent library activity will
+                                    appear here.
                                 </p>
 
                             </div>
 
                         </div>
 
-                    </section>
-
-
-                    <!-- Quick Actions -->
-                    <section class="profile-content-card">
-
-                        <div class="profile-card-heading">
-
-                            <div>
-
-                                <span class="section-tag">
-                                    Quick Actions
-                                </span>
-
-                                <h2>
-                                    What Would You Like To Do?
-                                </h2>
-
-                            </div>
-
-                        </div>
-
-
-                        <div class="quick-actions">
-
-
-                            <a
-                                href="books.html"
-                                class="quick-action">
-
-                                <i class="fa-solid fa-magnifying-glass"></i>
-
-                                <div>
-
-                                    <h3>
-                                        Find a Book
-                                    </h3>
-
-                                    <p>
-                                        Search the library collection.
-                                    </p>
-
-                                </div>
-
-                            </a>
-
-
-                            <a
-                                href="gallery.html"
-                                class="quick-action">
-
-                                <i class="fa-solid fa-images"></i>
-
-                                <div>
-
-                                    <h3>
-                                        Library Gallery
-                                    </h3>
-
-                                    <p>
-                                        Explore our library spaces.
-                                    </p>
-
-                                </div>
-
-                            </a>
-
-
-                            <a
-                                href="contact.html"
-                                class="quick-action">
-
-                                <i class="fa-solid fa-headset"></i>
-
-                                <div>
-
-                                    <h3>
-                                        Need Help?
-                                    </h3>
-
-                                    <p>
-                                        Contact the library team.
-                                    </p>
-
-                                </div>
-
-                            </a>
-
-
-                        </div>
-
-                    </section>
-
-
-                    <!-- Borrowing Information -->
-                    <section class="profile-content-card">
-
-                        <div class="profile-card-heading">
-
-                            <div>
-
-                                <span class="section-tag">
-                                    Borrowing Information
-                                </span>
-
-                                <h2>
-                                    Library Borrowing Rules
-                                </h2>
-
-                            </div>
-
-                        </div>
-
-
-                        <div class="borrowing-rules">
-
-
-                            <div class="borrowing-rule">
-
-                                <i class="fa-solid fa-calendar-days"></i>
-
-                                <div>
-
-                                    <h3>
-                                        14 Day Borrowing Period
-                                    </h3>
-
-                                    <p>
-                                        Each available book can be
-                                        borrowed for up to 14 days.
-                                    </p>
-
-                                </div>
-
-                            </div>
-
-
-                            <div class="borrowing-rule">
-
-                                <i class="fa-solid fa-clock"></i>
-
-                                <div>
-
-                                    <h3>
-                                        Track Remaining Time
-                                    </h3>
-
-                                    <p>
-                                        ShelfSync automatically
-                                        calculates the remaining
-                                        borrowing time.
-                                    </p>
-
-                                </div>
-
-                            </div>
-
-
-                            <div class="borrowing-rule">
-
-                                <i class="fa-solid fa-rotate-left"></i>
-
-                                <div>
-
-                                    <h3>
-                                        Return Books
-                                    </h3>
-
-                                    <p>
-                                        Return borrowed books from
-                                        your profile when you have
-                                        finished reading.
-                                    </p>
-
-                                </div>
-
-                            </div>
-
-
-                        </div>
-
-                    </section>
-
+                    </aside>
 
                 </div>
+
+
+                <!-- Account Actions -->
+                <section class="profile-actions-section">
+
+                    <div class="profile-actions-header">
+
+                        <div>
+
+                            <p class="small-heading">
+                                QUICK ACTIONS
+                            </p>
+
+                            <h2>
+                                Manage your library
+                            </h2>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="profile-actions-grid">
+
+
+                        <a
+                            href="books.html"
+                            class="profile-action-card"
+                        >
+
+                            <div class="profile-action-icon">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                            </div>
+
+                            <div>
+
+                                <h3>
+                                    Find a Book
+                                </h3>
+
+                                <p>
+                                    Search the ShelfSync collection and
+                                    discover your next read.
+                                </p>
+
+                            </div>
+
+                            <i class="fa-solid fa-arrow-right profile-action-arrow"></i>
+
+                        </a>
+
+
+                        <a
+                            href="gallery.html"
+                            class="profile-action-card"
+                        >
+
+                            <div class="profile-action-icon">
+                                <i class="fa-regular fa-images"></i>
+                            </div>
+
+                            <div>
+
+                                <h3>
+                                    View Gallery
+                                </h3>
+
+                                <p>
+                                    Explore the library environment and
+                                    ShelfSync experience.
+                                </p>
+
+                            </div>
+
+                            <i class="fa-solid fa-arrow-right profile-action-arrow"></i>
+
+                        </a>
+
+
+                        <a
+                            href="contact.html"
+                            class="profile-action-card"
+                        >
+
+                            <div class="profile-action-icon">
+                                <i class="fa-regular fa-message"></i>
+                            </div>
+
+                            <div>
+
+                                <h3>
+                                    Get Support
+                                </h3>
+
+                                <p>
+                                    Have a question or issue? Contact the
+                                    ShelfSync team.
+                                </p>
+
+                            </div>
+
+                            <i class="fa-solid fa-arrow-right profile-action-arrow"></i>
+
+                        </a>
+
+
+                        <button
+                            type="button"
+                            class="profile-action-card profile-logout-card"
+                            id="profileLogoutAction"
+                        >
+
+                            <div class="profile-action-icon">
+                                <i class="fa-solid fa-right-from-bracket"></i>
+                            </div>
+
+                            <div>
+
+                                <h3>
+                                    Sign Out
+                                </h3>
+
+                                <p>
+                                    End your current ShelfSync session
+                                    securely.
+                                </p>
+
+                            </div>
+
+                            <i class="fa-solid fa-arrow-right profile-action-arrow"></i>
+
+                        </button>
+
+                    </div>
+
+                </section>
+
+
+                <!-- Profile Photo Information -->
+                <section class="profile-library-info">
+
+                    <div class="profile-library-info-content">
+
+                        <div class="profile-library-info-icon">
+                            <i class="fa-solid fa-camera"></i>
+                        </div>
+
+                        <div>
+
+                            <p class="small-heading">
+                                PERSONALIZE YOUR PROFILE
+                            </p>
+
+                            <h3>
+                                Add your own profile picture.
+                            </h3>
+
+                            <p>
+                                Click the camera button beside your profile
+                                picture to choose an image from your device.
+                                Your selected photo will be saved for your
+                                ShelfSync account on this browser.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <button
+                        type="button"
+                        class="primary-btn"
+                        id="removeProfilePhotoBtn"
+                    >
+                        <i class="fa-solid fa-trash"></i>
+                        Remove Photo
+                    </button>
+
+                </section>
+
+
+                <!-- Library Tip -->
+                <section class="profile-library-info">
+
+                    <div class="profile-library-info-content">
+
+                        <div class="profile-library-info-icon">
+                            <i class="fa-solid fa-lightbulb"></i>
+                        </div>
+
+                        <div>
+
+                            <p class="small-heading">
+                                SHELFSYNC TIP
+                            </p>
+
+                            <h3>
+                                Keep track of your return date.
+                            </h3>
+
+                            <p>
+                                Each borrowed book has a 14-day borrowing
+                                period. Return books on time so they remain
+                                available for other readers.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <a
+                        href="books.html"
+                        class="primary-btn"
+                    >
+                        Browse Collection
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+
+                </section>
 
             </div>
 
@@ -586,103 +767,136 @@
 
 
     <!-- Footer -->
-    <footer class="main-footer">
+    <footer class="site-footer">
 
-        <div class="container footer-grid">
+        <div class="container">
+
+            <div class="footer-grid">
+
+                <div class="footer-brand">
+
+                    <a href="index.html" class="logo footer-logo">
+
+                        <span class="logo-icon">
+                            <i class="fa-solid fa-book-open"></i>
+                        </span>
+
+                        <span>
+                            ShelfSync
+                        </span>
+
+                    </a>
+
+                    <p>
+                        A modern digital library experience designed to
+                        make discovering, borrowing and managing books easier.
+                    </p>
+
+                </div>
 
 
-            <div class="footer-brand">
+                <div class="footer-column">
 
-                <a
-                    href="index.html"
-                    class="logo footer-logo">
+                    <h3>
+                        Explore
+                    </h3>
 
-                    <i class="fa-solid fa-book-open"></i>
-                    Shelf<span>Sync</span>
+                    <a href="index.html">
+                        Home
+                    </a>
 
-                </a>
+                    <a href="about.html">
+                        About
+                    </a>
 
-                <p>
-                    A simple and smart library management system
-                    designed for students and educational institutions.
-                </p>
+                    <a href="books.html">
+                        Books
+                    </a>
+
+                    <a href="gallery.html">
+                        Gallery
+                    </a>
+
+                </div>
+
+
+                <div class="footer-column">
+
+                    <h3>
+                        Account
+                    </h3>
+
+                    <a href="profile.html">
+                        My Profile
+                    </a>
+
+                    <a href="books.html">
+                        Browse Books
+                    </a>
+
+                    <a href="contact.html">
+                        Contact
+                    </a>
+
+                    <button
+                        type="button"
+                        class="footer-logout-button"
+                        id="footerLogoutBtn"
+                    >
+                        Logout
+                    </button>
+
+                </div>
+
+
+                <div class="footer-column">
+
+                    <h3>
+                        Contact
+                    </h3>
+
+                    <p>
+                        <i class="fa-solid fa-phone"></i>
+                        8093430469
+                    </p>
+
+                    <p>
+                        <i class="fa-solid fa-envelope"></i>
+                        kumarsahuakash710@gmail.com
+                    </p>
+
+                    <p>
+                        <i class="fa-solid fa-location-dot"></i>
+                        Bhubaneswar, Odisha
+                    </p>
+
+                </div>
 
             </div>
 
 
-            <div class="footer-links">
-
-                <h3>
-                    Quick Links
-                </h3>
-
-                <a href="index.html">Home</a>
-                <a href="about.html">About</a>
-                <a href="books.html">Books</a>
-                <a href="gallery.html">Gallery</a>
-
-            </div>
-
-
-            <div class="footer-links">
-
-                <h3>
-                    Account
-                </h3>
-
-                <a href="profile.html">
-                    Profile
-                </a>
-
-                <a href="books.html">
-                    Borrow Books
-                </a>
-
-                <a href="contact.html">
-                    Contact
-                </a>
-
-            </div>
-
-
-            <div class="footer-contact">
-
-                <h3>
-                    Library
-                </h3>
+            <div class="footer-bottom">
 
                 <p>
-                    <i class="fa-solid fa-location-dot"></i>
-                    Bhubaneswar, Odisha
+                    &copy;
+                    <span id="currentYear"></span>
+                    ShelfSync. All rights reserved.
                 </p>
 
-                <p>
-                    <i class="fa-solid fa-envelope"></i>
-                    library@shelfsync.com
-                </p>
 
-                <p>
-                    <i class="fa-solid fa-phone"></i>
-                    +91 98765 43210
-                </p>
+                <div class="footer-bottom-links">
+
+                    <a href="#">
+                        Privacy
+                    </a>
+
+                    <a href="#">
+                        Terms
+                    </a>
+
+                </div>
 
             </div>
-
-
-        </div>
-
-
-        <div class="container footer-bottom">
-
-            <p>
-                &copy;
-                <span id="currentYear"></span>
-                ShelfSync. All rights reserved.
-            </p>
-
-            <p>
-                Library Management System
-            </p>
 
         </div>
 

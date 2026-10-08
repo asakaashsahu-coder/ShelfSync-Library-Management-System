@@ -1,0 +1,396 @@
+/* =========================================================
+   ShelfSync - Midnight Theme
+   Add this file after style.css
+   ========================================================= */
+
+:root {
+    --primary: #8ab4ff;
+    --primary-dark: #6d9df5;
+    --primary-soft: #172642;
+
+    --ink: #f8fafc;
+    --text: #d5deeb;
+    --muted: #93a4b8;
+    --light-text: #64748b;
+
+    --line: #26364c;
+
+    --surface: #111c2e;
+    --soft: #0b1424;
+    --soft-blue: #142238;
+
+    --success: #5ee6a8;
+    --danger: #ff7d88;
+    --warning: #f7c76a;
+
+    --shadow-sm:
+        0 5px 18px rgba(2, 8, 23, 0.28);
+
+    --shadow:
+        0 16px 45px rgba(2, 8, 23, 0.36);
+
+    --shadow-lg:
+        0 28px 70px rgba(2, 8, 23, 0.48);
+}
+
+
+/* =========================================================
+   Main Background
+   ========================================================= */
+
+html {
+    background: #08111f;
+}
+
+body {
+    background:
+        radial-gradient(
+            circle at 12% 5%,
+            rgba(59, 130, 246, 0.16),
+            transparent 28%
+        ),
+        radial-gradient(
+            circle at 88% 15%,
+            rgba(99, 102, 241, 0.11),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 50% 100%,
+            rgba(30, 64, 175, 0.08),
+            transparent 35%
+        ),
+        linear-gradient(
+            135deg,
+            #08111f 0%,
+            #0c1728 45%,
+            #101c2f 100%
+        );
+
+    color: var(--text);
+}
+
+
+/* =========================================================
+   Header / Navigation
+   ========================================================= */
+
+.site-header,
+header,
+.navbar {
+    background: rgba(8, 17, 31, 0.86);
+    border-color: var(--line);
+    box-shadow: 0 8px 30px rgba(2, 8, 23, 0.18);
+}
+
+.nav-links a {
+    color: #cbd5e1;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    color: var(--primary);
+}
+
+
+/* =========================================================
+   Main Sections
+   ========================================================= */
+
+.categories-section,
+.featured-section,
+.about-purpose-section,
+.about-features-section,
+.technology-section,
+.journey-section,
+.gallery-section,
+.contact-section,
+.profile-dashboard-section {
+    background: transparent;
+}
+
+
+/* =========================================================
+   Cards
+   ========================================================= */
+
+.category-card,
+.featured-book-card,
+.service-card,
+.purpose-card,
+.technology-card,
+.gallery-card,
+.form-card,
+.contact-card,
+.profile-card,
+.profile-panel,
+.profile-stat-card {
+    background:
+        linear-gradient(
+            145deg,
+            rgba(17, 28, 46, 0.96),
+            rgba(14, 25, 42, 0.92)
+        );
+
+    border-color: rgba(71, 91, 118, 0.45);
+    box-shadow: var(--shadow-sm);
+}
+
+.category-card:hover,
+.featured-book-card:hover,
+.service-card:hover,
+.purpose-card:hover,
+.technology-card:hover,
+.gallery-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(138, 180, 255, 0.38);
+    box-shadow: var(--shadow);
+}
+
+
+/* =========================================================
+   Typography
+   ========================================================= */
+
+.center-heading h2,
+.section-heading h2,
+.category-card h3,
+.service-card h3,
+.featured-book-card h3,
+.purpose-card h3,
+.technology-card h3,
+.library-book-info h3,
+.borrowed-book-card h3 {
+    color: var(--ink);
+}
+
+.center-heading p,
+.section-heading p,
+.category-card p,
+.service-card p,
+.featured-book-card p,
+.purpose-card p,
+.technology-card p,
+.library-author,
+.book-description {
+    color: var(--muted);
+}
+
+
+/* =========================================================
+   Icons
+   ========================================================= */
+
+.category-icon,
+.service-icon,
+.technology-icon,
+.purpose-icon,
+.profile-stat-icon {
+    background: var(--primary-soft);
+    color: var(--primary);
+    box-shadow:
+        inset 0 0 0 1px rgba(138, 180, 255, 0.08);
+}
+
+
+/* =========================================================
+   Search
+   ========================================================= */
+
+.library-search-box,
+.search-input-wrap {
+    background: rgba(17, 28, 46, 0.92);
+    border-color: var(--line);
+}
+
+.library-search-box input,
+.search-input-wrap input {
+    color: var(--ink);
+}
+
+.library-search-box input::placeholder,
+.search-input-wrap input::placeholder {
+    color: #64748b;
+}
+
+
+/* =========================================================
+   Forms
+   ========================================================= */
+
+input,
+select,
+textarea {
+    background: #0e1a2c;
+    border-color: var(--line);
+    color: var(--ink);
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: #64748b;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: var(--primary);
+    box-shadow:
+        0 0 0 3px rgba(138, 180, 255, 0.11);
+}
+
+
+/* =========================================================
+   Filters
+   ========================================================= */
+
+.book-filter-btn,
+.gallery-filter-btn {
+    background: #0e1a2c;
+    border-color: var(--line);
+    color: var(--muted);
+}
+
+.book-filter-btn:hover,
+.book-filter-btn.active,
+.gallery-filter-btn:hover,
+.gallery-filter-btn.active {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: #08111f;
+}
+
+
+/* =========================================================
+   Book Actions
+   ========================================================= */
+
+.book-actions button {
+    background: #0e1a2c;
+    border-color: var(--line);
+    color: var(--text);
+}
+
+.book-actions .book-details-btn {
+    background: var(--primary-soft);
+    border-color: #314b72;
+    color: var(--primary);
+}
+
+.book-actions .borrow-btn {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: #08111f;
+}
+
+.book-actions .borrow-btn:hover {
+    background: var(--primary-dark);
+}
+
+
+/* =========================================================
+   Book Covers
+   ========================================================= */
+
+.library-book-cover {
+    background:
+        linear-gradient(
+            145deg,
+            #172942,
+            #0f1c30
+        );
+}
+
+.featured-book-icon {
+    background: #dbeafe;
+    color: #0f172a;
+}
+
+
+/* =========================================================
+   Profile
+   ========================================================= */
+
+.profile-panel-header {
+    border-color: var(--line);
+}
+
+.profile-stat-card {
+    background: rgba(17, 28, 46, 0.96);
+}
+
+.borrowed-book-card {
+    border-color: var(--line);
+}
+
+.borrowed-book-card > div:first-child {
+    background: var(--primary-soft);
+    color: var(--primary);
+}
+
+.borrowed-book-card .return-book-btn {
+    background: var(--primary-soft);
+    border-color: #314b72;
+    color: var(--primary);
+}
+
+.borrowed-book-card .return-book-btn:hover {
+    background: var(--primary);
+    color: #08111f;
+}
+
+
+/* =========================================================
+   Modal
+   ========================================================= */
+
+.book-modal-overlay {
+    background: rgba(2, 8, 23, 0.84);
+    backdrop-filter: blur(8px);
+}
+
+.book-modal-content {
+    background:
+        linear-gradient(
+            145deg,
+            #111c2e,
+            #0e192b
+        );
+
+    border-color: var(--line);
+    box-shadow: var(--shadow-lg);
+}
+
+
+/* =========================================================
+   Footer
+   ========================================================= */
+
+footer {
+    background: #060d18;
+    border-color: var(--line);
+}
+
+.footer-brand,
+.footer-column h3 {
+    color: var(--ink);
+}
+
+.footer-column a,
+.footer-brand p,
+.footer-bottom {
+    color: var(--muted);
+}
+
+.footer-column a:hover {
+    color: var(--primary);
+}
+
+
+/* =========================================================
+   Selection
+   ========================================================= */
+
+::selection {
+    background: rgba(138, 180, 255, 0.25);
+    color: #ffffff;
+}

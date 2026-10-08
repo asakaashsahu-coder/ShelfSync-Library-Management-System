@@ -1,0 +1,1334 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="ShelfSync Admin Dashboard - Manage books, members and library activity."
+    >
+
+    <title>Admin Dashboard | ShelfSync</title>
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+    <!-- ShelfSync Base Styles -->
+    <link rel="stylesheet" href="../css/style.css">
+
+    <!--
+        SHELFSYNC THEME
+        ------------------------------------------------
+        Keep style.css enabled.
+
+        Choose ONE theme below.
+
+        To change the theme:
+        1. Remove the comments from the theme you want.
+        2. Keep the other themes commented.
+        3. Save the file and refresh the page.
+
+        Available themes:
+        - Ivory
+        - Dark
+        - Midnight
+        - Sage
+        ------------------------------------------------
+    -->
+
+    <!-- Ivory Theme -->
+    <!-- <link rel="stylesheet" href="../css/theme-ivory.css"> -->
+
+    <!-- Dark Theme -->
+    <!-- <link rel="stylesheet" href="../css/theme-dark.css"> -->
+
+    <!-- Midnight Theme -->
+    <!-- <link rel="stylesheet" href="../css/theme-midnight.css"> -->
+
+    <!-- Sage Theme -->
+    <!-- <link rel="stylesheet" href="../css/theme-sage.css"> -->
+
+</head>
+
+<body class="admin-page">
+
+    <!-- Admin Header -->
+
+    <header class="admin-header">
+
+        <div class="admin-brand">
+
+            <a
+                href="index.html"
+                class="admin-logo"
+            >
+                <span class="admin-logo-mark">
+                    <i class="fa-solid fa-book-open"></i>
+                </span>
+
+                <span>
+                    Shelf<span>Sync</span>
+                </span>
+            </a>
+
+            <span class="admin-badge">
+                Admin
+            </span>
+
+        </div>
+
+
+        <div class="admin-header-actions">
+
+            <a
+                href="index.html"
+                class="admin-view-site"
+            >
+                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                View Website
+            </a>
+
+
+            <button
+                type="button"
+                class="admin-mobile-menu"
+                id="adminMenuBtn"
+                aria-label="Open admin menu"
+            >
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <!-- Admin Layout -->
+
+    <div class="admin-layout">
+
+
+        <!-- Sidebar -->
+
+        <aside
+            class="admin-sidebar"
+            id="adminSidebar"
+        >
+
+            <div class="admin-sidebar-top">
+
+                <p class="admin-sidebar-label">
+                    MAIN MENU
+                </p>
+
+
+                <nav class="admin-navigation">
+
+                    <a
+                        href="#dashboard"
+                        class="admin-nav-link active"
+                        data-admin-section="dashboard"
+                    >
+                        <i class="fa-solid fa-chart-line"></i>
+                        <span>Dashboard</span>
+                    </a>
+
+
+                    <a
+                        href="#books"
+                        class="admin-nav-link"
+                        data-admin-section="books"
+                    >
+                        <i class="fa-solid fa-book"></i>
+                        <span>Books</span>
+                    </a>
+
+
+                    <a
+                        href="#members"
+                        class="admin-nav-link"
+                        data-admin-section="members"
+                    >
+                        <i class="fa-solid fa-users"></i>
+                        <span>Members</span>
+                    </a>
+
+
+                    <a
+                        href="#borrowings"
+                        class="admin-nav-link"
+                        data-admin-section="borrowings"
+                    >
+                        <i class="fa-solid fa-right-left"></i>
+                        <span>Borrowings</span>
+                    </a>
+
+
+                    <a
+                        href="#activity"
+                        class="admin-nav-link"
+                        data-admin-section="activity"
+                    >
+                        <i class="fa-solid fa-clock-rotate-left"></i>
+                        <span>Activity</span>
+                    </a>
+
+                </nav>
+
+
+                <p class="admin-sidebar-label admin-sidebar-label-space">
+                    SYSTEM
+                </p>
+
+
+                <nav class="admin-navigation">
+
+                    <a
+                        href="index.html"
+                        class="admin-nav-link"
+                    >
+                        <i class="fa-solid fa-house"></i>
+                        <span>Back to Website</span>
+                    </a>
+
+
+                    <button
+                        type="button"
+                        class="admin-nav-link admin-logout-btn"
+                        id="adminLogoutBtn"
+                    >
+                        <i class="fa-solid fa-right-from-bracket"></i>
+                        <span>Logout</span>
+                    </button>
+
+                </nav>
+
+            </div>
+
+
+            <div class="admin-sidebar-footer">
+
+                <div class="admin-sidebar-user">
+
+                    <div class="admin-sidebar-avatar">
+                        A
+                    </div>
+
+                    <div>
+                        <strong>
+                            ShelfSync Admin
+                        </strong>
+
+                        <span>
+                            Administrator
+                        </span>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </aside>
+
+
+        <!-- Main Content -->
+
+        <main class="admin-main">
+
+
+            <!-- Dashboard Section -->
+
+            <section
+                class="admin-section active"
+                id="dashboard"
+                data-admin-content="dashboard"
+            >
+
+                <div class="admin-page-heading">
+
+                    <div>
+
+                        <span class="admin-eyebrow">
+                            Library Management
+                        </span>
+
+                        <h1>
+                            Dashboard
+                        </h1>
+
+                        <p>
+                            Welcome back. Here's what's happening in your library today.
+                        </p>
+
+                    </div>
+
+
+                    <div class="admin-date">
+
+                        <i class="fa-regular fa-calendar"></i>
+
+                        <span id="adminCurrentDate">
+                            Today
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Statistics -->
+
+                <div class="admin-stat-grid">
+
+
+                    <article class="admin-stat-card">
+
+                        <div class="admin-stat-icon books">
+                            <i class="fa-solid fa-book"></i>
+                        </div>
+
+                        <div class="admin-stat-content">
+
+                            <span>
+                                Total Books
+                            </span>
+
+                            <strong id="adminTotalBooks">
+                                16
+                            </strong>
+
+                            <small>
+                                Available in library
+                            </small>
+
+                        </div>
+
+                    </article>
+
+
+                    <article class="admin-stat-card">
+
+                        <div class="admin-stat-icon members">
+                            <i class="fa-solid fa-users"></i>
+                        </div>
+
+                        <div class="admin-stat-content">
+
+                            <span>
+                                Members
+                            </span>
+
+                            <strong id="adminTotalMembers">
+                                0
+                            </strong>
+
+                            <small>
+                                Registered members
+                            </small>
+
+                        </div>
+
+                    </article>
+
+
+                    <article class="admin-stat-card">
+
+                        <div class="admin-stat-icon borrowed">
+                            <i class="fa-solid fa-book-open-reader"></i>
+                        </div>
+
+                        <div class="admin-stat-content">
+
+                            <span>
+                                Borrowed
+                            </span>
+
+                            <strong id="adminTotalBorrowed">
+                                0
+                            </strong>
+
+                            <small>
+                                Currently borrowed
+                            </small>
+
+                        </div>
+
+                    </article>
+
+
+                    <article class="admin-stat-card">
+
+                        <div class="admin-stat-icon returned">
+                            <i class="fa-solid fa-arrow-rotate-left"></i>
+                        </div>
+
+                        <div class="admin-stat-content">
+
+                            <span>
+                                Returned
+                            </span>
+
+                            <strong id="adminTotalReturned">
+                                0
+                            </strong>
+
+                            <small>
+                                Books returned
+                            </small>
+
+                        </div>
+
+                    </article>
+
+                </div>
+
+
+                <!-- Dashboard Content -->
+
+                <div class="admin-dashboard-grid">
+
+
+                    <!-- Recent Borrowings -->
+
+                    <section class="admin-panel">
+
+                        <div class="admin-panel-header">
+
+                            <div>
+
+                                <span class="admin-panel-kicker">
+                                    Latest activity
+                                </span>
+
+                                <h2>
+                                    Recent Borrowings
+                                </h2>
+
+                            </div>
+
+                            <button
+                                type="button"
+                                class="admin-text-button"
+                                data-admin-target="borrowings"
+                            >
+                                View all
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+
+                        </div>
+
+
+                        <div
+                            class="admin-table-wrapper"
+                            id="dashboardBorrowings"
+                        >
+
+                            <table class="admin-table">
+
+                                <thead>
+
+                                    <tr>
+
+                                        <th>
+                                            Member
+                                        </th>
+
+                                        <th>
+                                            Book
+                                        </th>
+
+                                        <th>
+                                            Borrowed
+                                        </th>
+
+                                        <th>
+                                            Status
+                                        </th>
+
+                                    </tr>
+
+                                </thead>
+
+
+                                <tbody id="recentBorrowingsBody">
+
+                                    <tr>
+
+                                        <td colspan="4">
+
+                                            <div class="admin-empty-table">
+
+                                                <i class="fa-solid fa-book-open"></i>
+
+                                                <p>
+                                                    No borrowing activity yet.
+                                                </p>
+
+                                            </div>
+
+                                        </td>
+
+                                    </tr>
+
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+                    </section>
+
+
+                    <!-- Quick Actions -->
+
+                    <section class="admin-panel admin-quick-panel">
+
+                        <div class="admin-panel-header">
+
+                            <div>
+
+                                <span class="admin-panel-kicker">
+                                    Shortcuts
+                                </span>
+
+                                <h2>
+                                    Quick Actions
+                                </h2>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="admin-quick-actions">
+
+                            <button
+                                type="button"
+                                class="admin-action-card"
+                                data-admin-target="books"
+                            >
+
+                                <span class="admin-action-icon">
+                                    <i class="fa-solid fa-book-medical"></i>
+                                </span>
+
+                                <span>
+                                    <strong>
+                                        Manage Books
+                                    </strong>
+
+                                    <small>
+                                        View and manage library books
+                                    </small>
+                                </span>
+
+                                <i class="fa-solid fa-chevron-right"></i>
+
+                            </button>
+
+
+                            <button
+                                type="button"
+                                class="admin-action-card"
+                                data-admin-target="members"
+                            >
+
+                                <span class="admin-action-icon">
+                                    <i class="fa-solid fa-user-group"></i>
+                                </span>
+
+                                <span>
+                                    <strong>
+                                        View Members
+                                    </strong>
+
+                                    <small>
+                                        Check registered members
+                                    </small>
+                                </span>
+
+                                <i class="fa-solid fa-chevron-right"></i>
+
+                            </button>
+
+
+                            <button
+                                type="button"
+                                class="admin-action-card"
+                                data-admin-target="borrowings"
+                            >
+
+                                <span class="admin-action-icon">
+                                    <i class="fa-solid fa-book-bookmark"></i>
+                                </span>
+
+                                <span>
+                                    <strong>
+                                        Borrowing Records
+                                    </strong>
+
+                                    <small>
+                                        Track current borrowings
+                                    </small>
+                                </span>
+
+                                <i class="fa-solid fa-chevron-right"></i>
+
+                            </button>
+
+                        </div>
+
+                    </section>
+
+                </div>
+
+
+                <!-- Library Overview -->
+
+                <section class="admin-panel admin-overview-panel">
+
+                    <div class="admin-panel-header">
+
+                        <div>
+
+                            <span class="admin-panel-kicker">
+                                Library overview
+                            </span>
+
+                            <h2>
+                                Collection Summary
+                            </h2>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="admin-category-grid">
+
+                        <div class="admin-category-card">
+
+                            <div class="admin-category-icon">
+                                <i class="fa-solid fa-laptop-code"></i>
+                            </div>
+
+                            <div>
+
+                                <strong>
+                                    Technology
+                                </strong>
+
+                                <span>
+                                    4 books
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="admin-category-card">
+
+                            <div class="admin-category-icon">
+                                <i class="fa-solid fa-flask"></i>
+                            </div>
+
+                            <div>
+
+                                <strong>
+                                    Science
+                                </strong>
+
+                                <span>
+                                    4 books
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="admin-category-card">
+
+                            <div class="admin-category-icon">
+                                <i class="fa-solid fa-feather-pointed"></i>
+                            </div>
+
+                            <div>
+
+                                <strong>
+                                    Literature
+                                </strong>
+
+                                <span>
+                                    4 books
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="admin-category-card">
+
+                            <div class="admin-category-icon">
+                                <i class="fa-solid fa-landmark"></i>
+                            </div>
+
+                            <div>
+
+                                <strong>
+                                    History
+                                </strong>
+
+                                <span>
+                                    4 books
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+            </section>
+
+
+            <!-- Books Section -->
+
+            <section
+                class="admin-section"
+                id="books"
+                data-admin-content="books"
+            >
+
+                <div class="admin-page-heading">
+
+                    <div>
+
+                        <span class="admin-eyebrow">
+                            Library Collection
+                        </span>
+
+                        <h1>
+                            Books
+                        </h1>
+
+                        <p>
+                            Manage the books available in your ShelfSync library.
+                        </p>
+
+                    </div>
+
+
+                    <button
+                        type="button"
+                        class="admin-primary-button"
+                        id="adminAddBookBtn"
+                    >
+                        <i class="fa-solid fa-plus"></i>
+                        Add Book
+                    </button>
+
+                </div>
+
+
+                <section class="admin-panel">
+
+                    <div class="admin-toolbar">
+
+                        <div class="admin-search">
+
+                            <i class="fa-solid fa-magnifying-glass"></i>
+
+                            <input
+                                type="search"
+                                id="adminBookSearch"
+                                placeholder="Search books..."
+                                autocomplete="off"
+                            >
+
+                        </div>
+
+
+                        <select
+                            id="adminBookCategory"
+                            class="admin-select"
+                        >
+
+                            <option value="all">
+                                All Categories
+                            </option>
+
+                            <option value="technology">
+                                Technology
+                            </option>
+
+                            <option value="science">
+                                Science
+                            </option>
+
+                            <option value="literature">
+                                Literature
+                            </option>
+
+                            <option value="history">
+                                History
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div
+                        class="admin-books-grid"
+                        id="adminBooksGrid"
+                    >
+
+                        <!-- Book cards will be added by JavaScript -->
+
+                    </div>
+
+                </section>
+
+            </section>
+
+
+            <!-- Members Section -->
+
+            <section
+                class="admin-section"
+                id="members"
+                data-admin-content="members"
+            >
+
+                <div class="admin-page-heading">
+
+                    <div>
+
+                        <span class="admin-eyebrow">
+                            User Management
+                        </span>
+
+                        <h1>
+                            Members
+                        </h1>
+
+                        <p>
+                            View and manage registered ShelfSync members.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <section class="admin-panel">
+
+                    <div class="admin-toolbar">
+
+                        <div class="admin-search">
+
+                            <i class="fa-solid fa-magnifying-glass"></i>
+
+                            <input
+                                type="search"
+                                id="adminMemberSearch"
+                                placeholder="Search members..."
+                                autocomplete="off"
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="admin-table-wrapper">
+
+                        <table class="admin-table">
+
+                            <thead>
+
+                                <tr>
+
+                                    <th>
+                                        Member
+                                    </th>
+
+                                    <th>
+                                        Member ID
+                                    </th>
+
+                                    <th>
+                                        Email
+                                    </th>
+
+                                    <th>
+                                        Phone
+                                    </th>
+
+                                    <th>
+                                        Joined
+                                    </th>
+
+                                </tr>
+
+                            </thead>
+
+
+                            <tbody id="adminMembersBody">
+
+                                <tr>
+
+                                    <td colspan="5">
+
+                                        <div class="admin-empty-table">
+
+                                            <i class="fa-solid fa-users"></i>
+
+                                            <p>
+                                                No members registered yet.
+                                            </p>
+
+                                        </div>
+
+                                    </td>
+
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </section>
+
+            </section>
+
+
+            <!-- Borrowings Section -->
+
+            <section
+                class="admin-section"
+                id="borrowings"
+                data-admin-content="borrowings"
+            >
+
+                <div class="admin-page-heading">
+
+                    <div>
+
+                        <span class="admin-eyebrow">
+                            Library Transactions
+                        </span>
+
+                        <h1>
+                            Borrowings
+                        </h1>
+
+                        <p>
+                            Monitor books currently borrowed by ShelfSync members.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <section class="admin-panel">
+
+                    <div class="admin-borrowing-summary">
+
+                        <div>
+
+                            <span>
+                                Active Borrowings
+                            </span>
+
+                            <strong id="adminActiveBorrowings">
+                                0
+                            </strong>
+
+                        </div>
+
+
+                        <div>
+
+                            <span>
+                                Returned Books
+                            </span>
+
+                            <strong id="adminReturnedBooks">
+                                0
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="admin-table-wrapper">
+
+                        <table class="admin-table">
+
+                            <thead>
+
+                                <tr>
+
+                                    <th>
+                                        Book
+                                    </th>
+
+                                    <th>
+                                        Member
+                                    </th>
+
+                                    <th>
+                                        Borrowed
+                                    </th>
+
+                                    <th>
+                                        Due Date
+                                    </th>
+
+                                    <th>
+                                        Status
+                                    </th>
+
+                                </tr>
+
+                            </thead>
+
+
+                            <tbody id="adminBorrowingsBody">
+
+                                <tr>
+
+                                    <td colspan="5">
+
+                                        <div class="admin-empty-table">
+
+                                            <i class="fa-solid fa-book-open-reader"></i>
+
+                                            <p>
+                                                No active borrowings.
+                                            </p>
+
+                                        </div>
+
+                                    </td>
+
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </section>
+
+            </section>
+
+
+            <!-- Activity Section -->
+
+            <section
+                class="admin-section"
+                id="activity"
+                data-admin-content="activity"
+            >
+
+                <div class="admin-page-heading">
+
+                    <div>
+
+                        <span class="admin-eyebrow">
+                            System History
+                        </span>
+
+                        <h1>
+                            Activity
+                        </h1>
+
+                        <p>
+                            Review recent borrowing and return activity.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <section class="admin-panel">
+
+                    <div
+                        class="admin-activity-list"
+                        id="adminActivityList"
+                    >
+
+                        <div class="admin-empty-activity">
+
+                            <div class="admin-empty-icon">
+
+                                <i class="fa-solid fa-clock-rotate-left"></i>
+
+                            </div>
+
+                            <h3>
+                                No activity yet
+                            </h3>
+
+                            <p>
+                                Library activity will appear here when members borrow or return books.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+            </section>
+
+
+        </main>
+
+    </div>
+
+
+    <!-- Add Book Modal -->
+
+    <div
+        class="admin-modal"
+        id="adminBookModal"
+        aria-hidden="true"
+    >
+
+        <div
+            class="admin-modal-overlay"
+            id="adminModalOverlay"
+        ></div>
+
+
+        <div
+            class="admin-modal-card"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="adminModalTitle"
+        >
+
+            <div class="admin-modal-header">
+
+                <div>
+
+                    <span class="admin-panel-kicker">
+                        Library Collection
+                    </span>
+
+                    <h2 id="adminModalTitle">
+                        Add New Book
+                    </h2>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="admin-modal-close"
+                    id="adminModalClose"
+                    aria-label="Close"
+                >
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+
+            </div>
+
+
+            <form
+                id="adminBookForm"
+                class="admin-book-form"
+            >
+
+                <div class="admin-form-grid">
+
+                    <div class="admin-form-group">
+
+                        <label for="adminBookTitle">
+                            Book Title
+                        </label>
+
+                        <input
+                            type="text"
+                            id="adminBookTitle"
+                            placeholder="Enter book title"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="admin-form-group">
+
+                        <label for="adminBookAuthor">
+                            Author
+                        </label>
+
+                        <input
+                            type="text"
+                            id="adminBookAuthor"
+                            placeholder="Enter author name"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="admin-form-group">
+
+                        <label for="adminBookPrice">
+                            Price
+                        </label>
+
+                        <input
+                            type="text"
+                            id="adminBookPrice"
+                            placeholder="Example: ₹499"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="admin-form-group">
+
+                        <label for="adminBookCategoryInput">
+                            Category
+                        </label>
+
+                        <select
+                            id="adminBookCategoryInput"
+                            required
+                        >
+
+                            <option value="">
+                                Select category
+                            </option>
+
+                            <option value="technology">
+                                Technology
+                            </option>
+
+                            <option value="science">
+                                Science
+                            </option>
+
+                            <option value="literature">
+                                Literature
+                            </option>
+
+                            <option value="history">
+                                History
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+                <div class="admin-form-group">
+
+                    <label for="adminBookDescription">
+                        Description
+                    </label>
+
+                    <textarea
+                        id="adminBookDescription"
+                        rows="4"
+                        placeholder="Write a short description..."
+                        required
+                    ></textarea>
+
+                </div>
+
+
+                <div class="admin-modal-actions">
+
+                    <button
+                        type="button"
+                        class="admin-secondary-button"
+                        id="adminCancelBook"
+                    >
+                        Cancel
+                    </button>
+
+
+                    <button
+                        type="submit"
+                        class="admin-primary-button"
+                    >
+                        <i class="fa-solid fa-plus"></i>
+                        Add Book
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- Footer -->
+
+    <footer class="admin-footer">
+
+        <p>
+            ©
+            <span id="currentYear"></span>
+            ShelfSync. Admin Dashboard.
+        </p>
+
+        <span>
+            Library Management System
+        </span>
+
+    </footer>
+
+
+    <script
+        src="../js/script.js"
+    ></script>
+
+</body>
+
+</html>

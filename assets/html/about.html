@@ -5,8 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="description"
-        content="Learn more about ShelfSync, our mission, library services and how we make reading easier.">
+    <meta
+        name="description"
+        content="Learn about ShelfSync, a modern digital library management system designed to make discovering and managing books easier."
+    >
 
     <title>About | ShelfSync</title>
 
@@ -14,49 +16,110 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
-        rel="stylesheet">
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap"
+        rel="stylesheet"
+    >
 
     <link
         rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
 
+    <!-- ShelfSync Base Styles -->
     <link rel="stylesheet" href="../css/style.css">
+
+    <!--
+        SHELFSYNC THEME
+        ------------------------------------------------
+        Keep style.css enabled.
+
+        Choose ONE theme below.
+
+        To change the theme:
+        1. Remove the comments from the theme you want.
+        2. Keep the other themes commented.
+        3. Save the file and refresh the page.
+
+        Available themes:
+        - Ivory
+        - Dark
+        - Midnight
+        - Sage
+        ------------------------------------------------
+    -->
+
+    <!-- Ivory Theme -->
+    <!-- <link rel="stylesheet" href="../css/theme-ivory.css"> -->
+
+    <!-- Dark Theme -->
+    <!-- <link rel="stylesheet" href="../css/theme-dark.css"> -->
+
+    <!-- Midnight Theme -->
+    <!-- <link rel="stylesheet" href="../css/theme-midnight.css"> -->
+
+    <!-- Sage Theme -->
+    <!-- <link rel="stylesheet" href="../css/theme-sage.css"> -->
+
 </head>
 
 <body>
 
-    <!-- Navbar -->
-    <header class="header">
+    <!-- Navigation -->
+    <header class="main-header">
 
-        <div class="container navbar">
+        <div class="container nav-container">
 
             <a href="index.html" class="logo">
 
-                <div class="logo-icon">
+                <span class="logo-icon">
                     <i class="fa-solid fa-book-open"></i>
-                </div>
+                </span>
 
                 <span>ShelfSync</span>
 
             </a>
 
+
             <nav class="nav-links" id="navLinks">
 
-                <a href="index.html">Home</a>
-                <a href="about.html" class="active">About</a>
-                <a href="books.html">Books</a>
-                <a href="gallery.html">Gallery</a>
-                <a href="contact.html">Contact</a>
+                <a href="index.html">
+                    Home
+                </a>
 
-                <a href="login.html" class="login-btn">
+                <a href="about.html" class="active">
+                    About
+                </a>
+
+                <a href="books.html">
+                    Books
+                </a>
+
+                <a href="gallery.html">
+                    Gallery
+                </a>
+
+                <a href="contact.html">
+                    Contact
+                </a>
+
+                <a
+                    href="login.html"
+                    class="login-nav"
+                    id="accountNavLink"
+                >
                     <i class="fa-regular fa-user"></i>
                     Login
                 </a>
 
             </nav>
 
-            <button class="menu-btn" id="menuBtn" aria-label="Open menu">
+
+            <button
+                type="button"
+                class="menu-toggle"
+                id="menuToggle"
+                aria-label="Open navigation menu"
+            >
                 <i class="fa-solid fa-bars"></i>
             </button>
 
@@ -67,22 +130,23 @@
 
     <main>
 
-        <!-- Page heading -->
+        <!-- Page Hero -->
         <section class="page-banner">
 
             <div class="container">
 
                 <p class="small-heading">
-                    About ShelfSync
+                    ABOUT SHELFSYNC
                 </p>
 
                 <h1>
-                    Building a better library experience
+                    A simpler way to experience a library.
                 </h1>
 
                 <p>
-                    ShelfSync helps students, teachers and readers
-                    discover books and access library services with ease.
+                    ShelfSync is a digital library management project created
+                    to make discovering, borrowing and tracking books easier
+                    through a clean and user-friendly website.
                 </p>
 
             </div>
@@ -90,75 +154,88 @@
         </section>
 
 
-        <!-- About -->
-        <section class="about-section section">
+        <!-- Introduction -->
+        <section class="about-intro-section section">
 
-            <div class="container about-grid">
+            <div class="container about-intro-grid">
 
-                <div class="about-image">
+                <div class="about-intro-image">
 
                     <img
-                        src="https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&w=1000&q=85"
-                        alt="Library shelves">
+                        src="../images/gallery-reading.jpg"
+                        alt="Student reading a book"
+                    >
+
+                    <div class="about-image-card">
+
+                        <div class="about-image-icon">
+                            <i class="fa-solid fa-book-open-reader"></i>
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Read. Borrow. Track.
+                            </strong>
+
+                            <span>
+                                Everything in one place.
+                            </span>
+
+                        </div>
+
+                    </div>
 
                 </div>
 
 
-                <div class="about-content">
+                <div class="about-intro-content">
 
                     <p class="small-heading">
-                        Who We Are
+                        OUR PROJECT
                     </p>
 
                     <h2>
-                        A simple system for smarter learning
+                        Bringing the traditional library experience into a
+                        digital space.
                     </h2>
 
                     <p>
-                        ShelfSync is a modern library management system
-                        created to make books easier to search, explore
-                        and manage.
+                        ShelfSync is a web-based Library Management System
+                        designed as an easy way for users to explore a
+                        collection of books and manage their borrowing
+                        activity.
                     </p>
 
                     <p>
-                        Our goal is to bring traditional library services
-                        together with simple digital features so that users
-                        can find the information they need quickly.
+                        Instead of searching through a physical catalogue,
+                        users can browse books digitally, search by title or
+                        author, filter books by category and view detailed
+                        information before deciding what to read.
+                    </p>
+
+                    <p>
+                        The system also provides user accounts where borrowed
+                        books and borrowing information can be viewed in one
+                        place.
                     </p>
 
 
-                    <div class="about-points">
+                    <div class="about-highlight">
+
+                        <i class="fa-solid fa-lightbulb"></i>
 
                         <div>
-                            <i class="fa-solid fa-circle-check"></i>
 
-                            <span>
-                                Easy book searching
-                            </span>
-                        </div>
+                            <strong>
+                                Our idea
+                            </strong>
 
-                        <div>
-                            <i class="fa-solid fa-circle-check"></i>
+                            <p>
+                                Keep library management simple, organized
+                                and accessible through a modern web interface.
+                            </p>
 
-                            <span>
-                                Simple membership system
-                            </span>
-                        </div>
-
-                        <div>
-                            <i class="fa-solid fa-circle-check"></i>
-
-                            <span>
-                                Organized book categories
-                            </span>
-                        </div>
-
-                        <div>
-                            <i class="fa-solid fa-circle-check"></i>
-
-                            <span>
-                                User-friendly interface
-                            </span>
                         </div>
 
                     </div>
@@ -170,80 +247,117 @@
         </section>
 
 
-        <!-- Mission and vision -->
-        <section class="mission-section section">
+        <!-- Purpose -->
+        <section class="about-purpose-section section">
 
             <div class="container">
 
-                <div class="section-heading">
+                <div class="center-heading">
 
                     <p class="small-heading">
-                        Our Purpose
+                        WHY SHELFSYNC?
                     </p>
 
                     <h2>
-                        What drives ShelfSync
+                        Built around a simple purpose.
                     </h2>
 
                     <p>
-                        We believe libraries should be simple,
-                        accessible and useful for everyone.
+                        The project focuses on making common library tasks
+                        easier for students and readers.
                     </p>
 
                 </div>
 
 
-                <div class="mission-grid">
+                <div class="purpose-grid">
 
-                    <div class="mission-card">
+                    <article class="purpose-card">
 
-                        <div class="mission-icon">
-                            <i class="fa-solid fa-bullseye"></i>
+                        <div class="purpose-icon">
+                            <i class="fa-solid fa-magnifying-glass"></i>
                         </div>
 
-                        <h3>Our Mission</h3>
+                        <span>
+                            01
+                        </span>
+
+                        <h3>
+                            Easy Discovery
+                        </h3>
 
                         <p>
-                            To make library resources easier to discover
-                            and help users access books in a simple and
-                            organized way.
+                            Find books quickly using search and category
+                            filters instead of browsing through a long list.
                         </p>
 
-                    </div>
+                    </article>
 
 
-                    <div class="mission-card">
+                    <article class="purpose-card">
 
-                        <div class="mission-icon">
-                            <i class="fa-solid fa-eye"></i>
+                        <div class="purpose-icon">
+                            <i class="fa-solid fa-book-open-reader"></i>
                         </div>
 
-                        <h3>Our Vision</h3>
+                        <span>
+                            02
+                        </span>
+
+                        <h3>
+                            Simple Borrowing
+                        </h3>
 
                         <p>
-                            To create a modern learning environment where
-                            students and readers can connect with knowledge
-                            easily.
+                            Users can sign in and borrow books through a
+                            straightforward digital borrowing process.
                         </p>
 
-                    </div>
+                    </article>
 
 
-                    <div class="mission-card">
+                    <article class="purpose-card">
 
-                        <div class="mission-icon">
-                            <i class="fa-solid fa-heart"></i>
+                        <div class="purpose-icon">
+                            <i class="fa-solid fa-chart-simple"></i>
                         </div>
 
-                        <h3>Our Values</h3>
+                        <span>
+                            03
+                        </span>
+
+                        <h3>
+                            Better Tracking
+                        </h3>
 
                         <p>
-                            We focus on simplicity, accessibility,
-                            learning and creating a better experience
-                            for every library member.
+                            Borrowed books, due dates and recent activity
+                            can be viewed from the user's profile.
                         </p>
 
-                    </div>
+                    </article>
+
+
+                    <article class="purpose-card">
+
+                        <div class="purpose-icon">
+                            <i class="fa-solid fa-mobile-screen-button"></i>
+                        </div>
+
+                        <span>
+                            04
+                        </span>
+
+                        <h3>
+                            Responsive Design
+                        </h3>
+
+                        <p>
+                            The interface is designed to work comfortably
+                            across desktop, tablet and mobile screens.
+                        </p>
+
+                    </article>
 
                 </div>
 
@@ -253,23 +367,24 @@
 
 
         <!-- Features -->
-        <section class="about-features section">
+        <section class="about-features-section section">
 
-            <div class="container about-feature-grid">
+            <div class="container about-features-grid">
 
-                <div class="feature-content">
+                <div class="about-features-content">
 
                     <p class="small-heading">
-                        Why ShelfSync
+                        WHAT YOU CAN DO
                     </p>
 
                     <h2>
-                        Designed for students and readers
+                        More than just a list of books.
                     </h2>
 
                     <p>
-                        ShelfSync makes common library tasks easier
-                        without adding unnecessary complexity.
+                        ShelfSync combines book discovery with basic account
+                        and borrowing features to create a complete digital
+                        library experience.
                     </p>
 
 
@@ -277,63 +392,109 @@
 
                         <div class="feature-item">
 
-                            <div>
-                                <i class="fa-solid fa-magnifying-glass"></i>
+                            <div class="feature-check">
+                                <i class="fa-solid fa-check"></i>
                             </div>
 
-                            <section>
+                            <div>
 
                                 <h3>
-                                    Quick Search
+                                    Search &amp; Filter
                                 </h3>
 
                                 <p>
-                                    Find books using title, author or category.
+                                    Find books by title, author or category.
                                 </p>
 
-                            </section>
+                            </div>
 
                         </div>
 
 
                         <div class="feature-item">
 
-                            <div>
-                                <i class="fa-solid fa-book-bookmark"></i>
+                            <div class="feature-check">
+                                <i class="fa-solid fa-check"></i>
                             </div>
 
-                            <section>
+                            <div>
 
                                 <h3>
-                                    Book Availability
+                                    Book Information
                                 </h3>
 
                                 <p>
-                                    Check whether a book is available or borrowed.
+                                    View author, price, pages, year and other
+                                    available book information.
                                 </p>
 
-                            </section>
+                            </div>
 
                         </div>
 
 
                         <div class="feature-item">
 
-                            <div>
-                                <i class="fa-solid fa-user"></i>
+                            <div class="feature-check">
+                                <i class="fa-solid fa-check"></i>
                             </div>
 
-                            <section>
+                            <div>
 
                                 <h3>
-                                    Member Access
+                                    Personal Profile
                                 </h3>
 
                                 <p>
-                                    Users can register and access library services.
+                                    View your account and current borrowing
+                                    information from one place.
                                 </p>
 
-                            </section>
+                            </div>
+
+                        </div>
+
+
+                        <div class="feature-item">
+
+                            <div class="feature-check">
+                                <i class="fa-solid fa-check"></i>
+                            </div>
+
+                            <div>
+
+                                <h3>
+                                    Borrow &amp; Return
+                                </h3>
+
+                                <p>
+                                    Manage your borrowed books and return
+                                    them when you are finished.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="feature-item">
+
+                            <div class="feature-check">
+                                <i class="fa-solid fa-check"></i>
+                            </div>
+
+                            <div>
+
+                                <h3>
+                                    Account Recovery
+                                </h3>
+
+                                <p>
+                                    Use the forgot-password option when
+                                    access to an account needs to be restored.
+                                </p>
+
+                            </div>
 
                         </div>
 
@@ -342,11 +503,85 @@
                 </div>
 
 
-                <div class="feature-image">
+                <div class="about-features-visual">
 
-                    <img
-                        src="https://images.unsplash.com/photo-1497633762265-9d179a990aa6?auto=format&fit=crop&w=1000&q=85"
-                        alt="Students studying in library">
+                    <div class="feature-visual-card">
+
+                        <div class="visual-card-top">
+
+                            <span>
+                                SHELFSYNC
+                            </span>
+
+                            <i class="fa-solid fa-layer-group"></i>
+
+                        </div>
+
+
+                        <div class="visual-book-stack">
+
+                            <div class="stack-book stack-book-one">
+                                <i class="fa-solid fa-code"></i>
+                            </div>
+
+                            <div class="stack-book stack-book-two">
+                                <i class="fa-solid fa-atom"></i>
+                            </div>
+
+                            <div class="stack-book stack-book-three">
+                                <i class="fa-solid fa-feather"></i>
+                            </div>
+
+                            <div class="stack-book stack-book-four">
+                                <i class="fa-solid fa-landmark"></i>
+                            </div>
+
+                        </div>
+
+
+                        <div class="visual-card-bottom">
+
+                            <div>
+
+                                <strong>
+                                    16+
+                                </strong>
+
+                                <span>
+                                    Books
+                                </span>
+
+                            </div>
+
+
+                            <div>
+
+                                <strong>
+                                    4
+                                </strong>
+
+                                <span>
+                                    Categories
+                                </span>
+
+                            </div>
+
+
+                            <div>
+
+                                <strong>
+                                    14
+                                </strong>
+
+                                <span>
+                                    Days
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
 
                 </div>
 
@@ -355,71 +590,293 @@
         </section>
 
 
-        <!-- Stats -->
-        <section class="about-stats">
-
-            <div class="container about-stats-grid">
-
-                <div>
-                    <h3>10,000+</h3>
-                    <p>Books Available</p>
-                </div>
-
-                <div>
-                    <h3>1,200+</h3>
-                    <p>Active Members</p>
-                </div>
-
-                <div>
-                    <h3>30+</h3>
-                    <p>Categories</p>
-                </div>
-
-                <div>
-                    <h3>15+</h3>
-                    <p>Years of Service</p>
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- CTA -->
-        <section class="join-section">
+        <!-- Technology -->
+        <section class="technology-section section">
 
             <div class="container">
 
-                <div class="join-box">
+                <div class="center-heading">
 
-                    <div class="join-content">
+                    <p class="small-heading">
+                        TECHNOLOGY
+                    </p>
 
-                        <p class="small-heading">
-                            Start Exploring
-                        </p>
+                    <h2>
+                        Built with simple web technologies.
+                    </h2>
 
-                        <h2>
-                            Discover thousands of books today.
-                        </h2>
+                    <p>
+                        ShelfSync uses familiar technologies to keep the
+                        project understandable, maintainable and suitable
+                        for academic development.
+                    </p>
+
+                </div>
+
+
+                <div class="technology-grid">
+
+                    <div class="technology-card">
+
+                        <div class="technology-icon">
+                            <i class="fa-brands fa-html5"></i>
+                        </div>
+
+                        <h3>
+                            HTML5
+                        </h3>
 
                         <p>
-                            Browse our collection and find books
-                            that match your interests and studies.
+                            Provides the structure and semantic content
+                            of the website.
                         </p>
 
                     </div>
 
 
-                    <div class="join-buttons">
+                    <div class="technology-card">
 
-                        <a href="books.html" class="join-btn">
-                            Explore Books
+                        <div class="technology-icon">
+                            <i class="fa-brands fa-css3-alt"></i>
+                        </div>
+
+                        <h3>
+                            CSS3
+                        </h3>
+
+                        <p>
+                            Handles the visual design, responsive layout,
+                            animations and overall appearance.
+                        </p>
+
+                    </div>
+
+
+                    <div class="technology-card">
+
+                        <div class="technology-icon">
+                            <i class="fa-brands fa-js"></i>
+                        </div>
+
+                        <h3>
+                            JavaScript
+                        </h3>
+
+                        <p>
+                            Adds search, filters, account actions,
+                            borrowing and interactive features.
+                        </p>
+
+                    </div>
+
+
+                    <div class="technology-card">
+
+                        <div class="technology-icon">
+                            <i class="fa-solid fa-database"></i>
+                        </div>
+
+                        <h3>
+                            Local Storage
+                        </h3>
+
+                        <p>
+                            Stores demo account, session and borrowing
+                            information within the browser.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Project Journey -->
+        <section class="journey-section section">
+
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <div>
+
+                        <p class="small-heading">
+                            THE SHELFSYNC JOURNEY
+                        </p>
+
+                        <h2>
+                            From idea to digital library.
+                        </h2>
+
+                    </div>
+
+                    <p>
+                        The project brings together design, development and
+                        practical library functionality.
+                    </p>
+
+                </div>
+
+
+                <div class="journey-grid">
+
+                    <div class="journey-step">
+
+                        <span class="journey-number">
+                            01
+                        </span>
+
+                        <div class="journey-line"></div>
+
+                        <h3>
+                            Discover
+                        </h3>
+
+                        <p>
+                            Users explore the collection and search for
+                            books that match their interests.
+                        </p>
+
+                    </div>
+
+
+                    <div class="journey-step">
+
+                        <span class="journey-number">
+                            02
+                        </span>
+
+                        <div class="journey-line"></div>
+
+                        <h3>
+                            Select
+                        </h3>
+
+                        <p>
+                            Detailed book information helps users decide
+                            which book they want to read.
+                        </p>
+
+                    </div>
+
+
+                    <div class="journey-step">
+
+                        <span class="journey-number">
+                            03
+                        </span>
+
+                        <div class="journey-line"></div>
+
+                        <h3>
+                            Borrow
+                        </h3>
+
+                        <p>
+                            A signed-in user can borrow a book and receive
+                            a defined borrowing period.
+                        </p>
+
+                    </div>
+
+
+                    <div class="journey-step">
+
+                        <span class="journey-number">
+                            04
+                        </span>
+
+                        <div class="journey-line"></div>
+
+                        <h3>
+                            Track
+                        </h3>
+
+                        <p>
+                            The profile keeps borrowing information and
+                            recent activity organized.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Future Scope -->
+        <section class="future-section">
+
+            <div class="container">
+
+                <div class="future-card">
+
+                    <div class="future-content">
+
+                        <p class="small-heading">
+                            WHAT COMES NEXT?
+                        </p>
+
+                        <h2>
+                            ShelfSync can grow into a complete library platform.
+                        </h2>
+
+                        <p>
+                            The current project provides the frontend
+                            foundation. Future development can connect it
+                            with a real backend and database for live library
+                            management.
+                        </p>
+
+
+                        <div class="future-list">
+
+                            <span>
+                                <i class="fa-solid fa-check"></i>
+                                Real database
+                            </span>
+
+                            <span>
+                                <i class="fa-solid fa-check"></i>
+                                Admin dashboard
+                            </span>
+
+                            <span>
+                                <i class="fa-solid fa-check"></i>
+                                Live book availability
+                            </span>
+
+                            <span>
+                                <i class="fa-solid fa-check"></i>
+                                User management
+                            </span>
+
+                        </div>
+
+
+                        <a
+                            href="books.html"
+                            class="primary-btn"
+                        >
+                            Explore the Library
                             <i class="fa-solid fa-arrow-right"></i>
                         </a>
 
-                        <a href="login.html" class="join-link">
-                            Become a Member
-                        </a>
+                    </div>
+
+
+                    <div class="future-icon">
+
+                        <div class="future-icon-circle">
+
+                            <i class="fa-solid fa-book-open-reader"></i>
+
+                        </div>
 
                     </div>
 
@@ -433,106 +890,156 @@
 
 
     <!-- Footer -->
-    <footer class="footer">
+    <footer class="site-footer">
 
-        <div class="container footer-grid">
+        <div class="container">
 
-            <div class="footer-about">
+            <div class="footer-grid">
 
-                <a href="index.html" class="logo footer-logo">
+                <div class="footer-brand">
 
-                    <div class="logo-icon">
-                        <i class="fa-solid fa-book-open"></i>
+                    <a href="index.html" class="logo footer-logo">
+
+                        <span class="logo-icon">
+                            <i class="fa-solid fa-book-open"></i>
+                        </span>
+
+                        <span>
+                            ShelfSync
+                        </span>
+
+                    </a>
+
+                    <p>
+                        A modern digital library experience designed to
+                        make discovering, borrowing and managing books easier.
+                    </p>
+
+
+                    <div class="footer-socials">
+
+                        <a
+                            href="#"
+                            aria-label="Facebook"
+                        >
+                            <i class="fa-brands fa-facebook-f"></i>
+                        </a>
+
+                        <a
+                            href="#"
+                            aria-label="Instagram"
+                        >
+                            <i class="fa-brands fa-instagram"></i>
+                        </a>
+
+                        <a
+                            href="#"
+                            aria-label="GitHub"
+                        >
+                            <i class="fa-brands fa-github"></i>
+                        </a>
+
                     </div>
 
-                    <span>ShelfSync</span>
+                </div>
 
-                </a>
 
-                <p>
-                    A modern library management system designed
-                    for students, teachers and passionate readers.
-                </p>
+                <div class="footer-column">
 
-                <div class="social-links">
+                    <h3>
+                        Explore
+                    </h3>
 
-                    <a href="#" aria-label="Facebook">
-                        <i class="fa-brands fa-facebook-f"></i>
+                    <a href="index.html">
+                        Home
                     </a>
 
-                    <a href="#" aria-label="Instagram">
-                        <i class="fa-brands fa-instagram"></i>
+                    <a href="about.html">
+                        About
                     </a>
 
-                    <a href="#" aria-label="LinkedIn">
-                        <i class="fa-brands fa-linkedin-in"></i>
+                    <a href="books.html">
+                        Books
                     </a>
+
+                    <a href="gallery.html">
+                        Gallery
+                    </a>
+
+                </div>
+
+
+                <div class="footer-column">
+
+                    <h3>
+                        Account
+                    </h3>
+
+                    <a href="login.html">
+                        Login
+                    </a>
+
+                    <a href="login.html">
+                        Register
+                    </a>
+
+                    <a href="profile.html">
+                        My Profile
+                    </a>
+
+                    <a href="contact.html">
+                        Contact
+                    </a>
+
+                </div>
+
+
+                <div class="footer-column">
+
+                    <h3>
+                        Contact
+                    </h3>
+
+                    <p>
+                        <i class="fa-solid fa-location-dot"></i>
+                        Bhubaneswar, Odisha
+                    </p>
+
+                    <p>
+                        <i class="fa-solid fa-envelope"></i>
+                        shelfsync@example.com
+                    </p>
+
+                    <p>
+                        <i class="fa-solid fa-clock"></i>
+                        Mon - Sat, 9:00 AM - 6:00 PM
+                    </p>
 
                 </div>
 
             </div>
 
 
-            <div class="footer-links">
-
-                <h3>Quick Links</h3>
-
-                <a href="index.html">Home</a>
-                <a href="about.html">About</a>
-                <a href="books.html">Books</a>
-                <a href="gallery.html">Gallery</a>
-
-            </div>
-
-
-            <div class="footer-links">
-
-                <h3>Library</h3>
-
-                <a href="books.html">Book Collection</a>
-                <a href="books.html">New Arrivals</a>
-                <a href="login.html">Membership</a>
-                <a href="contact.html">Contact</a>
-
-            </div>
-
-
-            <div class="footer-contact">
-
-                <h3>Contact</h3>
+            <div class="footer-bottom">
 
                 <p>
-                    <i class="fa-solid fa-location-dot"></i>
-                    Bhubaneswar, Odisha
+                    &copy;
+                    <span id="currentYear"></span>
+                    ShelfSync. All rights reserved.
                 </p>
 
-                <p>
-                    <i class="fa-solid fa-envelope"></i>
-                    info@shelfsync.com
-                </p>
 
-                <p>
-                    <i class="fa-solid fa-phone"></i>
-                    +91 98765 43210
-                </p>
+                <div class="footer-bottom-links">
 
-            </div>
+                    <a href="#">
+                        Privacy
+                    </a>
 
-        </div>
+                    <a href="#">
+                        Terms
+                    </a>
 
-
-        <div class="footer-bottom">
-
-            <div class="container footer-bottom-content">
-
-                <p>
-                    © <span id="currentYear"></span>
-                    ShelfSync. All Rights Reserved.
-                </p>
-
-                <p>
-                    Library Management System
-                </p>
+                </div>
 
             </div>
 

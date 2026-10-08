@@ -1,79 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="description"
-        content="ShelfSync is a simple digital library system for searching, borrowing and managing books.">
+    <meta
+        name="description"
+        content="ShelfSync is a modern digital library management system for discovering, borrowing and managing books."
+    >
 
     <title>ShelfSync | Library Management System</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
-        rel="stylesheet">
-
-    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
         rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    >
 
+    <!-- ShelfSync Base Styles -->
     <link rel="stylesheet" href="../css/style.css">
+
+    <!--
+        SHELFSYNC THEME
+        ------------------------------------------------
+        Keep style.css enabled.
+
+        Choose ONE theme below.
+
+        To change the theme:
+        1. Remove the comments from the theme you want.
+        2. Keep the other themes commented.
+        3. Save the file and refresh the page.
+
+        Available themes:
+        - Ivory
+        - Dark
+        - Midnight
+        - Sage
+        ------------------------------------------------
+    -->
+
+    <!-- Ivory Theme -->
+    <!-- <link rel="stylesheet" href="../css/theme-ivory.css"> -->
+
+    <!-- Dark Theme -->
+    <!-- <link rel="stylesheet" href="../css/theme-dark.css"> -->
+
+    <!-- Midnight Theme -->
+    <!-- <link rel="stylesheet" href="../css/theme-midnight.css"> -->
+
+    <!-- Sage Theme -->
+    <!-- <link rel="stylesheet" href="../css/theme-sage.css"> -->
+
 </head>
 
 <body>
 
-    <!-- Navbar -->
-    <header class="header">
-
-        <div class="container navbar">
+    <!-- Navigation -->
+    <header class="site-header">
+        <div class="container nav-container">
 
             <a href="index.html" class="logo">
-                <div class="logo-icon">
-                    <i class="fa-solid fa-book-open"></i>
-                </div>
-
+                <span class="logo-icon">
+                    <i class="fas fa-book-open"></i>
+                </span>
                 <span>ShelfSync</span>
             </a>
 
-            <nav class="nav-links" id="navLinks">
+            <button
+                class="menu-btn"
+                id="menuBtn"
+                aria-label="Open navigation menu"
+                type="button"
+            >
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
 
+            <nav class="nav-links" id="navLinks">
                 <a href="index.html" class="active">Home</a>
                 <a href="about.html">About</a>
                 <a href="books.html">Books</a>
                 <a href="gallery.html">Gallery</a>
                 <a href="contact.html">Contact</a>
-
-                <a href="login.html" class="login-btn">
-                    <i class="fa-regular fa-user"></i>
-                    Login
-                </a>
-
+                <a href="login.html" class="nav-login" id="loginNav">Login</a>
             </nav>
 
-            <button class="menu-btn" id="menuBtn" aria-label="Open menu">
-                <i class="fa-solid fa-bars"></i>
-            </button>
-
         </div>
-
     </header>
 
 
     <main>
 
-        <!-- Hero -->
-        <section class="hero">
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="container hero-grid">
 
-            <div class="container hero-content">
+                <div class="hero-content">
 
-                <div class="hero-text">
-
-                    <div class="hero-label">
-                        <span></span>
+                    <div class="hero-badge">
+                        <span class="badge-dot"></span>
                         Your Library, Simplified
                     </div>
 
@@ -82,38 +110,36 @@
                         <span>We'll keep it in sync.</span>
                     </h1>
 
-                    <p class="hero-description">
+                    <p class="hero-text">
                         Search, borrow and keep track of your books with ShelfSync —
                         a simple digital library built to make reading and library
                         management easier.
                     </p>
 
                     <div class="hero-buttons">
-
-                        <a href="books.html" class="primary-btn">
-                            Start Exploring
-                            <i class="fa-solid fa-arrow-right"></i>
+                        <a href="books.html" class="btn btn-primary">
+                            Explore Books
+                            <i class="fas fa-arrow-right"></i>
                         </a>
 
-                        <a href="about.html" class="secondary-btn">
+                        <a href="about.html" class="btn btn-secondary">
                             Discover ShelfSync
                         </a>
-
                     </div>
 
-                    <div class="hero-info">
+                    <div class="hero-stats">
 
-                        <div>
+                        <div class="hero-stat">
                             <strong>16+</strong>
                             <span>Featured Books</span>
                         </div>
 
-                        <div>
-                            <strong>14 Days</strong>
-                            <span>Borrow Period</span>
+                        <div class="hero-stat">
+                            <strong>14</strong>
+                            <span>Days Borrow Period</span>
                         </div>
 
-                        <div>
+                        <div class="hero-stat">
                             <strong>4</strong>
                             <span>Main Categories</span>
                         </div>
@@ -125,84 +151,69 @@
 
                 <div class="hero-visual">
 
-                    <div class="hero-image">
-
+                    <div class="hero-image-card">
                         <img
-                            src="https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&w=1200&q=85"
-                            alt="Modern library">
+                            src="../images/gallery-bookshelves.jpg"
+                            alt="Bookshelves in a library"
+                        >
 
-                        <div class="image-overlay"></div>
+                        <div class="hero-floating-card floating-card-top">
+                            <div class="floating-icon">
+                                <i class="fas fa-book"></i>
+                            </div>
 
-                    </div>
-
-
-                    <div class="floating-card card-one">
-
-                        <div class="floating-icon">
-                            <i class="fa-solid fa-book"></i>
+                            <div>
+                                <strong>Simple Borrowing</strong>
+                                <span>Borrow. Track. Return.</span>
+                            </div>
                         </div>
 
-                        <div>
-                            <strong>Explore Books</strong>
-                            <span>Find something worth reading</span>
+                        <div class="hero-floating-card floating-card-bottom">
+                            <div class="floating-icon">
+                                <i class="fas fa-search"></i>
+                            </div>
+
+                            <div>
+                                <strong>Explore Books</strong>
+                                <span>Find something worth reading.</span>
+                            </div>
                         </div>
-
-                    </div>
-
-
-                    <div class="floating-card card-two">
-
-                        <i class="fa-solid fa-circle-check"></i>
-
-                        <div>
-                            <strong>Simple Borrowing</strong>
-                            <span>Borrow. Track. Return.</span>
-                        </div>
-
                     </div>
 
                 </div>
 
             </div>
-
         </section>
 
 
-        <!-- Search -->
-        <section class="search-section">
-
+        <!-- Search Section -->
+        <section class="library-search-section">
             <div class="container">
 
-                <div class="search-box">
+                <div class="search-box-wrapper">
 
-                    <div class="search-text">
-
-                        <div class="search-icon-box">
-                            <i class="fa-solid fa-magnifying-glass"></i>
-                        </div>
-
-                        <div>
-
-                            <h2>What do you want to read?</h2>
-
-                            <p>
-                                Search our collection by book name or author.
-                            </p>
-
-                        </div>
-
+                    <div class="search-heading">
+                        <span class="small-heading">START EXPLORING</span>
+                        <h2>What would you like to read?</h2>
                     </div>
 
+                    <div class="library-search-box">
 
-                    <div class="search-bar">
+                        <i class="fas fa-search"></i>
 
                         <input
                             type="text"
                             id="bookSearch"
-                            placeholder="Search for a book...">
+                            placeholder="Search by book title, author or category..."
+                            autocomplete="off"
+                        >
 
-                        <button id="searchBtn">
-                            Find Book
+                        <button
+                            type="button"
+                            id="searchBtn"
+                            class="btn btn-primary"
+                        >
+                            Search
                         </button>
 
                     </div>
@@ -210,392 +221,278 @@
                 </div>
 
             </div>
-
         </section>
 
 
         <!-- Categories -->
-        <section class="categories section">
-
+        <section class="categories-section section">
             <div class="container">
 
-                <div class="section-top">
-
+                <div class="section-heading">
                     <div>
-
-                        <p class="small-heading">
-                            Find Your Interest
-                        </p>
-
-                        <h2>
-                            Pick a subject. Start exploring.
-                        </h2>
-
+                        <span class="small-heading">BROWSE COLLECTION</span>
+                        <h2>Explore by category</h2>
                     </div>
 
-                    <p class="section-description">
-                        Whether you're learning something new or simply looking
-                        for your next read, start with a category that interests you.
-                    </p>
-
+                    <a href="books.html" class="section-link">
+                        View all books
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
                 </div>
 
 
                 <div class="category-grid">
 
-                    <div class="category-card">
-
+                    <a
+                        href="books.html?category=Technology"
+                        class="category-card"
+                    >
                         <div class="category-icon">
-                            <i class="fa-solid fa-code"></i>
+                            <i class="fas fa-laptop-code"></i>
                         </div>
 
-                        <span class="category-count">
-                            Coding & Computing
-                        </span>
-
-                        <h3>Technology</h3>
-
-                        <p>
-                            Explore programming, web development, software
-                            concepts and the world of computer science.
-                        </p>
-
-                        <a href="books.html">
-                            Browse Technology
-                            <i class="fa-solid fa-arrow-right"></i>
-                        </a>
-
-                    </div>
-
-
-                    <div class="category-card">
-
-                        <div class="category-icon">
-                            <i class="fa-solid fa-flask"></i>
+                        <div>
+                            <h3>Technology</h3>
+                            <p>Programming, development and computing</p>
                         </div>
 
-                        <span class="category-count">
-                            Learn & Discover
+                        <span class="category-arrow">
+                            <i class="fas fa-arrow-right"></i>
                         </span>
-
-                        <h3>Science</h3>
-
-                        <p>
-                            Discover ideas from physics, biology, space,
-                            nature and the scientific world around us.
-                        </p>
-
-                        <a href="books.html">
-                            Browse Science
-                            <i class="fa-solid fa-arrow-right"></i>
-                        </a>
-
-                    </div>
+                    </a>
 
 
-                    <div class="category-card">
-
+                    <a
+                        href="books.html?category=Science"
+                        class="category-card"
+                    >
                         <div class="category-icon">
-                            <i class="fa-solid fa-landmark"></i>
+                            <i class="fas fa-atom"></i>
                         </div>
 
-                        <span class="category-count">
-                            Past & Civilizations
-                        </span>
-
-                        <h3>History</h3>
-
-                        <p>
-                            Travel through important events, civilizations,
-                            cultures and stories that shaped our world.
-                        </p>
-
-                        <a href="books.html">
-                            Browse History
-                            <i class="fa-solid fa-arrow-right"></i>
-                        </a>
-
-                    </div>
-
-
-                    <div class="category-card">
-
-                        <div class="category-icon">
-                            <i class="fa-solid fa-feather-pointed"></i>
+                        <div>
+                            <h3>Science</h3>
+                            <p>Discover ideas, nature and the universe</p>
                         </div>
 
-                        <span class="category-count">
-                            Stories & Classics
+                        <span class="category-arrow">
+                            <i class="fas fa-arrow-right"></i>
                         </span>
-
-                        <h3>Literature</h3>
-
-                        <p>
-                            Step into memorable stories, timeless classics
-                            and books written to inspire imagination.
-                        </p>
-
-                        <a href="books.html">
-                            Browse Literature
-                            <i class="fa-solid fa-arrow-right"></i>
-                        </a>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
+                    </a>
 
 
-        <!-- Featured books -->
-        <section class="featured-books section">
+                    <a
+                        href="books.html?category=Literature"
+                        class="category-card"
+                    >
+                        <div class="category-icon">
+                            <i class="fas fa-feather-alt"></i>
+                        </div>
 
-            <div class="container">
+                        <div>
+                            <h3>Literature</h3>
+                            <p>Stories, classics and timeless writing</p>
+                        </div>
 
-                <div class="section-top">
+                        <span class="category-arrow">
+                            <i class="fas fa-arrow-right"></i>
+                        </span>
+                    </a>
 
-                    <div>
 
-                        <p class="small-heading">
-                            ShelfSync Picks
-                        </p>
+                    <a
+                        href="books.html?category=History"
+                        class="category-card"
+                    >
+                        <div class="category-icon">
+                            <i class="fas fa-landmark"></i>
+                        </div>
 
-                        <h2>
-                            Books worth checking out
-                        </h2>
+                        <div>
+                            <h3>History</h3>
+                            <p>People, civilizations and the past</p>
+                        </div>
 
-                    </div>
-
-                    <a href="books.html" class="section-link">
-                        Explore all books
-                        <i class="fa-solid fa-arrow-right"></i>
+                        <span class="category-arrow">
+                            <i class="fas fa-arrow-right"></i>
+                        </span>
                     </a>
 
                 </div>
 
-
-                <div class="book-grid">
-
-                    <article class="book-card">
-
-                        <div class="book-image">
-
-                            <img
-                                src="https://images.unsplash.com/photo-1543002588-bfa74002ed7e?auto=format&fit=crop&w=700&q=85"
-                                alt="Programming books">
-
-                            <span class="available">
-                                Available
-                            </span>
-
-                        </div>
-
-                        <div class="book-details">
-
-                            <div class="book-top">
-
-                                <span>Technology</span>
-
-                                <div>
-                                    <i class="fa-solid fa-star"></i>
-                                    4.9
-                                </div>
-
-                            </div>
-
-                            <h3>Modern Programming</h3>
-
-                            <p class="author">
-                                By Daniel Morris
-                            </p>
-
-                            <a href="books.html">
-                                Find Similar Books
-                                <i class="fa-solid fa-arrow-right"></i>
-                            </a>
-
-                        </div>
-
-                    </article>
-
-
-                    <article class="book-card">
-
-                        <div class="book-image">
-
-                            <img
-                                src="https://images.unsplash.com/photo-1495446815901-a7297e633e8d?auto=format&fit=crop&w=700&q=85"
-                                alt="Literature books">
-
-                            <span class="available">
-                                Available
-                            </span>
-
-                        </div>
-
-                        <div class="book-details">
-
-                            <div class="book-top">
-
-                                <span>Literature</span>
-
-                                <div>
-                                    <i class="fa-solid fa-star"></i>
-                                    4.8
-                                </div>
-
-                            </div>
-
-                            <h3>Timeless Stories</h3>
-
-                            <p class="author">
-                                By Sophia Reed
-                            </p>
-
-                            <a href="books.html">
-                                Find Similar Books
-                                <i class="fa-solid fa-arrow-right"></i>
-                            </a>
-
-                        </div>
-
-                    </article>
-
-
-                    <article class="book-card">
-
-                        <div class="book-image">
-
-                            <img
-                                src="https://images.unsplash.com/photo-1516979187457-637abb4f9353?auto=format&fit=crop&w=700&q=85"
-                                alt="Science books">
-
-                            <span class="borrowed">
-                                Borrowed
-                            </span>
-
-                        </div>
-
-                        <div class="book-details">
-
-                            <div class="book-top">
-
-                                <span>Science</span>
-
-                                <div>
-                                    <i class="fa-solid fa-star"></i>
-                                    4.7
-                                </div>
-
-                            </div>
-
-                            <h3>Exploring The Universe</h3>
-
-                            <p class="author">
-                                By Ethan Clark
-                            </p>
-
-                            <a href="books.html">
-                                Find Similar Books
-                                <i class="fa-solid fa-arrow-right"></i>
-                            </a>
-
-                        </div>
-
-                    </article>
-
-
-                    <article class="book-card">
-
-                        <div class="book-image">
-
-                            <img
-                                src="https://images.unsplash.com/photo-1526243741027-444d633d7365?auto=format&fit=crop&w=700&q=85"
-                                alt="History books">
-
-                            <span class="available">
-                                Available
-                            </span>
-
-                        </div>
-
-                        <div class="book-details">
-
-                            <div class="book-top">
-
-                                <span>History</span>
-
-                                <div>
-                                    <i class="fa-solid fa-star"></i>
-                                    4.6
-                                </div>
-
-                            </div>
-
-                            <h3>The World Before Us</h3>
-
-                            <p class="author">
-                                By Amelia Parker
-                            </p>
-
-                            <a href="books.html">
-                                Find Similar Books
-                                <i class="fa-solid fa-arrow-right"></i>
-                            </a>
-
-                        </div>
-
-                    </article>
-
-                </div>
-
             </div>
-
         </section>
 
 
-        <!-- Services -->
-        <section class="services section">
-
+        <!-- Featured Books -->
+        <section class="featured-section section">
             <div class="container">
 
                 <div class="section-heading">
+                    <div>
+                        <span class="small-heading">HANDPICKED FOR YOU</span>
+                        <h2>Featured collection</h2>
+                    </div>
 
-                    <p class="small-heading">
-                        Why ShelfSync?
-                    </p>
-
-                    <h2>
-                        From searching to returning, kept simple.
-                    </h2>
-
-                    <p>
-                        ShelfSync keeps the everyday parts of using a library
-                        organized in one easy-to-use place.
-                    </p>
-
+                    <a href="books.html" class="section-link">
+                        Explore collection
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
                 </div>
 
 
-                <div class="service-grid">
+                <div class="featured-books-grid">
+
+                    <article class="featured-book-card">
+
+                        <div class="featured-book-number">01</div>
+
+                        <div class="featured-book-icon">
+                            <i class="fas fa-code"></i>
+                        </div>
+
+                        <div class="featured-book-content">
+
+                            <span class="book-category">Technology</span>
+
+                            <h3>
+                                Java: The Complete Reference
+                            </h3>
+
+                            <p class="book-author">
+                                Herbert Schildt
+                            </p>
+
+                            <p>
+                                Build a stronger foundation in Java programming
+                                with a comprehensive reference for learners.
+                            </p>
+
+                            <a href="books.html?search=Java" class="text-link">
+                                View book
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+
+                        </div>
+
+                    </article>
+
+
+                    <article class="featured-book-card">
+
+                        <div class="featured-book-number">02</div>
+
+                        <div class="featured-book-icon">
+                            <i class="fas fa-star"></i>
+                        </div>
+
+                        <div class="featured-book-content">
+
+                            <span class="book-category">Science</span>
+
+                            <h3>
+                                A Brief History of Time
+                            </h3>
+
+                            <p class="book-author">
+                                Stephen Hawking
+                            </p>
+
+                            <p>
+                                Explore fascinating questions about time,
+                                space and the universe in this famous work.
+                            </p>
+
+                            <a
+                                href="books.html?search=A%20Brief%20History%20of%20Time"
+                                class="text-link"
+                            >
+                                View book
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+
+                        </div>
+
+                    </article>
+
+
+                    <article class="featured-book-card">
+
+                        <div class="featured-book-number">03</div>
+
+                        <div class="featured-book-icon">
+                            <i class="fas fa-book-open"></i>
+                        </div>
+
+                        <div class="featured-book-content">
+
+                            <span class="book-category">Literature</span>
+
+                            <h3>
+                                Pride and Prejudice
+                            </h3>
+
+                            <p class="book-author">
+                                Jane Austen
+                            </p>
+
+                            <p>
+                                A timeless classic exploring relationships,
+                                society and personal choices.
+                            </p>
+
+                            <a
+                                href="books.html?search=Pride%20and%20Prejudice"
+                                class="text-link"
+                            >
+                                View book
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+
+                        </div>
+
+                    </article>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- How It Works -->
+        <section class="services-section section">
+            <div class="container">
+
+                <div class="center-heading">
+                    <span class="small-heading">HOW SHELFSYNC WORKS</span>
+
+                    <h2>
+                        Everything you need for a
+                        <span>better library experience.</span>
+                    </h2>
+
+                    <p>
+                        ShelfSync keeps the important parts of borrowing and
+                        managing books simple and easy to understand.
+                    </p>
+                </div>
+
+
+                <div class="services-grid">
 
                     <div class="service-card">
 
-                        <div class="service-number">
-                            01
-                        </div>
+                        <div class="service-number">01</div>
 
                         <div class="service-icon">
-                            <i class="fa-solid fa-magnifying-glass"></i>
+                            <i class="fas fa-search"></i>
                         </div>
 
-                        <h3>Find What You Need</h3>
+                        <h3>Discover</h3>
 
                         <p>
-                            Search by title or author and use categories
-                            to quickly narrow down the books you want.
+                            Search through the collection and find books
+                            based on title, author or category.
                         </p>
 
                     </div>
@@ -603,19 +500,17 @@
 
                     <div class="service-card">
 
-                        <div class="service-number">
-                            02
-                        </div>
+                        <div class="service-number">02</div>
 
                         <div class="service-icon">
-                            <i class="fa-solid fa-book-open-reader"></i>
+                            <i class="fas fa-book-reader"></i>
                         </div>
 
-                        <h3>Borrow With Ease</h3>
+                        <h3>Borrow</h3>
 
                         <p>
-                            Choose an available book, borrow it and keep
-                            your current books connected to your account.
+                            Sign in to your account and borrow available
+                            books with a simple interaction.
                         </p>
 
                     </div>
@@ -623,19 +518,17 @@
 
                     <div class="service-card">
 
-                        <div class="service-number">
-                            03
-                        </div>
+                        <div class="service-number">03</div>
 
                         <div class="service-icon">
-                            <i class="fa-solid fa-clock-rotate-left"></i>
+                            <i class="fas fa-chart-line"></i>
                         </div>
 
-                        <h3>Never Lose Track</h3>
+                        <h3>Track</h3>
 
                         <p>
-                            Check borrowed books, due dates and remaining
-                            borrowing time directly from your profile.
+                            Check your profile to see borrowed books,
+                            due dates and your recent library activity.
                         </p>
 
                     </div>
@@ -643,158 +536,163 @@
                 </div>
 
             </div>
-
         </section>
 
 
         <!-- CTA -->
         <section class="join-section">
-
             <div class="container">
 
-                <div class="join-box">
+                <div class="join-card">
 
                     <div class="join-content">
 
-                        <p class="small-heading">
-                            Ready to Start?
-                        </p>
+                        <span class="small-heading">
+                            READY TO GET STARTED?
+                        </span>
 
                         <h2>
-                            There's always another book to discover.
+                            Your next great read
+                            is waiting.
                         </h2>
 
                         <p>
-                            Create your ShelfSync account, explore the collection
-                            and keep your borrowed books organized in one place.
+                            Explore the ShelfSync collection and discover
+                            books that match your interests.
                         </p>
+
+                        <div class="join-buttons">
+
+                            <a href="books.html" class="btn btn-light">
+                                Browse Books
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+
+                            <a href="login.html" class="btn btn-outline-light">
+                                Create Account
+                            </a>
+
+                        </div>
 
                     </div>
 
 
-                    <div class="join-buttons">
+                    <div class="join-decoration">
 
-                        <a href="login.html" class="join-btn">
-                            Create Your Account
-                            <i class="fa-solid fa-arrow-right"></i>
-                        </a>
+                        <div class="decoration-circle circle-one"></div>
+                        <div class="decoration-circle circle-two"></div>
 
-                        <a href="books.html" class="join-link">
-                            Explore First
-                        </a>
+                        <i class="fas fa-book-open"></i>
 
                     </div>
 
                 </div>
 
             </div>
-
         </section>
 
     </main>
 
 
     <!-- Footer -->
-    <footer class="footer">
+    <footer class="site-footer">
 
-        <div class="container footer-grid">
+        <div class="container">
 
-            <div class="footer-about">
+            <div class="footer-grid">
 
-                <a href="index.html" class="logo footer-logo">
+                <div class="footer-brand">
 
-                    <div class="logo-icon">
-                        <i class="fa-solid fa-book-open"></i>
+                    <a href="index.html" class="logo footer-logo">
+                        <span class="logo-icon">
+                            <i class="fas fa-book-open"></i>
+                        </span>
+                        <span>ShelfSync</span>
+                    </a>
+
+                    <p>
+                        A simple digital library experience designed to make
+                        discovering, borrowing and managing books easier.
+                    </p>
+
+                    <div class="footer-socials">
+
+                        <a href="#" aria-label="Facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+
+                        <a href="#" aria-label="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+
+                        <a href="#" aria-label="GitHub">
+                            <i class="fab fa-github"></i>
+                        </a>
+
                     </div>
 
-                    <span>ShelfSync</span>
+                </div>
 
-                </a>
 
-                <p>
-                    Search smarter, borrow easily and keep your
-                    library activity in sync with ShelfSync.
-                </p>
+                <div class="footer-column">
 
-                <div class="social-links">
+                    <h3>Explore</h3>
 
-                    <a href="#" aria-label="Facebook">
-                        <i class="fa-brands fa-facebook-f"></i>
-                    </a>
+                    <a href="index.html">Home</a>
+                    <a href="about.html">About</a>
+                    <a href="books.html">Books</a>
+                    <a href="gallery.html">Gallery</a>
 
-                    <a href="#" aria-label="Instagram">
-                        <i class="fa-brands fa-instagram"></i>
-                    </a>
+                </div>
 
-                    <a href="#" aria-label="LinkedIn">
-                        <i class="fa-brands fa-linkedin-in"></i>
-                    </a>
+
+                <div class="footer-column">
+
+                    <h3>Account</h3>
+
+                    <a href="login.html">Login</a>
+                    <a href="login.html">Register</a>
+                    <a href="profile.html">My Profile</a>
+                    <a href="contact.html">Contact</a>
+
+                </div>
+
+
+                <div class="footer-column">
+
+                    <h3>Contact</h3>
+
+                    <p>
+                        <i class="fas fa-map-marker-alt"></i>
+                        Bhubaneswar, Odisha, India
+                    </p>
+
+                    <p>
+                        <i class="fas fa-envelope"></i>
+                        shelfsync@example.com
+                    </p>
+
+                    <p>
+                        <i class="fas fa-clock"></i>
+                        Mon - Sat, 9:00 AM - 6:00 PM
+                    </p>
 
                 </div>
 
             </div>
 
 
-            <div class="footer-links">
-
-                <h3>Quick Links</h3>
-
-                <a href="index.html">Home</a>
-                <a href="about.html">About</a>
-                <a href="books.html">Books</a>
-                <a href="gallery.html">Gallery</a>
-
-            </div>
-
-
-            <div class="footer-links">
-
-                <h3>Explore ShelfSync</h3>
-
-                <a href="books.html">Browse Collection</a>
-                <a href="books.html">Find a Book</a>
-                <a href="login.html">My Account</a>
-                <a href="contact.html">Contact</a>
-
-            </div>
-
-
-            <div class="footer-contact">
-
-                <h3>Contact</h3>
+            <div class="footer-bottom">
 
                 <p>
-                    <i class="fa-solid fa-location-dot"></i>
-                    Bhubaneswar, Odisha
+                    &copy; <span id="currentYear"></span>
+                    ShelfSync. All rights reserved.
                 </p>
 
-                <p>
-                    <i class="fa-solid fa-envelope"></i>
-                    info@shelfsync.com
-                </p>
-
-                <p>
-                    <i class="fa-solid fa-phone"></i>
-                    +91 98765 43210
-                </p>
-
-            </div>
-
-        </div>
-
-
-        <div class="footer-bottom">
-
-            <div class="container footer-bottom-content">
-
-                <p>
-                    © <span id="currentYear"></span>
-                    ShelfSync. All Rights Reserved.
-                </p>
-
-                <p>
-                    Search. Borrow. Track. Read.
-                </p>
+                <div class="footer-bottom-links">
+                    <a href="#">Privacy</a>
+                    <a href="#">Terms</a>
+                </div>
 
             </div>
 
@@ -803,8 +701,14 @@
     </footer>
 
 
+    <!-- Font Awesome -->
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/js/all.min.js"
+        crossorigin="anonymous"
+    ></script>
+
+    <!-- Main JavaScript -->
     <script src="../js/script.js"></script>
 
 </body>
-
 </html>
