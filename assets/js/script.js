@@ -392,6 +392,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
         const member =
             getCurrentMember();
+            
+        const adminLink =
+            document.getElementById("adminNavLink");
+
+        if (adminLink) {
+            adminLink.href = pageLink("admin.html");
+
+            adminLink.style.display =
+                member && member.role === "admin"
+                    ? ""
+                    : "none";
+        }
+
 
         const account =
             document.getElementById(
@@ -752,168 +765,148 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
-    function borrowBook(button) {
+  
+async function borrowBook(button) {
+    const member = getCurrentMember();
 
-        const member =
-            getCurrentMember();
-
-        if (!member) {
-
-            const goLogin =
-                confirm(
-                    "You need to login before borrowing a book. Go to the login page?"
-                );
-
-            if (goLogin) {
-                window.location.href =
-                    pageLink("login.html");
-            }
-
-            return;
-        }
-
-
-        const card =
-            button.closest(
-                ".library-book-card"
-            );
-
-        if (!card) {
-            return;
-        }
-
-
-        const title =
-            card.dataset.title ||
-            "Unknown Book";
-
-        const author =
-            card.dataset.author ||
-            "Unknown Author";
-
-        const category =
-            card.dataset.category ||
-            "General";
-
-        const price =
-            card.dataset.price ||
-            "Not listed";
-
-
-        const borrowed =
-            getBorrowedBooks(
-                member.email
-            );
-
-
-        if (
-            borrowed.some(
-                function (item) {
-                    return item.title === title;
-                }
-            )
-        ) {
-
-            alert(
-                "You have already borrowed this book."
-            );
-
-            return;
-        }
-
-
-        const confirmBorrow =
-            confirm(
-                'Borrow "' +
-                title +
-                '" for 14 days?'
-            );
-
-        if (!confirmBorrow) {
-            return;
-        }
-
-
-        const borrowedAt =
-            new Date();
-
-        const dueAt =
-            new Date(
-                borrowedAt
-            );
-
-        dueAt.setDate(
-            dueAt.getDate() + 14
+    if (!member) {
+        const goLogin = confirm(
+            "You need to login before borrowing a book. Go to the login page?"
         );
 
+        if (goLogin) {
+            window.location.href = pageLink("login.html");
+        }
+
+        return;
+    }
+
+    const card = button.closest(".library-book-card");
+
+    if (!card) return;
+
+    const title = card.dataset.title || "Unknown Book";
+    const author = card.dataset.author || "Unknown Author";
+    const category = card.dataset.category || "General";
+    const price = card.dataset.price || "Not listed";
+
+    const borrowed = getBorrowedBooks(member.email);
+
+    if (borrowed.some(item => item.title === title)) {
+        alert("You have already borrowed this book.");
+        return;
+    }
+
+    const confirmBorrow = confirm(
+        'Borrow "' + title + '" for 14 days?'
+    );
+
+    if (!confirmBorrow) return;
+
+    const supabase = window.supabaseClient;
+
+    if (!supabase) {
+        alert("The borrowing service is unavailable. Please refresh the page.");
+        return;
+    }
+
+    button.disabled = true;
+    const originalText = button.textContent;
+    button.textContent = "Processing...";
+
+    try {
+        const { data: book, error: bookError } = await supabase
+            .from("books")
+            .select("id, title, author")
+            .eq("title", title)
+            .eq("author", author)
+            .maybeSingle();
+
+        if (bookError) {
+            throw bookError;
+        }
+
+        if (!book) {
+            throw new Error(
+                "This book could not be found in the database."
+            );
+        }
+
+        const { data, error } = await supabase.rpc(
+            "borrow_shelfsync_book",
+            {
+                p_book_id: book.id
+            }
+        );
+
+        if (error) {
+            throw error;
+        }
+
+        const borrowing = Array.isArray(data) ? data[0] : data;
+
+        if (!borrowing || !borrowing.id) {
+            throw new Error("The borrowing record was not returned.");
+        }
+
+        const borrowedAt = borrowing.borrowed_at;
+        const dueAt = borrowing.due_at;
 
         borrowed.push({
-
             id: Date.now(),
-
+            supabaseBorrowingId: borrowing.id,
+            bookId: book.id,
             title: title,
-
             author: author,
-
             category: category,
-
             price: price,
-
-            borrowedAt:
-                borrowedAt.toISOString(),
-
-            dueAt:
-                dueAt.toISOString()
+            borrowedAt: borrowedAt,
+            dueAt: dueAt
         });
 
+        saveBorrowedBooks(member.email, borrowed);
 
-        saveBorrowedBooks(
-            member.email,
-            borrowed
-        );
+        addActivity(member.email, {
+            type: "borrow",
+            title: title,
+            date: borrowedAt
+        });
 
+        button.textContent = "Borrowed";
 
-        addActivity(
-            member.email,
-            {
-                type: "borrow",
-                title: title,
-                date:
-                    new Date().toISOString()
-            }
-        );
-
-
-        button.disabled = true;
-        button.textContent =
-            "Borrowed";
-
-
-        const availability =
-            card.querySelector(
-                ".availability"
-            );
+        const availability = card.querySelector(".availability");
 
         if (availability) {
-
-            availability.textContent =
-                "Borrowed";
-
-            availability.classList.remove(
-                "available"
-            );
-
-            availability.classList.add(
-                "borrowed"
-            );
+            availability.textContent = "Borrowed";
+            availability.classList.remove("available");
+            availability.classList.add("borrowed");
         }
 
-
         alert(
-            title +
-            " has been borrowed successfully for 14 days."
+            title + " has been borrowed successfully for 14 days."
         );
+    } catch (error) {
+        console.error("Book borrowing failed:", error);
+
+        let message = error.message || "Please try again.";
+
+        if (message.includes("already borrowed")) {
+            message = "You have already borrowed this book.";
+        } else if (message.includes("No copies")) {
+            message = "No copies of this book are currently available.";
+        } else if (message.includes("sign in")) {
+            message = "Your session may have expired. Please sign in again.";
+        }
+
+        alert("Unable to borrow this book: " + message);
+        button.textContent = originalText;
+    } finally {
+        if (button.textContent !== "Borrowed") {
+            button.disabled = false;
+        }
     }
+}
+
 
 
     document
@@ -1802,513 +1795,531 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
-    if (loginFormElement) {
+        if (loginFormElement) {
+        loginFormElement.addEventListener("submit", async function (event) {
+            event.preventDefault();
+            clearErrors();
 
-        loginFormElement.addEventListener(
-            "submit",
-            function (event) {
+            const email = (
+                document.getElementById("loginEmail") || {}
+            ).value?.trim().toLowerCase() || "";
 
-                event.preventDefault();
+            const password = (
+                document.getElementById("loginPassword") || {}
+            ).value || "";
 
-                clearErrors();
+            let valid = true;
 
+            if (!validEmail(email)) {
+                setError(
+                    "loginEmailError",
+                    "Please enter a valid email address."
+                );
+                valid = false;
+            }
 
-                const email =
-                    (
-                        document.getElementById(
-                            "loginEmail"
-                        ) || {}
-                    ).value
-                        ?.trim()
-                        .toLowerCase() || "";
+            if (!password) {
+                setError(
+                    "loginPasswordError",
+                    "Please enter your password."
+                );
+                valid = false;
+            }
 
+            if (!valid) return;
 
-                const password =
-                    (
-                        document.getElementById(
-                            "loginPassword"
-                        ) || {}
-                    ).value || "";
+            const supabase = window.supabaseClient;
 
+            if (!supabase) {
+                setError(
+                    "loginPasswordError",
+                    "Authentication is unavailable. Please refresh and try again."
+                );
+                return;
+            }
 
-                let valid = true;
+            const submitButton = loginFormElement.querySelector(
+                'button[type="submit"]'
+            );
 
+            if (submitButton) submitButton.disabled = true;
 
-                if (!validEmail(email)) {
+            try {
+                const { data, error } = await supabase.auth.signInWithPassword({
+                    email: email,
+                    password: password
+                });
 
-                    setError(
-                        "loginEmailError",
-                        "Please enter a valid email address."
-                    );
-
-                    valid = false;
-                }
-
-
-                if (!password) {
-
-                    setError(
-                        "loginPasswordError",
-                        "Please enter your password."
-                    );
-
-                    valid = false;
-                }
-
-
-                if (!valid) {
-                    return;
-                }
-
-
-                const users =
-                    getUsers();
-
-                const user =
-                    users.find(
-                        function (item) {
-
-                            return (
-                                String(
-                                    item.email
-                                ).toLowerCase() ===
-                                email &&
-                                item.password ===
-                                password
-                            );
-                        }
-                    );
-
-
-                if (!user) {
-
+                if (error) {
                     setError(
                         "loginPasswordError",
                         "Incorrect email or password."
                     );
-
                     return;
                 }
 
+                const authUser = data.user;
 
-                localStorage.setItem(
-                    "shelfSyncSession",
-                    JSON.stringify(user)
-                );
+                const { data: profile, error: profileError } = await supabase
+                    .from("profiles")
+                    .select("id, full_name, member_id, role")
+                    .eq("id", authUser.id)
+                    .single();
 
-
-                updateNavbar();
-
-
-                alert(
-                    "Welcome back, " +
-                    (
-                        user.name ||
-                        "Member"
-                    ) +
-                    "!"
-                );
-
-
-                window.location.href =
-                    pageLink(
-                        "profile.html"
-                    );
-            }
-        );
-    }
-
-
-    if (registerFormElement) {
-
-        registerFormElement.addEventListener(
-            "submit",
-            function (event) {
-
-                event.preventDefault();
-
-                clearErrors();
-
-
-                const name =
-                    (
-                        document.getElementById(
-                            "registerName"
-                        ) || {}
-                    ).value?.trim() || "";
-
-
-                const email =
-                    (
-                        document.getElementById(
-                            "registerEmail"
-                        ) || {}
-                    ).value
-                        ?.trim()
-                        .toLowerCase() || "";
-
-
-                const phone =
-                    (
-                        document.getElementById(
-                            "registerPhone"
-                        ) || {}
-                    ).value?.trim() || "";
-
-
-                const password =
-                    (
-                        document.getElementById(
-                            "registerPassword"
-                        ) || {}
-                    ).value || "";
-
-
-                const confirmPassword =
-                    (
-                        document.getElementById(
-                            "confirmPassword"
-                        ) || {}
-                    ).value || "";
-
-
-                const terms =
-                    document.getElementById(
-                        "acceptTerms"
-                    );
-
-
-                let valid = true;
-
-
-                if (name.length < 3) {
-
-                    setError(
-                        "registerNameError",
-                        "Please enter your full name."
-                    );
-
-                    valid = false;
+                if (profileError) {
+                    console.error("Could not load member profile:", profileError);
                 }
-
-
-                if (!validEmail(email)) {
-
-                    setError(
-                        "registerEmailError",
-                        "Please enter a valid email address."
-                    );
-
-                    valid = false;
-                }
-
-
-                if (!validPhone(phone)) {
-
-                    setError(
-                        "registerPhoneError",
-                        "Please enter a valid phone number."
-                    );
-
-                    valid = false;
-                }
-
-
-                if (password.length < 6) {
-
-                    setError(
-                        "registerPasswordError",
-                        "Password must contain at least 6 characters."
-                    );
-
-                    valid = false;
-                }
-
-
-                if (
-                    password !==
-                    confirmPassword
-                ) {
-
-                    setError(
-                        "confirmPasswordError",
-                        "Passwords do not match."
-                    );
-
-                    valid = false;
-                }
-
-
-                if (
-                    terms &&
-                    !terms.checked
-                ) {
-
-                    alert(
-                        "Please accept the ShelfSync project acknowledgement."
-                    );
-
-                    valid = false;
-                }
-
-
-                if (!valid) {
-                    return;
-                }
-
-
-                const users =
-                    getUsers();
-
-
-                if (
-                    users.some(
-                        function (item) {
-
-                            return (
-                                String(
-                                    item.email
-                                ).toLowerCase() ===
-                                email
-                            );
-                        }
-                    )
-                ) {
-
-                    setError(
-                        "registerEmailError",
-                        "An account with this email already exists."
-                    );
-
-                    return;
-                }
-
 
                 const member = {
-
-                    id:
-                        createMemberId(),
-
-                    memberId:
-                        createMemberId(),
-
-                    name:
-                        name,
-
-                    email:
-                        email,
-
-                    phone:
-                        phone,
-
-                    password:
-                        password,
-
-                    joinedDate:
-                        new Date().toISOString(),
-
-                    borrowedBooks:
-                        0
+                    id: authUser.id,
+                    name: profile?.full_name ||
+                        authUser.user_metadata?.full_name ||
+                        email.split("@")[0],
+                    email: authUser.email || email,
+                    phone: authUser.user_metadata?.phone || "",
+                    memberId: profile?.member_id || "",
+                    role: profile?.role || "member",
+                    joinedDate: authUser.created_at || new Date().toISOString()
                 };
-
-
-                member.memberId =
-                    member.id;
-
-
-                users.push(
-                    member
-                );
-
-                saveUsers(
-                    users
-                );
-
 
                 localStorage.setItem(
                     "shelfSyncSession",
                     JSON.stringify(member)
                 );
 
+                updateNavbar();
 
-                addActivity(
-                    email,
-                    {
-                        type: "register",
-                        title:
-                            "Account created",
-                        date:
-                            new Date().toISOString()
-                    }
+                alert("Welcome back, " + member.name + "!");
+
+                window.location.href = pageLink("profile.html");
+            } catch (error) {
+                console.error("Supabase login failed:", error);
+                setError(
+                    "loginPasswordError",
+                    "Unable to sign in right now. Please try again."
                 );
-
-
-                alert(
-                    "Account created successfully."
-                );
-
-
-                window.location.href =
-                    pageLink(
-                        "profile.html"
-                    );
+            } finally {
+                if (submitButton) submitButton.disabled = false;
             }
-        );
+        });
     }
 
 
+   
+    if (registerFormElement) {
+        registerFormElement.addEventListener("submit", async function (event) {
+            event.preventDefault();
+            clearErrors();
+
+            const name = (
+                document.getElementById("registerName") || {}
+            ).value?.trim() || "";
+
+            const email = (
+                document.getElementById("registerEmail") || {}
+            ).value?.trim().toLowerCase() || "";
+
+            const phone = (
+                document.getElementById("registerPhone") || {}
+            ).value?.trim() || "";
+
+            const password = (
+                document.getElementById("registerPassword") || {}
+            ).value || "";
+
+            const confirmPassword = (
+                document.getElementById("confirmPassword") || {}
+            ).value || "";
+
+            const terms = document.getElementById("acceptTerms");
+            let valid = true;
+
+            if (name.length < 3) {
+                setError(
+                    "registerNameError",
+                    "Please enter your full name."
+                );
+                valid = false;
+            }
+
+            if (!validEmail(email)) {
+                setError(
+                    "registerEmailError",
+                    "Please enter a valid email address."
+                );
+                valid = false;
+            }
+
+            if (!validPhone(phone)) {
+                setError(
+                    "registerPhoneError",
+                    "Please enter a valid phone number."
+                );
+                valid = false;
+            }
+
+            if (password.length < 6) {
+                setError(
+                    "registerPasswordError",
+                    "Password must contain at least 6 characters."
+                );
+                valid = false;
+            }
+
+            if (password !== confirmPassword) {
+                setError(
+                    "confirmPasswordError",
+                    "Passwords do not match."
+                );
+                valid = false;
+            }
+
+            if (terms && !terms.checked) {
+                alert("Please accept the ShelfSync project acknowledgement.");
+                valid = false;
+            }
+
+            if (!valid) return;
+
+            const supabase = window.supabaseClient;
+
+            if (!supabase) {
+                setError(
+                    "registerEmailError",
+                    "Authentication is unavailable. Please refresh and try again."
+                );
+                return;
+            }
+
+            const submitButton = registerFormElement.querySelector(
+                'button[type="submit"]'
+            );
+
+            if (submitButton) submitButton.disabled = true;
+
+            try {
+                const { data, error } = await supabase.auth.signUp({
+                    email: email,
+                    password: password,
+                    options: {
+                        data: {
+                            full_name: name,
+                            phone: phone
+                        }
+                    }
+                });
+
+                if (error) {
+                    const message = error.message || "";
+
+                    if (
+                        message.toLowerCase().includes("already registered") ||
+                        message.toLowerCase().includes("already exists")
+                    ) {
+                        setError(
+                            "registerEmailError",
+                            "An account with this email may already exist. Try signing in."
+                        );
+                    } else {
+                        setError(
+                            "registerEmailError",
+                            message || "Unable to create your account. Please try again."
+                        );
+                    }
+
+                    return;
+                }
+
+                if (data.session && data.user) {
+                    const authUser = data.user;
+
+                    const { data: profile, error: profileError } =
+                        await supabase
+                            .from("profiles")
+                            .select("id, full_name, member_id, role")
+                            .eq("id", authUser.id)
+                            .maybeSingle();
+
+                    if (profileError) {
+                        console.error(
+                            "Could not load the new member profile:",
+                            profileError
+                        );
+                    }
+
+                    const member = {
+                        id: authUser.id,
+                        name: profile?.full_name || name,
+                        email: authUser.email || email,
+                        phone: authUser.user_metadata?.phone || phone,
+                        memberId: profile?.member_id || "",
+                        role: profile?.role || "member",
+                        joinedDate: authUser.created_at ||
+                            new Date().toISOString()
+                    };
+
+                    localStorage.setItem(
+                        "shelfSyncSession",
+                        JSON.stringify(member)
+                    );
+
+                    alert("Account created successfully!");
+                    window.location.href = pageLink("profile.html");
+                    return;
+                }
+
+                alert(
+                    "Your account has been created. Please check your email to confirm your address, then sign in."
+                );
+
+                const loginEmail = document.getElementById("loginEmail");
+
+                if (loginEmail) {
+                    loginEmail.value = email;
+                }
+
+                const loginForm = document.getElementById("loginForm");
+                const registerForm = document.getElementById("registerForm");
+
+                if (registerForm) registerForm.style.display = "none";
+                if (loginForm) loginForm.style.display = "block";
+            } catch (error) {
+                console.error("Supabase registration failed:", error);
+
+                setError(
+                    "registerEmailError",
+                    "Unable to create your account right now. Please try again."
+                );
+            } finally {
+                if (submitButton) submitButton.disabled = false;
+            }
+        });
+    }
+
+
+    
     if (forgotPasswordFormElement) {
+        forgotPasswordFormElement.addEventListener("submit", async function (event) {
+            event.preventDefault();
+            clearErrors();
 
-        forgotPasswordFormElement.addEventListener(
-            "submit",
-            function (event) {
+            const email = (
+                document.getElementById("forgotEmail") || {}
+            ).value?.trim().toLowerCase() || "";
 
-                event.preventDefault();
+            if (!validEmail(email)) {
+                setError(
+                    "forgotEmailError",
+                    "Please enter a valid email address."
+                );
+                return;
+            }
 
-                clearErrors();
+            const supabase = window.supabaseClient;
 
+            if (!supabase) {
+                setError(
+                    "forgotEmailError",
+                    "Authentication is unavailable. Please refresh and try again."
+                );
+                return;
+            }
 
-                const email =
-                    (
-                        document.getElementById(
-                            "forgotEmail"
-                        ) || {}
-                    ).value
-                        ?.trim()
-                        .toLowerCase() || "";
+            const submitButton = forgotPasswordFormElement.querySelector(
+                'button[type="submit"]'
+            );
 
+            if (submitButton) submitButton.disabled = true;
 
-                const phone =
-                    (
-                        document.getElementById(
-                            "forgotPhone"
-                        ) || {}
-                    ).value?.trim() || "";
+            try {
+                const recoveryUrl = new URL(
+                    "login.html",
+                    window.location.href
+                );
 
+                recoveryUrl.searchParams.set("resetPassword", "true");
 
-                const newPassword =
-                    (
-                        document.getElementById(
-                            "newPassword"
-                        ) || {}
-                    ).value || "";
+                const { error } = await supabase.auth.resetPasswordForEmail(
+                    email,
+                    {
+                        redirectTo: recoveryUrl.toString()
+                    }
+                );
 
-
-                const confirmPassword =
-                    (
-                        document.getElementById(
-                            "forgotConfirmPassword"
-                        ) || {}
-                    ).value || "";
-
-
-                let valid = true;
-
-
-                if (!validEmail(email)) {
+                if (error) {
+                    console.error(
+                        "Supabase password recovery failed:",
+                        error
+                    );
 
                     setError(
                         "forgotEmailError",
-                        "Please enter a valid email address."
+                        "Unable to send the recovery email. Please try again."
                     );
-
-                    valid = false;
+                    return;
                 }
 
+                alert(
+                    "If an account exists for this email, Supabase will send password-recovery instructions. Please check your inbox and spam folder."
+                );
+            } catch (error) {
+                console.error("Password recovery failed:", error);
 
-                if (!validPhone(phone)) {
+                setError(
+                    "forgotEmailError",
+                    "Something went wrong. Please try again."
+                );
+            } finally {
+                if (submitButton) submitButton.disabled = false;
+            }
+        });
+    }
 
-                    setError(
-                        "forgotPhoneError",
-                        "Please enter your registered phone number."
-                    );
 
-                    valid = false;
-                }
+    
+    // Handle password recovery through Supabase.
+    const recoverySupabase = window.supabaseClient;
+    const resetPasswordRequested =
+        new URLSearchParams(window.location.search).get("resetPassword") === "true";
 
+    let passwordRecoveryActive = false;
 
-                if (newPassword.length < 6) {
+    function showPasswordResetFields() {
+        if (!forgotForm) return;
 
+        showForgotForm();
+
+        const emailInput = document.getElementById("forgotEmail");
+        const phoneInput = document.getElementById("forgotPhone");
+        const newPasswordInput = document.getElementById("newPassword");
+        const confirmInput = document.getElementById("forgotConfirmPassword");
+
+        [emailInput, phoneInput].forEach(function (input) {
+            if (!input) return;
+            const group = input.closest(".form-group");
+            if (group) group.style.display = "none";
+        });
+
+        [newPasswordInput, confirmInput].forEach(function (input) {
+            if (!input) return;
+            const group = input.closest(".form-group");
+            if (group) group.style.display = "block";
+        });
+
+        const heading = forgotForm.querySelector(".auth-form-header");
+        const title = heading?.querySelector("h1, h2, h3");
+
+        if (title) title.textContent = "Set a New Password";
+
+        const description = heading?.querySelector("p:not(.small-heading)");
+        if (description) {
+            description.textContent = "Choose a new password for your ShelfSync account.";
+        }
+
+        const submitButton = forgotPasswordFormElement?.querySelector(
+            'button[type="submit"]'
+        );
+
+        if (submitButton) {
+            submitButton.innerHTML =
+                'Update Password <i class="fa-solid fa-key"></i>';
+        }
+    }
+
+    if (recoverySupabase) {
+        recoverySupabase.auth.onAuthStateChange(function (event, session) {
+            if (event === "PASSWORD_RECOVERY" && session) {
+                passwordRecoveryActive = true;
+                showPasswordResetFields();
+            }
+        });
+    }
+
+    if (resetPasswordRequested && forgotForm) {
+        showForgotForm();
+    }
+
+    if (forgotPasswordFormElement) {
+        forgotPasswordFormElement.addEventListener(
+            "submit",
+            async function (event) {
+                if (!passwordRecoveryActive) return;
+
+                event.preventDefault();
+                event.stopImmediatePropagation();
+                clearErrors();
+
+                const password =
+                    document.getElementById("newPassword")?.value || "";
+                const confirmPassword =
+                    document.getElementById("forgotConfirmPassword")?.value || "";
+
+                let valid = true;
+
+                if (password.length < 6) {
                     setError(
                         "newPasswordError",
                         "Password must contain at least 6 characters."
                     );
-
                     valid = false;
                 }
 
-
-                if (
-                    newPassword !==
-                    confirmPassword
-                ) {
-
+                if (password !== confirmPassword) {
                     setError(
                         "forgotConfirmError",
                         "Passwords do not match."
                     );
-
                     valid = false;
                 }
 
+                if (!valid) return;
 
-                if (!valid) {
-                    return;
-                }
+                const submitButton = forgotPasswordFormElement.querySelector(
+                    'button[type="submit"]'
+                );
 
+                if (submitButton) submitButton.disabled = true;
 
-                const users =
-                    getUsers();
+                try {
+                    const { error } = await recoverySupabase.auth.updateUser({
+                        password: password
+                    });
 
+                    if (error) {
+                        console.error("Password update failed:", error);
+                        setError(
+                            "newPasswordError",
+                            "Could not update your password. Please request a new recovery email."
+                        );
+                        return;
+                    }
 
-                const index =
-                    users.findIndex(
-                        function (user) {
+                    passwordRecoveryActive = false;
 
-                            return (
-                                String(
-                                    user.email
-                                ).toLowerCase() ===
-                                email &&
-                                String(
-                                    user.phone
-                                ) ===
-                                String(phone)
-                            );
-                        }
+                    alert("Your password has been updated. You can now sign in.");
+
+                    await recoverySupabase.auth.signOut();
+
+                    window.history.replaceState(
+                        {},
+                        document.title,
+                        window.location.pathname
                     );
 
-
-                if (index === -1) {
-
+                    showLoginForm();
+                } catch (error) {
+                    console.error("Password update failed:", error);
                     setError(
-                        "forgotEmailError",
-                        "The email and phone number do not match an account."
+                        "newPasswordError",
+                        "Something went wrong. Please try again."
                     );
-
-                    return;
+                } finally {
+                    if (submitButton) submitButton.disabled = false;
                 }
-
-
-                users[index].password =
-                    newPassword;
-
-
-                saveUsers(
-                    users
-                );
-
-
-                alert(
-                    "Password reset successfully. You can now sign in."
-                );
-
-
-                showLoginForm();
-            }
+            },
+            true
         );
     }
-
 
     /* =========================
        Password visibility
@@ -2530,6 +2541,111 @@ document.addEventListener("DOMContentLoaded", function () {
         );
 
 
+        // Refresh member details from Supabase.
+        (async function loadSupabaseProfile() {
+            const supabase = window.supabaseClient;
+
+            if (!supabase) return;
+
+            try {
+                const { data: userData, error: userError } =
+                    await supabase.auth.getUser();
+
+                if (userError || !userData.user) return;
+
+                const user = userData.user;
+
+                const { data: profile, error: profileError } =
+                    await supabase
+                        .from("profiles")
+                        .select("full_name, member_id, role, created_at")
+                        .eq("id", user.id)
+                        .maybeSingle();
+
+                if (profileError) {
+                    console.error("Could not load Supabase profile:", profileError);
+                    return;
+                }
+
+                const savedMember = getCurrentMember() || {};
+
+                const updatedMember = {
+                    ...savedMember,
+                    id: user.id,
+                    name:
+                        profile?.full_name ||
+                        user.user_metadata?.full_name ||
+                        savedMember.name ||
+                        "Member",
+                    email: user.email || savedMember.email || "",
+                    phone:
+                        user.user_metadata?.phone ||
+                        savedMember.phone ||
+                        "",
+                    memberId:
+                        profile?.member_id ||
+                        savedMember.memberId ||
+                        "",
+                    role: profile?.role || "member",
+                    joinedDate:
+                        profile?.created_at ||
+                        user.created_at ||
+                        savedMember.joinedDate
+                };
+
+                localStorage.setItem(
+                    "shelfSyncSession",
+                    JSON.stringify(updatedMember)
+                );
+
+                setProfileText(
+                    ["profileName", "profileFirstName"],
+                    updatedMember.name
+                );
+
+                setProfileText(
+                    ["profileWelcomeName"],
+                    updatedMember.name.split(" ")[0]
+                );
+
+                setProfileText(
+                    ["profileEmail"],
+                    updatedMember.email || "-"
+                );
+
+                setProfileText(
+                    ["profilePhone"],
+                    updatedMember.phone || "-"
+                );
+
+                setProfileText(
+                    ["profileMemberId", "memberId"],
+                    updatedMember.memberId || "-"
+                );
+
+                let joined = "-";
+
+                if (updatedMember.joinedDate) {
+                    const date = new Date(updatedMember.joinedDate);
+
+                    if (!Number.isNaN(date.getTime())) {
+                        joined = date.toLocaleDateString("en-IN", {
+                            day: "2-digit",
+                            month: "short",
+                            year: "numeric"
+                        });
+                    }
+                }
+
+                setProfileText(
+                    ["profileJoinedDate", "joinedDate"],
+                    joined
+                );
+            } catch (error) {
+                console.error("Supabase profile loading failed:", error);
+            }
+        })();
+
         const borrowed =
             getBorrowedBooks(
                 member.email
@@ -2707,91 +2823,97 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
 
-        function returnBook(
-            bookId
-        ) {
+        
+async function returnBook(bookId) {
+    const current = getBorrowedBooks(member.email);
 
-            const current =
-                getBorrowedBooks(
-                    member.email
-                );
+    const index = current.findIndex(function (book) {
+        return Number(book.id) === Number(bookId);
+    });
 
+    if (index === -1) {
+        return;
+    }
 
-            const index =
-                current.findIndex(
-                    function (book) {
+    const book = current[index];
+    const supabase = window.supabaseClient;
 
-                        return (
-                            Number(book.id) ===
-                            Number(bookId)
-                        );
-                    }
-                );
+    if (!supabase) {
+        alert("The return service is unavailable. Please refresh the page.");
+        return;
+    }
 
+    if (!book.supabaseBorrowingId) {
+        alert(
+            "This borrowing record is not linked to Supabase. " +
+            "Please refresh your profile and try again."
+        );
+        return;
+    }
 
-            if (index === -1) {
-                return;
+    const confirmReturn = confirm(
+        'Are you sure you want to return "' + book.title + '"?'
+    );
+
+    if (!confirmReturn) {
+        return;
+    }
+
+    try {
+        const { data, error } = await supabase.rpc(
+            "return_shelfsync_book",
+            {
+                p_borrowing_id: book.supabaseBorrowingId
             }
+        );
 
-
-            const book =
-                current[index];
-
-
-            current.splice(
-                index,
-                1
-            );
-
-
-            saveBorrowedBooks(
-                member.email,
-                current
-            );
-
-
-            const returned =
-                getReturnedBooks(
-                    member.email
-                );
-
-
-            returned.unshift(
-                {
-                    ...book,
-                    returnedAt:
-                        new Date().toISOString()
-                }
-            );
-
-
-            saveReturnedBooks(
-                member.email,
-                returned
-            );
-
-
-            addActivity(
-                member.email,
-                {
-                    type:
-                        "return",
-                    title:
-                        book.title,
-                    date:
-                        new Date().toISOString()
-                }
-            );
-
-
-            alert(
-                book.title +
-                " has been returned."
-            );
-
-
-            window.location.reload();
+        if (error) {
+            throw error;
         }
+
+        const borrowing = Array.isArray(data) ? data[0] : data;
+
+        if (!borrowing || !borrowing.returned_at) {
+            throw new Error("The return was not confirmed by the database.");
+        }
+
+        current.splice(index, 1);
+
+        saveBorrowedBooks(member.email, current);
+
+        const returned = getReturnedBooks(member.email);
+
+        returned.unshift({
+            ...book,
+            returnedAt: borrowing.returned_at
+        });
+
+        saveReturnedBooks(member.email, returned);
+
+        addActivity(member.email, {
+            type: "return",
+            title: book.title,
+            date: borrowing.returned_at
+        });
+
+        alert(book.title + " has been returned successfully.");
+
+        window.location.reload();
+    } catch (error) {
+        console.error("Book return failed:", error);
+
+        let message = error.message || "Please try again.";
+
+        if (message.includes("already been returned")) {
+            message = "This book has already been returned.";
+        } else if (message.includes("sign in")) {
+            message = "Your session may have expired. Please sign in again.";
+        }
+
+        alert("Unable to return this book: " + message);
+    }
+}
+
 
 
         renderBorrowedBooks();
@@ -2903,6 +3025,112 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
         renderActivities();
+
+        // Load borrowing history and activity from Supabase.
+        (async function loadSupabaseHistory() {
+            const supabase = window.supabaseClient;
+
+            if (!supabase) return;
+
+            try {
+                const { data: userData, error: userError } =
+                    await supabase.auth.getUser();
+
+                if (userError) throw userError;
+
+                const user = userData.user;
+
+                if (!user) return;
+
+                const { data: records, error: recordsError } =
+                    await supabase
+                        .from("borrowings")
+                        .select(
+                            "id, book_id, borrowed_at, due_at, returned_at, books(title, author, category, price)"
+                        )
+                        .eq("user_id", user.id)
+                        .order("borrowed_at", { ascending: false });
+
+                if (recordsError) throw recordsError;
+
+                const activeRecords = [];
+                const returnedRecords = [];
+
+                (records || []).forEach(function (record, index) {
+                    const bookData = Array.isArray(record.books)
+                        ? record.books[0]
+                        : record.books;
+
+                    const book = {
+                        id: index + 1,
+                        supabaseBorrowingId: record.id,
+                        bookId: record.book_id,
+                        title: bookData?.title || "Unknown Book",
+                        author: bookData?.author || "Unknown Author",
+                        category: bookData?.category || "General",
+                        price: bookData?.price ?? "Not listed",
+                        borrowedAt: record.borrowed_at,
+                        dueAt: record.due_at
+                    };
+
+                    if (record.returned_at) {
+                        returnedRecords.push({
+                            ...book,
+                            returnedAt: record.returned_at
+                        });
+                    } else {
+                        activeRecords.push(book);
+                    }
+                });
+
+                borrowed.splice(0, borrowed.length, ...activeRecords);
+
+                saveBorrowedBooks(member.email, borrowed);
+                saveReturnedBooks(member.email, returnedRecords);
+
+                const { data: logs, error: logsError } =
+                    await supabase
+                        .from("activity_logs")
+                        .select("event_type, details, created_at")
+                        .eq("user_id", user.id)
+                        .order("created_at", { ascending: false });
+
+                if (logsError) throw logsError;
+
+                activities.splice(
+                    0,
+                    activities.length,
+                    ...(logs || []).map(function (log) {
+                        return {
+                            type: log.event_type,
+                            title: log.details?.title || "Library activity",
+                            date: log.created_at
+                        };
+                    })
+                );
+
+                if (borrowedCount) {
+                    borrowedCount.textContent = borrowed.length;
+                }
+
+                if (activityCount) {
+                    activityCount.textContent = activities.length;
+                }
+
+                if (totalReadCount) {
+                    totalReadCount.textContent = returnedRecords.length;
+                }
+
+                renderBorrowedBooks();
+                renderActivities();
+
+            } catch (error) {
+                console.error(
+                    "Could not load Supabase borrowing history:",
+                    error
+                );
+            }
+        })();
 
 
         /* Profile photo */
@@ -3809,46 +4037,300 @@ document.addEventListener("DOMContentLoaded", function () {
             );
     }
 
+    
+/* Load Admin Dashboard data from Supabase */
 
-    /* =========================
+(async function loadSupabaseAdminDashboard() {
+    const supabase = window.supabaseClient;
+
+    
+const memberTable =
+    document.getElementById("adminMembersBody") ||
+    document.getElementById("membersTableBody") ||
+    document.querySelector("#membersTable tbody");
+
+
+    
+const borrowingTable =
+    document.getElementById("adminBorrowingsBody") ||
+    document.getElementById("borrowingsTableBody") ||
+    document.querySelector("#borrowingsTable tbody");
+
+
+    if (
+        !supabase ||
+        (!memberTable && !borrowingTable &&
+        
+!document.getElementById("adminTotalMembers")
+)
+    ) {
+        return;
+    }
+
+    try {
+        const { data: authData, error: authError } =
+            await supabase.auth.getUser();
+
+        if (authError || !authData.user) {
+            window.location.href = pageLink("login.html");
+            return;
+        }
+
+        const { data: adminProfile, error: roleError } =
+            await supabase
+                .from("profiles")
+                .select("role, full_name, email, phone, member_id")
+                .eq("id", authData.user.id)
+                .single();
+
+        if (roleError || !adminProfile ||
+            adminProfile.role !== "admin") {
+            alert("You do not have permission to access the Admin Dashboard.");
+            window.location.href = pageLink("index.html");
+            return;
+        }
+
+        const [
+            { data: profiles, error: profilesError },
+            { data: books, error: booksError },
+            { data: borrowings, error: borrowingsError }
+        ] = await Promise.all([
+            supabase
+                .from("profiles")
+                .select("id, full_name, member_id, email, phone, created_at"),
+
+            supabase
+                .from("books")
+                .select("id, title, total_copies"),
+
+            supabase
+                .from("borrowings")
+                .select("id, user_id, borrowed_at, due_at, returned_at, book:books(title)")
+        ]);
+
+        if (profilesError) throw profilesError;
+        if (booksError) throw booksError;
+        if (borrowingsError) throw borrowingsError;
+
+        const members = profiles || [];
+        const allBooks = books || [];
+        const allRecords = borrowings || [];
+
+        const activeBorrowings = allRecords.filter(
+            function (item) {
+                return !item.returned_at;
+            }
+        );
+
+        const returnedBorrowings = allRecords.filter(
+            function (item) {
+                return Boolean(item.returned_at);
+            }
+        );
+
+        function setAdminNumber(ids, value) {
+            ids.forEach(function (id) {
+                const element = document.getElementById(id);
+
+                if (element) {
+                    element.textContent = value;
+                }
+            });
+        }
+
+        function safeText(value) {
+            if (typeof escapeHTML === "function") {
+                return escapeHTML(String(value ?? "-"));
+            }
+
+            return String(value ?? "-").replace(/[&<>"']/g, function (char) {
+                return {
+                    "&": "&amp;",
+                    "<": "&lt;",
+                    ">": "&gt;",
+                    '"': "&quot;",
+                    "'": "&#39;"
+                }[char];
+            });
+        }
+
+        setAdminNumber(
+            ["totalMembers", "adminTotalMembers", "memberCount"],
+            members.length
+        );
+
+        setAdminNumber(
+            ["totalBorrowed", "adminTotalBorrowed", "borrowedCount"],
+            activeBorrowings.length
+        );
+
+        setAdminNumber(
+            ["totalBooks", "adminTotalBooks", "bookCount"],
+            allBooks.length
+        );
+
+        setAdminNumber(
+            ["totalReturned", "adminTotalReturned"],
+            returnedBorrowings.length
+        );
+
+        const nameElement = document.getElementById("adminUserName");
+        const emailElement = document.getElementById("adminUserEmail");
+        const avatarElement = document.getElementById("adminAvatar");
+
+        if (nameElement) {
+            nameElement.textContent =
+                adminProfile.full_name || "ShelfSync Admin";
+        }
+
+        if (emailElement) {
+            emailElement.textContent =
+                adminProfile.email || authData.user.email || "Administrator";
+        }
+
+        if (avatarElement) {
+            avatarElement.textContent =
+                (adminProfile.full_name || "A").charAt(0).toUpperCase();
+        }
+
+        
+if (memberTable) {
+    memberTable.innerHTML = "";
+
+    members.forEach(function (member) {
+        const row = document.createElement("tr");
+
+        const joinedDate = member.created_at
+            ? new Date(member.created_at).toLocaleDateString("en-IN", {
+                day: "2-digit",
+                month: "short",
+                year: "numeric"
+            })
+            : "-";
+
+        row.innerHTML =
+            "<td>" + safeText(member.full_name) + "</td>" +
+            "<td>" + safeText(member.member_id) + "</td>" +
+            "<td>" + safeText(member.email) + "</td>" +
+            "<td>" + safeText(member.phone) + "</td>" +
+            "<td>" + safeText(joinedDate) + "</td>";
+
+        memberTable.appendChild(row);
+    });
+}
+
+
+        if (borrowingTable) {
+            borrowingTable.innerHTML = "";
+
+            const membersById = new Map(
+                members.map(function (member) {
+                    return [member.id, member];
+                })
+            );
+
+            activeBorrowings.forEach(function (item) {
+                const member = membersById.get(item.user_id);
+                const row = document.createElement("tr");
+
+                const dueDate = item.due_at
+                    ? new Date(item.due_at).toLocaleDateString("en-IN")
+                    : "-";
+
+                const bookTitle = Array.isArray(item.book)
+                    ? item.book[0]?.title
+                    : item.book?.title;
+
+                row.innerHTML =
+                    "<td>" + safeText(bookTitle) + "</td>" +
+                    "<td>" + safeText(member?.full_name) + "</td>" +
+                    "<td>" + safeText(member?.email) + "</td>" +
+                    "<td>" + safeText(dueDate) + "</td>";
+
+                borrowingTable.appendChild(row);
+            });
+        }
+
+        console.log("ShelfSync Admin Dashboard loaded from Supabase.");
+    } catch (error) {
+        console.error("Could not load Admin Dashboard data:", error);
+
+        alert(
+            "The Admin Dashboard could not load its Supabase data. " +
+            "Please check the browser console for details."
+        );
+    }
+})();
+
+
+    /* 
+    =========================
        Logout
     ========================= */
 
-    document
-        .querySelectorAll(
-            "#logoutBtn, .logout-btn, [data-logout]"
-        )
-        .forEach(
-            function (button) {
+    
+document
+    .querySelectorAll(
+        "#logoutBtn, .logout-btn, [data-logout]"
+    )
+    .forEach(
+        function (button) {
 
-                button.addEventListener(
-                    "click",
-                    function (event) {
+            button.addEventListener(
+                "click",
+                async function (event) {
 
-                        event.preventDefault();
+                    event.preventDefault();
 
+                    const supabase = window.supabaseClient;
+
+                    try {
+                        if (supabase) {
+                            const { error } =
+                                await supabase.auth.signOut();
+
+                            if (error) {
+                                console.error(
+                                    "Supabase logout failed:",
+                                    error
+                                );
+
+                                alert(
+                                    "Could not sign out completely. Please try again."
+                                );
+
+                                return;
+                            }
+                        }
 
                         localStorage.removeItem(
                             "shelfSyncSession"
                         );
 
-
                         updateNavbar();
-
 
                         alert(
                             "You have been logged out."
                         );
 
-
                         window.location.href =
-                            pageLink(
-                                "login.html"
-                            );
+                            pageLink("login.html");
+
+                    } catch (error) {
+                        console.error(
+                            "Logout failed:",
+                            error
+                        );
+
+                        alert(
+                            "Unable to log out right now. Please try again."
+                        );
                     }
-                );
-            }
-        );
+                }
+            );
+        }
+    );
+
 
 
     /* =========================
