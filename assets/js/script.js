@@ -4090,10 +4090,11 @@ const borrowingTable =
             return;
         }
 
-        const [
+             const [
             { data: profiles, error: profilesError },
             { data: books, error: booksError },
-            { data: borrowings, error: borrowingsError }
+            { data: borrowings, error: borrowingsError },
+            { data: activityLogs, error: activityLogsError }
         ] = await Promise.all([
             supabase
                 .from("profiles")
@@ -4101,16 +4102,23 @@ const borrowingTable =
 
             supabase
                 .from("books")
-                .select("id, title, total_copies"),
+                .select("id, title, author, category, description, price, cover_url, total_copies, created_at"),
 
             supabase
                 .from("borrowings")
-                .select("id, user_id, borrowed_at, due_at, returned_at, book:books(title)")
+                .select("id, user_id, borrowed_at, due_at, returned_at, book:books(title)"),
+
+            supabase
+                .from("activity_logs")
+                .select("id, user_id, event_type, details, created_at")
+                .order("created_at", { ascending: false })
+                .limit(50)
         ]);
 
         if (profilesError) throw profilesError;
         if (booksError) throw booksError;
         if (borrowingsError) throw borrowingsError;
+        if (activityLogsError) throw activityLogsError;
 
         const members = profiles || [];
         const allBooks = books || [];
@@ -4137,22 +4145,73 @@ const borrowingTable =
                 }
             });
         }
+function safeText(value) {
+    if (typeof escapeHTML === "function") {
+        return escapeHTML(String(value ?? "-"));
+    }
 
-        function safeText(value) {
-            if (typeof escapeHTML === "function") {
-                return escapeHTML(String(value ?? "-"));
-            }
+    return String(value ?? "-").replace(/[&<>"']/g, function (char) {
+        return {
+            "&": "&amp;",
+            "<": "&lt;",
+            ">": "&gt;",
+            '"': "&quot;",
+            "'": "&#39;"
+        }[char];
+    });
+}
 
-            return String(value ?? "-").replace(/[&<>"']/g, function (char) {
-                return {
-                    "&": "&amp;",
-                    "<": "&lt;",
-                    ">": "&gt;",
-                    '"': "&quot;",
-                    "'": "&#39;"
-                }[char];
-            });
-        }
+const recentBorrowingsBody = document.getElementById("recentBorrowingsBody");
+
+if (recentBorrowingsBody) {
+    const membersById = new Map(
+        members.map(function (member) {
+            return [member.id, member];
+        })
+    );
+
+    const recentRecords = [...allRecords]
+        .sort(function (a, b) {
+            return new Date(b.borrowed_at || 0) -
+                new Date(a.borrowed_at || 0);
+        })
+        .slice(0, 5);
+
+    if (recentRecords.length === 0) {
+        recentBorrowingsBody.innerHTML = `
+            <tr>
+                <td colspan="4">
+                    <div class="admin-empty-table">
+                        <i class="fa-solid fa-book-open"></i>
+                        <p>No borrowing activity yet.</p>
+                    </div>
+                </td>
+            </tr>
+        `;
+    } else {
+        recentBorrowingsBody.innerHTML = recentRecords.map(function (record) {
+            const member = membersById.get(record.user_id);
+            const bookTitle = record.book?.title || "Unknown book";
+
+            const borrowedDate = record.borrowed_at
+                ? new Date(record.borrowed_at).toLocaleDateString("en-IN")
+                : "-";
+
+            const status = record.returned_at ? "Returned" : "Borrowed";
+
+            return `
+                <tr>
+                    <td>${safeText(member?.full_name || "Library member")}</td>
+                    <td>${safeText(bookTitle)}</td>
+                    <td>${safeText(borrowedDate)}</td>
+                    <td>${safeText(status)}</td>
+                </tr>
+            `;
+        }).join("");
+    }
+}
+
+
 
         setAdminNumber(
             ["totalMembers", "adminTotalMembers", "memberCount"],
@@ -4173,6 +4232,51 @@ const borrowingTable =
             ["totalReturned", "adminTotalReturned"],
             returnedBorrowings.length
         );
+        setAdminNumber(
+    ["adminActiveBorrowings"],
+    activeBorrowings.length
+);
+
+setAdminNumber(
+    ["adminReturnedBooks"],
+    returnedBorrowings.length
+);
+        const adminBooksGrid = document.getElementById("adminBooksGrid");
+
+if (adminBooksGrid) {
+    if (allBooks.length === 0) {
+        adminBooksGrid.innerHTML = "<p>No books found.</p>";
+    } else {
+        adminBooksGrid.innerHTML = allBooks.map(function (book) {
+            return `
+                <div class="admin-book-card">
+                    <div class="admin-book-icon">
+                        <i class="fa-solid fa-book"></i>
+                    </div>
+
+                    <h3>${safeText(book.title)}</h3>
+
+                    <p class="admin-book-author">
+                        By ${safeText(book.author)}
+                    </p>
+
+                    <div class="admin-book-meta">
+                        <span>${safeText(book.category)}</span>
+                        <span>₹${safeText(book.price)}</span>
+                    </div>
+
+                    <p>
+                        ${safeText(book.description)}
+                    </p>
+
+                    <p>
+                        Total copies: ${safeText(book.total_copies)}
+                    </p>
+                </div>
+            `;
+        }).join("");
+    }
+}
 
         const nameElement = document.getElementById("adminUserName");
         const emailElement = document.getElementById("adminUserEmail");
@@ -4220,7 +4324,7 @@ if (memberTable) {
 }
 
 
-        if (borrowingTable) {
+                if (borrowingTable) {
             borrowingTable.innerHTML = "";
 
             const membersById = new Map(
@@ -4229,26 +4333,110 @@ if (memberTable) {
                 })
             );
 
-            activeBorrowings.forEach(function (item) {
-                const member = membersById.get(item.user_id);
-                const row = document.createElement("tr");
+            if (activeBorrowings.length === 0) {
+                borrowingTable.innerHTML = `
+                    <tr>
+                        <td colspan="5">
+                            <div class="admin-empty-table">
+                                <i class="fa-solid fa-book-open-reader"></i>
+                                <p>No active borrowings.</p>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            } else {
+                activeBorrowings.forEach(function (item) {
+                    const member = membersById.get(item.user_id);
+                    const row = document.createElement("tr");
 
-                const dueDate = item.due_at
-                    ? new Date(item.due_at).toLocaleDateString("en-IN")
-                    : "-";
+                    const borrowedDate = item.borrowed_at
+                        ? new Date(item.borrowed_at).toLocaleDateString("en-IN")
+                        : "-";
 
-                const bookTitle = Array.isArray(item.book)
-                    ? item.book[0]?.title
-                    : item.book?.title;
+                    const dueDate = item.due_at
+                        ? new Date(item.due_at).toLocaleDateString("en-IN")
+                        : "-";
 
-                row.innerHTML =
-                    "<td>" + safeText(bookTitle) + "</td>" +
-                    "<td>" + safeText(member?.full_name) + "</td>" +
-                    "<td>" + safeText(member?.email) + "</td>" +
-                    "<td>" + safeText(dueDate) + "</td>";
+                    const bookTitle = Array.isArray(item.book)
+                        ? item.book[0]?.title
+                        : item.book?.title;
 
-                borrowingTable.appendChild(row);
-            });
+                    row.innerHTML =
+                        "<td>" + safeText(bookTitle) + "</td>" +
+                        "<td>" + safeText(member?.full_name) + "</td>" +
+                        "<td>" + safeText(borrowedDate) + "</td>" +
+                        "<td>" + safeText(dueDate) + "</td>" +
+                        '<td><span class="status-badge active">Active</span></td>';
+
+                    borrowingTable.appendChild(row);
+                });
+            }
+        }
+                const adminActivityList = document.getElementById("adminActivityList");
+
+        if (adminActivityList) {
+            const membersById = new Map(
+                members.map(function (member) {
+                    return [member.id, member];
+                })
+            );
+
+            if (!activityLogs || activityLogs.length === 0) {
+                adminActivityList.innerHTML = `
+                    <div class="admin-empty-activity">
+                        <div class="admin-empty-icon">
+                            <i class="fa-solid fa-clock-rotate-left"></i>
+                        </div>
+                        <h3>No activity yet</h3>
+                        <p>Library activity will appear here when members borrow or return books.</p>
+                    </div>
+                `;
+            } else {
+                adminActivityList.innerHTML = activityLogs.map(function (log) {
+                    const member = membersById.get(log.user_id);
+                    const eventType = String(log.event_type || "activity")
+                        .replace(/[_-]+/g, " ");
+
+                    const details = log.details && typeof log.details === "object"
+                        ? log.details
+                        : {};
+
+                    const bookTitle =
+                        details.book_title ||
+                        details.title ||
+                        details.book ||
+                        "a book";
+
+                    const eventDate = log.created_at
+                        ? new Date(log.created_at).toLocaleString("en-IN", {
+                            dateStyle: "medium",
+                            timeStyle: "short"
+                        })
+                        : "Date unavailable";
+
+                    return `
+                        <article class="admin-activity-item">
+                            <div class="admin-activity-icon">
+                                <i class="fa-solid ${
+                                    /return/i.test(eventType)
+                                        ? "fa-rotate-left"
+                                        : /borrow/i.test(eventType)
+                                            ? "fa-book-open"
+                                            : "fa-clock-rotate-left"
+                                }"></i>
+                            </div>
+                            <div class="admin-activity-content">
+                                <h3>${safeText(eventType)}</h3>
+                                <p>
+                                    ${safeText(member?.full_name || "Library member")}
+                                    — ${safeText(bookTitle)}
+                                </p>
+                                <span>${safeText(eventDate)}</span>
+                            </div>
+                        </article>
+                    `;
+                }).join("");
+            }
         }
 
         console.log("ShelfSync Admin Dashboard loaded from Supabase.");
@@ -4494,5 +4682,21 @@ document
                 "&#039;"
             );
     }
+});
+document.addEventListener("click", function (event) {
+    const shortcut = event.target.closest("[data-admin-target]");
 
+    if (!shortcut) {
+        return;
+    }
+
+    const targetSection = shortcut.dataset.adminTarget;
+
+    const navLink = document.querySelector(
+        `[data-admin-section="${targetSection}"]`
+    );
+
+    if (navLink) {
+        navLink.click();
+    }
 });
